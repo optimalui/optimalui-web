@@ -1,25 +1,21 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './index.css';
+import { Button } from './components/buttons'
+import { Menu, MenuItem } from './components/navigation'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <Button>Deneme</Button>
+        <Button>Test</Button>
+        <Menu>
+          <MenuItem target="/" text="Item 1" active />
+          <MenuItem target="#" text="Item 2" parent>
+            <MenuItem target="/" text="Item 3" />
+            <MenuItem target="/" text="Item 4" />
+          </MenuItem>
+        </Menu>
       </div>
     );
   }
