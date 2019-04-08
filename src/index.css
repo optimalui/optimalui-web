@@ -3874,25 +3874,25 @@ ul.uk-nav-sub {
 /*
  * Remove pseudo elements created by micro clearfix as precaution (if Container component is used)
  */
-.uk-navbar-container > ::before,
+/* .uk-navbar-container > ::before,
 .uk-navbar-container > ::after {
-  display: none !important;
-}
+  /* display: none !important; */
+/*}*/ 
 /* Groups
  ========================================================================== */
 /*
  * 1. Align navs and items vertically if they have a different height
  * 2. Note: IE 11 requires an extra `div` which affects the center selector
  */
-.uk-navbar-left,
+/* .uk-navbar-left,
 .uk-navbar-right,
 .uk-navbar-center,
 .uk-navbar-center-left > *,
 .uk-navbar-center-right > * {
   display: flex;
   /* 1 */
-  align-items: center;
-}
+  /* align-items: center;
+} */ 
 /*
  * Horizontal alignment
  * 1. Create position context for centered navbar with sub groups (left/right)
@@ -3969,32 +3969,32 @@ ul.uk-nav-sub {
  * 3. Style
  * 4. Required for `a`
  */
-.uk-navbar-nav > li > a,
+/* .uk-navbar-nav > li > div.text,
 .uk-navbar-item,
 .uk-navbar-toggle {
   /* 1 */
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
   /* 2 */
-  box-sizing: border-box;
+  /* box-sizing: border-box;
   min-height: 80px;
-  padding: 0 15px;
+  padding: 0 15px; */
   /* 3 */
-  font-size: 0.875rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  /* font-size: 0.875rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; */
   /* 4 */
-  text-decoration: none;
-}
+  /* text-decoration: none; */
+/* } */ */
 /*
  * Nav items
  */
-.uk-navbar-nav > li > a {
+/* .uk-navbar-nav > li > a {
   color: #999;
   text-transform: uppercase;
   transition: 0.1s ease-in-out;
   transition-property: color, background-color;
-}
+} */
 /*
  * Hover
  * Apply hover style also to focus state and if dropdown is opened
@@ -4010,7 +4010,7 @@ ul.uk-nav-sub {
   color: #333;
 }
 /* Active */
-.uk-navbar-nav > li.uk-active > a {
+.uk-navbar-nav > li.uk-active {
   color: #333;
 }
 /* Item
@@ -4051,21 +4051,7 @@ ul.uk-nav-sub {
  * 3. Set a default width
  * 4. Style
  */
-.uk-navbar-dropdown {
-  /* 1 */
-  display: none;
-  /* 2 */
-  position: absolute;
-  z-index: 1020;
-  /* 3 */
-  box-sizing: border-box;
-  width: 200px;
-  /* 4 */
-  padding: 25px;
-  background: #fff;
-  color: #666;
-  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
-}
+
 /* Show */
 .uk-navbar-dropdown.uk-open {
   display: block;
