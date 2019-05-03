@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link } from "react-router-dom";
 
 export const WebHeader = () => (
     <nav uk-sticky="media: 960" className="uk-navbar-container tm-navbar-container uk-sticky" uk-navbar="" style={{ background: 'linear-gradient(to left, #28a5f5, #1e87f0)' }}>
@@ -9,7 +10,7 @@ export const WebHeader = () => (
         </div>
         <div className="uk-navbar-right">
             <ul className="uk-navbar-nav">
-                <li className="uk-active"><a href="#">Documentation</a></li>
+                <li className="uk-active"><Link to="/docs">Documentation</Link></li>
                 <li><a href="#">Support</a></li>
                 <li><a href="#">Pricing</a></li>
             </ul>

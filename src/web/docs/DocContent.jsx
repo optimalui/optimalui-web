@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Intro } from './Intro';
-import { ButtonDoc } from './ButtonDoc';
+import { ButtonsDocOverview } from './ButtonsDocOverview';
 
 
 class DocContent extends Component {
@@ -10,9 +10,11 @@ class DocContent extends Component {
     }
     render() {
         return (
-            <div className="uk-container uk-container-small uk-position-relative">
+            <div className="tm-main uk-section uk-section-default">
+                <div>
                     <Route exact path="/docs/introduction" component={Intro} />
-                    <Route path="/docs/button" component={ButtonDoc} />
+                    <Route path="/docs/buttons" component={ButtonsDocOverview} />
+                </div>
             </div>
         );
     }
