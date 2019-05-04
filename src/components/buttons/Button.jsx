@@ -30,7 +30,7 @@ const RegularButton = ({ ...props }) => {
   })
 
   return (
-    <button {...other} className={className} />
+    <button {...props} className={className} />
   )
 }
 
@@ -58,6 +58,7 @@ RegularButton.defaultProps = {
   className: '',
   secondary: false,
   text: false,
+  disabled:false
 }
 
 export { RegularButton as Button }

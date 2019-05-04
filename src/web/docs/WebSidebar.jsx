@@ -12,12 +12,8 @@ export const WebSidebar = () => (
         <hr/>
         <div className="uk-nav uk-nav-default tm-nav">
             <ul className="uk-nav-default uk-nav-parent-icon" uk-nav="multiple: true">
-               <li className="uk-parent">
-                    <Link to="/docs/buttons">Buttons</Link>
-                    <ul className="uk-nav-sub">
-                        <li><Link to="/docs/buttons">Overview</Link></li>
-                        <li><Link to="/docs/button">Button</Link></li>
-                    </ul>
+               <li className="">
+                    <Link to="/docs/button">Buttons</Link>
                 </li>
                 <li className="uk-parent">
                     <Link to="/docs/layout">Layout</Link>
