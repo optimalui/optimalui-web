@@ -9,7 +9,8 @@ import 'uikit/dist/css/uikit-core.css'
 import 'uikit/dist/css/uikit.css'
 import './assets/web/css/theme.css'
 import 'uikit/dist/js/uikit.js'
-import 'uikit/dist/js/uikit-icons.js'
+
+
 
 import { Docs } from './web/docs'
 import {Home} from './web'

@@ -5,12 +5,13 @@ import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import MarkupButtons from './MarkupButtons';
 import ButtonEvents from './events/ButtonEvents';
+import { Icon } from '../../components';
 
 
 const buttonUsage = `
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Button } from '@optimalui/buttons'
+import { Button } from '@optimalui/components/buttons'
 
 class App extends React.Component {
     render() { 
@@ -32,7 +33,7 @@ ReactDOM.render(
 const styleProps = `
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Button } from '@optimalui/buttons'
+import { Button } from '@optimalui/components/buttons'
 
 class App extends React.Component {
     render() {
@@ -59,7 +60,7 @@ ReactDOM.render(
 const sizeProps = `
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Button } from '@optimalui/buttons'
+import { Button } from '@optimalui/components/buttons'
 
 class App extends React.Component {
     render() {
@@ -89,7 +90,7 @@ ReactDOM.render(
 const widthProps = `
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Button } from '@optimalui/buttons'
+import { Button } from '@optimalui/components/buttons'
 
 class App extends React.Component {
     render() {
@@ -176,7 +177,7 @@ export const ButtonDoc = () => (
 
         {/** USAGE */}
         <h2 id="usage" className="uk-h3 tm-heading-fragment"><a href="#usage">Usage</a></h2>
-        <p>Import <code>@optimalui/buttons</code> module to use button component. Add the <code>disabled</code> prop to a button component to disable.</p>
+        <p>Import <code>@optimalui/components/buttons</code> module to use button component. Add the <code>disabled</code> prop to a button component to disable.</p>
         <div className="uk-position-relative uk-margin-medium">
             <ul uk-tab="swiping: false" className="uk-tab">
                 <li className="uk-active"><a href="#" aria-expanded="true">Preview</a></li>
@@ -185,8 +186,9 @@ export const ButtonDoc = () => (
             <ul className="uk-switcher uk-margin">
                 <li>
                     <p>
-                        <Button>Button</Button>
+                        <Button><span uk-icon="icon: check"></span> Button</Button>
                         <Button disabled style={{marginLeft:'2px'}}>Disabled</Button>
+                        <Icon name="heart" isLink to='//www.google.com' target='_blank'/>
                     </p>
                 </li>
                 <li>

@@ -8,7 +8,7 @@ import MarkupButtons from './MarkupButtons';
 const buttonGroupUsage = `
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Button,ButtonGroup } from '@optimalui/buttons'
+import { Button,ButtonGroup } from '@optimalui/components/buttons'
 
 class App extends React.Component {
     render() { 
@@ -51,6 +51,7 @@ export const ButtonGroupDoc = () => (
         <p className="uk-text-lead">You can configure each Button in the ButtonGroup separately depending on the requirements of your project.</p>
         {/** USAGE */}
         <h2 id="usage" className="uk-h3 tm-heading-fragment"><a href="#usage">Usage</a></h2>
+        <p>Import <code>@optimalui/components/buttons</code> module to use ButtonGroup component.</p>
         <p>By default, the ButtonGroup component is enabled. To disable the all group of buttons, set the <code>disabled</code> prop of the <code>ButtonGroup</code> to true.</p>
         <div className="uk-position-relative uk-margin-medium">
             <ul uk-tab="swiping: false" className="uk-tab">
@@ -88,6 +89,14 @@ export const ButtonGroupDoc = () => (
                 </li>
             </ul>
             <MarkupButtons codeText={buttonGroupUsage}/>
+        </div>
+        <div className="tm-sidebar-right uk-visible@l">
+            <div uk-sticky="offset: 160" className="uk-sticky uk-active uk-sticky-fixed">
+                <ul uk-scrollspy-nav="closest: li; scroll: true; offset: 100" className="uk-nav uk-nav-default tm-nav uk-nav-parent-icon">
+                    <li className="uk-active"><a href="#usage">Usage</a></li>
+                </ul>
+            </div>
+            <div className="uk-sticky-placeholder" style={{ height: '249px', margin: '0px' }}></div>
         </div>
     </div>
 )
