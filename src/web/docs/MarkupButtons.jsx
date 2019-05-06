@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import copyImg from '../../assets/web/img/icon-clipboard.svg'
 import codepenImg from '../../assets/web/img/icon-flask.svg'
@@ -26,13 +27,13 @@ class MarkupButtons extends React.Component {
                     <li>
                         <CopyToClipboard text={this.props.codeText} uk-tooltip="Copy to Clipboard" onCopy={() => this.setState({copied: true})}>
                             <a className="js-copy" uk-tooltip="Copy to Clipboard" rel="#code-jv9wit2w" title="" aria-expanded="false">
-                                <img className="uk-icon" src={copyImg} alt="" uk-svg="" hidden="true" />
+                                <img className="uk-icon" src={copyImg} alt="" uk-svg=""  />
                             </a>
                         </CopyToClipboard>
                     </li>
                     <li>
                         <a className="js-codepen" uk-tooltip="Edit on Codepen" rel="#code-jv9wit2w" title="" aria-expanded="false">
-                            <img className="uk-icon" src={codepenImg} alt="" uk-svg="" hidden="true" />
+                            <img className="uk-icon" src={codepenImg} alt="" uk-svg=""/>
                         </a>
                     </li>
                 </ul>

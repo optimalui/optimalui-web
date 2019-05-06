@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
@@ -9,11 +10,15 @@ export const WebSidebar = () => (
             <li className=""><Link to="/docs/introduction">Introduction</Link></li>
         </ul>
         <h3>Components</h3>
-        <hr/>
+        <hr />
         <div className="uk-nav uk-nav-default tm-nav">
             <ul className="uk-nav-default uk-nav-parent-icon" uk-nav="multiple: true">
-               <li className="">
-                    <Link to="/docs/button">Buttons</Link>
+                <li className="uk-parent">
+                    <Link to="/docs/buttons">Buttons</Link>
+                    <ul className="uk-nav-sub">
+                        <li><Link to="/docs/button">Button</Link></li>
+                        <li><Link to="/docs/button-group">ButtonGroup</Link></li>
+                    </ul>
                 </li>
                 <li className="uk-parent">
                     <Link to="/docs/layout">Layout</Link>

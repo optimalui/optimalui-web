@@ -1,5 +1,6 @@
 export * from './WebHeader'
 export * from './WebSidebar'
 export * from './Docs'
-export * from './ButtonsDoc'
+export * from './ButtonDoc'
+export * from './ButtonGroupDoc'
 export * from './Intro'

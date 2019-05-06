@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import './index.css';
 import { Button } from './components/buttons'
