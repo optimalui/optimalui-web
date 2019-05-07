@@ -5,14 +5,15 @@ import { Button } from './components/buttons'
 import { Menu, MenuItem } from './components/navigation'
 import items from '../src/components/navigation/items.json'
 import { BrowserRouter as Router, Route} from "react-router-dom";
-import 'uikit/dist/css/uikit-core.css'
-import 'uikit/dist/css/uikit.css'
+// import 'uikit/dist/css/uikit-core.css'
+// import 'uikit/dist/css/uikit.css'
+// import 'uikit/src/less/uikit.theme.less'
 import './assets/web/css/theme.css'
 import 'uikit/dist/js/uikit.js'
 
 
 
-import { Docs } from './web/docs'
+import { Docs } from './web/docs' 
 import {Home} from './web'
 
 

@@ -188,7 +188,6 @@ export const ButtonDoc = () => (
                     <p>
                         <Button><span uk-icon="icon: check"></span> Button</Button>
                         <Button disabled style={{marginLeft:'2px'}}>Disabled</Button>
-                        <Icon name="heart" isLink to='//www.google.com' target='_blank'/>
                     </p>
                 </li>
                 <li>
