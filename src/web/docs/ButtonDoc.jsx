@@ -6,6 +6,8 @@ import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import MarkupButtons from './MarkupButtons';
 import ButtonEvents from './events/ButtonEvents';
 import { Icon } from '../../components';
+import sample_img_icon from '../../assets/web/img/sample_img_icon.png'
+import '../../assets/web/css/font-awesome-v4.7.0.css'
 
 
 const buttonUsage = `
@@ -39,13 +41,17 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <Button active>Active</Button>
-                <Button>Default</Button>
-                <Button primary>Primary</Button>
-                <Button secondary>Secondary</Button>
-                <Button danger>Danger</Button>
-                <Button text>Text</Button>
-                <Button link>Link</Button>
+                <p>
+                    <Button active>Active</Button>
+                    <Button>Default</Button>
+                    <Button primary>Primary</Button>
+                </p>
+                <p>
+                    <Button secondary>Secondary</Button>
+                    <Button danger>Danger</Button>
+                    <Button text>Text</Button>
+                    <Button link>Link</Button>
+                </p>
             </div>
         )
     }
@@ -166,6 +172,30 @@ ReactDOM.render(
 );
 `;
 
+const iconWithButton = `
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Button } from '@optimalui/components/buttons'
+import sample_img_icon from '../assets/img/sample_img_icon.png'
+
+class App extends React.Component {
+    render() {
+        return (
+            <div>
+                <Button icon="heart">OptimalUI Icon</Button>
+                <Button imageUrl={sample_img_icon} imageWidth={15} imageHeight={15}>Image Icon</Button>
+                <Button iconClass="fa fa-thumbs-o-up" iconStyle={{fontSize:'18px'}}>FontAwesome Icon</Button>
+            </div>
+        )
+    }
+}
+
+ReactDOM.render(
+    <App />,
+    document.querySelector('my-app')
+)
+`;
+
 
 export const ButtonDoc = () => (
     <div className="uk-container uk-container-small uk-position-relative">
@@ -186,7 +216,7 @@ export const ButtonDoc = () => (
             <ul className="uk-switcher uk-margin">
                 <li>
                     <p>
-                        <Button><span uk-icon="icon: check"></span> Button</Button>
+                        <Button>Button</Button>
                         <Button disabled style={{marginLeft:'2px'}}>Disabled</Button>
                     </p>
                 </li>
@@ -259,12 +289,14 @@ export const ButtonDoc = () => (
                 <li>
                     <p>
                         <Button active>Active</Button>
-                        <Button style={{marginLeft:'2px'}}>Default</Button>
-                        <Button primary style={{marginLeft:'2px'}}>Primary</Button>
-                        <Button secondary style={{marginLeft:'2px'}}>Secondary</Button>
-                        <Button danger style={{marginLeft:'2px'}}>Danger</Button>
-                        <Button text style={{marginLeft:'2px'}}>Text</Button>
-                        <Button link style={{marginLeft:'2px'}}>Link</Button>
+                        <Button style={{ marginLeft: '2px' }}>Default</Button>
+                        <Button primary style={{ marginLeft: '2px' }}>Primary</Button>
+                    </p>
+                    <p>
+                        <Button secondary style={{ marginLeft: '2px' }}>Secondary</Button>
+                        <Button danger style={{ marginLeft: '2px' }}>Danger</Button>
+                        <Button text style={{ marginLeft: '2px' }}>Text</Button>
+                        <Button link style={{ marginLeft: '2px' }}>Link</Button>
                     </p>
                 </li>
                 <li>
@@ -273,6 +305,7 @@ export const ButtonDoc = () => (
             </ul>
             <MarkupButtons codeText={styleProps}/>
         </div>
+
         {/** SIZE PROPS  */}
         <h2 id="size-props" className="uk-h3 tm-heading-fragment"><a href="#size-props">Size Props</a></h2>
         <p>Add <code>small</code> and <code>large</code> props to a button component to change size.</p>
@@ -369,6 +402,91 @@ export const ButtonDoc = () => (
             </ul>
             <MarkupButtons codeText={widthProps}/>
         </div>
+       {/** ICON */}
+        <h2 id="icon" className="uk-h3 tm-heading-fragment"><a href="#icon">Icon Props</a></h2>
+        <p>Add <code>iconStyle</code> prop   the button component as style object to change style of icon.</p>
+        <p>
+            <ul className="uk-list uk-list-bullet">
+                <li>The built-in icons are applied through the <code>icon</code>prop. Add <code>iconClassName</code> to add custom css class.</li>
+                <li>Adding image icons. They are applied through the <code>imageUrl</code> property of the component. To change image size ,add <code>imageWidth</code> and <code>imageHeight</code> props. Add <code>iconClassName</code> to add custom css class.</li>
+                <li>Adding FontAwesome and other font icons.  They are implemented by setting the required third-party CSS classes through the <code>iconClass</code> prop.</li>
+            </ul>
+        </p>
+        <div className="uk-overflow-auto">
+            <table className="uk-table uk-table-divider">
+                <thead>
+                    <tr>
+                        <th align="left">prop</th>
+                        <th align="left">propType</th>
+                        <th align="left">reqiured</th>
+                        <th align="left">default</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td align="left"><code>icon</code></td>
+                        <td align="left"><code>string</code></td>
+                        <td align="left">no</td>
+                        <td align="left"><code>''</code></td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>iconClassName</code></td>
+                        <td align="left"><code>string</code></td>
+                        <td align="left">no</td>
+                        <td align="left"><code>''</code></td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>iconStyle</code></td>
+                        <td align="left"><code>object</code></td>
+                        <td align="left">no</td>
+                        <td align="left"><code>{`{}`}</code></td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>imageUrl</code></td>
+                        <td align="left"><code>string</code></td>
+                        <td align="left">no</td>
+                        <td align="left"><code>''</code></td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>imageWidth</code></td>
+                        <td align="left"><code>number</code></td>
+                        <td align="left">no</td>
+                        <td align="left"><code>15</code></td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>imageHeight</code></td>
+                        <td align="left"><code>number</code></td>
+                        <td align="left">no</td>
+                        <td align="left"><code>15</code></td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>iconClass</code></td>
+                        <td align="left"><code>string</code></td>
+                        <td align="left">no</td>
+                        <td align="left"><code>''</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div className="uk-position-relative uk-margin-medium">
+            <ul uk-tab="swiping: false" className="uk-tab">
+                <li className="uk-active"><a href="#" aria-expanded="true">Preview</a></li>
+                <li className=""><a href="#" aria-expanded="false">Markup</a></li>
+            </ul>
+            <ul className="uk-switcher uk-margin">
+                <li>
+                    <p>
+                        <Button icon="heart">OptimalUI Icon</Button>
+                        <Button imageUrl={sample_img_icon} style={{marginLeft:'2px'}} imageWidth={15} imageHeight={15}>Image Icon</Button>
+                        <Button iconClass="fa fa-thumbs-o-up" style={{marginLeft:'2px'}} iconStyle={{fontSize:'18px'}}>FontAwesome Icon</Button>
+                    </p>
+                </li>
+                <li>
+                    <SyntaxHighlighter language='javascript' style={docco}>{iconWithButton}</SyntaxHighlighter>
+                </li>
+            </ul>
+            <MarkupButtons codeText={iconWithButton}/>
+        </div>
         {/** EVENTS  */}
         <h2 id="events" className="uk-h3 tm-heading-fragment"><a href="#events">Events</a></h2>
         <p>The following example demonstrates basic Button events.</p>
@@ -396,6 +514,7 @@ export const ButtonDoc = () => (
                     <li className=""><a href="#style-props">Style Props</a></li>
                     <li className=""><a href="#size-props">Size Props</a></li>
                     <li className=""><a href="#width-props">Width Props</a></li>
+                    <li className=""><a href="#icon">Icon Props</a></li>
                     <li className=""><a href="#events">Events</a></li>
                 </ul>
             </div>

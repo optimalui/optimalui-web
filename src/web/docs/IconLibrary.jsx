@@ -27,12 +27,16 @@ class IconLibrary extends Component {
         const {displayedIcons} = this.state;
         return (
             <React.Fragment>
-                    <div className="uk-margin">
-                        <div className="uk-inline">
-                            <Icon name="search" className="uk-form-icon"/>
-                            <input className="uk-input" type="text" placeholder="Search" onChange={this.handleFilterChange}/>
+                <form>
+                    <fieldset className="uk-fieldset">
+                        <div className="uk-margin">
+                            <div className="uk-inline uk-width-1-1">
+                                <Icon name="search" className="uk-form-icon" />
+                                <input className="uk-input uk-width-1-1" type="text" placeholder="Search Icon" onChange={this.handleFilterChange} />
+                            </div>
                         </div>
-                    </div>
+                    </fieldset>
+                </form>
                     <h4 className="uk-heading-line"><span>App</span></h4>
                     <div className="uk-child-width-1-3@s uk-grid">
                         <div className="uk-first-column">

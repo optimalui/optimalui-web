@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
 import ReactDOM from 'react-dom'
+import {Icon} from '../Icon'
 
 class RegularButton extends Component {
 
@@ -25,6 +26,13 @@ class RegularButton extends Component {
     small: PropTypes.bool,
     text: PropTypes.bool,
     fullWidth: PropTypes.bool,
+    icon:PropTypes.string,
+    imageUrl:PropTypes.string,
+    imageWidth:PropTypes.number,
+    imageHeight:PropTypes.number,
+    iconClass:PropTypes.string,
+    iconClassName:PropTypes.string,
+    iconStyle:PropTypes.object,
   }
 
   static defaultProps = {
@@ -39,7 +47,13 @@ class RegularButton extends Component {
     secondary: false,
     text: false,
     disabled: false,
-    fullWidth: false
+    fullWidth: false,
+    icon:'',
+    imageWidth:15,
+    imageHeight:15,
+    iconClass:'',
+    iconClassName:'',
+    iconStyle:{}
   }
 
   componentWillReceiveProps(nextProps) {
@@ -65,6 +79,14 @@ class RegularButton extends Component {
       fullWidth,
       className: customClassName,
       dispatch,
+      children,
+      icon,
+      imageUrl,
+      imageWidth,
+      imageHeight,
+      iconClass:customIconClassName,
+      iconClassName:customIconClass,
+      iconStyle,
       ...other
     } = this.props
 
@@ -80,11 +102,19 @@ class RegularButton extends Component {
       'uk-active': active,
       'uk-width-1-1': fullWidth
     })
+
+    const iconClassName = classNames('uk-margin-small-right',customIconClass);
+    const iconClass = classNames('uk-margin-small-right',customIconClassName);
     
     const {disabledGroup}=this.state;
     
     return (
-      <button {...other} className={className} disabled={disabledGroup ? true:false}/>
+      <button {...other} className={className} disabled={disabledGroup ? true : false}>
+        {icon ? <Icon name={icon} className={iconClassName} style={iconStyle}/> : ''}
+        {imageUrl ? <img src={imageUrl} alt="" className={iconClassName} style={iconStyle} width={imageWidth} height={imageHeight}/>:''}
+        {iconClass ? <i className={iconClass} style={iconStyle}></i>:''}
+        {children}
+      </button>
     )
   }
 }
