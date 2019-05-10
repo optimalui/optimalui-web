@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Intro } from './Intro';
 import { ButtonDoc,ButtonGroupDoc,IconDoc} from '../docs';
+import { DropDownButtonDoc } from './DropDownButtonDoc';
 
 
 class DocContent extends Component {
@@ -14,8 +15,9 @@ class DocContent extends Component {
             <div className="tm-main uk-section uk-section-default">
                 <div>
                     <Route exact path="/docs/introduction" component={Intro} />
-                    <Route path="/docs/button" component={ButtonDoc} />
-                    <Route path="/docs/button-group" component={ButtonGroupDoc} />
+                    <Route path="/docs/buttons/button" component={ButtonDoc} />
+                    <Route path="/docs/buttons/button-group" component={ButtonGroupDoc} />
+                    <Route path="/docs/buttons/dropdown-button" component={DropDownButtonDoc} />
                     <Route path="/docs/icon" component={IconDoc} />
                 </div>
             </div>

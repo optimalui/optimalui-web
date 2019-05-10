@@ -16,8 +16,9 @@ export const WebSidebar = () => (
                 <li className="uk-parent">
                     <Link to="/docs/buttons">Buttons</Link>
                     <ul className="uk-nav-sub">
-                        <li><Link to="/docs/button">Button</Link></li>
-                        <li><Link to="/docs/button-group">ButtonGroup</Link></li>
+                        <li><Link to="/docs/buttons/button">Button</Link></li>
+                        <li><Link to="/docs/buttons/button-group">ButtonGroup</Link></li>
+                        <li><Link to="/docs/buttons/dropdown-button">DropDownButton</Link></li>
                     </ul>
                 </li>
                 <li className="uk-parent">
