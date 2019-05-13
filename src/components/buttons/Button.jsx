@@ -9,9 +9,6 @@ class RegularButton extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {
-      disabledGroup:false
-    }
   }
 
   static propTypes = {
@@ -105,11 +102,10 @@ class RegularButton extends Component {
 
     const iconClassName = classNames('uk-margin-small-right',customIconClass);
     const iconClass = classNames('uk-margin-small-right',customIconClassName);
-    
-    const {disabledGroup}=this.state;
+  
     
     return (
-      <button {...other} className={className} disabled={disabledGroup ? true : false}>
+      <button {...other} className={className} disabled={disabled}>
         {icon ? <Icon name={icon} className={iconClassName} style={iconStyle}/> : ''}
         {imageUrl ? <img src={imageUrl} alt="" className={iconClassName} style={iconStyle} width={imageWidth} height={imageHeight}/>:''}
         {iconClass ? <i className={iconClass} style={iconStyle}></i>:''}
@@ -119,10 +115,12 @@ class RegularButton extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return { disableids: state.buttonReducer.disableIds }
-}
+// const mapStateToProps = (state) => {
+//   return { disableids: state.buttonReducer.disableIds }
+// }
 
-const connectedButton = connect(mapStateToProps)(RegularButton)
+// const connectedButton = connect(mapStateToProps)(RegularButton)
 
-export { connectedButton as Button }
+const btn = RegularButton
+
+export {btn as Button }

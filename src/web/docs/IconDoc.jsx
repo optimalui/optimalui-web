@@ -37,11 +37,11 @@ class App extends React.Component {
     render() { 
         return (
             <div>
-                <Icon name="google" isLink to="www.google.com" target="_blank"/>
-                <Icon name="facebook" isLink to="www.facebook.com" target="_blank"/>
-                <Icon name="linkedin" isLink to="www.linkedin.com" target="_blank"/>
-                <Icon name="github" isLink to="www.github.com" target="_blank" />
-                <Icon name="twitter" isLink to="www.twitter.com" target="_blank"/>
+                <Icon name="google" link="www.google.com" target="_blank"/>
+                <Icon name="facebook" link="www.facebook.com" target="_blank"/>
+                <Icon name="linkedin" link="www.linkedin.com" target="_blank"/>
+                <Icon name="github" link="www.github.com" target="_blank" />
+                <Icon name="twitter" link="www.twitter.com" target="_blank"/>
             </div>
         )
     }
@@ -84,9 +84,9 @@ class App extends React.Component {
     render() { 
         return (
             <div>
-                <Icon name="twitter" isButton to="www.twitter.com" target="_blank"/>
-                <Icon name="facebook" isButton to="www.facebook.com" target="_blank" />
-                <Icon name="google" isButton to="www.google.com" target="_blank"/>
+                <Icon name="twitter" isButton link="www.twitter.com" target="_blank"/>
+                <Icon name="facebook" isButton link="www.facebook.com" target="_blank" />
+                <Icon name="google" isButton link="www.google.com" target="_blank"/>
             </div>
         )
     }
@@ -148,7 +148,7 @@ export const IconDoc = () => (
         </div>
         {/** LINK*/}
         <h2 id="link" className="uk-h3 tm-heading-fragment"><a href="#link">Link</a></h2>
-        <p>Add <code>isLink</code> prop to Icon component to set the component as a link property at external or inside your content. Add <code>linkClassName</code> prop to the Icon component to use custom link css class </p>
+        <p>Set <code>link</code> prop to Icon component to set the component as a link property at external or inside your content. Add <code>linkClassName</code> prop to the Icon component to use custom link css class </p>
         <div className="uk-position-relative uk-margin-medium">
             <ul uk-tab="swiping: false" className="uk-tab">
                 <li className="uk-active"><a href="#" aria-expanded="true">Preview</a></li>
@@ -157,11 +157,11 @@ export const IconDoc = () => (
             <ul className="uk-switcher uk-margin">
                 <li>
                     <p>
-                        <Icon name="google" isLink to="www.google.com" target="_blank"/>
-                        <Icon name="facebook" isLink to="www.facebook.com" target="_blank" style={{ marginLeft: '10px' }} />
-                        <Icon name="linkedin" isLink to="www.linkedin.com" target="_blank" style={{ marginLeft: '10px' }} />
-                        <Icon name="github" isLink to="www.github.com" target="_blank" style={{ marginLeft: '10px' }} />
-                        <Icon name="twitter" isLink to="www.twitter.com" target="_blank" style={{ marginLeft: '10px' }} />
+                        <Icon name="google" link="www.google.com" target="_blank"/>
+                        <Icon name="facebook" link="www.facebook.com" target="_blank" style={{ marginLeft: '10px' }} />
+                        <Icon name="linkedin" link="www.linkedin.com" target="_blank" style={{ marginLeft: '10px' }} />
+                        <Icon name="github" link="www.github.com" target="_blank" style={{ marginLeft: '10px' }} />
+                        <Icon name="twitter" link="www.twitter.com" target="_blank" style={{ marginLeft: '10px' }} />
                     </p>
                 </li>
                 <li>
@@ -182,9 +182,9 @@ export const IconDoc = () => (
             <ul className="uk-switcher uk-margin">
                 <li>
                     <p>
-                        <Icon name="twitter" isButton to="www.twitter.com" target="_blank"/>
-                        <Icon name="facebook" isButton to="www.facebook.com" target="_blank" />
-                        <Icon name="google" isButton to="www.google.com" target="_blank"/>
+                        <Icon name="twitter" isButton link="www.twitter.com" target="_blank"/>
+                        <Icon name="facebook" isButton link="www.facebook.com" target="_blank" />
+                        <Icon name="google" isButton link="www.google.com" target="_blank"/>
                     </p>
                 </li>
                 <li>
@@ -226,10 +226,10 @@ export const IconDoc = () => (
                         <td align="left"><code>1</code></td>
                     </tr>
                     <tr>
-                        <td align="left"><code>isLink</code></td>
-                        <td align="left"><code>bool</code></td>
+                        <td align="left"><code>link</code></td>
+                        <td align="left"><code>string</code></td>
                         <td align="left">no</td>
-                        <td align="left"><code>false</code></td>
+                        <td align="left"><code>''</code></td>
                     </tr>
                     <tr>
                         <td align="left"><code>isButton</code></td>

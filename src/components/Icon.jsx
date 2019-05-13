@@ -12,10 +12,9 @@ const RegularIcon = ({ ...props }) => {
     const {
         name,
         size,
-        isLink,
         isButton,
         linkClassName:customLinkClassName,
-        to,
+        link,
         className: customClassName,
         classes,
         ...other
@@ -26,11 +25,11 @@ const RegularIcon = ({ ...props }) => {
     const height = props.size * 20;
 
     const linkClassName = classNames('uk-margin-small-right',customLinkClassName, {
-        'uk-icon-link': isLink,
+        'uk-icon-link': !(link===''),
         'uk-icon-button': isButton,
       })
-    const icon = props.isLink || props.isButton ?
-            <a href={`//${props.to}`} target={props.target} className={linkClassName}>
+    const icon = props.link || props.isButton ?
+            <a href={`//${props.link}`} target={props.target} className={linkClassName}>
                 <span dangerouslySetInnerHTML={{ __html: iconList(width, height, props.name) }} className={className} uk-icon={iconProp} {...other}></span>
             </a> :<span dangerouslySetInnerHTML={{ __html: iconList(width, height, props.name) }} className={className} uk-icon={iconProp} {...other}></span>
     return (icon)
@@ -39,20 +38,18 @@ const RegularIcon = ({ ...props }) => {
 RegularIcon.propTypes = {
     name: PropTypes.string.isRequired,
     size: PropTypes.number,
-    isLink: PropTypes.bool,
     isButton: PropTypes.bool,
     linkClassName:PropTypes.string,
-    to: PropTypes.string,
+    link:PropTypes.string,
     className: PropTypes.string,
 }
 RegularIcon.defaultProps = {
     name: '',
     size: 1,
-    isLink: false,
     isButton: false,
-    to: '',
     className: '',
-    linkClassName:''
+    linkClassName:'',
+    link:''
 }
 
 const styledIcon = withStyles(iconStyle)(RegularIcon)

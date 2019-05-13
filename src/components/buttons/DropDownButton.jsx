@@ -1,45 +1,78 @@
-import cx from 'classnames'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Button } from './Button';
+import {styles} from '../../assets/jss/dropDownButtonStyle.jsx'
+import { StyleSheet,css } from 'aphrodite/no-important';
+import {slideDown} from 'react-animations'
 
-export default class DropDownButton extends Component {
+const animationStyle = StyleSheet.create({
+  slideDown: {
+    animationName: slideDown,
+    animationDuration: '1s'
+  }
+})
+
+class DropDownButton extends Component {
 
   static propTypes = {
-    mode: PropTypes.oneOf(['hover', 'click']).isRequired,
     className: PropTypes.string,
-    list: PropTypes.array.isRequired,
-    buttonClassName: PropTypes.string,
-    listClassName:PropTypes.string,
-    text: PropTypes.string.isRequired
+    items: PropTypes.array.isRequired,
+    listClassName: PropTypes.string,
+    text: PropTypes.string.isRequired,
+    disabled: PropTypes.bool,
+    buttonProps: PropTypes.object,
+    mode:PropTypes.string,
+    animation:PropTypes.string,
+    duration:PropTypes.string,
   }
 
   static defaultProps = {
-    mode: 'hover',
     className: '',
-    buttonClassName: '',
     text: '',
-    listClassName:''
+    listClassName: '',
+    buttonProps: {},
+    mode:'hover',
+    animation:'',
+    duration:'1s'
   }
 
   constructor(props) {
     super(props)
     this.state = {
       isOpen: false,
+      animationStyle:{}
     }
+    this.dropDownRef = React.createRef();
+    this.handleClick = this.handleClick.bind(this)
+    this.handleMouseEnter = this.handleMouseEnter.bind(this)
+    this.handleMouseLeave = this.handleMouseLeave.bind(this)
   }
 
+  componentDidMount(){
+    document.addEventListener("mousedown",this.outSideEvent)
+    document.addEventListener("mousemove",this.handleMouseLeave)
 
-  handleMouseEnter = () => {
-    if (this.props.mode === 'hover') {
-      this.setState({ isOpen: true })
-    }
+
+        this.setState({
+          // animationStyle: StyleSheet.create({
+          //   animation: {
+          //     animationName: slideDown,
+          //     animationDuration: this.state.duration
+          //   }
+          // })
+        });
+
+
+
   }
 
-  handleMouseLeave = () => {
-    this.setState({ isOpen: false })
+  componentWillUnmount(){
+    document.removeEventListener("mousedown",this.outSideEvent)
+    document.removeEventListener("mousemove",this.handleMouseLeave)
   }
 
-  handleClick = () => {
+  handleClick(){
+
     if (this.props.mode === 'click') {
       this.setState({ isOpen: !this.state.isOpen })
     }
@@ -47,17 +80,41 @@ export default class DropDownButton extends Component {
     if (this.props.mode === 'hover') {
       this.setState({ isOpen: false })
     }
+
+  }
+
+  handleMouseEnter(){
+    if (this.props.mode === 'hover') {
+      this.setState({ isOpen: true })
+    }
+  }
+
+  handleMouseLeave(e){
+    if(this.props.mode==="hover" && !this.dropDownRef.current.contains(e.target)){
+      this.setState({ isOpen: false })
+    }
+  }
+
+
+  outSideEvent = (e) => {
+    if(this.dropDownRef && !this.dropDownRef.current.contains(e.target)){
+      this.setState({ isOpen: false })
+    }
   }
 
   render() {
-    const { handleMouseEnter, handleMouseLeave, handleClick } = this
+    const { handleMouseEnter,handleMouseLeave, handleClick } = this
     const {
-      mode,
       className: customClassName,
-      buttonClassName: customButtonClassName,
-      listClassName:customListClassName,
-      list,
-      text } = this.props
+      listClassName: customListClassName,
+      items,
+      text,
+      buttonProps,
+      mode,
+      animation,
+      duration,
+      ...other
+    } = this.props
     const { isOpen } = this.state
 
     const eventHandlers = {
@@ -68,29 +125,31 @@ export default class DropDownButton extends Component {
       eventHandlers.onMouseLeave = handleMouseLeave
     }
 
-    if (!Array.isArray(list) || !list.length) {
-      throw new Error('List must be passed as array and must be not empty.')
+    if (!Array.isArray(items) || !items.length) {
+      throw new Error('Items must be passed as array and must be not empty.')
     }
 
-    const className = cx('uk-inline', customClassName)
+    const className = css(styles.inline, customClassName)
 
-    const buttonClassName = cx('uk-button', 'uk-button-default', customButtonClassName)
 
-    const listClassName = cx('uk-dropdown uk-dropdown-bottom-left',customListClassName,{
-      'uk-open':isOpen
-    })
+
+    const listClassName = css(styles.dropDown, customListClassName,
+      animationStyle.slideInDown,
+      isOpen & !buttonProps["disabled"] ? styles.dropDownOpen:'')
 
     return (
-      <div className={className}>
-        <button className={buttonClassName} type="button" {...eventHandlers}>{text}</button>
+      <div className={className} {...other} ref={this.dropDownRef}>
+        <Button {...eventHandlers} {...buttonProps}>{text}</Button>
         <div className={listClassName}>
-            <ul className="uk-nav uk-dropdown-nav">
-              {list.map((el, index) =>
-                <li key={index}><a href="#">{el}</a></li>
-              )}
-            </ul>
-            </div>
+          <ul className={css(styles.dropDownNav)}>
+            {items.map((el, index) =>
+              <li key={index}><a href="#" className={css(styles.dropDownNavLink)}>{el}</a></li>
+            )}
+          </ul>
+        </div>
       </div>
     )
   }
 }
+const drp = DropDownButton
+export {drp as DropDownButton}
