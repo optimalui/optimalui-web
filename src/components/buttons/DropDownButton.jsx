@@ -1,29 +1,22 @@
-import React, { Component } from 'react'
+import React, { Component,cloneElement } from 'react'
 import PropTypes from 'prop-types'
-import { Button } from './Button';
-import {styles} from '../../assets/jss/dropDownButtonStyle.jsx'
-import { StyleSheet,css } from 'aphrodite/no-important';
-import {slideDown} from 'react-animations'
-
-const animationStyle = StyleSheet.create({
-  slideDown: {
-    animationName: slideDown,
-    animationDuration: '1s'
-  }
-})
+import { Button,DropDownButtonItem } from '../buttons';
+import {getDropDownStyle,dropDownLinkStyle} from '../../assets/jss/dropDownButtonStyle.jsx'
+import { css } from 'aphrodite/no-important';
 
 class DropDownButton extends Component {
 
   static propTypes = {
     className: PropTypes.string,
-    items: PropTypes.array.isRequired,
+    items: PropTypes.array,
     listClassName: PropTypes.string,
-    text: PropTypes.string.isRequired,
+    text: PropTypes.string,
     disabled: PropTypes.bool,
     buttonProps: PropTypes.object,
     mode:PropTypes.string,
     animation:PropTypes.string,
     duration:PropTypes.string,
+    textField:PropTypes.string,
   }
 
   static defaultProps = {
@@ -33,7 +26,8 @@ class DropDownButton extends Component {
     buttonProps: {},
     mode:'hover',
     animation:'',
-    duration:'1s'
+    duration:'1s',
+    textField:''
   }
 
   constructor(props) {
@@ -46,24 +40,12 @@ class DropDownButton extends Component {
     this.handleClick = this.handleClick.bind(this)
     this.handleMouseEnter = this.handleMouseEnter.bind(this)
     this.handleMouseLeave = this.handleMouseLeave.bind(this)
+    this.onItemClick = this.onItemClick.bind(this)
   }
 
   componentDidMount(){
     document.addEventListener("mousedown",this.outSideEvent)
     document.addEventListener("mousemove",this.handleMouseLeave)
-
-
-        this.setState({
-          // animationStyle: StyleSheet.create({
-          //   animation: {
-          //     animationName: slideDown,
-          //     animationDuration: this.state.duration
-          //   }
-          // })
-        });
-
-
-
   }
 
   componentWillUnmount(){
@@ -95,6 +77,10 @@ class DropDownButton extends Component {
     }
   }
 
+  onItemClick(e){
+    this.setState({ isOpen: false })
+  }
+
 
   outSideEvent = (e) => {
     if(this.dropDownRef && !this.dropDownRef.current.contains(e.target)){
@@ -113,8 +99,12 @@ class DropDownButton extends Component {
       mode,
       animation,
       duration,
+      textField,
+      children,
       ...other
     } = this.props
+    const styles = getDropDownStyle(animation,duration);
+
     const { isOpen } = this.state
 
     const eventHandlers = {
@@ -125,26 +115,48 @@ class DropDownButton extends Component {
       eventHandlers.onMouseLeave = handleMouseLeave
     }
 
-    if (!Array.isArray(items) || !items.length) {
-      throw new Error('Items must be passed as array and must be not empty.')
-    }
-
     const className = css(styles.inline, customClassName)
 
-
-
     const listClassName = css(styles.dropDown, customListClassName,
-      animationStyle.slideInDown,
+      styles.animation,
       isOpen & !buttonProps["disabled"] ? styles.dropDownOpen:'')
+
+      const itemEventHandlers = {
+        onClick:this.onItemClick
+      }
+
+      // construct item Element
+      const cloneItem = (item) => cloneElement(item, {
+        ...item.props,
+        ...itemEventHandlers,
+        className: css(item.props.className),
+      })
+
+    const renderItems = items ? items.map((item, index) => {
+      if (typeof (item) === 'object') {
+        const {
+          text,
+          ...other
+        } = item
+       return <DropDownButtonItem
+          key={`item-${index}`}
+          text={textField ? item[textField] : text}
+          {...other}
+          {...itemEventHandlers}
+           />
+      } else {
+       return <DropDownButtonItem key={`item-${index}`} text={item} {...itemEventHandlers}/>
+      }
+    }) : React.Children.map(children, cloneItem)
+    
+
 
     return (
       <div className={className} {...other} ref={this.dropDownRef}>
         <Button {...eventHandlers} {...buttonProps}>{text}</Button>
         <div className={listClassName}>
           <ul className={css(styles.dropDownNav)}>
-            {items.map((el, index) =>
-              <li key={index}><a href="#" className={css(styles.dropDownNavLink)}>{el}</a></li>
-            )}
+            {renderItems}
           </ul>
         </div>
       </div>

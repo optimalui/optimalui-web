@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import './index.css';
+import './assets/web/css/font-awesome-v4.7.0.css'
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
