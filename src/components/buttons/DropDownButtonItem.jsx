@@ -24,6 +24,7 @@ class DropDownButtonItem extends Component {
         iconClass:PropTypes.string,
         iconClassName:PropTypes.string,
         iconStyle:PropTypes.object,
+        listClassName:PropTypes.string,
     }
 
     static defaultProps = {
@@ -33,16 +34,24 @@ class DropDownButtonItem extends Component {
         disabled: false,
         linkTarget: '',
         icon:'',
+        imageUrl:'',
         imageWidth:15,
         imageHeight:15,
         iconClass:'',
         iconClassName:'',
         iconStyle:{},
+        listClassName:'',
+        onItemClick:null
     }
     handleClick(e) {
         if (this.props.disabled) {
             e.preventDefault()
         }
+        const info ={
+            item:this,
+            domEvent:e
+        }
+        this.props.onClick(info);
         
     }
     render() { 

@@ -13,12 +13,26 @@ class DropDownButtonEvents extends Component {
         };
     }
 
-    handleDomEvent = (event) => {
-        let logs = this.state.logs.slice();
+    handleDomEvent = (eventType) => {
+        this.setState((state, props) => {
+          let logs = state.logs.slice();
+          logs.unshift(eventType);
+          return { logs };
+        });
+    }
+    handleItemClick = (event) => {
+        if (event.item) {
 
-        logs.unshift(event.type)
+            const key = event.item._reactInternalFiber.key,
+                text = event.item._reactInternalFiber.pendingProps.text
 
-        this.setState({logs: logs})
+
+            this.setState((state, props) => {
+                let logs = state.logs.slice();
+                logs.unshift(`item click {key:${key},text:${text}}`);
+                return { logs };
+            });
+        }
     }
 
     render() { 
@@ -28,13 +42,10 @@ class DropDownButtonEvents extends Component {
                 <DropDownButton
                     text="Events"
                     items={items}
-                    onItemClick={() => this.handleDomEvent('item click')}
-                    onMouseEnter={this.handleDomEvent}
-                    onClick={this.handleDomEvent}
-                    onFocus={this.handleDomEvent}
-                    onBlur={this.handleDomEvent}
-                    onOpen={this.handleDomEvent}
-                    onClose={this.handleDomEvent}
+                    onItemClick={(e) => this.handleItemClick(e)}
+                    onMouseEnter={() =>this.handleDomEvent('mouseenter')}
+                    onFocus={() =>this.handleDomEvent('focus')}
+                    onBlur={() =>this.handleDomEvent('blur')}
 
                 />,
                 <EventLog title="Event Log" logs={this.state.logs}/>

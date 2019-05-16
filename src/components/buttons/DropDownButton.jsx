@@ -17,6 +17,7 @@ class DropDownButton extends Component {
     animation:PropTypes.string,
     duration:PropTypes.string,
     textField:PropTypes.string,
+    onItemClick:PropTypes.func
   }
 
   static defaultProps = {
@@ -27,7 +28,9 @@ class DropDownButton extends Component {
     mode:'hover',
     animation:'',
     duration:'1s',
-    textField:''
+    textField:'',
+    onItemClick:null,
+    items:[]
   }
 
   constructor(props) {
@@ -40,7 +43,7 @@ class DropDownButton extends Component {
     this.handleClick = this.handleClick.bind(this)
     this.handleMouseEnter = this.handleMouseEnter.bind(this)
     this.handleMouseLeave = this.handleMouseLeave.bind(this)
-    this.onItemClick = this.onItemClick.bind(this)
+    this.handleItemClick = this.handleItemClick.bind(this)
   }
 
   componentDidMount(){
@@ -77,8 +80,9 @@ class DropDownButton extends Component {
     }
   }
 
-  onItemClick(e){
+  handleItemClick(e){
     this.setState({ isOpen: false })
+    this.props.onItemClick(e)
   }
 
 
@@ -89,7 +93,7 @@ class DropDownButton extends Component {
   }
 
   render() {
-    const { handleMouseEnter,handleMouseLeave, handleClick } = this
+    const { handleMouseEnter,handleMouseLeave, handleClick,handleItemClick} = this
     const {
       className: customClassName,
       listClassName: customListClassName,
@@ -109,6 +113,7 @@ class DropDownButton extends Component {
 
     const eventHandlers = {
       onClick: handleClick,
+      onItemClick:handleItemClick
     }
     if (mode === 'hover') {
       eventHandlers.onMouseEnter = handleMouseEnter
@@ -122,7 +127,7 @@ class DropDownButton extends Component {
       isOpen & !buttonProps["disabled"] ? styles.dropDownOpen:'')
 
       const itemEventHandlers = {
-        onClick:this.onItemClick
+        onClick:handleItemClick
       }
 
       // construct item Element

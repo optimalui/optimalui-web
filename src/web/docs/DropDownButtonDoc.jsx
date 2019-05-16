@@ -110,6 +110,7 @@ ReactDOM.render(
 `;
 
 const eventLogs = `
+const items = ['My Profile', 'Friend Requests', 'Account Settings', 'Support', 'Log Out'];
 class EventLog extends React.Component {
     renderLogs = () => {
         return this.props.logs.map((log, index)=> {
@@ -143,16 +144,31 @@ class ButtonEvents extends React.Component {
 
         this.setState({logs: logs})
     }
+    handleItemClick = (event) => {
+        if (event.item) {
+
+            const key = event.item._reactInternalFiber.key,
+                text = event.item._reactInternalFiber.pendingProps.text
+
+
+            this.setState((state, props) => {
+                let logs = state.logs.slice();
+                logs.unshift(`.concat('`item click {key:${key},text:${text}`').concat(`);
+                return { logs };
+            });
+        }
+    }
     render() {
         return ([
-            <Button
-                onClick={this.handleDomEvent}
-                onMouseDown={this.handleDomEvent}
-                onMouseUp={this.handleDomEvent}
-                onFocus={this.handleDomEvent}
-                onBlur={this.handleDomEvent}
-                onKeyPress={this.handleDomEvent}
-            >
+            <DropDownButton
+                text="Events"
+                items={items}
+                onItemClick={(e) => this.handleItemClick(e)}
+                onMouseEnter={() =>this.handleDomEvent('mouseenter')}
+                onFocus={() =>this.handleDomEvent('focus')}
+                onBlur={() =>this.handleDomEvent('blur')}
+
+            />,
                 My Button
             </Button>,
             <EventLog title="Event Log" logs={this.state.logs}/>
@@ -163,7 +179,7 @@ ReactDOM.render(
     <ButtonEvents/>,
     document.querySelector('my-app')
 );
-`;
+`);
 
 const dataBinding = `
 import React from 'react';
@@ -212,6 +228,29 @@ class App extends React.Component {
                     <DropDownButtonItem text="Upload" icon="cloud-upload" />
                     <DropDownButtonItem text="Save As PDF" icon="file-pdf" />
                 </DropDownButton>
+            </div>
+        )
+    }
+}
+
+ReactDOM.render(
+    <App />,
+    document.querySelector('my-app')
+)
+`
+
+const itemClick = `
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { DropDownButton } from '@optimalui/components/buttons'
+
+const items = ['My Profile', 'Friend Requests', 'Account Settings', 'Support', 'Log Out'];
+
+class App extends React.Component {
+    render() {
+        return (
+            <div>
+                <DropDownButton text="File Settings" items={items} onItemClick={(info)=>{alert(info.item._reactInternalFiber.pendingProps.text)}}/>
             </div>
         )
     }
@@ -337,6 +376,89 @@ export const DropDownButtonDoc = () => (
             <MarkupButtons codeText={iconWithButton}/>
         </div>
 
+        {/** PROPS  */}
+        <h2 id="props" className="uk-h3 tm-heading-fragment"><a href="#props">DropDownButton Props</a></h2>
+        <div className="uk-overflow-auto">
+            <table className="uk-table uk-table-divider">
+                <thead>
+                    <tr>
+                        <th align="left">prop</th>
+                        <th align="left">propType</th>
+                        <th align="left">reqiured</th>
+                        <th align="left">default</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td align="left"><code>text</code></td>
+                        <td align="left"><code>string</code></td>
+                        <td align="left">no</td>
+                        <td align="left"><code>''</code></td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>className</code></td>
+                        <td align="left"><code>string</code></td>
+                        <td align="left">no</td>
+                        <td align="left"><code>''</code></td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>items</code></td>
+                        <td align="left"><code>array</code></td>
+                        <td align="left">no</td>
+                        <td align="left"><code>[]</code></td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>listClassName</code></td>
+                        <td align="left"><code>string</code></td>
+                        <td align="left">no</td>
+                        <td align="left"><code>''</code></td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>disabled</code></td>
+                        <td align="left"><code>bool</code></td>
+                        <td align="left">no</td>
+                        <td align="left"><code>false</code></td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>buttonProps</code></td>
+                        <td align="left"><code>object</code></td>
+                        <td align="left">no</td>
+                        <td align="left"><code>{`{}`}</code></td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>mode</code></td>
+                        <td align="left"><code>string</code></td>
+                        <td align="left">no</td>
+                        <td align="left"><code>hover</code></td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>animation</code></td>
+                        <td align="left"><code>string</code></td>
+                        <td align="left">no</td>
+                        <td align="left"><code>''</code></td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>duration</code></td>
+                        <td align="left"><code>string</code></td>
+                        <td align="left">no</td>
+                        <td align="left"><code>''</code></td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>textField</code></td>
+                        <td align="left"><code>string</code></td>
+                        <td align="left">no</td>
+                        <td align="left"><code>''</code></td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>onItemClick</code></td>
+                        <td align="left"><code>func</code></td>
+                        <td align="left">no</td>
+                        <td align="left"><code>null</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
          {/** DATA BINDING */}
          <h2 id="data-binding" className="uk-h3 tm-heading-fragment"><a href="#data-binding">Data Binding</a></h2>
          <p>If DropDownButton list item consists of only plain text,it is sufficient giving only array of text items. </p>
@@ -384,6 +506,100 @@ export const DropDownButtonDoc = () => (
             </ul>
             <MarkupButtons codeText={itemSource}/>
         </div>
+        <p className="uk-text-lead">DropDownButtonItem Props</p>
+        <div className="uk-overflow-auto">
+            <table className="uk-table uk-table-divider">
+                <thead>
+                    <tr>
+                        <th align="left">prop</th>
+                        <th align="left">propType</th>
+                        <th align="left">reqiured</th>
+                        <th align="left">default</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr>
+                        <td align="left"><code>text</code></td>
+                        <td align="left"><code>string</code></td>
+                        <td align="left">yes</td>
+                        <td align="left"><code>''</code></td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>className</code></td>
+                        <td align="left"><code>string</code></td>
+                        <td align="left">no</td>
+                        <td align="left"><code>''</code></td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>disabled</code></td>
+                        <td align="left"><code>bool</code></td>
+                        <td align="left">no</td>
+                        <td align="left"><code>false</code></td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>link</code></td>
+                        <td align="left"><code>string</code></td>
+                        <td align="left">no</td>
+                        <td align="left"><code>''</code></td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>linkTarget</code></td>
+                        <td align="left"><code>string</code></td>
+                        <td align="left">no</td>
+                        <td align="left"><code>''</code></td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>icon</code></td>
+                        <td align="left"><code>string</code></td>
+                        <td align="left">no</td>
+                        <td align="left"><code>''</code></td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>imageUrl</code></td>
+                        <td align="left"><code>string</code></td>
+                        <td align="left">no</td>
+                        <td align="left"><code>''</code></td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>imageWidth</code></td>
+                        <td align="left"><code>number</code></td>
+                        <td align="left">no</td>
+                        <td align="left"><code>15</code></td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>imageHeight</code></td>
+                        <td align="left"><code>number</code></td>
+                        <td align="left">no</td>
+                        <td align="left"><code>15</code></td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>iconClass</code></td>
+                        <td align="left"><code>string</code></td>
+                        <td align="left">no</td>
+                        <td align="left"><code>''</code></td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>iconClassName</code></td>
+                        <td align="left"><code>string</code></td>
+                        <td align="left">no</td>
+                        <td align="left"><code>''</code></td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>listClassName</code></td>
+                        <td align="left"><code>string</code></td>
+                        <td align="left">no</td>
+                        <td align="left"><code>''</code></td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>iconStyle</code></td>
+                        <td align="left"><code>object</code></td>
+                        <td align="left">no</td>
+                        <td align="left"><code>{`{}`}</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
 
         {/** EVENTS  */}
         <h2 id="events" className="uk-h3 tm-heading-fragment"><a href="#events">Events</a></h2>
@@ -403,6 +619,23 @@ export const DropDownButtonDoc = () => (
             </ul>
             <MarkupButtons codeText={eventLogs}/>
         </div>
+        <p><code>onItemClick</code> function prop is getting with default object variables which is <code>item</code> and <code>domEvent</code>.You can inspect this when create a custom item click function.</p>
+        <div className="uk-position-relative uk-margin-medium">
+            <ul uk-tab="swiping: false" className="uk-tab">
+                <li className="uk-active"><a href="#" aria-expanded="true">Example</a></li>
+                <li className=""><a href="#" aria-expanded="false">View Source</a></li>
+            </ul>
+            <ul className="uk-switcher uk-margin">
+                <li>
+                    <DropDownButton text="File Settings" items={items} onItemClick={(info)=>{alert(info.item._reactInternalFiber.pendingProps.text)}}/>
+                </li>
+                <li>
+                    <SyntaxHighlighter language='javascript' style={docco}>{itemClick}</SyntaxHighlighter>
+                </li>
+            </ul>
+            <MarkupButtons codeText={itemClick}/>
+        </div>
+
 
 
         <div className="tm-sidebar-right uk-visible@l">
@@ -412,6 +645,7 @@ export const DropDownButtonDoc = () => (
                     <li className=""><a href="#button-props">Button Style Props</a></li>
                     <li className=""><a href="#animation">Animation</a></li>
                     <li className=""><a href="#icon">Icon</a></li>
+                    <li className=""><a href="#props">DropDownButton Props</a></li>
                     <li className=""><a href="#data-binding">Data Binding</a></li>
                     <li className=""><a href="#events">Events</a></li>
                 </ul>
