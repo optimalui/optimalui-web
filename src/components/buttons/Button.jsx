@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux'
 import ReactDOM from 'react-dom'
 import {Icon} from '../Icon'
 
 class RegularButton extends Component {
-
-  constructor(props) {
-    super(props)
-  }
-
   static propTypes = {
     active: PropTypes.bool,
     className: PropTypes.string,

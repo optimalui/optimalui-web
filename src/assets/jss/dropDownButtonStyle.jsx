@@ -25,7 +25,7 @@ export const getDropDownStyle = (animationName = "", duration) => {
         },
         dropDown: {
             /**uk-dropdown */
-            display: 'none',
+            display:'none',
             position: 'absolute',
             zIndex: 1020,
             boxSizing: 'border-box',
@@ -72,6 +72,7 @@ export const dropDownLinkStyle = StyleSheet.create({
         ':focus': {
             color: '#666',
             outline: 'none',
+            textDecoration: 'none',
         },
 
     },

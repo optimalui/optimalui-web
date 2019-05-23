@@ -1,6 +1,5 @@
 /* eslint-disable */
 import React from 'react';
-import { ButtonGroup,Button } from '../../components/buttons'
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import MarkupButtons from './MarkupButtons';
@@ -627,7 +626,10 @@ export const DropDownButtonDoc = () => (
             </ul>
             <ul className="uk-switcher uk-margin">
                 <li>
-                    <DropDownButton text="File Settings" items={items} onItemClick={(info)=>{alert(info.item._reactInternalFiber.pendingProps.text)}}/>
+                    <DropDownButton text="File Settings" 
+                        items={items} 
+                        onItemClick={(info)=>{alert(info.item._reactInternalFiber.pendingProps.text)}}
+                        onItemKeyDown={(info)=>{console.log(info)}}/>
                 </li>
                 <li>
                     <SyntaxHighlighter language='javascript' style={docco}>{itemClick}</SyntaxHighlighter>
@@ -636,6 +638,41 @@ export const DropDownButtonDoc = () => (
             <MarkupButtons codeText={itemClick}/>
         </div>
 
+        {/** KEYBOARD-NAVIGATIONS */}
+        <h2 id="keyboard" className="uk-h3 tm-heading-fragment"><a href="#keyboard">Keyboard Navigations</a></h2>
+        <p>The DropDownButton supports the following keyboard shortcuts:</p>
+        <div className="uk-overflow-auto">
+            <table className="uk-table uk-table-divider">
+                <thead>
+                    <tr>
+                        <th align="left">Shortcut</th>
+                        <th align="left">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td align="left"><code>Alt+Down Arrow</code></td>
+                        <td align="left">Open the popup</td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>Esc</code></td>
+                        <td align="left">Closes the popup</td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>Up Arrow</code></td>
+                        <td align="left">Sets the focus on the previously available item.</td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>Down Arrow</code></td>
+                        <td align="left">Sets the focus on the next available item.</td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>Enter</code></td>
+                        <td align="left">Activates the highlighted item and closes the popup.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
 
         <div className="tm-sidebar-right uk-visible@l">
@@ -647,6 +684,8 @@ export const DropDownButtonDoc = () => (
                     <li className=""><a href="#icon">Icon</a></li>
                     <li className=""><a href="#props">DropDownButton Props</a></li>
                     <li className=""><a href="#data-binding">Data Binding</a></li>
+                    <li className=""><a href="#keyboard">Keyboard Navigation</a></li>
+                    <li className=""><a href="#accesibility">Accesibility</a></li>
                     <li className=""><a href="#events">Events</a></li>
                 </ul>
             </div>

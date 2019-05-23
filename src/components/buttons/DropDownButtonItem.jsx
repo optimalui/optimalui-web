@@ -1,15 +1,18 @@
+/* eslint-disable */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {dropDownLinkStyle} from '../../assets/jss/dropDownButtonStyle.jsx'
 import { css } from 'aphrodite/no-important';
 import { Icon } from '../Icon.jsx';
 import classNames from 'classnames';
+import {noop} from '../../util'
 
 
 class DropDownButtonItem extends Component {
     constructor(props) {
         super(props);
         this.handleClick = this.handleClick.bind(this)
+        this.handleKeyDown = this.handleKeyDown.bind(this)
     }
     static propTypes = {
         className: PropTypes.string,
@@ -30,7 +33,7 @@ class DropDownButtonItem extends Component {
     static defaultProps = {
         className: '',
         text: '',
-        link: '',
+        link: '#', 
         disabled: false,
         linkTarget: '',
         icon:'',
@@ -41,7 +44,7 @@ class DropDownButtonItem extends Component {
         iconClassName:'',
         iconStyle:{},
         listClassName:'',
-        onItemClick:null
+        onItemClick:null,
     }
     handleClick(e) {
         if (this.props.disabled) {
@@ -53,6 +56,14 @@ class DropDownButtonItem extends Component {
         }
         this.props.onClick(info);
         
+    }
+    handleKeyDown(e){
+            this.props.onKeyDown(
+                {
+                    item: this,
+                    domEvent: e
+                }
+            )
     }
     render() { 
         const {
@@ -77,25 +88,19 @@ class DropDownButtonItem extends Component {
         const iconClassName = classNames('uk-margin-small-right',customIconClass);
         const iconClass = classNames('uk-margin-small-right',customIconClassName);
         const eventHandlers = {
-            onClick:this.handleClick
+            onClick:this.handleClick,
+            onKeyDown:this.handleKeyDown
         }
 
-        const listContent = <span className={linkClass}>
-            {icon ? <Icon name={icon} className={iconClassName} style={iconStyle} /> : ''}
-            {imageUrl ? <img src={imageUrl} alt="" className={iconClassName} style={iconStyle} width={imageWidth} height={imageHeight} /> : ''}
-            {iconClass ? <i className={iconClass} style={iconStyle}></i> : ''}
-            {text}
-        </span>
-        let linkContent = ''
-        if(link && disabled===false){
-               linkContent= <a href={link} className={linkClass} target={linkTarget}>
-                    {listContent}
-                </a>
-        }
+
         return (
             <li {...other} className={listClass} {...eventHandlers}>
-                {linkContent}
-                {!link && listContent }
+                <a href={link} className={linkClass} target={linkTarget}>
+                    {icon ? <Icon name={icon} className={iconClassName} style={iconStyle} /> : ''}
+                    {imageUrl ? <img src={imageUrl} alt="" className={iconClassName} style={iconStyle} width={imageWidth} height={imageHeight} /> : ''}
+                    {iconClass ? <i className={iconClass} style={iconStyle}></i> : ''}
+                    {text}
+                </a>
             </li>
         );
     }

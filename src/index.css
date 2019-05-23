@@ -4900,15 +4900,15 @@ ul.uk-nav-sub {
 /*
  * Items
  */
-.uk-dropdown-nav > li > a {
+/* .uk-dropdown-nav > li > a {
   color: #999;
-}
+} */
 /* Hover + Focus + Active */
-.uk-dropdown-nav > li > a:hover,
+/* .uk-dropdown-nav > li > a:hover,
 .uk-dropdown-nav > li > a:focus,
 .uk-dropdown-nav > li.uk-active > a {
   color: #666;
-}
+} */
 /*
  * Header
  */
