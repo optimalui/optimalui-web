@@ -45,7 +45,6 @@ class DropDownButton extends Component {
       animationStyle: {},
       lastItemIndex: -1,
       currentItemIndex: -1,
-      enterKeyboard:false
     }
     this.dropDownRef = React.createRef();
     this.handleClick = this.handleClick.bind(this)
@@ -132,8 +131,8 @@ class DropDownButton extends Component {
   handleKeyDown(event) {
     switch (event.keyCode) {
       case this.keyCode.ENTER:
-          this.setState({enterKeyboard:true})
           this.closeDropDown();
+          break;
       case this.keyCode.SPACE:
       case this.keyCode.RETURN:
       case this.keyCode.DOWN:
@@ -159,7 +158,7 @@ class DropDownButton extends Component {
 
   closeDropDown() {
     /**for key binding */
-    this.setState({ isOpen: false,enterKeyboard:false })
+    this.setState({ isOpen: false})
   }
 
   toggleDropDown() {
@@ -197,7 +196,9 @@ class DropDownButton extends Component {
   }
 
   handleItemKeyDown(e) {
+    if(e.keyCode===this.keyCode.ENTER){
       this.props.onItemKeyDown(e)
+    }
   }
 
 
@@ -255,7 +256,7 @@ class DropDownButton extends Component {
 
     const itemEventHandlers = {
       onClick: handleItemClick,
-      onKeyDown:enterKeyboard ? handleItemKeyDown : noop
+      onKeyDown:handleItemKeyDown,
     }
 
 
@@ -265,7 +266,7 @@ class DropDownButton extends Component {
       'aria-haspopup': true,
       'aria-expanded': isOpen,
       'aria-label': text,
-      role: this.props.role || 'menuitem'
+      role: this.props.role || 'menu'
     }
 
 

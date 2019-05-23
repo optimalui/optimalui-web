@@ -33,7 +33,7 @@ class DropDownButtonItem extends Component {
     static defaultProps = {
         className: '',
         text: '',
-        link: '#', 
+        link: '', 
         disabled: false,
         linkTarget: '',
         icon:'',
@@ -47,9 +47,7 @@ class DropDownButtonItem extends Component {
         onItemClick:null,
     }
     handleClick(e) {
-        if (this.props.disabled) {
-            e.preventDefault()
-        }
+        e.preventDefault()
         const info ={
             item:this,
             domEvent:e

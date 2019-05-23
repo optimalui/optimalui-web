@@ -628,8 +628,7 @@ export const DropDownButtonDoc = () => (
                 <li>
                     <DropDownButton text="File Settings" 
                         items={items} 
-                        onItemClick={(info)=>{alert(info.item._reactInternalFiber.pendingProps.text)}}
-                        onItemKeyDown={(info)=>{console.log(info)}}/>
+                        onItemClick={(info)=>{alert(info.item._reactInternalFiber.pendingProps.text)}}/>
                 </li>
                 <li>
                     <SyntaxHighlighter language='javascript' style={docco}>{itemClick}</SyntaxHighlighter>
@@ -674,7 +673,11 @@ export const DropDownButtonDoc = () => (
             </table>
         </div>
 
-
+        {/** ACCESSIBILITY */}
+        <h2 id="accessibility" className="uk-h3 tm-heading-fragment"><a href="#accessibility">Accessibility</a></h2>
+        <p>The DropDownButton is accessible by screen readers and provides full <strong>WAI-ARIA</strong> support.</p>
+        <p>The DropDownButton uses the <code>role="menu"</code>, <code>aria-haspopup="true"</code>, <code>aria-expanded</code>, <code>aria-owns</code>  attributes. </p>
+        
         <div className="tm-sidebar-right uk-visible@l">
             <div uk-sticky="offset: 160" className="uk-sticky uk-active uk-sticky-fixed">
                 <ul uk-scrollspy-nav="closest: li; scroll: true; offset: 100" className="uk-nav uk-nav-default tm-nav uk-nav-parent-icon">
@@ -684,9 +687,9 @@ export const DropDownButtonDoc = () => (
                     <li className=""><a href="#icon">Icon</a></li>
                     <li className=""><a href="#props">DropDownButton Props</a></li>
                     <li className=""><a href="#data-binding">Data Binding</a></li>
-                    <li className=""><a href="#keyboard">Keyboard Navigation</a></li>
-                    <li className=""><a href="#accesibility">Accesibility</a></li>
                     <li className=""><a href="#events">Events</a></li>
+                    <li className=""><a href="#keyboard">Keyboard Navigation</a></li>
+                    <li className=""><a href="#accessibility">Accesibility</a></li>
                 </ul>
             </div>
             <div className="uk-sticky-placeholder" style={{ height: '249px', margin: '0px' }}></div>
