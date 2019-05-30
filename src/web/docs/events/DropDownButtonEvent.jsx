@@ -40,6 +40,7 @@ class DropDownButtonEvents extends Component {
         return (
             [
                 <DropDownButton
+                    key="evnt-1"
                     text="Events"
                     items={items}
                     onItemClick={(e) => this.handleItemClick(e)}
@@ -48,7 +49,7 @@ class DropDownButtonEvents extends Component {
                     onBlur={() =>this.handleDomEvent('blur')}
 
                 />,
-                <EventLog title="Event Log" logs={this.state.logs}/>
+                <EventLog key="evnt-2" title="Event Log" logs={this.state.logs}/>
             ]
         );
     }

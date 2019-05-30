@@ -8,7 +8,7 @@ export default class EventLog extends React.Component {
                 <h3 className="uk-card-title">{this.props.title}</h3>
                 <ul className="uk-list uk-list-divider" style={{ maxHeight: '200px', overflowY: 'scroll' }}>
                     {this.props.logs.map((log, index) =>
-                        <li key={index}>{log}</li>
+                        <li key={`event-${index}`}>{log}</li>
                     )}
                 </ul>
             </div>

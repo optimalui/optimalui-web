@@ -44,7 +44,6 @@ class DropDownButtonItem extends Component {
         iconClassName:'',
         iconStyle:{},
         listClassName:'',
-        onItemClick:null,
     }
     handleClick(e) {
         e.preventDefault()

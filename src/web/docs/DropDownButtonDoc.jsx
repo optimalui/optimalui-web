@@ -19,7 +19,8 @@ class App extends React.Component {
     render() { 
         return (
             <div>
-                <DropDownButton text="User Settings" items={items} />
+                <DropDownButton text="Hover" items={items} />
+                <DropDownButton text="Click" items={items} />
                 <DropDownButton text="Disabled" items={items} buttonProps={{ disabled: true }}/>
             </div>
         )
@@ -325,7 +326,7 @@ export const DropDownButtonDoc = () => (
 
         {/** ANIMATION */}
         <h2 id="animation" className="uk-h3 tm-heading-fragment"><a href="#animation">Animation</a></h2>
-        <p>DropButtonComponent uses <code><a href="https://www.npmjs.com/package/react-animations" target="_blank">react-animations</a></code> react module. To implement an animation set <code>animation</code> prop and set <code>duration</code> prop to set animation duration time.</p>
+        <p>DropButtonComponent uses <code><a href="https://www.npmjs.com/package/react-animations" target="_blank">react-animations</a></code> react module. To implement an animation, set <code>animation</code> prop and set <code>duration</code> prop to change animation duration time.</p>
         <p>All animation collection should be inspect at this <code><a href="http://react-animations.herokuapp.com/" target="_blank">link</a></code></p>
         <div className="uk-position-relative uk-margin-medium" style={{height:'100%'}}>
             <ul uk-tab="swiping: false" className="uk-tab">
@@ -350,13 +351,11 @@ export const DropDownButtonDoc = () => (
         <h2 id="icon" className="uk-h3 tm-heading-fragment"><a href="#icon">Icon Props</a></h2>
         <p>Add <code>buttonProps</code> prop   the DropDownButton component and give Button component icon props as object.</p>
         <p>Button icon properties:</p>
-        <p>
             <ul className="uk-list uk-list-bullet">
                 <li>The built-in icons are applied through the <code>icon</code>prop. Add <code>iconClassName</code> to add custom css class.</li>
                 <li>Adding image icons. They are applied through the <code>imageUrl</code> property of the component. To change image size ,add <code>imageWidth</code> and <code>imageHeight</code> props. Add <code>iconClassName</code> to add custom css class.</li>
                 <li>Adding FontAwesome and other font icons.  They are implemented by setting the required third-party CSS classes through the <code>iconClass</code> prop.</li>
             </ul>
-        </p>
         <div className="uk-position-relative uk-margin-medium" style={{height:'100%'}}>
             <ul uk-tab="swiping: false" className="uk-tab">
                 <li className="uk-active"><a href="#" aria-expanded="true">Preview</a></li>
@@ -609,10 +608,8 @@ export const DropDownButtonDoc = () => (
                 <li className=""><a href="#" aria-expanded="false">View Source</a></li>
             </ul>
             <ul className="uk-switcher uk-margin">
-                <li>
-                    <DropDownButtonEvents/>
-                </li>
-                <li>
+                <li key="src-1"> <DropDownButtonEvents/></li>
+                <li key="src-2">
                     <SyntaxHighlighter language='javascript' style={docco}>{eventLogs}</SyntaxHighlighter>
                 </li>
             </ul>

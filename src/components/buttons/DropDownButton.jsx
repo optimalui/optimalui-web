@@ -33,8 +33,6 @@ class DropDownButton extends Component {
     animation: '',
     duration: '1s',
     textField: '',
-    onItemClick: noop,
-    onItemKeyDown: noop,
     items: []
   }
 
@@ -192,7 +190,8 @@ class DropDownButton extends Component {
 
   handleItemClick(e) {
     this.setState({ isOpen: false })
-    this.props.onItemClick(e)
+      this.props.onItemClick(e)
+    
   }
 
   handleItemKeyDown(e) {
@@ -235,11 +234,13 @@ class DropDownButton extends Component {
       textField,
       children,
       attribute,
+      onItemClick,
+      onItemKeyDown,
       ...other
     } = this.props
     const styles = getDropDownStyle(animation, duration);
 
-    const { isOpen,enterKeyboard} = this.state
+    const { isOpen} = this.state
 
     const eventHandlers = {
       onClick: handleClick,
@@ -286,7 +287,7 @@ class DropDownButton extends Component {
                       {...itemEventHandlers}
                     />
                     : <DropDownButtonItem
-                      key={`item-${index}`}
+                      key={`${item}-${index}`}
                       text={item}
                       {...itemEventHandlers}
                     />
