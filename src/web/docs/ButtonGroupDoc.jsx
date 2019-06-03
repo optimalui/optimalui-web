@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React from 'react';
-import { ButtonGroup,Button } from '../../components/buttons'
+import { ButtonGroup, Button } from '../../components/buttons'
+import { Margin } from '../../components/layout'
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import MarkupButtons from './MarkupButtons';
@@ -43,7 +44,7 @@ ReactDOM.render(
     <App/>,
     document.querySelector('my-app')
 );
-`; 
+`;
 
 export const ButtonGroupDoc = () => (
     <div className="uk-container uk-container-small uk-position-relative">
@@ -60,35 +61,40 @@ export const ButtonGroupDoc = () => (
             </ul>
             <ul className="uk-switcher uk-margin">
                 <li>
-                        <ButtonGroup style={{marginTop:'2px'}}>
+                    <Margin type="small">
+                        <ButtonGroup>
                             <Button secondary>Button</Button>
                             <Button secondary>Button</Button>
                             <Button secondary>Button</Button>
                         </ButtonGroup>
-                        <br/>
-                        <ButtonGroup style={{marginTop:'2px'}}>
+                    </Margin>
+                    <Margin type="small">
+                        <ButtonGroup>
                             <Button primary>Button</Button>
                             <Button primary>Button</Button>
                             <Button primary>Button</Button>
                         </ButtonGroup>
-                        <br/>
-                        <ButtonGroup style={{marginTop:'2px'}}>
+                    </Margin>
+                    <Margin type="small">
+                        <ButtonGroup>
                             <Button danger>Button</Button>
                             <Button danger>Button</Button>
                             <Button danger>Button</Button>
                         </ButtonGroup>
-                        <br/>
+                    </Margin>
+                    <Margin type="small">
                         <ButtonGroup disabled>
                             <Button danger>Button</Button>
                             <Button danger>Button</Button>
                             <Button danger>Button</Button>
                         </ButtonGroup>
+                    </Margin>
                 </li>
                 <li>
                     <SyntaxHighlighter language='javascript' style={docco}>{buttonGroupUsage}</SyntaxHighlighter>
                 </li>
             </ul>
-            <MarkupButtons codeText={buttonGroupUsage}/>
+            <MarkupButtons codeText={buttonGroupUsage} />
         </div>
         <div className="tm-sidebar-right uk-visible@l">
             <div uk-sticky="offset: 160" className="uk-sticky uk-active uk-sticky-fixed">

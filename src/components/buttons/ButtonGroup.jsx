@@ -1,10 +1,8 @@
 /* eslint-disable */
-import React, { Component } from 'react';
-import classNames from 'classnames';
+import React, { Component, cloneElement } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux'
-import { buttonActions } from '../../_actions'
-import uuidv4 from 'uuid'
+import { buttonGroupStyle as styles } from '../../assets/jss'
+import { css } from 'aphrodite/no-important';
 
 class RegularButtonGroup extends Component {
     static propTypes = {
@@ -19,16 +17,6 @@ class RegularButtonGroup extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            groupId: `button-group-${uuidv4()}`
-        }
-    }
-
-    componentDidMount() {
-        const { dispatch } = this.props;
-        if (this.props.disabled) {
-            dispatch(buttonActions.setDisable(this.state.groupId))
-        }
     }
 
     render() {
@@ -36,22 +24,24 @@ class RegularButtonGroup extends Component {
             children,
             className: customClassName,
             disabled,
-            dispatch,
             ...other
         } = this.props;
-        const className = classNames('uk-button-group', customClassName)
+        const className = css(styles.root,customClassName);
         return (
-                <span {...other} className={className} group-id={this.state.groupId}>
-                    {children}
-                </span>
+            <span {...other} className={className}>
+                {
+                    React.Children.map(children, (item, index) => cloneElement(item, {
+                        key: `btn-${index}`,
+                        ...item.props,
+                        disabled,
+                    }))
+                }
+            </span>
         );
     }
 }
 
-const mapStateToProps = (state) => {
-    return { disableids: state.buttonReducer.disableIds }
-}
 
-const connectedButtonGroup = connect(mapStateToProps)(RegularButtonGroup)
+const btnGroup = RegularButtonGroup
 
-export { connectedButtonGroup as ButtonGroup }
+export { btnGroup as ButtonGroup }

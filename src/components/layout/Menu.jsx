@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { MenuItem } from './'
+import { MenuItem } from '.'
 import { menuStyle } from '../../assets/jss'
 import withStyles from 'react-jss'
 import {menuActions} from '../../_actions'

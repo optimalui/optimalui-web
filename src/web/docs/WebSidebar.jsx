@@ -26,6 +26,7 @@ export const WebSidebar = () => (
                     <ul className="uk-nav-sub">
                         <li><Link to="/docs/layout">Overview</Link></li>
                         <li><a>Menu</a></li>
+                        <li><Link to="/docs/layout/margin">Margin</Link></li>
                     </ul>
                 </li>
                 <li><Link to="/docs/icon">Icon</Link></li>

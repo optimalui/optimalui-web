@@ -2,8 +2,8 @@
 import React, { Component } from 'react';
 import './index.css';
 import { Button } from './components/buttons'
-import { Menu, MenuItem } from './components/navigation'
-import items from '../src/components/navigation/items.json'
+import { Menu, MenuItem } from './components/layout'
+import items from '../src/components/layout/items.json'
 import { BrowserRouter as Router, Route} from "react-router-dom";
 // import 'uikit/dist/css/uikit-core.css'
 // import 'uikit/dist/css/uikit.css'
