@@ -2,7 +2,8 @@
 import React, { Component, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import { buttonGroupStyle as styles } from '../../assets/jss'
-import { css } from 'aphrodite/no-important';
+import cx from 'classnames'
+import withStyles from 'react-jss';
 
 class RegularButtonGroup extends Component {
     static propTypes = {
@@ -24,9 +25,10 @@ class RegularButtonGroup extends Component {
             children,
             className: customClassName,
             disabled,
+            classes,
             ...other
         } = this.props;
-        const className = css(styles.root,customClassName);
+        const className = cx(styles.root,customClassName);
         return (
             <span {...other} className={className}>
                 {
@@ -42,6 +44,6 @@ class RegularButtonGroup extends Component {
 }
 
 
-const btnGroup = RegularButtonGroup
+const styledButtonGroup = withStyles(styles)(RegularButtonGroup)
 
-export { btnGroup as ButtonGroup }
+export { styledButtonGroup as ButtonGroup }

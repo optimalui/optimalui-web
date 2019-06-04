@@ -62,32 +62,34 @@ export const ButtonGroupDoc = () => (
             <ul className="uk-switcher uk-margin">
                 <li>
                     <Margin type="small">
-                        <ButtonGroup>
-                            <Button secondary>Button</Button>
-                            <Button secondary>Button</Button>
-                            <Button secondary>Button</Button>
-                        </ButtonGroup>
-                    </Margin>
-                    <Margin type="small">
-                        <ButtonGroup>
-                            <Button primary>Button</Button>
-                            <Button primary>Button</Button>
-                            <Button primary>Button</Button>
-                        </ButtonGroup>
-                    </Margin>
-                    <Margin type="small">
-                        <ButtonGroup>
-                            <Button danger>Button</Button>
-                            <Button danger>Button</Button>
-                            <Button danger>Button</Button>
-                        </ButtonGroup>
-                    </Margin>
-                    <Margin type="small">
-                        <ButtonGroup disabled>
-                            <Button danger>Button</Button>
-                            <Button danger>Button</Button>
-                            <Button danger>Button</Button>
-                        </ButtonGroup>
+                        <p>
+                            <ButtonGroup>
+                                <Button secondary>Button</Button>
+                                <Button secondary>Button</Button>
+                                <Button secondary>Button</Button>
+                            </ButtonGroup>
+                        </p>
+                        <p>
+                            <ButtonGroup>
+                                <Button primary>Button</Button>
+                                <Button primary>Button</Button>
+                                <Button primary>Button</Button>
+                            </ButtonGroup>
+                        </p>
+                        <p>
+                            <ButtonGroup>
+                                <Button danger>Button</Button>
+                                <Button danger>Button</Button>
+                                <Button danger>Button</Button>
+                            </ButtonGroup>
+                        </p>
+                        <p>
+                            <ButtonGroup disabled>
+                                <Button danger>Button</Button>
+                                <Button danger>Button</Button>
+                                <Button danger>Button</Button>
+                            </ButtonGroup>
+                        </p>
                     </Margin>
                 </li>
                 <li>

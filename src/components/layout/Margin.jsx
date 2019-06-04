@@ -8,12 +8,12 @@ import withStyles from 'react-jss';
 
 
 const RegularMargin = ({ children, type,classes }) => {
-    console.log(classes)
     const customClassName = classNames({
         [classes.default]:type==='default',
         [classes.top]:type==='top',
         [classes.bottom]:type==='bottom',
         [classes.left]:type==='left',
+        [classes.right]:type==='right',
         [classes.small]:type==='small',
         [classes.smallTop]:type==='small-top',
         [classes.smallBottom]:type==='small-bottom',
@@ -48,13 +48,14 @@ const RegularMargin = ({ children, type,classes }) => {
         [classes.autoRight]:type==='auto-right',
         [classes.autoVertical]:type==='auto-vertical',
     })
+
     return (
     <div>
         {
             React.Children.map(children, (item, index) => cloneElement(item, {
                 key: `element-${index}`,
                 ...item.props,
-                className:classNames(item.props.className,customClassName)
+                className:item.props.className? classNames(item.props.className,customClassName):customClassName
             }))
         }
     </div>
