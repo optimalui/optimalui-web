@@ -31,6 +31,7 @@ export const WebSidebar = () => (
                     </ul>
                 </li>
                 <li><Link to="/docs/icon">Icon</Link></li>
+                <li><Link to="/docs/cover">Cover</Link></li>
             </ul>
         </div>
     </div>
