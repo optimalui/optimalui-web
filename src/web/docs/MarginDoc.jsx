@@ -192,7 +192,7 @@ export const MarginDoc = () => (
         <h2 id="usage" className="uk-h3 tm-heading-fragment"><a href="#usage">Usage</a></h2>
         <p>Import <code>@optimalui/components/layout</code> module to use Margin component. Set <code>Margin</code> component as a parent to give  margin to any component.</p>
         <div className="uk-position-relative uk-margin-medium">
-            <ul uk-tab="swiping: false" className="uk-tab">
+            <ul uk-tab="" className="uk-tab">
                 <li className="uk-active"><a href="#" aria-expanded="true">Preview</a></li>
                 <li className=""><a href="#" aria-expanded="false">Markup</a></li>
             </ul>
