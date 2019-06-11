@@ -34,11 +34,18 @@ class Tab extends Component {
     }
 
     handleClick(e){
+        const { onClick } = this.props;
         const info ={
             item:this,
             domEvent:e
         }
-        console.log(info)
+        if (typeof onClick === 'function') {
+            if (onClick(info) === false) return;
+        }
+
+    }
+    componentDidMount(){
+        this.setState()
     }
 
     render() {
@@ -64,13 +71,11 @@ class Tab extends Component {
         return (
             <li
                 {...other}
-                // {...events}
                 role="tab"
                 aria-selected={selected}
                 aria-disabled={disabled}
                 tabIndex={tabIndex || (selected ? '0' : null)}
                 className={className}
-
             >
                 {title}
             </li>

@@ -7,8 +7,4 @@ export * from './IconDoc'
 export * from './DropDownButtonDoc'
 export * from './Intro'
 export * from './MarginDoc'
-<<<<<<< HEAD
 export * from './TabStripDoc'
-=======
-export * from './CoverDoc'
->>>>>>> bfbcc828c61e8104ef52e7fc5102602794357596

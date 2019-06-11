@@ -39,5 +39,10 @@ export const tabStripStyle = {
     text: {
         color: '#999',
         ...textStyle
+    },
+    content:{
+        margin: 0,
+        padding: 0,
+        listStyle: 'none'
     }
 }

@@ -2,11 +2,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Intro } from './Intro';
-<<<<<<< HEAD
 import { ButtonDoc,ButtonGroupDoc,IconDoc,MarginDoc,DropDownButtonDoc,TabStripDoc} from '../docs';
-=======
-import { ButtonDoc,ButtonGroupDoc,IconDoc,MarginDoc,DropDownButtonDoc,CoverDoc} from '../docs';
->>>>>>> bfbcc828c61e8104ef52e7fc5102602794357596
 
 
 class DocContent extends Component {
@@ -22,11 +18,7 @@ class DocContent extends Component {
                     <Route path="/docs/buttons/button-group" component={ButtonGroupDoc} />
                     <Route path="/docs/buttons/dropdown-button" component={DropDownButtonDoc} />
                     <Route path="/docs/layout/margin" component={MarginDoc} />
-<<<<<<< HEAD
                     <Route path="/docs/layout/tabstrip" component={TabStripDoc} />
-=======
-                    <Route path="/docs/cover" component={CoverDoc} />
->>>>>>> bfbcc828c61e8104ef52e7fc5102602794357596
                     <Route path="/docs/icon" component={IconDoc} />
                 </div>
             </div>

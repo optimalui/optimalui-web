@@ -1,8 +1,6 @@
 import React ,{Component,cloneElement} from 'react';
-import ReactDOM from 'react-dom'
 import withStyles from 'react-jss';
 import {coverStyle} from '../assets/jss'
-import PropTypes from 'prop-types';
 import cx from 'classnames'
 
 class Cover extends Component {
@@ -24,11 +22,7 @@ class Cover extends Component {
     }
     render() {
         const { classes, children, className: customClassName } = this.props
-<<<<<<< HEAD
         const {width} = this.state
-=======
-        const {width,height} = this.state
->>>>>>> bfbcc828c61e8104ef52e7fc5102602794357596
         const className = cx(classes.root,customClassName)
     
 
