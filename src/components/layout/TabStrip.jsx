@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import cx from 'classnames'
 import { Tab } from './index'
 import { onSelectPropType, selectedIndexPropType } from '../../_helpers/propTypes'
+import { css} from 'aphrodite/no-important';
 
 
 
@@ -12,11 +13,13 @@ class TabStrip extends Component {
     static propTypes = {
         className: PropTypes.string,
         selected: selectedIndexPropType,
-        onSelect: onSelectPropType
+        onSelect: onSelectPropType,
+        alignTabs:PropTypes.string
     }
     static defaultProps = {
         className: '',
-        selected: 0
+        selected: 0,
+        alignTabs:''
     }
     constructor(props) {
         super(props);
@@ -62,11 +65,17 @@ class TabStrip extends Component {
         }
         return null;
     }
-    setSelectedTabState(index,tab){
-        this.setState({ 
-            selectedIndex: index, 
-            selectedContent: tab.props.children 
-        })
+    setSelectedTabState(index, tab) {
+        if (!tab.props.disabled) {
+            this.setState({
+                selectedIndex: index,
+                selectedContent: tab.props.children
+            })
+        }
+    }
+
+    getCssClasses(){
+        return tabStripStyle(this.props.alignTabs)
     }
 
 
@@ -77,12 +86,17 @@ class TabStrip extends Component {
             className: customClassName,
             selected,
             children,
+            alignTabs,
             ...other
         } = this.props
 
         const { selectedIndex, selectedContent } = this.state
+        
+        const styles = tabStripStyle(alignTabs)
 
-        const className = cx(classes.root, customClassName)
+        console.log(styles);
+
+        const className = css(customClassName,styles.default)
 
 
         const tabElements = React.Children.map(children, (child, index) => {
@@ -90,7 +104,8 @@ class TabStrip extends Component {
                 return cloneElement(child, {
                     key: `tab-${index}`,
                     onClick: this.handleSelected.bind(this, index, child.props.onClick),
-                    selected: selectedIndex === index
+                    selected: selectedIndex === index,
+                    alignment:alignTabs
                 })
 
             }
@@ -105,14 +120,15 @@ class TabStrip extends Component {
                 <ul className={className} {...other} {...events} ref={this.tabStripRef} role="tablist">
                     {tabElements}
                 </ul>
-                <div className={classes.content}>
+                <div className={css(styles.content)}>
                     {selectedContent}
                 </div>
             </React.Fragment>
         );
     }
 }
+// const tabStrTyle = TabStrip.getCssClasses()
 
-const styledTabStrip = withStyle(tabStripStyle)(TabStrip)
-
+// const styledTabStrip = withStyle(tabStripStyle)(TabStrip)
+const styledTabStrip = TabStrip
 export { styledTabStrip as TabStrip }

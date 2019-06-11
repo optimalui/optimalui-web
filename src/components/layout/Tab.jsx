@@ -3,6 +3,7 @@ import cx from 'classnames'
 import withStyle from 'react-jss'
 import {tabStripStyle} from '../../assets/jss' 
 import PropTypes from 'prop-types'
+import { css} from 'aphrodite/no-important';
 
 class Tab extends Component {
     static propTypes = {
@@ -18,6 +19,7 @@ class Tab extends Component {
             PropTypes.string,
         ]),
         title:PropTypes.string.isRequired,
+        alignment:PropTypes.string
     }
     static defaultProps = {
         className: '',
@@ -26,6 +28,7 @@ class Tab extends Component {
         text: '',
         id: null,
         title:'',
+        alignment:'',
 
     }
     constructor(props) {
@@ -47,6 +50,10 @@ class Tab extends Component {
     componentDidMount(){
         this.setState()
     }
+    getCssClasses(){
+        const {alignment,selected,disabled} = this.props
+        return tabStripStyle(alignment,selected,disabled)
+    }
 
     render() {
         const {
@@ -59,14 +66,13 @@ class Tab extends Component {
             classes,
             children,
             title,
+            alignment,
             ...other
         } = this.props
 
-        const className = cx(customClassName,{
-            [classes.text]: !selected && !disabled ,
-            [classes.selectedTab]: selected,
-            [classes.disabledTab]: disabled,
-        })
+        const styles = tabStripStyle(alignment,selected,disabled)
+
+        const className = css(customClassName,styles.text)
 
         return (
             <li
@@ -84,6 +90,10 @@ class Tab extends Component {
 
 }
 
-const styledTab = withStyle(tabStripStyle)(Tab)
+// const tabStyle = Tab.getCssClasses();
+
+// const styledTab = withStyle(tabStripStyle)(Tab)
+
+const styledTab = Tab
 
 export {styledTab as Tab}
