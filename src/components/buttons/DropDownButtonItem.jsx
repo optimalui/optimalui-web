@@ -5,7 +5,6 @@ import {dropDownLinkStyle} from '../../assets/jss/dropDownButtonStyle.jsx'
 import { css } from 'aphrodite/no-important';
 import { Icon } from '../Icon.jsx';
 import classNames from 'classnames';
-import {noop} from '../../util'
 
 
 class DropDownButtonItem extends Component {
@@ -80,10 +79,10 @@ class DropDownButtonItem extends Component {
             ...other
         } = this.props
 
-        const listClass = css(customListClassName,disabled ? dropDownLinkStyle.disabledItem : '')
-        const linkClass = css(dropDownLinkStyle.root,customClassName,disabled ? dropDownLinkStyle.disabledItem : '')
-        const iconClassName = classNames('uk-margin-small-right',customIconClass);
-        const iconClass = classNames('uk-margin-small-right',customIconClassName);
+        const listClass = classNames(customListClassName,css(disabled ? dropDownLinkStyle.disabledItem : ''))
+        const linkClass = classNames(customClassName,css(dropDownLinkStyle.root,disabled ? dropDownLinkStyle.disabledItem : ''))
+        const iconClassName = classNames(css(dropDownLinkStyle.iconStyle),customIconClass);
+        const iconClass = classNames(css(dropDownLinkStyle.iconStyle),customIconClassName);
         const eventHandlers = {
             onClick:this.handleClick,
             onKeyDown:this.handleKeyDown

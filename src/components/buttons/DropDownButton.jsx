@@ -190,8 +190,9 @@ class DropDownButton extends Component {
 
   handleItemClick(e) {
     this.setState({ isOpen: false })
+    if (this.props.onItemClick){
       this.props.onItemClick(e)
-    
+    }
   }
 
   handleItemKeyDown(e) {

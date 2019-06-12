@@ -1,6 +1,5 @@
 import React, { Component, cloneElement } from 'react';
 import { tabStripStyle } from '../../assets/jss'
-import withStyle from 'react-jss'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
 import { Tab } from './index'
@@ -34,6 +33,7 @@ class TabStrip extends Component {
         const { onSelect } = this.props;
         const tab = this.getSelectedTab(index)
         if(tab){
+            console.log(tab)
             this.setSelectedTabState(index,tab)
         }
         const info = {
@@ -58,7 +58,7 @@ class TabStrip extends Component {
             }
         }
     }
-    getSelectedTab(tabIndex) {
+    getSelectedTab(tabIndex,isItem) {
         const tab = this.props.children.filter((item, index) => tabIndex === index)
         if (tab[0]) {
             return tab[0]
@@ -94,13 +94,23 @@ class TabStrip extends Component {
         
         const styles = tabStripStyle(alignTabs)
 
-        console.log(styles);
-
-        const className = css(customClassName,styles.default)
+        const className = css(styles.default)
 
 
         const tabElements = React.Children.map(children, (child, index) => {
             if (child.type === Tab) {
+                //if moreTab is true
+                //if child children type is TabItem
+                //get TabItem children as content
+                // console.log(child)
+                // if(child.props.moreTab){
+                //     child.props.children.map((item, itemIndex) => {
+                //         return cloneElement(item, {
+                //             key: `tab-item-${itemIndex}`,
+                //             onClick: this.handleSelectedTabItem.bind(this, index, item.props.onClick),
+                //         })
+                //     })
+                // }
                 return cloneElement(child, {
                     key: `tab-${index}`,
                     onClick: this.handleSelected.bind(this, index, child.props.onClick),
@@ -117,18 +127,20 @@ class TabStrip extends Component {
 
         return (
             <React.Fragment>
-                <ul className={className} {...other} {...events} ref={this.tabStripRef} role="tablist">
-                    {tabElements}
-                </ul>
-                <div className={css(styles.content)}>
-                    {selectedContent}
+                <div className={css(styles.gridStyle)}>
+                    <div className={css(styles.tabWrapper)}>
+                        <ul className={cx(className, customClassName)} {...other} {...events} ref={this.tabStripRef} role="tablist">
+                            {tabElements}
+                        </ul>
+                    </div>
+                    <div className={css(styles.content)}>
+                        {selectedContent}
+                    </div>
                 </div>
             </React.Fragment>
         );
     }
 }
-// const tabStrTyle = TabStrip.getCssClasses()
 
-// const styledTabStrip = withStyle(tabStripStyle)(TabStrip)
 const styledTabStrip = TabStrip
 export { styledTabStrip as TabStrip }

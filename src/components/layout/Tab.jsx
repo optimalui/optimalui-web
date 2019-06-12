@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component,cloneElement } from 'react';
 import cx from 'classnames'
-import withStyle from 'react-jss'
 import {tabStripStyle} from '../../assets/jss' 
 import PropTypes from 'prop-types'
 import { css} from 'aphrodite/no-important';
+import { Icon } from '../Icon'
+import {TabItem} from './TabItem'
 
 class Tab extends Component {
     static propTypes = {
@@ -19,7 +20,8 @@ class Tab extends Component {
             PropTypes.string,
         ]),
         title:PropTypes.string.isRequired,
-        alignment:PropTypes.string
+        alignment:PropTypes.string,
+        moreTab:PropTypes.bool
     }
     static defaultProps = {
         className: '',
@@ -29,6 +31,7 @@ class Tab extends Component {
         id: null,
         title:'',
         alignment:'',
+        moreTab:false
 
     }
     constructor(props) {
@@ -67,12 +70,23 @@ class Tab extends Component {
             children,
             title,
             alignment,
+            moreTab,
             ...other
         } = this.props
 
         const styles = tabStripStyle(alignment,selected,disabled)
 
-        const className = css(customClassName,styles.text)
+        const className = cx(customClassName,css(styles.text))
+
+        const tabItems =  React.Children.map(children, (child, index) => {
+            if (child.type === TabItem) {
+                return cloneElement(child, {
+                    key: `tab-item-${index}`,
+                    ...child.props        
+                })
+
+            }
+        });
 
         return (
             <li
@@ -83,16 +97,23 @@ class Tab extends Component {
                 tabIndex={tabIndex || (selected ? '0' : null)}
                 className={className}
             >
-                {title}
+                {!moreTab && title}
+                {moreTab &&
+                    <div>
+                        {title}
+                        <div className="uk-dropdown" uk-dropdown="mode:click">
+                            <ul className="uk-nav uk-dropdown-nav">
+                                {tabItems}
+                            </ul>
+                        </div>
+                    </div>
+                }
             </li>
         );
     }
 
 }
 
-// const tabStyle = Tab.getCssClasses();
-
-// const styledTab = withStyle(tabStripStyle)(Tab)
 
 const styledTab = Tab
 

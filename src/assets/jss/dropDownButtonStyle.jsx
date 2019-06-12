@@ -79,5 +79,8 @@ export const dropDownLinkStyle = StyleSheet.create({
     disabledItem:{
         cursor:'default',
         opacity:'0.6',
+    },
+    iconStyle:{
+        marginRight: '10px !important'
     }
 })
