@@ -14,12 +14,18 @@ class TabStrip extends Component {
         className: PropTypes.string,
         selected: selectedIndexPropType,
         onSelect: onSelectPropType,
-        alignTabs:PropTypes.string
+        alignTabs:PropTypes.string,
+        animationName:PropTypes.string,
+        duration: PropTypes.string,
+        contentClassName:PropTypes.string
     }
     static defaultProps = {
         className: '',
         selected: 0,
-        alignTabs:''
+        alignTabs:'',
+        animationName:'',
+        contentClassName:'',
+        duration:'1s'
     }
     constructor(props) {
         super(props);
@@ -104,16 +110,19 @@ class TabStrip extends Component {
         const {
             classes,
             className: customClassName,
+            contentClassName,
             selected,
             children,
             alignTabs,
             store,
+            animationName,
+            duration,
             ...other
         } = this.props
 
         const { selectedIndex} = this.state
         
-        const styles = tabStripStyle(alignTabs)
+        const styles = tabStripStyle(alignTabs,null,null,animationName,duration)
 
         const className = css(styles.default)
 
@@ -135,6 +144,8 @@ class TabStrip extends Component {
         }
         const {selectedContent} = this.state
 
+        const contentClass = cx(contentClassName, css(styles.content))
+
         return (
             <React.Fragment>
                     <div className={css(styles.gridStyle)}>
@@ -143,7 +154,7 @@ class TabStrip extends Component {
                                 {tabElements}
                             </ul>
                         </div>
-                        <div className={css(styles.content)}>
+                        <div className={contentClass}>
                             {selectedContent}
                         </div>
                     </div>

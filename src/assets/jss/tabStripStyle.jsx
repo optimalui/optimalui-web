@@ -1,7 +1,17 @@
 
 import { StyleSheet } from 'aphrodite/no-important';
 
-export const tabStripStyle = (alignment, selected, disabled) => {
+export const tabStripStyle = (alignment, selected, disabled,animationName,duration) => {
+
+    let animObject = {}
+    if (animationName) {
+        const _module = require(`react-animations/lib/${animationName}`);
+        Object.assign(animObject, {
+            animationName: [_module.default],
+            animationDuration: duration
+        })
+    }
+
     let _default = {
         display: 'flex',
         flexWrap: 'wrap',
@@ -223,12 +233,12 @@ export const tabStripStyle = (alignment, selected, disabled) => {
         disabledDropDownItem:{
             color: '#999 !important',
             pointerEvents:'none !important',
-            cursor:'default !important',
             opacity:'0.6',
             ':hover,:focus': {
                 color: '##999 !important',
             },
-        }
+        },
+        animation: animObject
     })
 
     return styles
