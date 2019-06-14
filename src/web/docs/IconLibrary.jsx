@@ -31,7 +31,7 @@ class IconLibrary extends Component {
                     <fieldset className="uk-fieldset">
                         <div className="uk-margin">
                             <div className="uk-inline uk-width-1-1">
-                                <Icon name="search" className="uk-form-icon" />
+                                <Icon smallRightMargin name="search" size={1.5} formIcon />
                                 <input className="uk-input uk-width-1-1" type="text" placeholder="Search Icon" onChange={this.handleFilterChange} />
                             </div>
                         </div>
@@ -41,82 +41,82 @@ class IconLibrary extends Component {
                     <div className="uk-child-width-1-3@s uk-grid">
                         <div className="uk-first-column">
                             <ul className="uk-list">
-                                {displayedIcons.includes("home") && <li><Icon name="home" className="uk-margin-small-right" />home</li>}
-                                {displayedIcons.includes("sign-in") && <li><Icon name="sign-in" className="uk-margin-small-right" />sign-in</li>}
-                                {displayedIcons.includes("sign-out") && <li><Icon name="sign-out" className="uk-margin-small-right" />sign-out</li>}
-                                {displayedIcons.includes("user") && <li><Icon name="user" className="uk-margin-small-right" />user</li>}
-                                {displayedIcons.includes("users") && <li><Icon name="users" className="uk-margin-small-right" />users</li>}
-                                {displayedIcons.includes("lock") && <li><Icon name="lock" className="uk-margin-small-right" />lock</li>}
-                                {displayedIcons.includes("unlock") && <li><Icon name="unlock" className="uk-margin-small-right" />unlock</li>}
-                                {displayedIcons.includes("settings") && <li><Icon name="settings" className="uk-margin-small-right" />settings</li>}
-                                {displayedIcons.includes("cog") && <li><Icon name="cog" className="uk-margin-small-right" />cog</li>}
-                                {displayedIcons.includes("nut") && <li><Icon name="nut" className="uk-margin-small-right" />nut</li>}
-                                {displayedIcons.includes("comment") && <li><Icon name="comment" className="uk-margin-small-right" />comment</li>}
-                                {displayedIcons.includes("commenting") && <li><Icon name="commenting" className="uk-margin-small-right" />commenting</li>}
-                                {displayedIcons.includes("comments") && <li><Icon name="comments" className="uk-margin-small-right" />comments</li>}
-                                {displayedIcons.includes("hashtag") && <li><Icon name="hashtag" className="uk-margin-small-right" />hashtag</li>}
-                                {displayedIcons.includes("tag") && <li><Icon name="tag" className="uk-margin-small-right" />tag</li>}
-                                {displayedIcons.includes("cart") && <li><Icon name="cart" className="uk-margin-small-right" />cart</li>}
-                                {displayedIcons.includes("credit-cart") && <li><Icon name="credit-card" className="uk-margin-small-right" />credit-card</li>}
-                                {displayedIcons.includes("mail") && <li><Icon name="mail" className="uk-margin-small-right" />mail</li>}
-                                {displayedIcons.includes("receiver") && <li><Icon name="receiver" className="uk-margin-small-right" />receiver</li>}
-                                {displayedIcons.includes("print") && <li><Icon name="print" className="uk-margin-small-right" />print</li>}
-                                {displayedIcons.includes("search") && <li><Icon name="search" className="uk-margin-small-right" />search</li>}
-                                {displayedIcons.includes("location") && <li><Icon name="location" className="uk-margin-small-right" />location</li>}
-                                {displayedIcons.includes("bookmark") && <li><Icon name="bookmark" className="uk-margin-small-right" />bookmark</li>}
+                                {displayedIcons.includes("home") && <li><Icon smallRightMargin name="home" />home</li>}
+                                {displayedIcons.includes("sign-in") && <li><Icon smallRightMargin name="sign-in" />sign-in</li>}
+                                {displayedIcons.includes("sign-out") && <li><Icon smallRightMargin name="sign-out" />sign-out</li>}
+                                {displayedIcons.includes("user") && <li><Icon smallRightMargin name="user" />user</li>}
+                                {displayedIcons.includes("users") && <li><Icon smallRightMargin name="users" />users</li>}
+                                {displayedIcons.includes("lock") && <li><Icon smallRightMargin name="lock" />lock</li>}
+                                {displayedIcons.includes("unlock") && <li><Icon smallRightMargin name="unlock" />unlock</li>}
+                                {displayedIcons.includes("settings") && <li><Icon smallRightMargin name="settings" />settings</li>}
+                                {displayedIcons.includes("cog") && <li><Icon smallRightMargin name="cog" />cog</li>}
+                                {displayedIcons.includes("nut") && <li><Icon smallRightMargin name="nut" />nut</li>}
+                                {displayedIcons.includes("comment") && <li><Icon smallRightMargin name="comment" />comment</li>}
+                                {displayedIcons.includes("commenting") && <li><Icon smallRightMargin name="commenting" />commenting</li>}
+                                {displayedIcons.includes("comments") && <li><Icon smallRightMargin name="comments" />comments</li>}
+                                {displayedIcons.includes("hashtag") && <li><Icon smallRightMargin name="hashtag" />hashtag</li>}
+                                {displayedIcons.includes("tag") && <li><Icon smallRightMargin name="tag" />tag</li>}
+                                {displayedIcons.includes("cart") && <li><Icon smallRightMargin name="cart" />cart</li>}
+                                {displayedIcons.includes("credit-cart") && <li><Icon smallRightMargin name="credit-card" />credit-card</li>}
+                                {displayedIcons.includes("mail") && <li><Icon smallRightMargin name="mail" />mail</li>}
+                                {displayedIcons.includes("receiver") && <li><Icon smallRightMargin name="receiver" />receiver</li>}
+                                {displayedIcons.includes("print") && <li><Icon smallRightMargin name="print" />print</li>}
+                                {displayedIcons.includes("search") && <li><Icon smallRightMargin name="search" />search</li>}
+                                {displayedIcons.includes("location") && <li><Icon smallRightMargin name="location" />location</li>}
+                                {displayedIcons.includes("bookmark") && <li><Icon smallRightMargin name="bookmark" />bookmark</li>}
                             </ul>
                         </div>
                         <div>
                             <ul className="uk-list">
-                                {displayedIcons.includes("code") && <li><Icon name="code" className="uk-margin-small-right" />code</li>}
-                                {displayedIcons.includes("paint-bucket") && <li><Icon name="paint-bucket" className="uk-margin-small-right" />paint-bucket</li>}
-                                {displayedIcons.includes("camera") && <li><Icon name="camera" className="uk-margin-small-right" />camera</li>}
-                                {displayedIcons.includes("video-camera") && <li><Icon name="video-camera" className="uk-margin-small-right" />video-camera</li>}
-                                {displayedIcons.includes("bell") && <li><Icon name="bell" className="uk-margin-small-right" />bell</li>}
-                                {displayedIcons.includes("microphone") && <li><Icon name="microphone" className="uk-margin-small-right" />microphone</li>}
-                                {displayedIcons.includes("bolt") && <li><Icon name="bolt" className="uk-margin-small-right" />bolt</li>}
-                                {displayedIcons.includes("star") && <li><Icon name="star" className="uk-margin-small-right" />star</li>}
-                                {displayedIcons.includes("heart") && <li><Icon name="heart" className="uk-margin-small-right" />heart</li>}
-                                {displayedIcons.includes("happy") && <li><Icon name="happy" className="uk-margin-small-right" />happy</li>}
-                                {displayedIcons.includes("lifesaver") && <li><Icon name="lifesaver" className="uk-margin-small-right" />lifesaver</li>}
-                                {displayedIcons.includes("rss") && <li><Icon name="rss" className="uk-margin-small-right" />rss</li>}
-                                {displayedIcons.includes("social") && <li><Icon name="social" className="uk-margin-small-right" />social</li>}
-                                {displayedIcons.includes("git-branch") && <li><Icon name="git-branch" className="uk-margin-small-right" />git-branch</li>}
-                                {displayedIcons.includes("git-fork") && <li><Icon name="git-fork" className="uk-margin-small-right" />git-fork</li>}
-                                {displayedIcons.includes("world") && <li><Icon name="world" className="uk-margin-small-right" />world</li>}
-                                {displayedIcons.includes("calendar") && <li><Icon name="calendar" className="uk-margin-small-right" />calendar</li>}
-                                {displayedIcons.includes("clock") && <li><Icon name="clock" className="uk-margin-small-right" />clock</li>}
-                                {displayedIcons.includes("history") && <li><Icon name="history" className="uk-margin-small-right" />history</li>}
-                                {displayedIcons.includes("future") && <li><Icon name="future" className="uk-margin-small-right" />future</li>}
-                                {displayedIcons.includes("pencil") && <li><Icon name="pencil" className="uk-margin-small-right" />pencil</li>}
-                                {displayedIcons.includes("trash") && <li><Icon name="trash" className="uk-margin-small-right" />trash</li>}
-                                {displayedIcons.includes("move") && <li><Icon name="move" className="uk-margin-small-right" />move</li>}
+                                {displayedIcons.includes("code") && <li><Icon smallRightMargin name="code" />code</li>}
+                                {displayedIcons.includes("paint-bucket") && <li><Icon smallRightMargin name="paint-bucket" />paint-bucket</li>}
+                                {displayedIcons.includes("camera") && <li><Icon smallRightMargin name="camera" />camera</li>}
+                                {displayedIcons.includes("video-camera") && <li><Icon smallRightMargin name="video-camera" />video-camera</li>}
+                                {displayedIcons.includes("bell") && <li><Icon smallRightMargin name="bell" />bell</li>}
+                                {displayedIcons.includes("microphone") && <li><Icon smallRightMargin name="microphone" />microphone</li>}
+                                {displayedIcons.includes("bolt") && <li><Icon smallRightMargin name="bolt" />bolt</li>}
+                                {displayedIcons.includes("star") && <li><Icon smallRightMargin name="star" />star</li>}
+                                {displayedIcons.includes("heart") && <li><Icon smallRightMargin name="heart" />heart</li>}
+                                {displayedIcons.includes("happy") && <li><Icon smallRightMargin name="happy" />happy</li>}
+                                {displayedIcons.includes("lifesaver") && <li><Icon smallRightMargin name="lifesaver" />lifesaver</li>}
+                                {displayedIcons.includes("rss") && <li><Icon smallRightMargin name="rss" />rss</li>}
+                                {displayedIcons.includes("social") && <li><Icon smallRightMargin name="social" />social</li>}
+                                {displayedIcons.includes("git-branch") && <li><Icon smallRightMargin name="git-branch" />git-branch</li>}
+                                {displayedIcons.includes("git-fork") && <li><Icon smallRightMargin name="git-fork" />git-fork</li>}
+                                {displayedIcons.includes("world") && <li><Icon smallRightMargin name="world" />world</li>}
+                                {displayedIcons.includes("calendar") && <li><Icon smallRightMargin name="calendar" />calendar</li>}
+                                {displayedIcons.includes("clock") && <li><Icon smallRightMargin name="clock" />clock</li>}
+                                {displayedIcons.includes("history") && <li><Icon smallRightMargin name="history" />history</li>}
+                                {displayedIcons.includes("future") && <li><Icon smallRightMargin name="future" />future</li>}
+                                {displayedIcons.includes("pencil") && <li><Icon smallRightMargin name="pencil" />pencil</li>}
+                                {displayedIcons.includes("trash") && <li><Icon smallRightMargin name="trash" />trash</li>}
+                                {displayedIcons.includes("move") && <li><Icon smallRightMargin name="move" />move</li>}
                             </ul>
                         </div>
                         <div>
                             <ul className="uk-list">
-                                {displayedIcons.includes("link") && <li><Icon name="link" className="uk-margin-small-right" />link</li>}
-                                {displayedIcons.includes("question") && <li><Icon name="question" className="uk-margin-small-right" />question</li>}
-                                {displayedIcons.includes("info") && <li><Icon name="info" className="uk-margin-small-right" />info</li>}
-                                {displayedIcons.includes("warning") && <li><Icon name="warning" className="uk-margin-small-right" />warning</li>}
-                                {displayedIcons.includes("image") && <li><Icon name="image" className="uk-margin-small-right" />image</li>}
-                                {displayedIcons.includes("thumbnails") && <li><Icon name="thumbnails" className="uk-margin-small-right" />thumbnails</li>}
-                                {displayedIcons.includes("table") && <li><Icon name="table" className="uk-margin-small-right" />table</li>}
-                                {displayedIcons.includes("list") && <li><Icon name="list" className="uk-margin-small-right" />list</li>}
-                                {displayedIcons.includes("menu") && <li><Icon name="menu" className="uk-margin-small-right" />menu</li>}
-                                {displayedIcons.includes("grid") && <li><Icon name="grid" className="uk-margin-small-right" />grid</li>}
-                                {displayedIcons.includes("more") && <li><Icon name="more" className="uk-margin-small-right" />more</li>}
-                                {displayedIcons.includes("more-vertical") && <li><Icon name="more-vertical" className="uk-margin-small-right" />more-vertical</li>}
-                                {displayedIcons.includes("plus") && <li><Icon name="plus" className="uk-margin-small-right" />plus</li>}
-                                {displayedIcons.includes("plus-circle") && <li><Icon name="plus-circle" className="uk-margin-small-right" />plus-circle</li>}
-                                {displayedIcons.includes("minus") && <li><Icon name="minus" className="uk-margin-small-right" />minus</li>}
-                                {displayedIcons.includes("minus-circle") && <li><Icon name="minus-circle" className="uk-margin-small-right" />minus-circle</li>}
-                                {displayedIcons.includes("close") && <li><Icon name="close" className="uk-margin-small-right" />close</li>}
-                                {displayedIcons.includes("check") && <li><Icon name="check" className="uk-margin-small-right" />check</li>}
-                                {displayedIcons.includes("ban") && <li><Icon name="ban" className="uk-margin-small-right" />ban</li>}
-                                {displayedIcons.includes("refresh") && <li><Icon name="refresh" className="uk-margin-small-right" />refresh</li>}
-                                {displayedIcons.includes("play") && <li><Icon name="play" className="uk-margin-small-right" />play</li>}
-                                {displayedIcons.includes("play-circl") && <li><Icon name="play-circle" className="uk-margin-small-right" />play-circle</li>}
+                                {displayedIcons.includes("link") && <li><Icon smallRightMargin name="link" />link</li>}
+                                {displayedIcons.includes("question") && <li><Icon smallRightMargin name="question" />question</li>}
+                                {displayedIcons.includes("info") && <li><Icon smallRightMargin name="info" />info</li>}
+                                {displayedIcons.includes("warning") && <li><Icon smallRightMargin name="warning" />warning</li>}
+                                {displayedIcons.includes("image") && <li><Icon smallRightMargin name="image" />image</li>}
+                                {displayedIcons.includes("thumbnails") && <li><Icon smallRightMargin name="thumbnails" />thumbnails</li>}
+                                {displayedIcons.includes("table") && <li><Icon smallRightMargin name="table" />table</li>}
+                                {displayedIcons.includes("list") && <li><Icon smallRightMargin name="list" />list</li>}
+                                {displayedIcons.includes("menu") && <li><Icon smallRightMargin name="menu" />menu</li>}
+                                {displayedIcons.includes("grid") && <li><Icon smallRightMargin name="grid" />grid</li>}
+                                {displayedIcons.includes("more") && <li><Icon smallRightMargin name="more" />more</li>}
+                                {displayedIcons.includes("more-vertical") && <li><Icon smallRightMargin name="more-vertical" />more-vertical</li>}
+                                {displayedIcons.includes("plus") && <li><Icon smallRightMargin name="plus" />plus</li>}
+                                {displayedIcons.includes("plus-circle") && <li><Icon smallRightMargin name="plus-circle" />plus-circle</li>}
+                                {displayedIcons.includes("minus") && <li><Icon smallRightMargin name="minus" />minus</li>}
+                                {displayedIcons.includes("minus-circle") && <li><Icon smallRightMargin name="minus-circle" />minus-circle</li>}
+                                {displayedIcons.includes("close") && <li><Icon smallRightMargin name="close" />close</li>}
+                                {displayedIcons.includes("check") && <li><Icon smallRightMargin name="check" />check</li>}
+                                {displayedIcons.includes("ban") && <li><Icon smallRightMargin name="ban" />ban</li>}
+                                {displayedIcons.includes("refresh") && <li><Icon smallRightMargin name="refresh" />refresh</li>}
+                                {displayedIcons.includes("play") && <li><Icon smallRightMargin name="play" />play</li>}
+                                {displayedIcons.includes("play-circl") && <li><Icon smallRightMargin name="play-circle" />play-circle</li>}
                             </ul>
                         </div>
                     </div>
@@ -124,21 +124,21 @@ class IconLibrary extends Component {
                     <div className="uk-child-width-1-3@s uk-grid">
                         <div className="uk-first-column">
                             <ul className="uk-list">
-                                {displayedIcons.includes("tv") && <li><Icon name="tv" className="uk-margin-small-right" />tv</li>}
-                                {displayedIcons.includes("desktop") && <li><Icon name="desktop" className="uk-margin-small-right" />desktop</li>}
-                                {displayedIcons.includes("laptop") && <li><Icon name="laptop" className="uk-margin-small-right" />laptop</li>}
+                                {displayedIcons.includes("tv") && <li><Icon smallRightMargin name="tv" />tv</li>}
+                                {displayedIcons.includes("desktop") && <li><Icon smallRightMargin name="desktop" />desktop</li>}
+                                {displayedIcons.includes("laptop") && <li><Icon smallRightMargin name="laptop" />laptop</li>}
                             </ul>
                         </div>
                         <div>
                             <ul className="uk-list">
-                                {displayedIcons.includes("tablet") && <li><Icon name="tablet" className="uk-margin-small-right" />tablet</li>}
-                                {displayedIcons.includes("phone") && <li><Icon name="phone" className="uk-margin-small-right" />phone</li>}
+                                {displayedIcons.includes("tablet") && <li><Icon smallRightMargin name="tablet" />tablet</li>}
+                                {displayedIcons.includes("phone") && <li><Icon smallRightMargin name="phone" />phone</li>}
                             </ul>
                         </div>
                         <div>
                             <ul className="uk-list">
-                                {displayedIcons.includes("tablet-landscape") && <li><Icon name="tablet-landscape" className="uk-margin-small-right" />tablet-landscape</li>}
-                                {displayedIcons.includes("phone-landscape") && <li><Icon name="phone-landscape" className="uk-margin-small-right" />phone-landscape</li>}
+                                {displayedIcons.includes("tablet-landscape") && <li><Icon smallRightMargin name="tablet-landscape" />tablet-landscape</li>}
+                                {displayedIcons.includes("phone-landscape") && <li><Icon smallRightMargin name="phone-landscape" />phone-landscape</li>}
                             </ul>
                         </div>
                     </div>
@@ -146,29 +146,29 @@ class IconLibrary extends Component {
                     <div className="uk-child-width-1-3@s uk-grid">
                         <div className="uk-first-column">
                             <ul className="uk-list">
-                                {displayedIcons.includes("file") && <li><Icon name="file" className="uk-margin-small-right" />file</li>}
-                                {displayedIcons.includes("file-text") && <li><Icon name="file-text" className="uk-margin-small-right" />file-text</li>}
-                                {displayedIcons.includes("file-pdf") && <li><Icon name="file-pdf" className="uk-margin-small-right" />file-pdf</li>}
-                                {displayedIcons.includes("copy") && <li><Icon name="copy" className="uk-margin-small-right" />copy</li>}
-                                {displayedIcons.includes("file-edit") && <li><Icon name="file-edit" className="uk-margin-small-right" />file-edit</li>}
+                                {displayedIcons.includes("file") && <li><Icon smallRightMargin name="file" />file</li>}
+                                {displayedIcons.includes("file-text") && <li><Icon smallRightMargin name="file-text" />file-text</li>}
+                                {displayedIcons.includes("file-pdf") && <li><Icon smallRightMargin name="file-pdf" />file-pdf</li>}
+                                {displayedIcons.includes("copy") && <li><Icon smallRightMargin name="copy" />copy</li>}
+                                {displayedIcons.includes("file-edit") && <li><Icon smallRightMargin name="file-edit" />file-edit</li>}
                             </ul>
                         </div>
                         <div>
                             <ul className="uk-list">
-                                {displayedIcons.includes("folder") && <li><Icon name="folder" className="uk-margin-small-right" />folder</li>}
-                                {displayedIcons.includes("album") && <li><Icon name="album" className="uk-margin-small-right" />album</li>}
-                                {displayedIcons.includes("push") && <li><Icon name="push" className="uk-margin-small-right" />push</li>}
-                                {displayedIcons.includes("pull") && <li><Icon name="pull" className="uk-margin-small-right" />pull</li>}
-                                {displayedIcons.includes("server") && <li><Icon name="server" className="uk-margin-small-right" />server</li>}
+                                {displayedIcons.includes("folder") && <li><Icon smallRightMargin name="folder" />folder</li>}
+                                {displayedIcons.includes("album") && <li><Icon smallRightMargin name="album" />album</li>}
+                                {displayedIcons.includes("push") && <li><Icon smallRightMargin name="push" />push</li>}
+                                {displayedIcons.includes("pull") && <li><Icon smallRightMargin name="pull" />pull</li>}
+                                {displayedIcons.includes("server") && <li><Icon smallRightMargin name="server" />server</li>}
                             </ul>
                         </div>
                         <div>
                             <ul className="uk-list">
-                                {displayedIcons.includes("database") && <li><Icon name="database" className="uk-margin-small-right" />database</li>}
-                                {displayedIcons.includes("cloud-upload") && <li><Icon name="cloud-upload" className="uk-margin-small-right" />cloud-upload</li>}
-                                {displayedIcons.includes("cloud-download") && <li><Icon name="cloud-download" className="uk-margin-small-right" />cloud-download</li>}
-                                {displayedIcons.includes("download") && <li><Icon name="download" className="uk-margin-small-right" />download</li>}
-                                {displayedIcons.includes("upload") && <li><Icon name="upload" className="uk-margin-small-right" />upload</li>}
+                                {displayedIcons.includes("database") && <li><Icon smallRightMargin name="database" />database</li>}
+                                {displayedIcons.includes("cloud-upload") && <li><Icon smallRightMargin name="cloud-upload" />cloud-upload</li>}
+                                {displayedIcons.includes("cloud-download") && <li><Icon smallRightMargin name="cloud-download" />cloud-download</li>}
+                                {displayedIcons.includes("download") && <li><Icon smallRightMargin name="download" />download</li>}
+                                {displayedIcons.includes("upload") && <li><Icon smallRightMargin name="upload" />upload</li>}
                             </ul>
                         </div>
                     </div>
@@ -176,32 +176,32 @@ class IconLibrary extends Component {
                     <div className="uk-child-width-1-3@s uk-grid">
                         <div className="uk-first-column">
                             <ul className="uk-list">
-                                {displayedIcons.includes("reply") && <li><Icon name="reply" className="uk-margin-small-right" />reply</li>}
-                                {displayedIcons.includes("forward") && <li><Icon name="forward" className="uk-margin-small-right" />forward</li>}
-                                {displayedIcons.includes("expand") && <li><Icon name="expand" className="uk-margin-small-right" />expand</li>}
-                                {displayedIcons.includes("shrink") && <li><Icon name="shrink" className="uk-margin-small-right" />shrink</li>}
-                                {displayedIcons.includes("arrow-up") && <li><Icon name="arrow-up" className="uk-margin-small-right" />arrow-up</li>}
-                                {displayedIcons.includes("arrow-down") && <li><Icon name="arrow-down" className="uk-margin-small-right" />arrow-down</li>}
+                                {displayedIcons.includes("reply") && <li><Icon smallRightMargin name="reply" />reply</li>}
+                                {displayedIcons.includes("forward") && <li><Icon smallRightMargin name="forward" />forward</li>}
+                                {displayedIcons.includes("expand") && <li><Icon smallRightMargin name="expand" />expand</li>}
+                                {displayedIcons.includes("shrink") && <li><Icon smallRightMargin name="shrink" />shrink</li>}
+                                {displayedIcons.includes("arrow-up") && <li><Icon smallRightMargin name="arrow-up" />arrow-up</li>}
+                                {displayedIcons.includes("arrow-down") && <li><Icon smallRightMargin name="arrow-down" />arrow-down</li>}
                             </ul>
                         </div>
                         <div>
                             <ul className="uk-list">
-                                {displayedIcons.includes("arrow-left") && <li><Icon name="arrow-left" className="uk-margin-small-right" />arrow-left</li>}
-                                {displayedIcons.includes("arrow-right") && <li><Icon name="arrow-right" className="uk-margin-small-right" />arrow-right</li>}
-                                {displayedIcons.includes("chevron-up") && <li><Icon name="chevron-up" className="uk-margin-small-right" />chevron-up</li>}
-                                {displayedIcons.includes("chevron-down") && <li><Icon name="chevron-down" className="uk-margin-small-right" />chevron-down</li>}
-                                {displayedIcons.includes("chevron-left") && <li><Icon name="chevron-left" className="uk-margin-small-right" />chevron-left</li>}
-                                {displayedIcons.includes("chevron-right") && <li><Icon name="chevron-right" className="uk-margin-small-right" />chevron-right</li>}
+                                {displayedIcons.includes("arrow-left") && <li><Icon smallRightMargin name="arrow-left" />arrow-left</li>}
+                                {displayedIcons.includes("arrow-right") && <li><Icon smallRightMargin name="arrow-right" />arrow-right</li>}
+                                {displayedIcons.includes("chevron-up") && <li><Icon smallRightMargin name="chevron-up" />chevron-up</li>}
+                                {displayedIcons.includes("chevron-down") && <li><Icon smallRightMargin name="chevron-down" />chevron-down</li>}
+                                {displayedIcons.includes("chevron-left") && <li><Icon smallRightMargin name="chevron-left" />chevron-left</li>}
+                                {displayedIcons.includes("chevron-right") && <li><Icon smallRightMargin name="chevron-right" />chevron-right</li>}
                             </ul>
                         </div>
                         <div>
                             <ul className="uk-list">
-                                {displayedIcons.includes("chevron-double-left") && <li><Icon name="chevron-double-left" className="uk-margin-small-right" />chevron-double-left</li>}
-                                {displayedIcons.includes("chevron-double-right") && <li><Icon name="chevron-double-right" className="uk-margin-small-right" />chevron-double-right</li>}
-                                {displayedIcons.includes("triangle-up") && <li><Icon name="triangle-up" className="uk-margin-small-right" />triangle-up</li>}
-                                {displayedIcons.includes("triangle-down") && <li><Icon name="triangle-down" className="uk-margin-small-right" />triangle-down</li>}
-                                {displayedIcons.includes("triangle-left") && <li><Icon name="triangle-left" className="uk-margin-small-right" />triangle-left</li>}
-                                {displayedIcons.includes("triangle-right") && <li><Icon name="triangle-right" className="uk-margin-small-right" />triangle-right</li>}
+                                {displayedIcons.includes("chevron-double-left") && <li><Icon smallRightMargin name="chevron-double-left" />chevron-double-left</li>}
+                                {displayedIcons.includes("chevron-double-right") && <li><Icon smallRightMargin name="chevron-double-right" />chevron-double-right</li>}
+                                {displayedIcons.includes("triangle-up") && <li><Icon smallRightMargin name="triangle-up" />triangle-up</li>}
+                                {displayedIcons.includes("triangle-down") && <li><Icon smallRightMargin name="triangle-down" />triangle-down</li>}
+                                {displayedIcons.includes("triangle-left") && <li><Icon smallRightMargin name="triangle-left" />triangle-left</li>}
+                                {displayedIcons.includes("triangle-right") && <li><Icon smallRightMargin name="triangle-right" />triangle-right</li>}
                             </ul>
                         </div>
                     </div>
@@ -209,18 +209,18 @@ class IconLibrary extends Component {
                     <div className="uk-child-width-1-3@s uk-grid">
                         <div className="uk-first-column">
                             <ul className="uk-list">
-                                {displayedIcons.includes("bold") && <li><Icon name="bold" className="uk-margin-small-right" />bold</li>}
-                                {displayedIcons.includes("italic") && <li><Icon name="italic" className="uk-margin-small-right" />italic</li>}
+                                {displayedIcons.includes("bold") && <li><Icon smallRightMargin name="bold" />bold</li>}
+                                {displayedIcons.includes("italic") && <li><Icon smallRightMargin name="italic" />italic</li>}
                             </ul>
                         </div>
                         <div>
                             <ul className="uk-list">
-                                {displayedIcons.includes("strikethrough") && <li><Icon name="strikethrough" className="uk-margin-small-right" />strikethrough</li>}
+                                {displayedIcons.includes("strikethrough") && <li><Icon smallRightMargin name="strikethrough" />strikethrough</li>}
                             </ul>
                         </div>
                         <div>
                             <ul className="uk-list">
-                                {displayedIcons.includes("quote-right") && <li><Icon name="quote-right" className="uk-margin-small-right" />quote-right</li>}
+                                {displayedIcons.includes("quote-right") && <li><Icon smallRightMargin name="quote-right" />quote-right</li>}
                             </ul>
                         </div>
                     </div>
@@ -228,42 +228,42 @@ class IconLibrary extends Component {
                     <div className="uk-child-width-1-3@s uk-grid">
                         <div className="uk-first-column">
                             <ul className="uk-list">
-                                {displayedIcons.includes("500px") && <li><Icon name="500px" className="uk-margin-small-right" />500px</li>}
-                                {displayedIcons.includes("behance") && <li><Icon name="behance" className="uk-margin-small-right" />behance</li>}
-                                {displayedIcons.includes("dribbble") && <li><Icon name="dribbble" className="uk-margin-small-right" />dribbble</li>}
-                                {displayedIcons.includes("facebook") && <li><Icon name="facebook" className="uk-margin-small-right" />facebook</li>}
-                                {displayedIcons.includes("flickr") && <li><Icon name="flickr" className="uk-margin-small-right" />flickr</li>}
-                                {displayedIcons.includes("foursquare") && <li><Icon name="foursquare" className="uk-margin-small-right" />foursquare</li>}
-                                {displayedIcons.includes("github") && <li><Icon name="github" className="uk-margin-small-right" />github</li>}
-                                {displayedIcons.includes("github-alt") && <li><Icon name="github-alt" className="uk-margin-small-right" />github-alt</li>}
-                                {displayedIcons.includes("gitter") && <li><Icon name="gitter" className="uk-margin-small-right" />gitter</li>}
-                                {displayedIcons.includes("google") && <li><Icon name="google" className="uk-margin-small-right" />google</li>}
+                                {displayedIcons.includes("500px") && <li><Icon smallRightMargin name="500px" />500px</li>}
+                                {displayedIcons.includes("behance") && <li><Icon smallRightMargin name="behance" />behance</li>}
+                                {displayedIcons.includes("dribbble") && <li><Icon smallRightMargin name="dribbble" />dribbble</li>}
+                                {displayedIcons.includes("facebook") && <li><Icon smallRightMargin name="facebook" />facebook</li>}
+                                {displayedIcons.includes("flickr") && <li><Icon smallRightMargin name="flickr" />flickr</li>}
+                                {displayedIcons.includes("foursquare") && <li><Icon smallRightMargin name="foursquare" />foursquare</li>}
+                                {displayedIcons.includes("github") && <li><Icon smallRightMargin name="github" />github</li>}
+                                {displayedIcons.includes("github-alt") && <li><Icon smallRightMargin name="github-alt" />github-alt</li>}
+                                {displayedIcons.includes("gitter") && <li><Icon smallRightMargin name="gitter" />gitter</li>}
+                                {displayedIcons.includes("google") && <li><Icon smallRightMargin name="google" />google</li>}
                             </ul>
                         </div>
                         <div>
                             <ul className="uk-list">
-                                {displayedIcons.includes("google-plus") && <li><Icon name="google-plus" className="uk-margin-small-right" />google-plus</li>}
-                                {displayedIcons.includes("instagram") && <li><Icon name="instagram" className="uk-margin-small-right" />instagram</li>}
-                                {displayedIcons.includes("joomla") && <li><Icon name="joomla" className="uk-margin-small-right" />joomla</li>}
-                                {displayedIcons.includes("linkedin") && <li><Icon name="linkedin" className="uk-margin-small-right" />linkedin</li>}
-                                {displayedIcons.includes("pagekit") && <li><Icon name="pagekit" className="uk-margin-small-right" />pagekit</li>}
-                                {displayedIcons.includes("pinterest") && <li><Icon name="pinterest" className="uk-margin-small-right" />pinterest</li>}
-                                {displayedIcons.includes("reddit") && <li><Icon name="reddit" className="uk-margin-small-right" />reddit</li>}
-                                {displayedIcons.includes("soundcloud") && <li><Icon name="soundcloud" className="uk-margin-small-right" />soundcloud</li>}
-                                {displayedIcons.includes("tripadvisor") && <li><Icon name="tripadvisor" className="uk-margin-small-right" />tripadvisor</li>}
+                                {displayedIcons.includes("google-plus") && <li><Icon smallRightMargin name="google-plus" />google-plus</li>}
+                                {displayedIcons.includes("instagram") && <li><Icon smallRightMargin name="instagram" />instagram</li>}
+                                {displayedIcons.includes("joomla") && <li><Icon smallRightMargin name="joomla" />joomla</li>}
+                                {displayedIcons.includes("linkedin") && <li><Icon smallRightMargin name="linkedin" />linkedin</li>}
+                                {displayedIcons.includes("pagekit") && <li><Icon smallRightMargin name="pagekit" />pagekit</li>}
+                                {displayedIcons.includes("pinterest") && <li><Icon smallRightMargin name="pinterest" />pinterest</li>}
+                                {displayedIcons.includes("reddit") && <li><Icon smallRightMargin name="reddit" />reddit</li>}
+                                {displayedIcons.includes("soundcloud") && <li><Icon smallRightMargin name="soundcloud" />soundcloud</li>}
+                                {displayedIcons.includes("tripadvisor") && <li><Icon smallRightMargin name="tripadvisor" />tripadvisor</li>}
                             </ul>
                         </div>
                         <div>
                             <ul className="uk-list">
-                                {displayedIcons.includes("tumblr") && <li><Icon name="tumblr" className="uk-margin-small-right" />tumblr</li>}
-                                {displayedIcons.includes("twitter") && <li><Icon name="twitter" className="uk-margin-small-right" />twitter</li>}
-                                {displayedIcons.includes("uikit") && <li><Icon name="uikit" className="uk-margin-small-right" />uikit</li>}
-                                {displayedIcons.includes("vimeo") && <li><Icon name="vimeo" className="uk-margin-small-right" />vimeo</li>}
-                                {displayedIcons.includes("whatsapp") && <li><Icon name="whatsapp" className="uk-margin-small-right" />whatsapp</li>}
-                                {displayedIcons.includes("wordpress") && <li><Icon name="wordpress" className="uk-margin-small-right" />wordpress</li>}
-                                {displayedIcons.includes("xing") && <li><Icon name="xing" className="uk-margin-small-right" />xing</li>}
-                                {displayedIcons.includes("yelp") && <li><Icon name="yelp" className="uk-margin-small-right" />yelp</li>}
-                                {displayedIcons.includes("youtube") && <li><Icon name="youtube" className="uk-margin-small-right" />youtube</li>}
+                                {displayedIcons.includes("tumblr") && <li><Icon smallRightMargin name="tumblr" />tumblr</li>}
+                                {displayedIcons.includes("twitter") && <li><Icon smallRightMargin name="twitter" />twitter</li>}
+                                {displayedIcons.includes("uikit") && <li><Icon smallRightMargin name="uikit" />uikit</li>}
+                                {displayedIcons.includes("vimeo") && <li><Icon smallRightMargin name="vimeo" />vimeo</li>}
+                                {displayedIcons.includes("whatsapp") && <li><Icon smallRightMargin name="whatsapp" />whatsapp</li>}
+                                {displayedIcons.includes("wordpress") && <li><Icon smallRightMargin name="wordpress" />wordpress</li>}
+                                {displayedIcons.includes("xing") && <li><Icon smallRightMargin name="xing" />xing</li>}
+                                {displayedIcons.includes("yelp") && <li><Icon smallRightMargin name="yelp" />yelp</li>}
+                                {displayedIcons.includes("youtube") && <li><Icon smallRightMargin name="youtube" />youtube</li>}
                             </ul>
                         </div>
                     </div>

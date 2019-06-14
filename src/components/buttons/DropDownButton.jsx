@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { Button, DropDownButtonItem } from '../buttons';
 import { getDropDownStyle, dropDownLinkStyle } from '../../assets/jss/dropDownButtonStyle.jsx'
 import { css } from 'aphrodite/no-important';
-import { noop } from '../../util'
+import cx from 'classnames'
 
 class DropDownButton extends Component {
 
@@ -251,10 +251,10 @@ class DropDownButton extends Component {
       eventHandlers.onMouseLeave = handleMouseLeave
     }
 
-    const className = css(styles.inline, customClassName)
+    const className = cx(customClassName,css(styles.inline))
 
-    const listClassName = css(styles.dropDown, customListClassName,
-      styles.animation,isOpen & !buttonProps["disabled"] ? styles.dropDownOpen:'')
+    const listClassName = cx(customListClassName,css(styles.dropDown,
+      styles.animation,isOpen & !buttonProps["disabled"] ? styles.dropDownOpen:''))
 
     const itemEventHandlers = {
       onClick: handleItemClick,

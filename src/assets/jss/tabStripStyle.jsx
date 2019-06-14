@@ -180,6 +180,54 @@ export const tabStripStyle = (alignment, selected, disabled) => {
         },
         tabWrapper: {
             ...tabWrapper
+        },
+        dropDownWrapper : {
+            display: 'block',
+            position: 'absolute',
+            zIndex: 1020,
+            boxSizing: 'border-box',
+            minWidth: '200px',
+            padding: '25px',
+            background: '#fff',
+            color: '#666',
+            boxShadow: '0 5px 12px rgba(0, 0, 0, 0.15)',
+            listStyle: 'none',
+            marginTop:'20px'
+        },
+        dropDownStyle:{
+            margin: 0,
+            padding: 0,
+            listStyle: 'none',
+            whiteSpace: 'nowrap',
+            fontSize: '0.875rem',
+            textAlign:'left !important'
+        },
+        dropdownItemStyle:{
+            /* Hover + Focus + Active */
+            padding: '5px 0',
+            display: 'block',
+            textDecoration: 'none !important',
+            textTransform:'none !important',
+            cursor: 'pointer',
+            color: '#999',
+            ':hover': {
+                color: '#666',
+                textDecoration: 'none',
+            },
+            ':focus': {
+                color: '#666',
+                outline: 'none',
+                textDecoration: 'none',
+            },
+        },
+        disabledDropDownItem:{
+            color: '#999 !important',
+            pointerEvents:'none !important',
+            cursor:'default !important',
+            opacity:'0.6',
+            ':hover,:focus': {
+                color: '##999 !important',
+            },
         }
     })
 

@@ -4,8 +4,9 @@ import ReactDOM from 'react-dom';
 import './assets/web/css/font-awesome-v4.7.0.css'
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { Provider } from 'react-redux';
-import { store } from './_helpers'
+// import { Provider } from 'react-redux';
+import { Provider} from 'mini-store';
+import { miniStore as store } from './_helpers'
 
 ReactDOM.render(
     <Provider store={store}>

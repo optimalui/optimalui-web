@@ -5,6 +5,8 @@ import PropTypes from 'prop-types'
 import { css} from 'aphrodite/no-important';
 import { Icon } from '../Icon'
 import {TabItem} from './TabItem'
+import { connect } from 'mini-store';
+
 
 class Tab extends Component {
     static propTypes = {
@@ -21,7 +23,12 @@ class Tab extends Component {
         ]),
         title:PropTypes.string.isRequired,
         alignment:PropTypes.string,
-        moreTab:PropTypes.bool
+        dropdown:PropTypes.bool,
+        tabItemContent:PropTypes.oneOfType([
+            PropTypes.array,
+            PropTypes.object,
+            PropTypes.string,
+        ]),
     }
     static defaultProps = {
         className: '',
@@ -31,12 +38,17 @@ class Tab extends Component {
         id: null,
         title:'',
         alignment:'',
-        moreTab:false
-
+        dropdown:false,
     }
     constructor(props) {
         super(props);
+        this.state = {
+            dropDownOpen:false
+        }
         this.handleClick = this.handleClick.bind(this)
+        this.dropDownWrapperRef = React.createRef()
+        this.toggleDropDown = this.toggleDropDown.bind(this)
+        this.dropDownClickOutSide = this.dropDownClickOutSide.bind(this)
     }
 
     handleClick(e){
@@ -50,12 +62,42 @@ class Tab extends Component {
         }
 
     }
+
+    handleItemClick(index, tabItem) {
+        if (tabItem) {
+            if (!tabItem.props.disabled) {
+                const { store } = this.props;
+                store.setState({
+                    selectedTabItem: tabItem,
+                    selectedTabItemIndex: index,
+                    selectedContent: tabItem.props.children
+                });
+            }
+        }
+
+    }
+
     componentDidMount(){
-        this.setState()
+        document.addEventListener("click", this.dropDownClickOutSide)
+    }
+    dropDownClickOutSide = (e) => {
+        if (this.dropDownWrapperRef.current) {
+            if (!this.dropDownWrapperRef.current.contains(e.target)) {
+                this.setState({ dropDownOpen: false })
+            }
+        }
+    }
+
+    componentWillUnmount(){
+        document.removeEventListener("click", this.dropDownClickOutSide)
     }
     getCssClasses(){
         const {alignment,selected,disabled} = this.props
         return tabStripStyle(alignment,selected,disabled)
+    }
+    toggleDropDown(){
+        const {dropDownOpen} = this.state
+        this.setState({dropDownOpen:!dropDownOpen})
     }
 
     render() {
@@ -70,9 +112,11 @@ class Tab extends Component {
             children,
             title,
             alignment,
-            moreTab,
+            dropdown,
             ...other
         } = this.props
+
+        const {dropDownOpen} = this.state
 
         const styles = tabStripStyle(alignment,selected,disabled)
 
@@ -82,7 +126,8 @@ class Tab extends Component {
             if (child.type === TabItem) {
                 return cloneElement(child, {
                     key: `tab-item-${index}`,
-                    ...child.props        
+                    onClick:this.handleItemClick.bind(this,index,child),
+                    ...child.props    
                 })
 
             }
@@ -97,16 +142,22 @@ class Tab extends Component {
                 tabIndex={tabIndex || (selected ? '0' : null)}
                 className={className}
             >
-                {!moreTab && title}
-                {moreTab &&
-                    <div>
-                        {title}
-                        <div className="uk-dropdown" uk-dropdown="mode:click">
-                            <ul className="uk-nav uk-dropdown-nav">
-                                {tabItems}
-                            </ul>
-                        </div>
+                {dropdown &&
+                    <div ref={this.dropDownWrapperRef} onClick={this.toggleDropDown}>
+                        {title} {dropDownOpen ? <Icon name="triangle-up" /> : <Icon name="triangle-down" />}
+
+                        {dropDownOpen &&
+                            <div className={css(styles.dropDownWrapper)}>
+                                <ul className={css(styles.dropDownStyle)}>
+                                    {tabItems}
+                                </ul>
+                            </div>
+                            
+                        }
                     </div>
+                }
+                {
+                    dropdown === false && <span>{title}</span>
                 }
             </li>
         );
@@ -115,6 +166,6 @@ class Tab extends Component {
 }
 
 
-const styledTab = Tab
+const connectedTab = connect()(Tab)
 
-export {styledTab as Tab}
+export {connectedTab as Tab}

@@ -5,6 +5,7 @@ import cx from 'classnames'
 import { Tab } from './index'
 import { onSelectPropType, selectedIndexPropType } from '../../_helpers/propTypes'
 import { css} from 'aphrodite/no-important';
+import { connect } from 'mini-store';
 
 
 
@@ -24,22 +25,24 @@ class TabStrip extends Component {
         super(props);
         this.state = {
             selectedIndex: 0,
+            selectedTabIndex:0,
             selectedContent: null
         }
         this.tabStripRef = React.createRef()
         this.getSelectedTab = this.getSelectedTab.bind(this)
+        this.setSelectedTabState = this.setSelectedTabState.bind(this)
     }
     handleSelected(index, event) {
-        const { onSelect } = this.props;
+        const { onSelect} = this.props;
         const tab = this.getSelectedTab(index)
         if(tab){
-            console.log(tab)
             this.setSelectedTabState(index,tab)
         }
         const info = {
-            selectedTabIndex: index,
+            selectedIndex: index,
             selectedTab: tab
         }
+
         if (typeof onSelect === 'function') {
             if (onSelect(info) === false) return;
         }
@@ -50,6 +53,10 @@ class TabStrip extends Component {
 
     }
 
+    handleSelectedTabItem = (_this,index,tabIndex)=>{
+        console.log(index)
+    }
+
     componentDidMount() {
         if (this.props.selected != null) {
             const tab = this.getSelectedTab(this.props.selected)
@@ -57,8 +64,11 @@ class TabStrip extends Component {
                 this.setSelectedTabState(this.props.selected,tab)
             }
         }
+
+        // const {selectedTabIndex,selectedContent} = this.props.store.getState()
+        // console.log(this.props.store.getState())
     }
-    getSelectedTab(tabIndex,isItem) {
+    getSelectedTab(tabIndex) {
         const tab = this.props.children.filter((item, index) => tabIndex === index)
         if (tab[0]) {
             return tab[0]
@@ -67,10 +77,20 @@ class TabStrip extends Component {
     }
     setSelectedTabState(index, tab) {
         if (!tab.props.disabled) {
-            this.setState({
-                selectedIndex: index,
-                selectedContent: tab.props.children
-            })
+            console.log(tab)
+            if(tab.props.dropdown){
+                const {selectedTabIndex,selectedContent} = this.props.store.getState()
+                this.setState({
+                    selectedIndex: `${index}-${selectedTabIndex}`,
+                    selectedContent: selectedContent
+                })
+            }else{
+                this.setState({
+                    selectedIndex: index,
+                    selectedContent: tab.props.children
+                })
+            }
+
         }
     }
 
@@ -87,10 +107,11 @@ class TabStrip extends Component {
             selected,
             children,
             alignTabs,
+            store,
             ...other
         } = this.props
 
-        const { selectedIndex, selectedContent } = this.state
+        const { selectedIndex} = this.state
         
         const styles = tabStripStyle(alignTabs)
 
@@ -99,18 +120,6 @@ class TabStrip extends Component {
 
         const tabElements = React.Children.map(children, (child, index) => {
             if (child.type === Tab) {
-                //if moreTab is true
-                //if child children type is TabItem
-                //get TabItem children as content
-                // console.log(child)
-                // if(child.props.moreTab){
-                //     child.props.children.map((item, itemIndex) => {
-                //         return cloneElement(item, {
-                //             key: `tab-item-${itemIndex}`,
-                //             onClick: this.handleSelectedTabItem.bind(this, index, item.props.onClick),
-                //         })
-                //     })
-                // }
                 return cloneElement(child, {
                     key: `tab-${index}`,
                     onClick: this.handleSelected.bind(this, index, child.props.onClick),
@@ -124,23 +133,29 @@ class TabStrip extends Component {
         const events = {
             onSelect: this.handleSelected
         }
+        const {selectedContent} = this.state
 
         return (
             <React.Fragment>
-                <div className={css(styles.gridStyle)}>
-                    <div className={css(styles.tabWrapper)}>
-                        <ul className={cx(className, customClassName)} {...other} {...events} ref={this.tabStripRef} role="tablist">
-                            {tabElements}
-                        </ul>
+                    <div className={css(styles.gridStyle)}>
+                        <div className={css(styles.tabWrapper)}>
+                            <ul className={cx(className, customClassName)} {...other} {...events} ref={this.tabStripRef} role="tablist">
+                                {tabElements}
+                            </ul>
+                        </div>
+                        <div className={css(styles.content)}>
+                            {selectedContent}
+                        </div>
                     </div>
-                    <div className={css(styles.content)}>
-                        {selectedContent}
-                    </div>
-                </div>
             </React.Fragment>
         );
     }
 }
 
-const styledTabStrip = TabStrip
-export { styledTabStrip as TabStrip }
+// const mapStore = (state)=>({
+//     selectedIndex:state.selectedTabIndex,
+//     selectedContent:state.selectedContent
+
+// })
+const connectedTabStrip =connect()(TabStrip)
+export { connectedTabStrip as TabStrip }
