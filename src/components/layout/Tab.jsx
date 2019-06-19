@@ -70,7 +70,7 @@ class Tab extends Component {
                 store.setState({
                     selectedTabItem: tabItem,
                     selectedTabItemIndex: index,
-                    selectedContent: tabItem.props.children
+                    // selectedContent: tabItem.props.children
                 });
             }
         }
@@ -113,6 +113,7 @@ class Tab extends Component {
             title,
             alignment,
             dropdown,
+            animation,
             ...other
         } = this.props
 

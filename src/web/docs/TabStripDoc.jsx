@@ -364,6 +364,78 @@ document.querySelector('my-app')
 )
 `
 
+
+const tabStripAnimation = `
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { TabStrip,Tab,TabItem } from '@optimalui/components/layout'
+
+class App extends React.Component {
+    render() { 
+        return (
+
+        <TabStrip>
+            <Tab title="Preview">
+                <TabStrip selected={selected} onSelect={handleSelect} animation='fadeInRight'>
+                    <Tab title="Istanbul">
+                            <p>
+                                Beautiful Istanbul, both modern and historical city.
+                                Istanbul has 8500 years old history, wich discovered by Yenikapı Theodosius port excavation.
+                                So that, new period started about Istanbul’s archaeological history.
+                                First settlement established B.C in 700 by Greeks.
+                                This city, become the capital of rome and east rome empire in the name of Constantinapole.
+                                It was conquered by the Ottoman empire in 1453 and become capital for five centuries.
+                            </p>
+                        </Tab>
+                        <Tab title="New York">
+                                <p>
+                                New York City was the first capital of the United States after the Constitution was ratified in 1788. 
+                                On April 30, 1789, George Washington was inaugurated as the nation’s first president at Federal Hall, located on Wall Street.
+                                </p>
+                            </Tab>
+                        <Tab title="More" dropdown={true}>
+                            <TabItem title="Paris">
+                                <p>
+                                    Paris is the capital and most populous city of France.
+                                    The history of Paris dates back to approximately 259 BC, with the Parisii, a Celtic tribe settled on the banks of the Seine.
+                                    In 52 BC, the fishermen village was conquered by the Romans, founding a Gallo-Roman town called Lutetia.
+                                    The city changed its name to Paris during the fourth century.
+                                    During this period, the city was threatened by Attila the Hun and his army, and according to the legend, the inhabitants of Paris resisted the attacks thanks to the providential intervention of Saint Geneviève (patron saint of the city).
+                            </p>
+                            </TabItem>
+                            <TabItem title="London">
+                                <p>
+                                    The city of London was founded by the Romans and their rule extended from 43 AD to the fifth century AD, when the Empire fell.
+                                    During the third century, Londinium, the name given to the town by the Romans, had a population of 50,000, mainly due to the influence of its major port.
+                                    As a consequence of repeated Anglo-Saxon invasions during the fifth century, Londinium declined and during the eighth century it became the capital of the Kingdom of Essex.
+                            </p>
+                            </TabItem>
+                            <TabItem title="Sydney" disabled>
+                                <p>
+                                    Sydney was founded in 1788 when the first fleet arrived in Australia from England. On 13 May 1787 a fleet of 11 ships set sail from Portsmouth, England. 
+                                    On board were 759 convicts, most of them men with sailors and marines to guard the prisoners. 
+                                    With them they took seeds, farm implements, livestock such as cattle, sheep, pigs, goats, horses and chickens and 2 years supply of food. 
+                                    The first colonists came ashore at Port Jackson on 26 January 1788. 
+                                    They were commanded by Captain Arthur Phillip (1738-1814).
+                            </p>
+                            </TabItem>
+                        </Tab>
+                </TabStrip>
+            </Tab>
+            <Tab title="Markup">
+
+        </Tab>
+        </TabStrip>
+        )
+    }
+}
+
+ReactDOM.render(
+<App />,
+document.querySelector('my-app')
+)
+`
+
 export const TabStripDoc = () => {
     const [selected, setSelected] = useState(0);
     const handleSelect = (e) => {
@@ -704,11 +776,14 @@ export const TabStripDoc = () => {
 
         {/** Animation */}
         <h2 id="animation" className="uk-h3 tm-heading-fragment"><a href="#animation">Animation</a></h2>
+        <p>TabStrip component uses <code><a href="https://www.npmjs.com/package/react-animations" target="_blank">react-animations</a></code> react module. 
+        To implement an animation, set <code>animation</code> prop and set <code>duration</code> prop to change animation duration time.</p>
+        <p>All animation collection should be inspect at this <code><a href="http://react-animations.herokuapp.com/" target="_blank">link</a></code></p>
         <div className="uk-position-relative uk-margin-medium">
             <TabStrip>
                 <Tab title="Preview">
-                    <TabStrip selected={selected} onSelect={handleSelect} animationName='bounce'>
-                        <Tab title="Istanbul">
+                    <TabStrip selected={selected} onSelect={handleSelect} animation='fadeInRight'>
+                    <Tab title="Istanbul">
                             <p>
                                 Beautiful Istanbul, both modern and historical city.
                                 Istanbul has 8500 years old history, wich discovered by Yenikapı Theodosius port excavation.
@@ -718,34 +793,46 @@ export const TabStripDoc = () => {
                                  It was conquered by the Ottoman empire in 1453 and become capital for five centuries.
                             </p>
                         </Tab>
-                        <Tab title="Paris">
-                            <p>
-                                Paris is the capital and most populous city of France.
-                                The history of Paris dates back to approximately 259 BC, with the Parisii, a Celtic tribe settled on the banks of the Seine.
-                                In 52 BC, the fishermen village was conquered by the Romans, founding a Gallo-Roman town called Lutetia.
-                                The city changed its name to Paris during the fourth century.
-                                During this period, the city was threatened by Attila the Hun and his army, and according to the legend, the inhabitants of Paris resisted the attacks thanks to the providential intervention of Saint Geneviève (patron saint of the city).
+                        <Tab title="New York">
+                                <p>
+                                New York City was the first capital of the United States after the Constitution was ratified in 1788. 
+                                On April 30, 1789, George Washington was inaugurated as the nation’s first president at Federal Hall, located on Wall Street.
+                                </p>
+                            </Tab>
+                        <Tab title="More" dropdown={true}>
+                            <TabItem title="Paris">
+                                <p>
+                                    Paris is the capital and most populous city of France.
+                                    The history of Paris dates back to approximately 259 BC, with the Parisii, a Celtic tribe settled on the banks of the Seine.
+                                    In 52 BC, the fishermen village was conquered by the Romans, founding a Gallo-Roman town called Lutetia.
+                                    The city changed its name to Paris during the fourth century.
+                                    During this period, the city was threatened by Attila the Hun and his army, and according to the legend, the inhabitants of Paris resisted the attacks thanks to the providential intervention of Saint Geneviève (patron saint of the city).
                             </p>
-                        </Tab>
-                        <Tab title="London">
-                            <p>
-                                The city of London was founded by the Romans and their rule extended from 43 AD to the fifth century AD, when the Empire fell.
-                                 During the third century, Londinium, the name given to the town by the Romans, had a population of 50,000, mainly due to the influence of its major port.
-                                As a consequence of repeated Anglo-Saxon invasions during the fifth century, Londinium declined and during the eighth century it became the capital of the Kingdom of Essex.
+                            </TabItem>
+                            <TabItem title="London">
+                                <p>
+                                    The city of London was founded by the Romans and their rule extended from 43 AD to the fifth century AD, when the Empire fell.
+                                     During the third century, Londinium, the name given to the town by the Romans, had a population of 50,000, mainly due to the influence of its major port.
+                                    As a consequence of repeated Anglo-Saxon invasions during the fifth century, Londinium declined and during the eighth century it became the capital of the Kingdom of Essex.
                             </p>
-                        </Tab>
-                        <Tab title="Sydney" disabled={true}>
-                            <p>
-                                Sydney was founded in 1788 when the first fleet arrived in Australia from England. On 13 May 1787 a fleet of 11 ships set sail from Portsmouth, England. On board were 759 convicts, most of them men with sailors and marines to guard the prisoners. With them they took seeds, farm implements, livestock such as cattle, sheep, pigs, goats, horses and chickens and 2 years supply of food. The first colonists came ashore at Port Jackson on 26 January 1788. They were commanded by Captain Arthur Phillip (1738-1814).
+                            </TabItem>
+                            <TabItem title="Sydney" disabled>
+                                <p>
+                                    Sydney was founded in 1788 when the first fleet arrived in Australia from England. On 13 May 1787 a fleet of 11 ships set sail from Portsmouth, England. 
+                                    On board were 759 convicts, most of them men with sailors and marines to guard the prisoners. 
+                                    With them they took seeds, farm implements, livestock such as cattle, sheep, pigs, goats, horses and chickens and 2 years supply of food. 
+                                    The first colonists came ashore at Port Jackson on 26 January 1788. 
+                                    They were commanded by Captain Arthur Phillip (1738-1814).
                             </p>
+                            </TabItem>
                         </Tab>
                     </TabStrip>
                 </Tab>
                 <Tab title="Markup">
-                    <SyntaxHighlighter language='javascript' style={docco}>{tabStripUsage}</SyntaxHighlighter>
+                    <SyntaxHighlighter language='javascript' style={docco}>{tabStripAnimation}</SyntaxHighlighter>
                 </Tab>
             </TabStrip>
-            <MarkupButtons codeText={tabStripUsage} />
+            <MarkupButtons codeText={tabStripAnimation} />
         </div>
 
         {/** DataBinding */}

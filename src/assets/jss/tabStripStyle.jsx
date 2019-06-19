@@ -151,16 +151,12 @@ export const tabStripStyle = (alignment, selected, disabled,animationName,durati
     }
 
     if (disabled) {
-        if (alignment === 'bottom') {
-
-        } else {
             textColor = {
                 color: '#999 !important',
             }
             pointerEvents = {
                 pointerEvents: 'none'
             }
-        }
     }
 
     const styles = StyleSheet.create({
@@ -181,6 +177,7 @@ export const tabStripStyle = (alignment, selected, disabled,animationName,durati
             transition: 'color 0.1s ease-in-out',
             lineHeight: '20px',
             cursor: 'pointer',
+            outline:'none'
         },
         content: {
             ...content
@@ -238,7 +235,10 @@ export const tabStripStyle = (alignment, selected, disabled,animationName,durati
                 color: '##999 !important',
             },
         },
-        animation: animObject
+        animation: animObject,
+        hideContent:{
+            display:'none'
+        }
     })
 
     return styles
