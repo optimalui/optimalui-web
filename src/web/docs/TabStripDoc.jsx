@@ -845,6 +845,7 @@ export const TabStripDoc = () => {
                         <li className="uk-active"><a href="#usage">Usage</a></li>
                         <li ><a href="#alignment">Alignment</a></li>
                         <li ><a href="#dropdown">Dropdown Tab</a></li>
+                        <li ><a href="#animation">Animation</a></li>
                     </ul>
                 </div>
                 <div className="uk-sticky-placeholder" style={{ height: '249px', margin: '0px' }}></div>

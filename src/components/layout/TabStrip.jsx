@@ -129,7 +129,6 @@ class TabStrip extends Component {
                     key: `tab-${index}`,
                     onClick: this.handleSelected.bind(this, index, child.props.onClick),
                     selected: selectedIndex === index,
-                    animation: selectedIndex === index,
                     alignment:alignTabs,
                     ...child.props
                 })
