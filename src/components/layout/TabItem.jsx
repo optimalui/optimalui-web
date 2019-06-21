@@ -16,10 +16,12 @@ class TabItem extends Component {
         onItemClick:PropTypes.func,
         disabled:PropTypes.bool,
         className:PropTypes.string,
+        selected:PropTypes.bool
     }
     static defaultPropTypes = {
         disabled:false,
-        className:''
+        className:'',
+        selected:false
     }
     constructor(props){
         super(props)
@@ -42,11 +44,11 @@ class TabItem extends Component {
     
 
     render() {
-        const {title,className:customClassName,disabled,...other} = this.props
+        const {title,className:customClassName,disabled,selected,...other} = this.props
 
         const styles = tabStripStyle()
         const className = cx(customClassName,
-            css(styles.dropdownItemStyle, disabled ? styles.disabledDropDownItem : ''))
+            css(styles.dropdownItemStyle, disabled ? styles.disabledDropDownItem : '',selected ? styles.activeTab:''))
         return (
             <li className={className} {...other}>{title}</li>
         );

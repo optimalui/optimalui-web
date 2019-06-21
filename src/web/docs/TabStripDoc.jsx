@@ -436,6 +436,247 @@ document.querySelector('my-app')
 )
 `
 
+const items = [{
+    disabled: false,
+    city: "Istanbul",
+    temp: 18,
+    weather: "rainy"
+}, {
+    disabled: false,
+    city: "New York",
+    temp: 29,
+    weather: "sunny"
+}, {
+    disabled: false,
+    city: "Sofia",
+    temp: 23,
+    weather: "cloudy"
+}, {
+    disabled: false,
+    city: "London",
+    temp: 19,
+    weather: "cloudy"
+}, {
+    disabled: true,
+    city: "Paris",
+    temp: 19,
+    weather: "cloudy"
+}]
+
+const configurationSource = `
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { TabStrip,Tab } from '@optimalui/components/layout'
+
+class App extends React.Component {
+    render() { 
+        const items = [{
+            disabled: false,
+            city: "Istanbul",
+            temp: 18,
+            weather: "rainy"
+        }, {
+            disabled: false,
+            city: "New York",
+            temp: 29,
+            weather: "sunny"
+        }, {
+            disabled: false,
+            city: "Sofia",
+            temp: 23,
+            weather: "cloudy"
+        }, {
+            disabled: false,
+            city: "London",
+            temp: 19,
+            weather: "cloudy"
+        }, {
+            disabled: true,
+            city: "Paris",
+            temp: 19,
+            weather: "cloudy"
+        }]
+
+        return (
+                <TabStrip>
+                    {items.map((item,index)=> {
+                        return (
+                            <Tab disabled={item.disabled} title={item.city} key={index}>
+                                <div style={{ margin: '30px',textAlign: 'center'}}>
+                                    <h4>{item.temp}<span>&ordm;C</span></h4>
+                                    <p>Weather in {item.city} is {item.weather}.</p>
+                                </div>
+                            </Tab>
+                        );
+                    })}
+                 </TabStrip>
+                )
+                }
+         }
+            
+    ReactDOM.render(
+    <App />,
+    document.querySelector('my-app')
+    ) `
+
+
+const keyBoardItems = [{
+    disabled: false,
+    city: "Istanbul",
+    temp: 18,
+    weather: "rainy"
+}, {
+    disabled: false,
+    city: "New York",
+    temp: 29,
+    weather: "sunny"
+}, {
+    disabled: true,
+    city: "Sofia",
+    temp: 23,
+    weather: "cloudy"
+}, {
+    disabled: false,
+    city: "London",
+    temp: 19,
+    weather: "cloudy"
+}, {
+    disabled: false,
+    city: "Paris",
+    temp: 19,
+    weather: "cloudy"
+},
+{
+    disabled: true,
+    city: "Rome",
+    temp: 19,
+    weather: "cloudy"
+},
+{
+    dropdown: true,
+    city: "More",
+    disabled:false,
+    tabItems:[
+        {
+            disabled: false,
+            city: "Barcelona",
+            temp: 19,
+            weather: "cloudy"
+        },
+        {
+            disabled: false,
+            city: "Moscow",
+            temp: 17,
+            weather: "rainy"
+        },
+        {
+            disabled: false,
+            city: "Singapure",
+            temp: 22,
+            weather: "sunny"
+        }
+    ]
+},
+]
+
+const keyboardSource = `
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { TabStrip,Tab } from '@optimalui/components/layout'
+
+class App extends React.Component {
+    render() { 
+        const keyBoardItems = [{
+            disabled: false,
+            city: "Istanbul",
+            temp: 18,
+            weather: "rainy"
+        }, {
+            disabled: false,
+            city: "New York",
+            temp: 29,
+            weather: "sunny"
+        }, {
+            disabled: true,
+            city: "Sofia",
+            temp: 23,
+            weather: "cloudy"
+        }, {
+            disabled: false,
+            city: "London",
+            temp: 19,
+            weather: "cloudy"
+        }, {
+            disabled: false,
+            city: "Paris",
+            temp: 19,
+            weather: "cloudy"
+        },
+        {
+            disabled: true,
+            city: "Rome",
+            temp: 19,
+            weather: "cloudy"
+        },
+        {
+            dropdown: true,
+            city: "More",
+            disabled:false,
+            tabItems:[
+                {
+                    disabled: false,
+                    city: "Barcelona",
+                    temp: 19,
+                    weather: "cloudy"
+                },
+                {
+                    disabled: false,
+                    city: "Moscow",
+                    temp: 17,
+                    weather: "rainy"
+                },
+                {
+                    disabled: false,
+                    city: "Singapure",
+                    temp: 22,
+                    weather: "sunny"
+                }
+            ]
+        },
+        ]
+
+        return (
+                <TabStrip>
+                    {keyBoardItems.map((item, index) => {
+                        return (
+                            <Tab disabled={item.disabled} title={item.city} key={index} dropdown={item.dropdown}>
+                                {item.dropdown ?
+                                    item.tabItems.map((tabItem, tabIndex) => (
+                                        <TabItem title={tabItem.city} key={tabIndex}>
+                                            <div style={{ margin: '30px', textAlign: 'center' }}>
+                                                <h4>{tabItem.temp}<span>&ordm;C</span></h4>
+                                                <p>Weather in {tabItem.city} is {tabItem.weather}.</p>
+                                            </div>
+                                        </TabItem>
+                                    )) :
+                                    <div style={{ margin: '30px', textAlign: 'center' }}>
+                                        <h4>{item.temp}<span>&ordm;C</span></h4>
+                                        <p>Weather in {item.city} is {item.weather}.</p>
+                                    </div>
+                                }
+                            </Tab>
+                        );
+                    })}
+                 </TabStrip>
+                )
+                }
+         }
+            
+    ReactDOM.render(
+    <App />,
+    document.querySelector('my-app')
+    ) `
+
 export const TabStripDoc = () => {
     const [selected, setSelected] = useState(0);
     const handleSelect = (e) => {
@@ -835,9 +1076,101 @@ export const TabStripDoc = () => {
             <MarkupButtons codeText={tabStripAnimation} />
         </div>
 
-        {/** DataBinding */}
-        <h2 id="data-binding" className="uk-h3 tm-heading-fragment"><a href="#data-binding">Data-Binding</a></h2>
+        {/** Configuration */}
+        <h2 id="configuration" className="uk-h3 tm-heading-fragment"><a href="#configuration">Configuration</a></h2>
+        <p>The following example shows how to map a collection to <code>Tab</code> components.</p>
+            <TabStrip>
+                <Tab title="Preview">
+                    <TabStrip>
+                        {items.map((item,index)=> {
+                            return (
+                                <Tab disabled={item.disabled} title={item.city} key={index}>
+                                    <div style={{ margin: '30px',textAlign: 'center'}}>
+                                        <h4>{item.temp}<span>&ordm;C</span></h4>
+                                        <p>Weather in {item.city} is {item.weather}.</p>
+                                    </div>
+                                </Tab>
+                            );
+                        })}
+                    </TabStrip>
+                </Tab>
+                <Tab title="Markup">
+                    <SyntaxHighlighter language='javascript' style={docco}>{configurationSource}</SyntaxHighlighter>
+                </Tab>
+            </TabStrip>
+            <MarkupButtons codeText={configurationSource} />
 
+        {/** Keyboard Navigation */}
+        <h2 id="keyboard" className="uk-h3 tm-heading-fragment"><a href="#keyboard">Keyboard Navigation</a></h2>
+        <p>The <code>TabStrip</code> supports the following keyboard shortcuts:</p>
+        <div className="uk-overflow-auto">
+            <table className="uk-table uk-table-divider">
+                <thead>
+                    <tr>
+                        <th align="left">Shortcut</th>
+                        <th align="left">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td align="left"><code>Ctrl+Right Arrow</code></td>
+                        <td align="left">Sets the focus on the next available tab.</td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>Ctrl+Left Arrow</code></td>
+                        <td align="left">Sets the focus on the previously available tab.</td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>Space</code></td>
+                        <td align="left">Toggles open or close to dropdown Tab.</td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>Alt+Down Arrow</code></td>
+                        <td align="left">Sets the focus on the next available tab dropdown item.</td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>Alt+Up Arrow</code></td>
+                        <td align="left">Sets the focus on the previously available tab dropdown item.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <TabStrip>
+                <Tab title="Preview">
+                    <TabStrip>
+                        {keyBoardItems.map((item, index) => {
+                                return (
+                                    <Tab disabled={item.disabled} title={item.city} key={index} dropdown={item.dropdown}>
+                                        {item.dropdown ?
+                                            item.tabItems.map((tabItem, tabIndex) => (
+                                                <TabItem title={tabItem.city} key={tabIndex}>
+                                                    <div style={{ margin: '30px', textAlign: 'center' }}>
+                                                        <h4>{tabItem.temp}<span>&ordm;C</span></h4>
+                                                        <p>Weather in {tabItem.city} is {tabItem.weather}.</p>
+                                                    </div>
+                                                </TabItem>
+                                            )) :
+                                            <div style={{ margin: '30px', textAlign: 'center' }}>
+                                                <h4>{item.temp}<span>&ordm;C</span></h4>
+                                                <p>Weather in {item.city} is {item.weather}.</p>
+                                            </div>
+                                        }
+                                    </Tab>
+                                );
+                        })}
+                    </TabStrip>
+                </Tab>
+                <Tab title="Markup">
+                    <SyntaxHighlighter language='javascript' style={docco}>{keyboardSource}</SyntaxHighlighter>
+                </Tab>
+            </TabStrip>
+            <MarkupButtons codeText={keyboardSource} />
+
+         {/** ACCESSIBILITY */}
+        <h2 id="accessibility" className="uk-h3 tm-heading-fragment"><a href="#accessibility">Accessibility</a></h2>
+        <p>The TabStrip is accessible by screen readers and provides  <strong>WAI-ARIA</strong> support.</p>
+        <p>The TabStrip uses the  <code>aria-selected</code> and <code>aria-disabled</code>  properties on the nested elements depending on the selected and disabled options.The TabStrip uses the <code>tablist</code> role. </p>
 
             <div className="tm-sidebar-right uk-visible@l">
                 <div uk-sticky="offset: 160" className="uk-sticky uk-active uk-sticky-fixed">
@@ -846,6 +1179,9 @@ export const TabStripDoc = () => {
                         <li ><a href="#alignment">Alignment</a></li>
                         <li ><a href="#dropdown">Dropdown Tab</a></li>
                         <li ><a href="#animation">Animation</a></li>
+                        <li ><a href="#configuration">Configuration</a></li>
+                        <li ><a href="#keyboard">Keyboard Navigation</a></li>
+                        <li ><a href="#accessibility">Accessibility</a></li>
                     </ul>
                 </div>
                 <div className="uk-sticky-placeholder" style={{ height: '249px', margin: '0px' }}></div>

@@ -40,7 +40,8 @@ export const tabStripStyle = (alignment, selected, disabled,animationName,durati
             listStyle: 'none'
         }, gridStyle = {},
         tabWrapper = {
-            width: 'auto'
+            width: 'auto',
+            outline:'none'
         }
 
     if(alignment==='center'){
@@ -226,6 +227,11 @@ export const tabStripStyle = (alignment, selected, disabled,animationName,durati
                 outline: 'none',
                 textDecoration: 'none',
             },
+        },
+        activeTab:{
+            color: '#666',
+            outline: 'none',
+            textDecoration: 'none',
         },
         disabledDropDownItem:{
             color: '#999 !important',

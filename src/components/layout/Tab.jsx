@@ -29,6 +29,7 @@ class Tab extends Component {
             PropTypes.object,
             PropTypes.string,
         ]),
+        openDropDown:PropTypes.bool
     }
     static defaultProps = {
         className: '',
@@ -39,16 +40,33 @@ class Tab extends Component {
         title:'',
         alignment:'',
         dropdown:false,
+        openDropDown:false
     }
     constructor(props) {
         super(props);
         this.state = {
-            dropDownOpen:false
+            dropDownOpen:false,
         }
         this.handleClick = this.handleClick.bind(this)
         this.dropDownWrapperRef = React.createRef()
         this.toggleDropDown = this.toggleDropDown.bind(this)
         this.dropDownClickOutSide = this.dropDownClickOutSide.bind(this)
+
+        this.keyCode = Object.freeze({
+            'TAB': 9,
+            'RETURN': 13,
+            'ESC': 27,
+            'SPACE': 32,
+            'PAGEUP': 33,
+            'PAGEDOWN': 34,
+            'END': 35,
+            'HOME': 36,
+            'LEFT': 37,
+            'UP': 38,
+            'RIGHT': 39,
+            'DOWN': 40,
+            'ENTER':13
+          });
     }
 
     handleClick(e){
@@ -70,12 +88,12 @@ class Tab extends Component {
                 store.setState({
                     selectedTabItem: tabItem,
                     selectedTabItemIndex: index,
-                    // selectedContent: tabItem.props.children
                 });
             }
         }
 
     }
+    
 
     componentDidMount(){
         document.addEventListener("click", this.dropDownClickOutSide)
@@ -114,6 +132,8 @@ class Tab extends Component {
             alignment,
             dropdown,
             animation,
+            openDropDown,
+            store,
             ...other
         } = this.props
 
@@ -123,11 +143,14 @@ class Tab extends Component {
 
         const className = cx(customClassName,css(styles.text))
 
+        const {selectedTabItemIndex} = store.getState()
+
         const tabItems =  React.Children.map(children, (child, index) => {
             if (child.type === TabItem) {
                 return cloneElement(child, {
                     key: `tab-item-${index}`,
                     onClick:this.handleItemClick.bind(this,index,child),
+                    selected:selectedTabItemIndex === index,
                     ...child.props    
                 })
 
@@ -147,7 +170,7 @@ class Tab extends Component {
                     <div ref={this.dropDownWrapperRef} onClick={this.toggleDropDown}>
                         {title} {dropDownOpen ? <Icon name="triangle-up" /> : <Icon name="triangle-down" />}
 
-                        {dropDownOpen &&
+                        {(dropDownOpen || openDropDown) &&
                             <div className={css(styles.dropDownWrapper)}>
                                 <ul className={css(styles.dropDownStyle)}>
                                     {tabItems}
