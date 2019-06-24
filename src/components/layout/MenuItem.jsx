@@ -1,7 +1,7 @@
 /* eslint-disable */ 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import cx from 'classnames';
 import withStyles from 'react-jss'
 import { menuStyle } from '../../assets/jss'
 import { noop } from '../../util'
@@ -152,21 +152,19 @@ class RegularMenuItem extends Component {
             customDropdownClassName,
             children,
             classes,
-            itemId
+            itemId,
+            ...other
         } = this.props;
 
         const { isOpen, clickMode } = this.state
 
-        const className = classNames(customClassName, {
+        const className = cx(customClassName, {
             "uk-parent": parent,
             "uk-active": active,
         })
 
-        const parentClassName = classNames(customDropdownClassName, classes.dropdownItem)
+        const parentClassName = cx(customDropdownClassName, classes.dropdownNavWrapperStyle)
 
-        const style = {
-            ...this.props.style
-        }
 
         const mouseEvents = {
             onClick: disabled ? null : this.onClick,
@@ -174,19 +172,19 @@ class RegularMenuItem extends Component {
             onMouseEnter: disabled ? null : this.onMouseLeave,
         }
 
-        const textClassName = classNames(textCustomClassName, classes.menuItemText, active ? classes.activeMenuItemText : '')
+        const textClassName = cx(textCustomClassName, parent ? classes.parentItemText :classes.menuItemText, active ? classes.activeMenuItemText : '')
 
         return (
             <li
                 {...mouseEvents}
-                style={style}
                 className={className}
                 ref={(item) => { this.menuItemRef = item; }}
-                id={itemId}>
+                id={itemId}
+                {...other}>
                 <span className={textClassName}>{text}</span>
                 {(parent && isOpen) &&
                     (<div className={parentClassName} >
-                        <ul className="uk-nav uk-navbar-dropdown-nav">
+                        <ul className={cx(classes.dropdownNavStyle)}>
                             {children}
                         </ul>
                     </div>)}
@@ -196,16 +194,16 @@ class RegularMenuItem extends Component {
 }
 
 
-const mapStateToProps = (state) => {
-    return {
-        openClickMenuIds: state.clickModeMenuReducer.clickModeMenues
-    }
+// const mapStateToProps = (state) => {
+//     return {
+//         openClickMenuIds: state.clickModeMenuReducer.clickModeMenues
+//     }
 
-}
+// }
 
-const connectedMenuItem = connect(mapStateToProps)(RegularMenuItem)
+// const connectedMenuItem = connect(mapStateToProps)(RegularMenuItem)
 
-const styledMenuItem = withStyles(menuStyle)(connectedMenuItem)
+const styledMenuItem = withStyles(menuStyle)(RegularMenuItem)
 
 
 export { styledMenuItem as MenuItem }

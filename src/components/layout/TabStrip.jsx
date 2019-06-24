@@ -35,7 +35,6 @@ class TabStrip extends Component {
             selectedContent: null,
             contentAnimation:false,
             tabCount:0,
-            tabItemCount:0,
             openDropDown:false
         }
         this.tabStripRef = React.createRef()
@@ -80,24 +79,6 @@ class TabStrip extends Component {
             if (event(info) === false) return;
         }
 
-    }
-
-    handleTabKeyDown(index,tab,event){
-        console.log(tab)
-        console.log(index)
-        // const tab = this.getSelectedTab(index)
-        // if(tab){
-        //     this.setSelectedTabState(index,tab)
-        // }
-
-        const info = {
-            selectedIndex: index,
-            selectedTab: tab
-        }
-
-        if (typeof event === 'function') {
-            if (event(info) === false) return;
-        }
     }
 
     componentDidMount() {
@@ -315,7 +296,6 @@ class TabStrip extends Component {
                 return cloneElement(child, {
                     key: `tab-${index}`,
                     onClick: this.handleSelected.bind(this, index, child.props.onClick),
-                    // onKeyDown:this.handleTabKeyDown.bind(this, index,child, child.props.onKeyDown),
                     openDropDown,
                     selected: selectedIndex === index,
                     alignment:alignTabs,

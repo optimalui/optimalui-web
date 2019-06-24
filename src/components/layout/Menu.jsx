@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { Component } from 'react';
+import React, { Component,cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { MenuItem } from '.'
@@ -13,29 +13,14 @@ import uuidv4 from 'uuid'
 class RegularMenu extends Component {
     constructor(props){
         super(props)
-        this.state = {
-            mId : `menu-${uuidv4()}`
-        }
     }
 
-    componentDidMount() {
-        const { dispatch, openOnClick } = this.props;
-
-        if(openOnClick){
-            dispatch(menuActions.setClickMode(this.state.mId))
-        }
-        
-    }
 
     render() {
 
-        const { mId } = this.state;
-
         const {
             children,
-            center,
-            right,
-            left,
+            alignItems,
             className: customClassName,
             items,
             classes,
@@ -45,30 +30,36 @@ class RegularMenu extends Component {
 
         const className = classNames(classes.root, customClassName)
 
-        const directionClass = classNames( 
-            left ? classes.leftSide :
-                right ? classes.rightSide :
-                    center ? classes.center :
-                        (!right && !center && !left) ? classes.leftSide : ''
-        )
+        const containerClassName = classNames({
+            [classes.leftSide]: alignItems === 'left',
+            [classes.rightSide]: alignItems === 'right',
+            [classes.center]: alignItems === 'center',
+        })
 
-        const menuItems = this.props.items && this.props.items.length > 0 ? this.props.items.map((item, index) => (
-            (item.items && item.items.length > 0 ?
-                <MenuItem text={item.text} parent={true} key={index}>
-                    {item.items.map((i, ix) => <MenuItem text={i.text} key={ix} />)}
-                </MenuItem> : <MenuItem text={item.text} key={index} />
-            )
-        )) : '';
+        // const menuItems = this.props.items && this.props.items.length > 0 ? this.props.items.map((item, index) => (
+        //     (item.items && item.items.length > 0 ?
+        //         <MenuItem text={item.text} parent={true} key={index}>
+        //             {item.items.map((i, ix) => <MenuItem text={i.text} key={ix} />)}
+        //         </MenuItem> : <MenuItem text={item.text} key={index} />
+        //     )
+        // )) : '';
 
-        const style = {
-            ...this.props.style
-        }
+        const menuItems = React.Children.map(children, (child, index) => {
+            if (child.type === MenuItem) {
+                return cloneElement(child, {
+                    key: `menu-item-${index}`,
+                    ...child.props
+                })
+
+            }
+        });
+
 
         return (
-            <nav className={className} uk-navbar="" style={style}>
-                <div className={directionClass}>
-                    <ul className="uk-navbar-nav" menu-id={mId}>
-                        {menuItems || children}
+            <nav className={className} {...other}>
+                <div className={containerClassName}>
+                    <ul className={classNames(classes.navStyle)}>
+                        {menuItems}
                     </ul>
                 </div>
             </nav>
@@ -77,27 +68,23 @@ class RegularMenu extends Component {
 }
 
 RegularMenu.propTypes = {
-    center: PropTypes.bool,
-    right: PropTypes.bool,
-    left: PropTypes.bool,
+    alignItems:PropTypes.string,
     items: PropTypes.array,
     openOnClick:PropTypes.bool
 }
 
 RegularMenu.defaultProps = {
-    right: false,
-    center: false,
-    left: false,
+    alignItems:'left',
     items: [],
     openOnClick: false
 }
 
-const mapStateToProps = (state) => {
-    return { openOnClickIds: state.clickModeMenuReducer.clickModeMenues }
-}
+// const mapStateToProps = (state) => {
+//     return { openOnClickIds: state.clickModeMenuReducer.clickModeMenues }
+// }
 
-const connectedMenu = connect(mapStateToProps)(RegularMenu)
+// const connectedMenu = connect(mapStateToProps)(RegularMenu)
 
-const styledMenu = withStyles(menuStyle)(connectedMenu)
+const styledMenu = withStyles(menuStyle)(RegularMenu)
 
 export { styledMenu as Menu }
