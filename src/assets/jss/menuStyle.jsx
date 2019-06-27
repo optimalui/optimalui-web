@@ -28,6 +28,12 @@ export const menuStyle = {
         color: '#666',
         boxShadow: '0 5px 12px rgba(0, 0, 0, 0.15)',
     },
+    showMenuItem:{
+        display:'block'
+    },
+    hideMenuItem:{
+        display:'none'
+    },
     dropdownNavStyle:{
         margin: 0,
         padding: 0,

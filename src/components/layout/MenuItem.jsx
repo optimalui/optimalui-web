@@ -14,7 +14,8 @@ class RegularMenuItem extends Component {
     static propTypes = {
         parent: PropTypes.bool,
         active: PropTypes.bool,
-        text: PropTypes.string.isRequired,
+        isOpen:PropTypes.bool,
+        text: PropTypes.string,
         eventKey: PropTypes.string,
         children: PropTypes.any,
         selectedKeys: PropTypes.array,
@@ -27,10 +28,16 @@ class RegularMenuItem extends Component {
         onMouseEnter: PropTypes.func,
         onMouseLeave: PropTypes.func,
         isSelected: PropTypes.bool,
+        mode:PropTypes.string,
+        data: PropTypes.oneOfType([
+            PropTypes.array,
+            PropTypes.object
+        ])
     };
 
     static defaultProps = {
         active: false,
+        isOpen:false,
         parent: false,
         onSelect: noop,
         onClick: noop,
@@ -39,7 +46,8 @@ class RegularMenuItem extends Component {
         customClassName: '',
         customDropdownClassName: '',
         textCustomClassName: '',
-        itemId: uuidv4()
+        mode:"hover",
+        itemId: `menu-item-${uuidv4()}`
     };
 
     constructor(props) {
@@ -47,97 +55,95 @@ class RegularMenuItem extends Component {
         this.state = {
             isOpen: false,
             active: false,
-            clickMode: false,
-            clickCount: 0
         }
         this.toggleMenu = this.toggleMenu.bind(this);
-        this.eventType = this.eventType.bind(this);
+        // this.subMenuRef = React.createRef()
     }
 
-    eventType = () => (this.state.clickMode ? 'onclick' : 'mousemove')
+    // componentDidMount() {
+    //     const { active, mode } = this.props;
 
-    componentDidMount() {
-        const { active } = this.props;
+    //     this.setState({ active });
 
-        this.setState({ active: active });
-        document.addEventListener("click", this.toggleMenu)
-    }
+    //     if (mode === "hover") {
+    //         document.addEventListener("mousemove", this.toggleMenu)
+    //     } else if (mode === "click") {
+    //         document.addEventListener("click", this.toggleMenu)
+    //     }
+
+    // }
 
 
-    componentWillUnmount() {
-        document.removeEventListener(this.eventType(), this.toggleMenu)
-        document.removeEventListener("click", this.toggleMenu)
-    }
+    // componentWillUnmount() {
+    //     const { mode } = this.props;
+    //     if (mode === "hover") {
+    //         document.removeEventListener("mousemove", this.toggleMenu)
+    //     } else if (mode === "click") {
+    //         document.removeEventListener("click", this.toggleMenu)
+    //     }
+    // }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.openClickMenuIds) {
-            const parentId = ReactDOM.findDOMNode(this).parentNode.getAttribute("menu-id")
-            if (nextProps.openClickMenuIds.includes(parentId)) {
-                this.setState({ clickMode: true }, () => (document.addEventListener('onclick', this.toggleMenu)))
-            } else {
-                this.setState({ clickMode: false }, () => (document.addEventListener('mousemove', this.toggleMenu)))
-            }
-        }
+        // if (nextProps.openClickMenuIds) {
+        //     const parentId = ReactDOM.findDOMNode(this).parentNode.getAttribute("menu-id")
+        //     if (nextProps.openClickMenuIds.includes(parentId)) {
+        //         this.setState({ clickMode: true }, () => (document.addEventListener('onclick', this.toggleMenu)))
+        //     } else {
+        //         this.setState({ clickMode: false }, () => (document.addEventListener('mousemove', this.toggleMenu)))
+        //     }
+        // }
     }
 
 
-    onClick = (e) => {
-        const { onClick } = this.props;
-        const { clickMode, clickCount } = this.state;
-        const info = {
-            item: this,
-            domEvent: e,
-        };
-        if (clickMode) {
-            this.toggleMenu(e)
-            this.setState({ clickCount: clickCount + 1 })
-        }
-        onClick(info)
-    };
+    // onClick = (e) => {
+    //     const { onClick, mode } = this.props;
+    //     const info = {
+    //         item: this,
+    //         domEvent: e,
+    //     };
+    //     if (mode === "click") {
+    //         this.toggleMenu(e)
+    //     }
+    //     onClick(info)
+    // };
 
-    onMouseEnter = (e) => {
-        const { onMouseEnter } = this.props;
-        const { clickMode } = this.state;
-        const info = {
-            item: this,
-            domEvent: e,
-        };
-        if (clickMode == false) {
-            this.toggleMenu(e)
-        }
-        onMouseEnter(info)
-    };
+    // onMouseEnter = (e) => {
+    //     const { onMouseEnter,mode } = this.props;
+    //     const info = {
+    //         item: this,
+    //         domEvent: e,
+    //     };
+    //     if (mode === "hover") {
+    //         this.toggleMenu(e)
+    //     }
+    //     onMouseEnter(info)
+    // };
 
 
-    onMouseLeave = (e) => {
-        const { onMouseLeave } = this.props;
-        const { clickMode } = this.state;
-        const info = {
-            item: this,
-            domEvent: e,
-        };
-        if (clickMode == false) {
-            this.toggleMenu(e)
-        }
-        onMouseLeave(info)
-    };
+    // onMouseLeave = (e) => {
+    //     const { onMouseLeave,mode } = this.props;
+    //     const info = {
+    //         item: this,
+    //         domEvent: e,
+    //     };
+    //     if (mode==="hover") {
+    //         this.toggleMenu(e)
+    //     }
+    //     onMouseLeave(info)
+    // };
 
     toggleMenu = (e) => {
-        const { clickMode, clickCount } = this.state
-        if (this.menuItemRef && !this.menuItemRef.contains(e.target)) {
-            this.setState({ isOpen: false, active: false, clickCount: 0 })
-        } else {
-            if (clickMode) {
-                if (clickCount != 0 && clickCount % 2 == 0) {
-                    this.setState({ isOpen: false })
-                } else {
-                    this.setState({ isOpen: true, active: true })
-                }
-            } else {
-                this.setState({ isOpen: true, active: true })
-            }
-
-        }
+        // const { isOpen, active } = this.state
+        // const { mode } = this.props;
+        // if (this.menuItemRef && !this.menuItemRef.contains(e.target)) {
+        //     this.setState({ isOpen: false, active: false })
+        // } else {
+        //     if (mode === "click") {
+        //         this.setState({ isOpen: !isOpen, active: !active })
+        //     }else if(mode==="hover"){
+        //         this.setState({ isOpen: true, active: true })
+        //     }
+        // }
     };
 
     render() {
@@ -145,6 +151,7 @@ class RegularMenuItem extends Component {
         const {
             parent,
             active,
+            isOpen,
             disabled,
             text,
             customClassName,
@@ -153,14 +160,16 @@ class RegularMenuItem extends Component {
             children,
             classes,
             itemId,
+            mode,
+            data,
             ...other
         } = this.props;
 
-        const { isOpen, clickMode } = this.state
+        // const { isOpen} = this.state
 
         const className = cx(customClassName, {
-            "uk-parent": parent,
-            "uk-active": active,
+            // "uk-parent": parent,
+            // "uk-active": active,
         })
 
         const parentClassName = cx(customDropdownClassName, classes.dropdownNavWrapperStyle)
@@ -179,15 +188,25 @@ class RegularMenuItem extends Component {
                 {...mouseEvents}
                 className={className}
                 ref={(item) => { this.menuItemRef = item; }}
-                id={itemId}
                 {...other}>
                 <span className={textClassName}>{text}</span>
-                {(parent && isOpen) &&
-                    (<div className={parentClassName} >
-                        <ul className={cx(classes.dropdownNavStyle)}>
-                            {children}
-                        </ul>
-                    </div>)}
+                <div>
+                    {(parent ) &&
+                        (<div className={parentClassName} ref={(item) => { this.subMenuRef = item; }}>
+                            <ul className={cx(classes.dropdownNavStyle)}>
+                                {
+                                    // data.map(item => (
+                                    //     <MenuItem text={item.text} parent={item.hasOwnProperty('items')}>
+                                    //         {
+                                    //             item.hasOwnProperty('items') && <MenuItem data={item}/>
+                                    //         }
+                                    //     </MenuItem>
+                                    // ))
+                                    children
+                                }
+                            </ul>
+                        </div>)}
+                </div>
             </li >
         )
     }

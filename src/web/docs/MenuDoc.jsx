@@ -4,19 +4,67 @@ import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { Menu,TabStrip,Tab,TabItem, MenuItem} from '../../components/layout';
 import MarkupButtons from './MarkupButtons';
+import _ from 'lodash'
 
 const usageSource = `
 `;
 
-const items = [{
+const items = [
+{
     "text": "Item1",
-    "items": [{ "text": "Item1.1" }, { "text": "Item1.2", "items": [{ "text": "Item1.2.1" }, { "text": "Item1.2.2" }] }]
-}, {
+    "items": [
+        { "text": "Item1.1" },
+        {
+            "text": "Item1.2",
+            "items": [
+                {
+                    "text": "Item1.2.1",
+                    "items": [{ "text": "Item1.2.1.1" }]
+                },
+                { "text": "Item1.2.2" }
+            ]
+        }
+    ]
+}, 
+{
     "text": "Item2",
     "items": [{ "text": "Item2.1" }, { "text": "Item2.2" }, { "text": "Item2.3" }]
-}, {
+}, 
+{
     "text": "Item3"
 }]
+
+const items2 = [{
+    "text": "Item1",
+    "items": [
+        { "text": "Item1.1" },
+        { 
+            "text": "Item1.1.2",
+            "items":[{"text": "Item1.1.2.1"}]
+        },
+    ]
+}]
+
+var flattenObject = function(ob) {
+	var toReturn = {};
+	
+	for (var i in ob) {
+		if (!ob.hasOwnProperty(i)) continue;
+		
+		if ((typeof ob[i]) == 'object') {
+			var flatObject = flattenObject(ob[i]);
+			for (var x in flatObject) {
+				if (!flatObject.hasOwnProperty(x)) continue;
+				
+				toReturn[i + '.' + x] = flatObject[x];
+			}
+		} else {
+			toReturn[i] = ob[i];
+		}
+	}
+	return toReturn;
+};
+
 
 export const MenuDoc = () => (
     <div className="uk-container uk-container-small uk-position-relative">
@@ -29,14 +77,14 @@ export const MenuDoc = () => (
         <TabStrip>
             <Tab title="Preview">
                 <div style={{ height: '400px' }}>
-                    <Menu>
-                        <MenuItem text="items" parent>
-                            <MenuItem text="item-1" />
-                            <MenuItem text="item-2" />
-                            <MenuItem text="item-3" />
-                            <MenuItem text="item-4" />
-                        </MenuItem>
-                    </Menu>
+                    <Menu items={items2}/>
+                    {/* <Menu>
+                        {items.map((item,index)=>{
+                            item.items && item.items.length ? item.items.map()
+                            <MenuItem text={item.text} items= />
+                        })}
+                    </Menu> */}
+
                 </div>
 
             </Tab>
