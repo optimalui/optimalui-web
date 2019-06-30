@@ -5,16 +5,17 @@ import cx from 'classnames';
 import withStyles from 'react-jss'
 import { menuStyle } from '../../assets/jss'
 import { noop } from '../../util'
-import { connect } from 'react-redux'
 import ReactDOM from 'react-dom'
+import { Icon } from '../Icon'
 import uuidv4 from 'uuid'
+import { connect } from 'mini-store';
 
 class RegularMenuItem extends Component {
 
     static propTypes = {
         parent: PropTypes.bool,
         active: PropTypes.bool,
-        isOpen:PropTypes.bool,
+        // isOpen:PropTypes.bool,
         text: PropTypes.string,
         eventKey: PropTypes.string,
         children: PropTypes.any,
@@ -29,25 +30,18 @@ class RegularMenuItem extends Component {
         onMouseLeave: PropTypes.func,
         isSelected: PropTypes.bool,
         mode:PropTypes.string,
-        data: PropTypes.oneOfType([
-            PropTypes.array,
-            PropTypes.object
-        ])
+        menuId:PropTypes.string
     };
 
     static defaultProps = {
         active: false,
-        isOpen:false,
+        // isOpen:false,
         parent: false,
-        onSelect: noop,
-        onClick: noop,
-        onMouseEnter: noop,
-        onMouseLeave: noop,
         customClassName: '',
         customDropdownClassName: '',
         textCustomClassName: '',
         mode:"hover",
-        itemId: `menu-item-${uuidv4()}`
+        itemId:null
     };
 
     constructor(props) {
@@ -56,32 +50,34 @@ class RegularMenuItem extends Component {
             isOpen: false,
             active: false,
         }
-        this.toggleMenu = this.toggleMenu.bind(this);
-        // this.subMenuRef = React.createRef()
+        // this.toggleMenu = this.toggleMenu.bind(this);
+        // this.handleClick = this.handleClick.bind(this)
+        // this.handleMouseEnter = this.handleMouseEnter.bind(this)
+        // this.handleMouseLeave = this.handleMouseLeave.bind(this)
     }
 
-    // componentDidMount() {
-    //     const { active, mode } = this.props;
+    componentDidMount() {
+        const { active, mode } = this.props;
 
-    //     this.setState({ active });
+        this.setState({ active });
 
-    //     if (mode === "hover") {
-    //         document.addEventListener("mousemove", this.toggleMenu)
-    //     } else if (mode === "click") {
-    //         document.addEventListener("click", this.toggleMenu)
-    //     }
+        // if (mode === "hover") {
+        //     document.addEventListener("mousemove", this.handleMouseLeave)
+        // } else if (mode === "click") {
+        //     document.addEventListener("click", this.toggleMenu)
+        // }
 
-    // }
+    }
 
 
-    // componentWillUnmount() {
-    //     const { mode } = this.props;
-    //     if (mode === "hover") {
-    //         document.removeEventListener("mousemove", this.toggleMenu)
-    //     } else if (mode === "click") {
-    //         document.removeEventListener("click", this.toggleMenu)
-    //     }
-    // }
+    componentWillUnmount() {
+        const { mode } = this.props;
+        // if (mode === "hover") {
+        //     document.removeEventListener("mousemove", this.toggleMenu)
+        // } else if (mode === "click") {
+        //     document.removeEventListener("click", this.handleMouseLeave)
+        // }
+    }
 
     componentWillReceiveProps(nextProps) {
         // if (nextProps.openClickMenuIds) {
@@ -95,63 +91,92 @@ class RegularMenuItem extends Component {
     }
 
 
-    // onClick = (e) => {
+    // handleClick = (e) => {
     //     const { onClick, mode } = this.props;
+    //     const { isOpen,active} = this.state
+
     //     const info = {
     //         item: this,
     //         domEvent: e,
     //     };
     //     if (mode === "click") {
-    //         this.toggleMenu(e)
+    //         this.setState({ isOpen: !isOpen , active: false })
     //     }
-    //     onClick(info)
+    //     if (typeof onClick === 'function') {
+    //         if (onClick(info) === false) return;
+    //     }
     // };
 
-    // onMouseEnter = (e) => {
-    //     const { onMouseEnter,mode } = this.props;
+    // handleMouseEnter = (e) => {
+    //     const { onMouseEnter,mode,store,itemId } = this.props;
+    //     const { isOpen,active} = this.state
     //     const info = {
     //         item: this,
     //         domEvent: e,
     //     };
     //     if (mode === "hover") {
-    //         this.toggleMenu(e)
+    //         store.setState({
+    //             currentItemId:itemId
+    //         })
+    //         this.setState({ isOpen: true, active: true })
     //     }
-    //     onMouseEnter(info)
+    //     if (typeof onMouseEnter === 'function') {
+    //         if (onMouseEnter(info) === false) return;
+    //     }
     // };
 
 
-    // onMouseLeave = (e) => {
-    //     const { onMouseLeave,mode } = this.props;
+    // handleMouseLeave = (e) => {
+    //     const {isOpen,active} = this.state
+    //     const { onMouseLeave,mode,store,itemId} = this.props;
     //     const info = {
     //         item: this,
     //         domEvent: e,
     //     };
     //     if (mode==="hover") {
-    //         this.toggleMenu(e)
+
+    //        const {currentItemId} = store.getState()
+            
+    //         // this.setState({ isOpen: false , active: false })
+    //         if (this.menuItemRef){
+    //             if(!this.menuItemRef.parentNode.contains(e.target)) { 
+    //                 this.setState({ isOpen: false , active: false })
+    //             }
+    //             // else{
+    //             // if (currentItemId != this.props.itemId) {
+    //             //     this.setState({ isOpen: false, active: false })
+    //             // }
+    //             // }
+    //         }
     //     }
-    //     onMouseLeave(info)
+    //     if (typeof onMouseLeave === 'function') {
+    //         if (onMouseLeave(info) === false) return;
+    //     }
+    // };
+ 
+    // toggleMenu = (e) => {
+    //     const { onMouseLeave,mode,menuId } = this.props;
+    //     const {isOpen,active} = this.state
+    //     // this.setState({ isOpen: true , active: true })
+    //     if (this.menuItemRef){
+    //         // if(!this.menuItemRef.contains(e.target)) { 
+    //         //     this.setState({ isOpen: false , active: false })
+    //         // }else{
+    //         //     // this.setState({ isOpen: !isOpen , active: !active })
+    //         //         this.setState({ isOpen: true , active: true })
+                
+    //         // }
+    //     }
     // };
 
-    toggleMenu = (e) => {
-        // const { isOpen, active } = this.state
-        // const { mode } = this.props;
-        // if (this.menuItemRef && !this.menuItemRef.contains(e.target)) {
-        //     this.setState({ isOpen: false, active: false })
-        // } else {
-        //     if (mode === "click") {
-        //         this.setState({ isOpen: !isOpen, active: !active })
-        //     }else if(mode==="hover"){
-        //         this.setState({ isOpen: true, active: true })
-        //     }
-        // }
-    };
 
     render() {
+        
 
         const {
             parent,
             active,
-            isOpen,
+            // isOpen,
             disabled,
             text,
             customClassName,
@@ -160,69 +185,65 @@ class RegularMenuItem extends Component {
             children,
             classes,
             itemId,
+            menuId,
             mode,
-            data,
+            store,
             ...other
         } = this.props;
 
-        // const { isOpen} = this.state
+
+        const { isOpen} = this.state
 
         const className = cx(customClassName, {
             // "uk-parent": parent,
             // "uk-active": active,
         })
 
-        const parentClassName = cx(customDropdownClassName, classes.dropdownNavWrapperStyle)
+        const parentClassName = cx(customDropdownClassName,"uk-navbar-dropdown", classes.subMenuWrapper,{
+            // [classes.showMenuItem]:isOpen,
+            // [classes.hideMenuItem]:!isOpen,
+        })
 
 
         const mouseEvents = {
-            onClick: disabled ? null : this.onClick,
-            onMouseLeave: disabled ? null : this.onMouseEnter,
-            onMouseEnter: disabled ? null : this.onMouseLeave,
+            onClick: disabled ? null : this.handleClick, 
+            onMouseEnter: disabled ? null : this.handleMouseEnter,
+            onMouseLeave: disabled ? null :  this.handleMouseLeave,
         }
 
-        const textClassName = cx(textCustomClassName, parent ? classes.parentItemText :classes.menuItemText, active ? classes.activeMenuItemText : '')
+        const textClassName = cx(textCustomClassName, classes.menuItemText)
+
+        const {currentItemId} = store.getState()
 
         return (
             <li
-                {...mouseEvents}
+                // {...mouseEvents}
                 className={className}
                 ref={(item) => { this.menuItemRef = item; }}
-                {...other}>
-                <span className={textClassName}>{text}</span>
-                <div>
-                    {(parent ) &&
-                        (<div className={parentClassName} ref={(item) => { this.subMenuRef = item; }}>
-                            <ul className={cx(classes.dropdownNavStyle)}>
+                {...other}
+                >
+                <a href="" className={cx(classes.menuItemText)}  onClick={(e)=>{e.preventDefault()}}>
+                    {text}
+                    {parent && <Icon name="triangle-right" className={classes.iconStyle} />}
+                </a>
+                    
+                    {(parent) &&
+                        <div className={parentClassName} ref={(item) => { this.subMenuRef = item; }}>
+                            <ul className={cx("uk-nav uk-navbar-dropdown-nav",classes.subMenu)}>
                                 {
-                                    // data.map(item => (
-                                    //     <MenuItem text={item.text} parent={item.hasOwnProperty('items')}>
-                                    //         {
-                                    //             item.hasOwnProperty('items') && <MenuItem data={item}/>
-                                    //         }
-                                    //     </MenuItem>
-                                    // ))
                                     children
                                 }
                             </ul>
-                        </div>)}
-                </div>
+                        </div>
+                    }
+                    
             </li >
         )
     }
 }
 
+const connectedMenuItem = connect()(RegularMenuItem)
 
-// const mapStateToProps = (state) => {
-//     return {
-//         openClickMenuIds: state.clickModeMenuReducer.clickModeMenues
-//     }
-
-// }
-
-// const connectedMenuItem = connect(mapStateToProps)(RegularMenuItem)
-
-const styledMenuItem = withStyles(menuStyle)(RegularMenuItem)
-
+const styledMenuItem = withStyles(menuStyle)(connectedMenuItem)
 
 export { styledMenuItem as MenuItem }

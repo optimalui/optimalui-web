@@ -4120,6 +4120,9 @@ display: none !important;
 .uk-navbar-dropdown-nav {
   font-size: 0.875rem;
 }
+.uk-navbar-dropdown-nav > div >*{
+  margin-left: 180px !important;
+}
 /*
  * Items
  */
@@ -7138,7 +7141,7 @@ display: none !important;
     text-align: center !important;
   }
 }
-/* tablet landscape and bigger */
+/* Tablet landscape and bigger */
 @media (min-width: 960px) {
   .uk-text-left\@m {
     text-align: left !important;
@@ -7181,7 +7184,7 @@ display: none !important;
   vertical-align: top !important;
 }
 .uk-text-middle {
-  vertical-align: middlu !important;
+  vertical-align: middle !important;
 }
 .uk-text-bottom {
   vertical-align: bottom !important;
@@ -7219,8 +7222,8 @@ td.uk-text-truncate {
  * 1. Wrap long words onto the next line and break them if they are too long to fit
  * 2. Legacy `word-wrap` as fallback for `overflow-wrap`
  * 3. Fix `overflow-wrap` which doesn't work with table cells in Chrome, Opera, IE11 and Edge
- *    Eust use `break-all` to support IE11 and Edge
- * Note: Not using `hyphens: auto;` because it hyphenates text even if not needed
+ *    Must use `break-all` to support IE11 and Edge
+ * Note: Not using `hyphens: auto;` because it hyphenates text even if not needed
  */
 .uk-text-break {
   /* 1 */

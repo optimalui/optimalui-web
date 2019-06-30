@@ -7,6 +7,11 @@ const tabStripStore = {
     selectedContent: null
 }
 
+const menuStore = {
+    currentItemId:null,
+}
+
 export const miniStore = create({
-    ...tabStripStore
+    ...tabStripStore,
+    ...menuStore
 });

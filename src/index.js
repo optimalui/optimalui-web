@@ -7,6 +7,7 @@ import * as serviceWorker from './serviceWorker';
 // import { Provider } from 'react-redux';
 import { Provider} from 'mini-store';
 import { miniStore as store } from './_helpers'
+import  './App.css'
 
 ReactDOM.render(
     <Provider store={store}>
