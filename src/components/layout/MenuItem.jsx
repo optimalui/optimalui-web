@@ -15,8 +15,8 @@ class RegularMenuItem extends Component {
     static propTypes = {
         parent: PropTypes.bool,
         active: PropTypes.bool,
-        // isOpen:PropTypes.bool,
-        text: PropTypes.string,
+        className:PropTypes.string,
+        text: PropTypes.string.isRequired,
         eventKey: PropTypes.string,
         children: PropTypes.any,
         selectedKeys: PropTypes.array,
@@ -37,7 +37,7 @@ class RegularMenuItem extends Component {
         active: false,
         // isOpen:false,
         parent: false,
-        customClassName: '',
+        className: '',
         customDropdownClassName: '',
         textCustomClassName: '',
         mode:"hover",
@@ -179,7 +179,7 @@ class RegularMenuItem extends Component {
             // isOpen,
             disabled,
             text,
-            customClassName,
+            className:customClassName,
             textCustomClassName,
             customDropdownClassName,
             children,
@@ -194,7 +194,7 @@ class RegularMenuItem extends Component {
 
         const { isOpen} = this.state
 
-        const className = cx(customClassName, {
+        const customClass = cx(customClassName, {
             // "uk-parent": parent,
             // "uk-active": active,
         })
@@ -218,7 +218,7 @@ class RegularMenuItem extends Component {
         return (
             <li
                 // {...mouseEvents}
-                className={className}
+                className={customClass}
                 ref={(item) => { this.menuItemRef = item; }}
                 {...other}
                 >
