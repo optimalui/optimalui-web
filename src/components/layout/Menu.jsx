@@ -166,7 +166,8 @@ class RegularMenu extends Component {
         const SubMenu = ({ menuItems, mode}) => {
             return _.map(menuItems, (item) => {
                 if (item.hasOwnProperty('items')) {
-                    return <MenuItem text={item.text} 
+                    return <MenuItem 
+                                {...item}
                                 parent={item.hasOwnProperty('items')} 
                                 key={uuidv4()} 
                                 mode={mode} 
@@ -178,7 +179,7 @@ class RegularMenu extends Component {
                         }
                     </MenuItem>
                 } else {
-                    return <MenuItem text={item.text} key={uuidv4()} />
+                    return <MenuItem key={uuidv4()} {...item}/>
                 }
             })
         }

@@ -214,6 +214,10 @@ export const menuStyle = {
         },
         iconStyle:{
             float:'right'
+        },
+        iconClass:{
+            marginRight: '10px !important', 
+            float:'left',
         }
     
     }

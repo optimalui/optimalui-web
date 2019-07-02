@@ -30,18 +30,25 @@ class RegularMenuItem extends Component {
         onMouseLeave: PropTypes.func,
         isSelected: PropTypes.bool,
         mode:PropTypes.string,
-        menuId:PropTypes.string
+        menuId:PropTypes.string,
+        url:PropTypes.string,
+        urlTarget:PropTypes.string,
+        icon:PropTypes.string,
+        iconClassName:PropTypes.string
     };
 
     static defaultProps = {
         active: false,
-        // isOpen:false,
         parent: false,
         className: '',
         customDropdownClassName: '',
         textCustomClassName: '',
         mode:"hover",
-        itemId:null
+        itemId:null,
+        url:'',
+        urlTarget:'',
+        icon:'',
+        iconClassName:''
     };
 
     constructor(props) {
@@ -54,6 +61,7 @@ class RegularMenuItem extends Component {
         // this.handleClick = this.handleClick.bind(this)
         // this.handleMouseEnter = this.handleMouseEnter.bind(this)
         // this.handleMouseLeave = this.handleMouseLeave.bind(this)
+        this.handleLinkClick = this.handleLinkClick.bind(this)
     }
 
     componentDidMount() {
@@ -169,6 +177,13 @@ class RegularMenuItem extends Component {
     //     }
     // };
 
+    handleLinkClick(e){
+        const {url} = this.props
+        if(!url){
+            e.preventDefault()
+        }
+    }
+
 
     render() {
         
@@ -188,6 +203,10 @@ class RegularMenuItem extends Component {
             menuId,
             mode,
             store,
+            url,
+            urlTarget,
+            icon,
+            iconClassName:customIconClassName,
             ...other
         } = this.props;
 
@@ -213,7 +232,7 @@ class RegularMenuItem extends Component {
 
         const textClassName = cx(textCustomClassName, classes.menuItemText)
 
-        const {currentItemId} = store.getState()
+        const iconClass = cx(classes.iconClass,customIconClassName)
 
         return (
             <li
@@ -222,7 +241,9 @@ class RegularMenuItem extends Component {
                 ref={(item) => { this.menuItemRef = item; }}
                 {...other}
                 >
-                <a href="" className={cx(classes.menuItemText)}  onClick={(e)=>{e.preventDefault()}}>
+                
+                <a href={`//${url}`} target={urlTarget} className={cx(classes.menuItemText)}  onClick={this.handleLinkClick}>
+                    {icon && <Icon name={icon} className={iconClass}/>}
                     {text}
                     {parent && <Icon name="triangle-right" className={classes.iconStyle} />}
                 </a>

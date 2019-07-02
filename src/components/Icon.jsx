@@ -21,7 +21,9 @@ const RegularIcon = ({ ...props }) => {
         smallRightMargin,
         ...other
     } = props;
-    const className = cx(css(iconStyle.root,smallRightMargin ? iconStyle.iconSmallRight:'',formIcon ? iconStyle.formIcon:''), customClassName)
+    const className = cx(
+        css(iconStyle.root,smallRightMargin ? iconStyle.iconSmallRight:'',
+            formIcon ? iconStyle.formIcon:''), customClassName) 
     const iconProp = `icon:${props.name};ratio:${props.size};`;
     const width = props.size * 20;
     const height = props.size * 20;

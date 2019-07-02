@@ -192,6 +192,47 @@ ReactDOM.render(
 )
 `;
 
+const itemUrl = `
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Menu,MenuItem } from '@optimalui/components/layout'
+
+class App extends React.Component {
+    render() { 
+        return (
+            <Menu>
+                <MenuItem text="Google" url="www.google.com" urlTarget="_blank"/>
+                <MenuItem text="Social" parent>
+                    <MenuItem text="Twitter" url="twitter.com" urlTarget="_blank" />
+                    <MenuItem text="Facebook" url="www.facebook.com" urlTarget="_blank" />
+                </MenuItem>
+            </Menu>
+        )
+    }
+}
+
+ReactDOM.render(
+    <App />,
+    document.querySelector('my-app')
+)
+`;
+
+const iconItems = [{
+    text: 'Social',
+    icon: 'social',
+    items: [{ text: 'Facebook', icon: 'facebook', url: "facebook.com", urlTarget: "_blank" },
+    { text: 'Twitter', icon: 'twitter', url: "twitter.com", urlTarget: "_blank" },
+    { text: 'Instagram', icon: 'instagram', url: "instagram.com", urlTarget: "_blank" },
+    { text: 'Linkedin', icon: 'linkedin', url: "linkedin.com", urlTarget: "_blank" },
+    { text: 'Pinterest', icon: 'pinterest', url: "pinterest.com", urlTarget: "_blank" }]
+},
+{
+    text:"Video",
+    icon:"video-camera",
+    items: [{ text: 'Youtube', icon: 'youtube', url: "youtube.com", urlTarget: "_blank" },
+    { text: 'Vimeo', icon: 'vimeo', url: "vimeo.com", urlTarget: "_blank" }]
+}]
+
 
 
 export const MenuDoc = () => (
@@ -289,6 +330,48 @@ export const MenuDoc = () => (
             </TabStrip>
             <MarkupButtons codeText={menuItemsUsage} />
         </div>
+        {/** URL */}
+        <h2 id="url" className="uk-h3 tm-heading-fragment"><a href="#url">Url</a></h2>
+        <p>
+        You can set the url of the items by using the <code>url</code> prop. 
+        The url will be rendered as a href attribute on the item link.
+        </p>
+        <div className="uk-position-relative uk-margin-medium">
+        <TabStrip>
+                <Tab title="Preview">
+                    <Menu>
+                        <MenuItem text="Google" url="www.google.com" urlTarget="_blank"/>
+                        <MenuItem text="Social" parent>
+                            <MenuItem text="Twitter" url="twitter.com" urlTarget="_blank" />
+                            <MenuItem text="Facebook" url="www.facebook.com" urlTarget="_blank" />
+                        </MenuItem>
+                    </Menu>
+                </Tab>
+                <Tab title="Markup">
+                    <SyntaxHighlighter language='javascript' style={docco}>{itemUrl}</SyntaxHighlighter>
+                </Tab>
+            </TabStrip>
+            <MarkupButtons codeText={itemUrl} />
+        </div>
+
+        <h2 id="icon" className="uk-h3 tm-heading-fragment"><a href="#url">Icon</a></h2>
+        <p>
+        You can set the url of the items by using the <code>url</code> prop. 
+        The url will be rendered as a href attribute on the item link.
+        </p>
+        <div className="uk-position-relative uk-margin-medium">
+        <TabStrip>
+                <Tab title="Preview">
+                    <Menu items={iconItems}/>
+                </Tab>
+                <Tab title="Markup">
+                    <SyntaxHighlighter language='javascript' style={docco}>{itemUrl}</SyntaxHighlighter>
+                </Tab>
+            </TabStrip>
+            <MarkupButtons codeText={itemUrl} />
+        </div>
+
+
         <p>The <code>MenuItem</code> component has the following props:</p>
         <div className="uk-overflow-auto">
             <table className="uk-table uk-table-divider">
