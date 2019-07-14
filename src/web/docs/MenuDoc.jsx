@@ -5,6 +5,8 @@ import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { Menu,TabStrip,Tab,TabItem, MenuItem} from '../../components/layout';
 import MarkupButtons from './MarkupButtons';
 import menuItems from './menuItems.json'
+import { Link,Route, Switch, BrowserRouter as Router,HashRouter} from "react-router-dom";
+import MenuRouting from './MenuRouting'
 import _ from 'lodash'
 
 const menuUsage = `
@@ -217,6 +219,43 @@ ReactDOM.render(
 )
 `;
 
+const iconsUsage = `
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Menu } from '@optimalui/components/layout'
+
+class App extends React.Component {
+    render() { 
+
+        const iconItems = [{
+            text: 'Social',
+            icon: 'social',
+            items: [{ text: 'Facebook', icon: 'facebook', url: "facebook.com", urlTarget: "_blank" },
+            { text: 'Twitter', icon: 'twitter', url: "twitter.com", urlTarget: "_blank" },
+            { text: 'Instagram', icon: 'instagram', url: "instagram.com", urlTarget: "_blank" },
+            { text: 'Linkedin', icon: 'linkedin', url: "linkedin.com", urlTarget: "_blank" },
+            { text: 'Pinterest', icon: 'pinterest', url: "pinterest.com", urlTarget: "_blank" }]
+        },
+        {
+            text:"Video",
+            icon:"video-camera",
+            items: [{ text: 'Youtube', icon: 'youtube', url: "youtube.com", urlTarget: "_blank" },
+            { text: 'Vimeo', icon: 'vimeo', url: "vimeo.com", urlTarget: "_blank" }]
+        }]
+
+        return (
+            <Menu items={iconItems}/>
+        )
+    }
+}
+
+ReactDOM.render(
+    <App />,
+    document.querySelector('my-app')
+)
+`;
+
+
 const iconItems = [{
     text: 'Social',
     icon: 'social',
@@ -233,7 +272,198 @@ const iconItems = [{
     { text: 'Vimeo', icon: 'vimeo', url: "vimeo.com", urlTarget: "_blank" }]
 }]
 
+const disabledItems = [
+    { text: 'Item1', disabled: true, items: [{ text: 'Item1.1' }] },
+    { text: 'Item2', disabled: true }
+];
 
+const disabledUsage = `
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Menu } from '@optimalui/components/layout'
+
+class App extends React.Component {
+    render() { 
+        const disabledItems = [
+            { text: 'Item1', disabled: true, items: [{ text: 'Item1.1' }] },
+            { text: 'Item2', disabled: true }
+        ];
+        return (
+            <Menu items={disabledItems}/>
+        )
+    }
+}
+
+ReactDOM.render(
+    <App />,
+    document.querySelector('my-app')
+)
+`;
+
+const bookCategories = [
+    {
+        text: 'Art & Music',
+        items: [
+            {
+                text: 'Music',
+                items: [
+                    { text: 'Classical' },
+                    { text: 'Country' },
+                    { text: 'Dance' }
+                ]
+            },
+            { text: 'Painting' },
+            { text: 'Photography' },
+        ]
+    },
+    {
+        text: 'Ethnic & Cultural',
+        items: [
+            { text: 'Europe' },
+            { text: 'Historical' },
+            { text: 'Military' }]
+    },
+    {
+        text: 'Business',
+        items: [
+            { text: 'Finance' },
+            { text: 'Economics' },
+            { text: 'Industries' }]
+    },
+    {
+        text: 'Cooking',
+        items: [
+            { text: 'Baking' },
+            { text: 'BBQ' },
+            { text: 'Preserving' }]
+    },
+    {
+        text: 'Health & Fitness',
+        items: [
+            { text: 'Aging' },
+            { text: 'Alternative Medicine' },
+            { text: 'Disease & Ailments' },
+            { 
+                text: 'Fitness',
+                items: [{ text: 'Acrobatics' }, { text: 'Barre' }, { text: 'Boxing' }, { text: 'Crossfit' }]
+            },]
+    },
+]
+
+const verticalMenu = `
+    import React from 'react';
+    import ReactDOM from 'react-dom';
+    import { Menu } from '@optimalui/components/layout'
+
+    class App extends React.Component {
+        render() { 
+
+            const bookCategories = [
+                {
+                    text: 'Art & Music',
+                    items: [
+                        {
+                            text: 'Music',
+                            items: [
+                                { text: 'Classical' },
+                                { text: 'Country' },
+                                { text: 'Dance' }
+                            ]
+                        },
+                        { text: 'Painting' },
+                        { text: 'Photography' },
+                    ]
+                },
+                {
+                    text: 'Ethnic & Cultural',
+                    items: [
+                        { text: 'Europe' },
+                        { text: 'Historical' },
+                        { text: 'Military' }]
+                },
+                {
+                    text: 'Business',
+                    items: [
+                        { text: 'Finance' },
+                        { text: 'Economics' },
+                        { text: 'Industries' }]
+                },
+                {
+                    text: 'Cooking',
+                    items: [
+                        { text: 'Baking' },
+                        { text: 'BBQ' },
+                        { text: 'Preserving' }]
+                },
+                {
+                    text: 'Health & Fitness',
+                    items: [
+                        { text: 'Aging' },
+                        { text: 'Alternative Medicine' },
+                        { text: 'Disease & Ailments' },
+                        { 
+                            text: 'Fitness',
+                            items: [
+                                { text: 'Acrobatics' }, 
+                                { text: 'Barre' }, 
+                                { text: 'Boxing' }, 
+                                { text: 'Crossfit' }
+                            ]
+                        },]
+                },
+            ]
+            
+            return (
+                <Menu items={bookCategories}  mode="click" vertical/>
+            )
+        }
+    }
+
+    ReactDOM.render(
+        <App />,
+        document.querySelector('my-app')
+    )
+    `;
+
+        const Home = () => (
+            <React.Fragment>
+                <p className="uk-text-lead">Home</p>
+                <p>
+                    Nunc nulla. Praesent turpis.
+
+                    Praesent nonummy mi in odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+
+                    Donec vitae orci sed dolor rutrum auctor. Suspendisse feugiat.
+                    </p>
+            </React.Fragment>
+        )
+
+        const Products = () => (
+            <React.Fragment>
+                <p className="uk-text-lead">Products</p>
+                <p>
+                    Aliquam lobortis. Nam at tortor in tellus interdum sagittis. Fusce ac felis sit amet ligula pharetra condimentum. Aliquam lobortis.
+                </p>
+            </React.Fragment>
+        )
+
+        const About = () => (
+            <React.Fragment>
+                <p className="uk-text-lead">About</p>
+                <p>
+                    Quisque libero metus, condimentum nec, tempor a, commodo mollis, magna. Etiam vitae tortor. Cras non dolor. Duis leo. Proin faucibus arcu quis ante. In ut quam vitae odio lacinia tincidunt.
+                </p>
+            </React.Fragment>
+        )
+
+        const Team = () => (
+            <React.Fragment>
+                <p className="uk-text-lead">Team</p>
+                <p>
+                 Donec posuere vulputate arcu. Fusce a quam.
+                </p>
+            </React.Fragment>
+        )
 
 export const MenuDoc = () => (
     <div className="uk-container uk-container-small uk-position-relative">
@@ -354,10 +584,10 @@ export const MenuDoc = () => (
             <MarkupButtons codeText={itemUrl} />
         </div>
 
-        <h2 id="icon" className="uk-h3 tm-heading-fragment"><a href="#url">Icon</a></h2>
+        {/** ICON */}
+        <h2 id="icon" className="uk-h3 tm-heading-fragment"><a href="#icon">Icon</a></h2>
         <p>
-        You can set the url of the items by using the <code>url</code> prop. 
-        The url will be rendered as a href attribute on the item link.
+        You can specify the name of a <Link to="/docs/icon">Icon</Link> that will be rendered for the item by using the icon property.
         </p>
         <div className="uk-position-relative uk-margin-medium">
         <TabStrip>
@@ -365,12 +595,67 @@ export const MenuDoc = () => (
                     <Menu items={iconItems}/>
                 </Tab>
                 <Tab title="Markup">
-                    <SyntaxHighlighter language='javascript' style={docco}>{itemUrl}</SyntaxHighlighter>
+                    <SyntaxHighlighter language='javascript' style={docco}>{iconsUsage}</SyntaxHighlighter>
                 </Tab>
             </TabStrip>
-            <MarkupButtons codeText={itemUrl} />
+            <MarkupButtons codeText={iconsUsage} />
         </div>
 
+        {/** DISABLED */}
+        <h2 id="disabled" className="uk-h3 tm-heading-fragment"><a href="#disabled">Disabled Item</a></h2>
+        <p>
+        You can specify that a <code>MenuItem</code> is disabled by using the <code>disabled</code> prop.
+        </p>
+        <div className="uk-position-relative uk-margin-medium">
+        <TabStrip>
+                <Tab title="Preview">
+                    <Menu items={disabledItems}/>
+                </Tab>
+                <Tab title="Markup">
+                    <SyntaxHighlighter language='javascript' style={docco}>{disabledUsage}</SyntaxHighlighter>
+                </Tab>
+            </TabStrip>
+            <MarkupButtons codeText={disabledUsage} />
+        </div>
+
+        {/** VERTICAL */}
+        <h2 id="vertical" className="uk-h3 tm-heading-fragment"><a href="#vertical">Vertical</a></h2>
+        <p>Set the <code>vertical</code> prop as <code>true</code> to create a vertical <code>Menu</code> component.</p>
+        <div className="uk-position-relative uk-margin-medium">
+        <TabStrip>
+                <Tab title="Preview">
+                    <Menu items={bookCategories}  mode="click" vertical/>
+                </Tab>
+                <Tab title="Markup">
+                    <SyntaxHighlighter language='javascript' style={docco}>{verticalMenu}</SyntaxHighlighter>
+                </Tab>
+            </TabStrip>
+            <MarkupButtons codeText={verticalMenu} />
+        </div>
+
+        {/** ROUTER */}
+        <h2 id="route" className="uk-h3 tm-heading-fragment"><a href="#route">Routing</a></h2>
+        <p>Set the <code>vertical</code> prop as <code>true</code> to create a vertical <code>Menu</code> component.</p>
+        <div className="uk-position-relative uk-margin-medium">
+        <TabStrip>
+                <Tab title="Preview">
+                    <HashRouter>
+                        <MenuRouting>
+                            <Switch>
+                                <Route exact={true} path="/home" component={Home} />
+                                <Route exact={true} path="/products" component={Products} />
+                                <Route exact={true} path="/about" component={About} />
+                                <Route exact={true} path="/about/team" component={Team} />
+                            </Switch>
+                        </MenuRouting>
+                    </HashRouter>
+                </Tab>
+                <Tab title="Markup">
+                    <SyntaxHighlighter language='javascript' style={docco}>{verticalMenu}</SyntaxHighlighter>
+                </Tab>
+            </TabStrip>
+            <MarkupButtons codeText={verticalMenu} />
+        </div>
 
         <p>The <code>MenuItem</code> component has the following props:</p>
         <div className="uk-overflow-auto">

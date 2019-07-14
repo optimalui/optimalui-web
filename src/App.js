@@ -1,6 +1,5 @@
 /* eslint-disable */
 import React, { Component } from 'react';
-import './index.css';
 import { Button } from './components/buttons'
 import { Menu, MenuItem } from './components/layout'
 import items from '../src/components/layout/items.json'
@@ -8,8 +7,10 @@ import { BrowserRouter as Router, Route} from "react-router-dom";
 // import 'uikit/dist/css/uikit-core.css'
 // import 'uikit/dist/css/uikit.css'
 // import 'uikit/src/less/uikit.theme.less'
+import './uikit.css'
+import './uikit.rtl.css'
 import './assets/web/css/theme.css'
-import 'uikit/dist/js/uikit.js'
+import './uikit.js' 
 
 
 import { Docs } from './web/docs' 

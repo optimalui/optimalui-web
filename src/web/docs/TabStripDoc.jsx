@@ -693,6 +693,7 @@ export const TabStripDoc = () => {
         <div className="uk-position-relative uk-margin-medium">
             <TabStrip>
                 <Tab title="Preview">
+                    <div>
                     <TabStrip selected={selected} onSelect={handleSelect}>
                         <Tab title="Istanbul">
                             <p>
@@ -726,6 +727,7 @@ export const TabStripDoc = () => {
                             </p>
                         </Tab>
                     </TabStrip>
+                    </div>
                 </Tab>
                 <Tab title="Markup">
                     <SyntaxHighlighter language='javascript' style={docco}>{tabStripUsage}</SyntaxHighlighter>
@@ -744,6 +746,7 @@ export const TabStripDoc = () => {
                 <TabStrip>
                     <Tab title="Preview">
                     <p className="uk-text-lead">Center Alignment</p>
+                    <div>
                     <TabStrip alignTabs="center">
                             <Tab title="Istanbul">
                                 <p>
@@ -776,7 +779,8 @@ export const TabStripDoc = () => {
                                     Sydney was founded in 1788 when the first fleet arrived in Australia from England. On 13 May 1787 a fleet of 11 ships set sail from Portsmouth, England. On board were 759 convicts, most of them men with sailors and marines to guard the prisoners. With them they took seeds, farm implements, livestock such as cattle, sheep, pigs, goats, horses and chickens and 2 years supply of food. The first colonists came ashore at Port Jackson on 26 January 1788. They were commanded by Captain Arthur Phillip (1738-1814).
                             </p>
                             </Tab>
-                        </TabStrip>
+                    </TabStrip>
+                    </div>
                     <p className="uk-text-lead">Left Alignment</p> 
                     <TabStrip alignTabs="left">
                             <Tab title="Istanbul">
@@ -847,7 +851,7 @@ export const TabStripDoc = () => {
                         </TabStrip>
                    
                     <p className="uk-text-lead">Bottom Alignment</p>
-                        <TabStrip alignTabs="bottom">
+                    <TabStrip alignTabs="bottom">
                             <Tab title="Istanbul">
                                 <p>
                                     Beautiful Istanbul, both modern and historical city.
@@ -880,8 +884,8 @@ export const TabStripDoc = () => {
                             </p>
                             </Tab>
                         </TabStrip>
-                        <p className="uk-text-lead">Vertical Left Alignment</p>
-                        <TabStrip alignTabs="v-left">
+                    <p className="uk-text-lead">Vertical Left Alignment</p>
+                    <TabStrip alignTabs="v-left">
                             <Tab title="Istanbul">
                                 <p>
                                     Beautiful Istanbul, both modern and historical city.
@@ -914,8 +918,8 @@ export const TabStripDoc = () => {
                             </p>
                             </Tab>
                         </TabStrip>
-                        <p className="uk-text-lead">Vertical Right Alignment</p>
-                        <TabStrip alignTabs="v-right">
+                    <p className="uk-text-lead">Vertical Right Alignment</p>
+                    <TabStrip alignTabs="v-right">
                             <Tab title="Istanbul">
                                 <p>
                                     Beautiful Istanbul, both modern and historical city.
@@ -948,7 +952,6 @@ export const TabStripDoc = () => {
                             </p>
                             </Tab>
                         </TabStrip>
-                    
                     </Tab>
                     <Tab title="Markup">
                         <SyntaxHighlighter language='javascript' style={docco}>{tabStripAlignment}</SyntaxHighlighter>
@@ -961,6 +964,7 @@ export const TabStripDoc = () => {
          <p>Set the <code>dropdown</code> property of the tab component to <code>true</code>.
          Add <code>TabItem</code> component as children of<code>Tab</code> component.
          To disable <code>TabItem</code> ,set <code>disabled</code> prop as <code>true</code>.</p>
+            <div>
             <TabStrip>
                 <Tab title="Preview">
                     <TabStrip>
@@ -1014,13 +1018,13 @@ export const TabStripDoc = () => {
                 </Tab>
             </TabStrip>
             <MarkupButtons codeText={tabStripDropDown} />
-
+            </div>
         {/** Animation */}
         <h2 id="animation" className="uk-h3 tm-heading-fragment"><a href="#animation">Animation</a></h2>
         <p>TabStrip component uses <code><a href="https://www.npmjs.com/package/react-animations" target="_blank">react-animations</a></code> react module. 
         To implement an animation, set <code>animation</code> prop and set <code>duration</code> prop to change animation duration time.</p>
         <p>All animation collection should be inspect at this <code><a href="http://react-animations.herokuapp.com/" target="_blank">link</a></code></p>
-        <div className="uk-position-relative uk-margin-medium">
+        <div>
             <TabStrip>
                 <Tab title="Preview">
                     <TabStrip selected={selected} onSelect={handleSelect} animation='fadeInRight'>
@@ -1079,6 +1083,7 @@ export const TabStripDoc = () => {
         {/** Configuration */}
         <h2 id="configuration" className="uk-h3 tm-heading-fragment"><a href="#configuration">Configuration</a></h2>
         <p>The following example shows how to map a collection to <code>Tab</code> components.</p>
+            <div>
             <TabStrip>
                 <Tab title="Preview">
                     <TabStrip>
@@ -1099,7 +1104,7 @@ export const TabStripDoc = () => {
                 </Tab>
             </TabStrip>
             <MarkupButtons codeText={configurationSource} />
-
+            </div>
         {/** Keyboard Navigation */}
         <h2 id="keyboard" className="uk-h3 tm-heading-fragment"><a href="#keyboard">Keyboard Navigation</a></h2>
         <p>The <code>TabStrip</code> supports the following keyboard shortcuts:</p>
@@ -1135,7 +1140,7 @@ export const TabStripDoc = () => {
                 </tbody>
             </table>
         </div>
-
+        <div>              
         <TabStrip>
                 <Tab title="Preview">
                     <TabStrip>
@@ -1165,8 +1170,8 @@ export const TabStripDoc = () => {
                     <SyntaxHighlighter language='javascript' style={docco}>{keyboardSource}</SyntaxHighlighter>
                 </Tab>
             </TabStrip>
-            <MarkupButtons codeText={keyboardSource} />
-
+        <MarkupButtons codeText={keyboardSource} />
+        </div>  
          {/** ACCESSIBILITY */}
         <h2 id="accessibility" className="uk-h3 tm-heading-fragment"><a href="#accessibility">Accessibility</a></h2>
         <p>The TabStrip is accessible by screen readers and provides  <strong>WAI-ARIA</strong> support.</p>

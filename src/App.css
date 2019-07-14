@@ -35,27 +35,37 @@
 .menu {
   display: block;
   z-index: 999999;
+  background: #f8f8f8;
 }
 .menu li {
   display: inline-block;
   position: relative;
 }
-.menu li.dropdown:hover > .submenu {
+/* .menu li.dropdown:hover > .submenu {
   display: block;
-}
-.menu li span {
+} */
+.menu li a {
   display: block;
   padding: 12px 8px;
-  background: #ccc;
+  color: #999;
+  text-decoration: none;
+  transition: .1s ease-in-out;
+  transition-property: color,background-color;
 }
 
-
-.menu li span:hover {
+/* .menu li a:hover {
   background: grey;
-}
+} */
 
 .menu .submenu {
-  display: none;
+  position: absolute;
+  z-index: 1020;
+  box-sizing: border-box;
+  width: 200px;
+  padding: 20px;
+  background: #fff;
+  color: #666;
+  box-shadow: 0 5px 12px rgba(0,0,0,0.15);
 }
 .submenu {
   margin: 0px;
@@ -70,12 +80,11 @@
 .submenu li {
   display: block;
 }
-.submenu li span{ 
+.submenu li a {
   display: block;
-  background: #999;
-  color: #fff;
-  padding: 8px 6px;
-  margin-bottom: 1px;
+  color: #999;
+  padding: 5px 0;
+  text-decoration: none;
 }
 .menu .submenu > li.dropdown:hover > .submenu {
   display: block;
@@ -86,6 +95,7 @@
   left: 200px;
   top: 0px;
 }
+
 
 
 

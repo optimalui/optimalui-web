@@ -1,10 +1,11 @@
 /* eslint-disable */
 import React, { Component,cloneElement,crea } from 'react';
+import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { MenuItem } from '.'
 import { menuStyle } from '../../assets/jss'
-import withStyles from 'react-jss'
+import injectSheet from 'react-jss'
 import {noop} from '../../util'
 import {connect} from 'mini-store'
 import uuidv4 from 'uuid'
@@ -16,19 +17,22 @@ class RegularMenu extends Component {
         alignItems:PropTypes.string,
         items: PropTypes.array,
         mode:PropTypes.string,
-        onMouseLeave:PropTypes.func
+        onMouseLeave:PropTypes.func,
+        vertical:PropTypes.bool,
+        onSelect:PropTypes.func,
     }
     
     static defaultProps = {
         alignItems:'left',
         items: [],
         mode:"hover",
-        onMouseLeave:noop
+        onMouseLeave:noop,
+        vertical:false,
+        onSelect:noop
     }
 
     constructor(props){
         super(props)
-        this.onMouseLeave = this.onMouseLeave.bind(this)
         this.state = {
             activeMenuItemId: null,
             menuItems: [],
@@ -37,98 +41,26 @@ class RegularMenu extends Component {
 
         this.subMenu = [];
         this.menu = []
+        this.menuRef = React.createRef()
     }
 
-    componentDidMount() {
-        const { mode } = this.props;
+    onSelect = (item,event) => {
+        const { onSelect} = this.props;
 
-        if (mode === "hover") {
-            document.addEventListener("mousemove", this.toggleMenu)
-        } else if (mode === "click") {
-            document.addEventListener("click", this.toggleMenu)
-        }
-
-    }
-
-
-    componentWillUnmount() {
-        const { mode } = this.props;
-        if (mode === "hover") {
-            document.removeEventListener("mousemove", this.toggleMenu)
-        } else if (mode === "click") {
-            document.removeEventListener("click", this.toggleMenu)
-        }
-    }
-
-
-    // onItemClick = (item,event) => {
-    //     const info = {
-    //         item
-    //     };
-
-    //     if (typeof event === 'function') {
-    //         //click event
-    //         if (event(info) === false) return;
-    //     }
-    // };
-
-    // onItemMouseEnter = (item,event) => {
-    //     const { mode } = this.props;
-    //     const {activeMenuItemId} = this.state
-    //     const info = {
-    //         item
-    //     };
-    //     if (mode === "hover") {
-    //        this.toggleMenuItem(item.props.itemId,activeMenuItemId)
-    //     }
-
-    //     if (typeof event === 'function') {
-    //         //click event
-    //         if (event(info) === false) return;
-    //     }
-    // };
-
-
-    onMouseLeave = (e) => {
-        const { onMouseLeave,mode } = this.props;
         const info = {
-            item: this,
+            item: item.props
         };
-        if (mode==="hover") {
-            this.toggleMenu(e)
+
+        if (typeof onSelect === 'function') {
+            if (onSelect(info) === false) return;
+        } 
+
+        if (typeof event === 'function') {
+            debugger;
+            //click event
+            if (event(info) === false) return; 
         }
-        this.props.onMouseLeave(info)
     };
-
-
-    toggleMenuItem = (itemId, activeMenuItemId) => {
-        this.toggleMenu
-        if (activeMenuItemId !== itemId) {
-            this.setState({ activeMenuItemId: itemId })
-        }
-    }
-
-
-    flattenItems = (items)=> {
-        var toReturn = {};
-        
-        for (var i in items) {
-            if (!items.hasOwnProperty(i)) continue;
-            
-            if ((typeof items[i]) == 'object') {
-                var flatObject = this.flattenItems(items[i]);
-                for (var x in flatObject) {
-                    if (!flatObject.hasOwnProperty(x)) continue;
-                    
-                    toReturn[i + '.' + x] = flatObject[x];
-                }
-            } else {
-                toReturn[i] = items[i];
-            }
-        }
-        return toReturn;
-    };
-    
 
 
 
@@ -141,23 +73,30 @@ class RegularMenu extends Component {
             items,
             classes,
             mode,
+            vertical,
             ...other
         } = this.props;
+        
 
        const {activeMenuItemId,closeMenuItems} = this.state 
+
+       const navClass = cx("uk-navbar-container",customClassName,{
+        [classes.verticalNavStyle]:vertical
+       })
 
 
         const containerClassName = cx({
             [classes.leftSide]: alignItems === 'left',
             [classes.rightSide]: alignItems === 'right',
             [classes.center]: alignItems === 'center',
+
         })
 
 
-        const {onMouseLeave} = this
+        const { onSelect } = this
 
         const events = {
-            // onMouseLeave,
+            // onClick:onSelect
         }
 
         const menuId = `menu-id-${uuidv4()}`
@@ -168,6 +107,7 @@ class RegularMenu extends Component {
                 if (item.hasOwnProperty('items')) {
                     return <MenuItem 
                                 {...item}
+                                vertical={vertical}
                                 parent={item.hasOwnProperty('items')} 
                                 key={uuidv4()} 
                                 mode={mode} 
@@ -175,19 +115,22 @@ class RegularMenu extends Component {
                                 itemId={`menu-item-${uuidv4()}`}
                                  >
                         {
-                            item.hasOwnProperty('items') && <SubMenu menuItems={item['items']} mode={mode} />
+                            item.hasOwnProperty('items') && <SubMenu menuItems={item['items']} mode={mode} vertical={vertical}/>
                         }
                     </MenuItem>
                 } else {
-                    return <MenuItem key={uuidv4()} {...item}/>
+                    return <MenuItem key={uuidv4()} {...item} vertical={vertical}/>
                 }
             })
         }
 
-
+        const navBarClass = cx({
+            "uk-navbar-nav":!vertical,
+            "uk-nav uk-nav-default":vertical,
+        }) 
         
         return (
-            <nav className={cx("uk-navbar-container",customClassName)} uk-navbar={`mode:${mode}`} {...other}  {...events}>
+            <nav className={navClass} uk-navbar={`mode:${mode};vertical:${vertical};`} {...other}  {...events} ref={this.menuRef}>
                 <div className="uk-navbar-left">
                     <ul className="uk-navbar-nav">
                         {
@@ -196,6 +139,8 @@ class RegularMenu extends Component {
                                     if (child.type === MenuItem) {
                                         return cloneElement(child, {
                                             key: `menu-item-${index}`,
+                                            vertical: vertical,
+                                            onClick:this.onSelect.bind(this,child,child.props.onClick) , 
                                             mode,
                                             menuId
                                         })
@@ -206,13 +151,12 @@ class RegularMenu extends Component {
                     </ul>
                 </div>
             </nav>
-
         )
     }
 }
 
 const connectedMenu = connect()(RegularMenu)
 
-const styledMenu = withStyles(menuStyle)(connectedMenu)
+const styledMenu = injectSheet(menuStyle)(connectedMenu)
 
 export { styledMenu as Menu }
