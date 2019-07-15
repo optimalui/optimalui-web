@@ -10,7 +10,7 @@ import { Icon } from '../Icon'
 import uuidv4 from 'uuid'
 import { connect } from 'mini-store';
 import {css,StyleSheet} from 'aphrodite/no-important'
-import { Link } from "react-router-dom";
+import { Route, Link, withRouter } from 'react-router-dom'
 
 let parentDropDownStyle = {
     parentStyle:{
@@ -44,7 +44,7 @@ class RegularMenuItem extends Component {
         icon:PropTypes.string,
         iconClassName:PropTypes.string,
         vertical:PropTypes.bool,
-        data:PropTypes.object
+        route:PropTypes.string
     };
 
     static defaultProps = {
@@ -60,7 +60,7 @@ class RegularMenuItem extends Component {
         icon:'',
         iconClassName:'',
         vertical:false,
-        data:{}
+        route:''
     };
 
     constructor(props) {
@@ -71,20 +71,25 @@ class RegularMenuItem extends Component {
         }
         this.handleClick = this.handleClick.bind(this)
         this.handleLinkClick = this.handleLinkClick.bind(this)
+        this.handleMouseEnter = this.handleMouseEnter.bind(this)
+        this.handleMouseLeave = this.handleMouseLeave.bind(this)
     }
 
 
     handleClick = (e) => {
         const { onClick, mode } = this.props;
-        const { isOpen,active} = this.state
+
+        const { isOpen } = this.state
 
         const info = {
             item: this,
             domEvent: e,
         };
+
         if (mode === "click") {
-            this.toggleMenu(e)
+            this.setState({ isOpen: !isOpen })
         }
+
         if (typeof onClick === 'function') {
             if (onClick(info) === false) return;
         }
@@ -98,11 +103,43 @@ class RegularMenuItem extends Component {
         }
     }
 
+    handleMouseEnter = (e) => {
+        const {mode,onMouseEnter} = this.props;
+
+        if (mode === "hover") {
+            this.setState({ isOpen: true}) 
+        }
+
+        const info = {
+            item: this,
+            domEvent: e,
+        };
+
+        if (typeof onMouseEnter === 'function') {
+            if (onMouseEnter(info) === false) return;
+        }
+    };
+
+    handleMouseLeave = (e) => {
+        const { mode,onMouseLeave } = this.props;
+
+        if (mode==="hover") {
+            this.setState({ isOpen: false}) 
+        }
+
+        const info = {
+            item: this,
+            domEvent: e,
+        };
+
+        if (typeof onMouseLeave === 'function') {
+            if (onMouseLeave(info) === false) return;
+        }
+    };
 
 
     render() {
         
-
         const {
             parent,
             active,
@@ -122,11 +159,12 @@ class RegularMenuItem extends Component {
             icon,
             iconClassName:customIconClassName,
             vertical, 
-            data,
+            route,
+            staticContext,
             ...other
         } = this.props;
 
-        const {topMargin,isOpen} = this.state
+        const { isOpen } = this.state
 
         const customClass = cx(customClassName, {
             [classes.disabledItem]: disabled,
@@ -142,12 +180,7 @@ class RegularMenuItem extends Component {
             onMouseLeave: disabled ? null :  this.handleMouseLeave,
         }
 
-        const textClassName = cx(textCustomClassName, classes.menuItemText)
-
         const iconClass = cx(classes.iconClass,customIconClassName)
-
-
-        const parentCls = StyleSheet.create(parentDropDownStyle)
 
         const parentClassName = cx(customDropdownClassName, { 
             "uk-navbar-dropdown": parent,
@@ -157,21 +190,34 @@ class RegularMenuItem extends Component {
 
         return (
             <li
-                // {...mouseEvents}
+                {...mouseEvents}
                 className={customClass}
                 ref={(item) => { this.menuItemRef = item; }}
                 {...other}
+                role = "menuitem"
+                aria-label = {text}
+                aria-disabled = {disabled}
+                aria-haspopup = {parent}
+                aria-expanded = {isOpen}
                 >
-                
-                <a href={`//${url}`} target={urlTarget} className={cx(classes.menuItemText)} onClick={this.handleLinkClick}>
-                    {icon && <Icon name={icon} className={iconClass} />}
-                    {text}
-                    {parent && <Icon name="triangle-right" className={classes.iconStyle} />}
-                </a>
+
+                {
+                        route ? 
+                        <Link replace={route === this.props.history.location.pathname} to={route} className={cx(classes.menuItemText)}>
+                            {icon && <Icon name={icon} className={iconClass} />}
+                            {text}
+                            {parent && <Icon name="triangle-right" className={classes.iconStyle} />}
+                        </Link> :
+                        <a href={`//${url}`} target={urlTarget} className={cx(classes.menuItemText)} onClick={this.handleLinkClick}>
+                            {icon && <Icon name={icon} className={iconClass} />}
+                            {text}
+                            {parent && <Icon name="triangle-right" className={classes.iconStyle} />}
+                        </a>
+
+                }
 
                     
                 {(parent && !disabled) &&
-
                     <div className={parentClassName} ref={(item) => { this.subMenuRef = item; }} uk-drop={vertical ? `boundary:!li; boundary-align: true; mode:${mode};pos: right-justify;`:`mode:${mode}`}>
                         <ul className={cx("uk-nav uk-navbar-dropdown-nav", classes.subMenu)}>
                             {
@@ -191,4 +237,6 @@ const connectedMenuItem = connect()(RegularMenuItem)
 
 const styledMenuItem = injectSheet(menuStyle)(connectedMenuItem)
 
-export { styledMenuItem as MenuItem }
+const routeMenuItem = withRouter(styledMenuItem)
+
+export { routeMenuItem as MenuItem }

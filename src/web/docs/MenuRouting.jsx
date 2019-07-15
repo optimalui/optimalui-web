@@ -5,7 +5,6 @@ import { Menu, MenuItem } from '../../components/layout';
 
 class MenuRouting extends React.Component {
     render() {
-        console.log(this.props.children)
         return (
             <div>
                 <Menu onSelect={this.onSelect}>

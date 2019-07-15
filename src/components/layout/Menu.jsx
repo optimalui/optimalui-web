@@ -46,7 +46,7 @@ class RegularMenu extends Component {
 
     onSelect = (item,event) => {
         const { onSelect} = this.props;
-
+        console.log(item)
         const info = {
             item: item.props
         };
@@ -86,10 +86,9 @@ class RegularMenu extends Component {
 
 
         const containerClassName = cx({
-            [classes.leftSide]: alignItems === 'left',
-            [classes.rightSide]: alignItems === 'right',
-            [classes.center]: alignItems === 'center',
-
+            "uk-navbar-left": alignItems === 'left',
+            "uk-navbar-right": alignItems === 'right',
+            "uk-navbar-center": alignItems === 'center',
         })
 
 
@@ -131,16 +130,16 @@ class RegularMenu extends Component {
         
         return (
             <nav className={navClass} uk-navbar={`mode:${mode};vertical:${vertical};`} {...other}  {...events} ref={this.menuRef}>
-                <div className="uk-navbar-left">
-                    <ul className="uk-navbar-nav">
+                <div className={containerClassName}>
+                    <ul className="uk-navbar-nav" role="menu" aria-orientation={vertical ? 'vertical' : ''}>
                         {
                             items.length ? <SubMenu menuItems={items} mode={mode} /> :
                                 React.Children.map(children, (child, index) => {
                                     if (child.type === MenuItem) {
                                         return cloneElement(child, {
                                             key: `menu-item-${index}`,
-                                            vertical: vertical,
-                                            onClick:this.onSelect.bind(this,child,child.props.onClick) , 
+                                            vertical: vertical, 
+                                            // onClick:this.onSelect.bind(this,child,child.props.onClick) , 
                                             mode,
                                             menuId
                                         })
