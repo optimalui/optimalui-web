@@ -4,19 +4,10 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import injectSheet from 'react-jss'
 import { menuStyle } from '../../assets/jss'
-import { noop } from '../../util'
-import ReactDOM from 'react-dom'
 import { Icon } from '../Icon'
-import uuidv4 from 'uuid'
 import { connect } from 'mini-store';
-import {css,StyleSheet} from 'aphrodite/no-important'
-import { Route, Link, withRouter } from 'react-router-dom'
+import {  Link, withRouter } from 'react-router-dom'
 
-let parentDropDownStyle = {
-    parentStyle:{
-        top:'calc(100%-40)px!important'
-    }
-}
 
 class RegularMenuItem extends Component {
 

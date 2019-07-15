@@ -725,6 +725,7 @@ export const MenuDoc = () => (
             </TabStrip>
             <MarkupButtons codeText={alignmentSource} />
         </div>
+        
         {/** URL */}
         <h2 id="url" className="uk-h3 tm-heading-fragment"><a href="#url">Url</a></h2>
         <p>
@@ -891,7 +892,7 @@ export const MenuDoc = () => (
 
         
         {/** ACCESSIBILITY */}
-        <h2 id="route" className="uk-h3 tm-heading-fragment"><a href="#route">Accessibility</a></h2>
+        <h2 id="accessibility" className="uk-h3 tm-heading-fragment"><a href="#accessibility">Accessibility</a></h2>
         <p>The <code>Menu</code> component is accessible by screen readers and provides full <strong>WAI-ARIA</strong> support.</p>
         <p>The <code>MenuItem</code> component has the following props:</p>
         <div className="uk-overflow-auto">
@@ -923,6 +924,26 @@ export const MenuDoc = () => (
             </table>
         </div>
         <p>The <code>Menu</code> component uses the <code>menuitem</code>, and <code>menu</code> roles.</p>
+
+        <div className="tm-sidebar-right uk-visible@l">
+            <div uk-sticky="offset: 160" className="uk-sticky uk-active uk-sticky-fixed">
+                <ul uk-scrollspy-nav="closest: li; scroll: true; offset: 100" className="uk-nav uk-nav-default tm-nav uk-nav-parent-icon">
+                    <li className="uk-active"><a href="#usage">Usage</a></li>
+                    <li className=""><a href="#databindings">Data Binding</a></li>
+                    <li className=""><a href="#mode">Click Mode</a></li>
+                    <li className=""><a href="#items">Items</a></li>
+                    <li className=""><a href="#alignment">Alignment</a></li>
+                    <li className=""><a href="#url">Url</a></li>
+                    <li className=""><a href="#icon">Icon</a></li>
+                    <li className=""><a href="#disabled">Disabled</a></li>
+                    <li className=""><a href="#vertical">Vertical</a></li>
+                    <li className=""><a href="#route">Routing</a></li>
+                    <li className=""><a href="#menuitem">MenuItem Props</a></li>
+                    <li className=""><a href="#accessibility">Accesibility</a></li>
+                </ul>
+            </div>
+            <div className="uk-sticky-placeholder" style={{ height: '249px', margin: '0px' }}></div>
+        </div>
 
 
 
