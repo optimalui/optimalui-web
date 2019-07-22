@@ -1,13 +1,15 @@
 /* eslint-disable */
-import React from 'react';
+import React, { useState } from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
-import { Menu, TabStrip, Tab, TabItem, MenuItem } from '../../components/layout';
+import { Menu, TabStrip, Tab, SubMenu,MenuItem } from '../../components/layout';
 import MarkupButtons from './MarkupButtons';
 import menuItems from './menuItems.json'
 import { Link, Route, Switch, BrowserRouter as Router, HashRouter } from "react-router-dom";
 import MenuRouting from './MenuRouting'
 import _ from 'lodash'
+import EventLog from './EventLog';
+
 
 const menuUsage = `
 import React from 'react';
@@ -560,6 +562,57 @@ const routeMenu = `
     )
     `;
 
+const menuEventsSource = `
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Menu,MenuItem } from '@optimalui/components/layout'
+
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { 
+            logs:[]
+        }
+        this.handleSelect = this.handleSelect.bind(this)
+    }
+    handleSelect(e) {
+        const logs = this.state.logs.slice();
+        logs.unshift(\`id:\${e.item.itemId}  text: \${e.item.text}\`);
+        this.setState({ logs }); 
+    }
+    render() { 
+        return (
+            <React.Fragment>
+
+                <Menu mode="click" onSelect={this.handleSelect} > 
+                    <MenuItem text="Home" itemId="home-item" />
+                    <MenuItem text="Products" itemId="products-item" />
+                    <MenuItem text="About" parent itemId="about-item" >
+                        <MenuItem text="Team" itemId="about-team-item"/>
+                    </MenuItem>
+                </Menu>
+
+                <div className="uk-card uk-card-default uk-card-body">
+                    <h3 className="uk-card-title">Event Logs</h3>
+                    <ul className="uk-list uk-list-divider" style={{ maxHeight: '200px', overflowY: 'scroll' }}>
+                        {this.state.logs.map((log, index) =>
+                            <li key={\`event-\${index}\`}>{log}</li>
+                        )}
+                    </ul>
+               </div>
+
+            </React.Fragment>
+
+        ); 
+    }
+}
+
+ReactDOM.render(
+    <App />,
+    document.querySelector('my-app')
+)
+`;
+
 const Home = () => (
     <React.Fragment>
         <p className="uk-text-lead">Home</p>
@@ -609,16 +662,10 @@ const MenuRoute = () => (
     </Switch>
 )
 
-export const MenuDoc = () => (
-    <div className="uk-container uk-container-small uk-position-relative">
-        <h1>Menu</h1>
-        <p className="uk-text-lead">The React OptimalUI  Menu is a multi-level component for displaying hierarchical data.</p>
-
-        {/** USAGE */}
+const MenuUsage = () => (
+    <React.Fragment>
         <h2 id="usage" className="uk-h3 tm-heading-fragment"><a href="#usage">Usage</a></h2>
-        <p>
-            Import <code>@optimalui/components/layout</code> module to use <code>Menu</code> component.
-        </p>
+        <p>Import <code>@optimalui/components/layout</code> module to use <code>Menu</code> component.</p>
         <p>You can describe the <code>Menu</code> items with <code>items</code> prop or <code>MenuItem</code> component.</p>
         <div className="uk-position-relative uk-margin-medium">
             <TabStrip>
@@ -645,13 +692,16 @@ export const MenuDoc = () => (
                 </Tab>
             </TabStrip>
         </div>
+    </React.Fragment>
+)
 
-        {/** DATA BINDING */}
+const MenuDataBinding = ()=>(
+    <React.Fragment>
         <h2 id="databinding" className="uk-h3 tm-heading-fragment"><a href="#databinding">Data Binding</a></h2>
         <p>
             The desired number of menu items can be created with local or remote data.
-            To do this, the <code>Menu</code> component's <code>items</code> prop should be set to the local or remote data as an array object.
-        </p>
+                To do this, the <code>Menu</code> component's <code>items</code> prop should be set to the local or remote data as an array object.
+                </p>
         <div className="uk-position-relative uk-margin-medium">
             <TabStrip>
                 <Tab title="Preview">
@@ -659,34 +709,43 @@ export const MenuDoc = () => (
                 </Tab>
                 <Tab title="Markup">
                     <SyntaxHighlighter language='javascript' style={docco}>{dataBindingSource}</SyntaxHighlighter>
+                    <MarkupButtons codeText={dataBindingSource} />
                 </Tab>
             </TabStrip>
-            <MarkupButtons codeText={dataBindingSource} />
+            
         </div>
+    </React.Fragment>
+)
 
-        {/** Click Mode */}
+const MenuClickMode = ()=>(
+    <React.Fragment>
         <h2 id="mode" className="uk-h3 tm-heading-fragment"><a href="#mode">Click Mode</a></h2>
         <p>
             The <code>Menu</code> component's menu items can be shown by hovering and clicking the toggle.
-        Add the <code>mode="click"</code> prop to enable click mode.
+                    Add the <code>mode="click"</code> prop to enable click mode.
         </p>
-        <div>
+        <div className="uk-position-relative uk-margin-medium">
             <TabStrip>
                 <Tab title="Preview">
                     <Menu items={items} mode="click" />
                 </Tab>
                 <Tab title="Markup">
                     <SyntaxHighlighter language='javascript' style={docco}>{clickModeSource}</SyntaxHighlighter>
+                    <MarkupButtons codeText={clickModeSource} />
                 </Tab>
             </TabStrip>
-            <MarkupButtons codeText={clickModeSource} />
+            
         </div>
-        {/** Items */}
+    </React.Fragment>
+)
+
+const MenuItems = () => (
+    <React.Fragment>
         <h2 id="items" className="uk-h3 tm-heading-fragment"><a href="#items">Items</a></h2>
         <p>You can set also <code>MenuItem</code> components inside <code>Menu</code> component to create custom nested menu items.</p>
         <p>Set <code>text</code> prop to create menu item text.
-        You can create nested menu items inside <code>MenuItem</code> component by setting <code>parent</code> prop as <code>true</code>.
-        </p>
+            You can create nested menu items inside <code>MenuItem</code> component by setting <code>parent</code> prop as <code>true</code>.
+            </p>
         <div className="uk-position-relative uk-margin-medium">
             <TabStrip>
                 <Tab title="Preview">
@@ -700,38 +759,47 @@ export const MenuDoc = () => (
                 </Tab>
                 <Tab title="Markup">
                     <SyntaxHighlighter language='javascript' style={docco}>{menuItemsUsage}</SyntaxHighlighter>
+                    <MarkupButtons codeText={menuItemsUsage} />
                 </Tab>
             </TabStrip>
-            <MarkupButtons codeText={menuItemsUsage} />
+            
         </div>
-        
-        {/** Alignment */}
+    </React.Fragment>
+
+)
+
+const MenuAlignment = () => (
+    <React.Fragment>
         <h2 id="alignment" className="uk-h3 tm-heading-fragment"><a href="#alignment">Alignment</a></h2>
         <p>You can align the <code>MenuItem</code> components by giving the value of the <code>alignItems</code> prop, which is the property of the <code>Menu</code> component, left, right, or center.</p>
         <p>The default value of the <code>alignItems</code> prop is <code>left</code>.</p>
         <div className="uk-position-relative uk-margin-medium">
             <TabStrip>
                 <Tab title="Preview">
-                        <p className="uk-text-lead">Left Alignment</p> 
-                        <Menu items={items} mode="click" alignItems="left" />
-                        <p className="uk-text-lead">Right Alignment</p> 
-                        <Menu items={items} mode="click" alignItems="right" />
-                        <p className="uk-text-lead">Center Alignment</p> 
-                        <Menu items={items} mode="click" alignItems="center" />
+                    <p className="uk-text-lead">Left Alignment</p>
+                    <Menu items={items} mode="click" alignItems="left" />
+                    <p className="uk-text-lead">Right Alignment</p>
+                    <Menu items={items} mode="click" alignItems="right" />
+                    <p className="uk-text-lead">Center Alignment</p>
+                    <Menu items={items} mode="click" alignItems="center" />
                 </Tab>
                 <Tab title="Markup">
                     <SyntaxHighlighter language='javascript' style={docco}>{alignmentSource}</SyntaxHighlighter>
+                    <MarkupButtons codeText={alignmentSource} />
                 </Tab>
             </TabStrip>
-            <MarkupButtons codeText={alignmentSource} />
+            
         </div>
-        
-        {/** URL */}
+    </React.Fragment>
+)
+
+const MenuUrl = () => (
+    <React.Fragment>
         <h2 id="url" className="uk-h3 tm-heading-fragment"><a href="#url">Url</a></h2>
         <p>
             You can set the url of the items by using the <code>url</code> prop.
             The url will be rendered as a href attribute on the item link.
-        </p>
+            </p>
         <div className="uk-position-relative uk-margin-medium">
             <TabStrip>
                 <Tab title="Preview">
@@ -745,16 +813,20 @@ export const MenuDoc = () => (
                 </Tab>
                 <Tab title="Markup">
                     <SyntaxHighlighter language='javascript' style={docco}>{itemUrl}</SyntaxHighlighter>
+                    <MarkupButtons codeText={itemUrl} />
                 </Tab>
             </TabStrip>
-            <MarkupButtons codeText={itemUrl} />
+            
         </div>
+    </React.Fragment>
+)
 
-        {/** ICON */}
+const MenuIcon = () => (
+    <React.Fragment>
         <h2 id="icon" className="uk-h3 tm-heading-fragment"><a href="#icon">Icon</a></h2>
         <p>
             You can specify the name of a <Link to="/docs/icon">Icon</Link> that will be rendered for the item by using the icon property.
-        </p>
+            </p>
         <div className="uk-position-relative uk-margin-medium">
             <TabStrip>
                 <Tab title="Preview">
@@ -762,16 +834,20 @@ export const MenuDoc = () => (
                 </Tab>
                 <Tab title="Markup">
                     <SyntaxHighlighter language='javascript' style={docco}>{iconsUsage}</SyntaxHighlighter>
+                    <MarkupButtons codeText={iconsUsage} />
                 </Tab>
             </TabStrip>
-            <MarkupButtons codeText={iconsUsage} />
+            
         </div>
+    </React.Fragment>
+)
 
-        {/** DISABLED */}
+const MenuDisabled = () => (
+    <React.Fragment>
         <h2 id="disabled" className="uk-h3 tm-heading-fragment"><a href="#disabled">Disabled Item</a></h2>
         <p>
             You can specify that a <code>MenuItem</code> is disabled by using the <code>disabled</code> prop.
-        </p>
+            </p>
         <div className="uk-position-relative uk-margin-medium">
             <TabStrip>
                 <Tab title="Preview">
@@ -779,12 +855,16 @@ export const MenuDoc = () => (
                 </Tab>
                 <Tab title="Markup">
                     <SyntaxHighlighter language='javascript' style={docco}>{disabledUsage}</SyntaxHighlighter>
+                    <MarkupButtons codeText={disabledUsage} />
                 </Tab>
             </TabStrip>
-            <MarkupButtons codeText={disabledUsage} />
+            
         </div>
+    </React.Fragment>
+)
 
-        {/** VERTICAL */}
+const MenuVertical = () => (
+    <React.Fragment>
         <h2 id="vertical" className="uk-h3 tm-heading-fragment"><a href="#vertical">Vertical</a></h2>
         <p>Set the <code>vertical</code> prop as <code>true</code> to create a vertical <code>Menu</code> component.</p>
         <div className="uk-position-relative uk-margin-medium">
@@ -794,12 +874,16 @@ export const MenuDoc = () => (
                 </Tab>
                 <Tab title="Markup">
                     <SyntaxHighlighter language='javascript' style={docco}>{verticalMenu}</SyntaxHighlighter>
+                    <MarkupButtons codeText={verticalMenu} />
                 </Tab>
             </TabStrip>
-            <MarkupButtons codeText={verticalMenu} />
+            
         </div>
+    </React.Fragment>
+)
 
-        {/** ROUTER */}
+const MenuRouter = () => (
+    <React.Fragment>
         <h2 id="route" className="uk-h3 tm-heading-fragment"><a href="#route">Routing</a></h2>
         <p>You can use the <code>Menu</code> as a navigational component by adding <code>route</code> prop with the react router.</p>
         <div className="uk-position-relative uk-margin-medium">
@@ -818,12 +902,16 @@ export const MenuDoc = () => (
                 </Tab>
                 <Tab title="Markup">
                     <SyntaxHighlighter language='javascript' style={docco}>{routeMenu}</SyntaxHighlighter>
+                    <MarkupButtons codeText={routeMenu} />
                 </Tab>
             </TabStrip>
-            <MarkupButtons codeText={routeMenu} />
+            
         </div>
+    </React.Fragment>
+)
 
-        {/** MENUITEM */}
+const MenuItemDoc = ()=>(
+    <React.Fragment>
         <h2 id="menuitem" className="uk-h3 tm-heading-fragment"><a href="#menuitem">MenuItem Props</a></h2>
         <p>The <code>MenuItem</code> component has the following props:</p>
         <div className="uk-overflow-auto">
@@ -890,63 +978,167 @@ export const MenuDoc = () => (
             </table>
         </div>
 
-        
-        {/** ACCESSIBILITY */}
-        <h2 id="accessibility" className="uk-h3 tm-heading-fragment"><a href="#accessibility">Accessibility</a></h2>
-        <p>The <code>Menu</code> component is accessible by screen readers and provides full <strong>WAI-ARIA</strong> support.</p>
-        <p>The <code>MenuItem</code> component has the following props:</p>
-        <div className="uk-overflow-auto">
-            <table className="uk-table uk-table-divider">
-                <thead>
-                    <tr>
-                        <th align="left">Aria</th>
-                        <th align="left">Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td align="left"><code>aria-orientation</code></td>
-                        <td align="left">Shows the <code>Menu</code> is vertical or not</td>
-                    </tr>
-                    <tr>
-                        <td align="left"><code>aria-label</code></td>
-                        <td align="left">For the <code>MenuItem</code> text</td>
-                    </tr>
-                    <tr>
-                        <td align="left"><code>aria-disabled</code></td>
-                        <td align="left">For the disabled <code>MenuItem</code> text</td>
-                    </tr>
-                    <tr>
-                        <td align="left"><code>aria-haspopup,aria-expanded</code></td>
-                        <td align="left">For items with children</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <p>The <code>Menu</code> component uses the <code>menuitem</code>, and <code>menu</code> roles.</p>
-
-        <div className="tm-sidebar-right uk-visible@l">
-            <div uk-sticky="offset: 160" className="uk-sticky uk-active uk-sticky-fixed">
-                <ul uk-scrollspy-nav="closest: li; scroll: true; offset: 100" className="uk-nav uk-nav-default tm-nav uk-nav-parent-icon">
-                    <li className="uk-active"><a href="#usage">Usage</a></li>
-                    <li className=""><a href="#databindings">Data Binding</a></li>
-                    <li className=""><a href="#mode">Click Mode</a></li>
-                    <li className=""><a href="#items">Items</a></li>
-                    <li className=""><a href="#alignment">Alignment</a></li>
-                    <li className=""><a href="#url">Url</a></li>
-                    <li className=""><a href="#icon">Icon</a></li>
-                    <li className=""><a href="#disabled">Disabled</a></li>
-                    <li className=""><a href="#vertical">Vertical</a></li>
-                    <li className=""><a href="#route">Routing</a></li>
-                    <li className=""><a href="#menuitem">MenuItem Props</a></li>
-                    <li className=""><a href="#accessibility">Accesibility</a></li>
-                </ul>
-            </div>
-            <div className="uk-sticky-placeholder" style={{ height: '249px', margin: '0px' }}></div>
-        </div>
-
-
-
-    </div>
-
+    </React.Fragment>
 )
+
+
+class MenuEvents extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { 
+            logs:[]
+        }
+        this.handleSelect = this.handleSelect.bind(this)
+    }
+    handleSelect(e) {
+        const logs = this.state.logs.slice();
+        logs.unshift(`id:${e.item.itemId}  text: ${e.item.text}`);
+        this.setState({ logs }); 
+    }
+
+
+    
+    render() { 
+
+        return (
+            <React.Fragment>
+                <Menu mode="click" onSelect={this.handleSelect} > 
+                    <MenuItem text="Home" itemId="home-item"/>
+                    <MenuItem text="Products" itemId="products-item" />
+                    <MenuItem text="About" parent itemId="about-item" >
+                        <MenuItem text="Team" itemId="about-team-item"/>
+                    </MenuItem>
+                </Menu>
+                <br/>
+                <EventLog logs = {this.state.logs} title="Event Logs"/>
+            </React.Fragment>
+
+        ); 
+    }
+}
+ 
+export default MenuEvents;
+
+
+class MenuDoc extends React.Component {
+    render() {
+        return (
+            <div className="uk-container uk-container-small uk-position-relative">
+                <h1>Menu</h1>
+                <p className="uk-text-lead">The React OptimalUI  Menu is a multi-level component for displaying hierarchical data.</p>
+                {/** USAGE */}
+                <MenuUsage/>
+
+                {/** DATA BINDING */}
+                <MenuDataBinding/>
+
+                {/**CLICK MODE */}
+                <MenuClickMode/>
+
+                {/** ITEMS */}
+                <MenuItems/>
+
+                {/** ALIGNMENT */}
+                <MenuAlignment/>
+
+                {/** URL */}
+                <MenuUrl/>
+
+                {/** ICON */}
+                <MenuIcon/>
+
+                {/** DISABLED */}
+                <MenuDisabled/>
+
+                {/** VERTICAL */}
+                <MenuVertical/>
+
+                {/** ROUTER */}
+                <MenuRouter/>
+
+                {/** MENUITEM */}
+                <MenuItemDoc/>
+
+                {/** EVENTS */}
+                <h2 id="events" className="uk-h3 tm-heading-fragment"><a href="#events">Events</a></h2>
+                <p>Set the <code>vertical</code> prop as <code>true</code> to create a vertical <code>Menu</code> component.</p>
+                <div className="uk-position-relative uk-margin-medium" >
+                    <TabStrip>
+                        <Tab title="Preview">
+                            <MenuEvents/> 
+                        </Tab>
+                        <Tab title="Markup">
+                            <SyntaxHighlighter language='javascript' style={docco}>{menuEventsSource}</SyntaxHighlighter>
+                            <MarkupButtons codeText={menuEventsSource} />
+                        </Tab>
+                    </TabStrip>
+
+
+                </div>
+
+
+                {/** ACCESSIBILITY */}
+                <h2 id="accessibility" className="uk-h3 tm-heading-fragment"><a href="#accessibility">Accessibility</a></h2>
+                <p>The <code>Menu</code> component is accessible by screen readers and provides full <strong>WAI-ARIA</strong> support.</p>
+                <p>The <code>MenuItem</code> component has the following props:</p>
+                <div className="uk-overflow-auto">
+                    <table className="uk-table uk-table-divider">
+                        <thead>
+                            <tr>
+                                <th align="left">Aria</th>
+                                <th align="left">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td align="left"><code>aria-orientation</code></td>
+                                <td align="left">Shows the <code>Menu</code> is vertical or not</td>
+                            </tr>
+                            <tr>
+                                <td align="left"><code>aria-label</code></td>
+                                <td align="left">For the <code>MenuItem</code> text</td>
+                            </tr>
+                            <tr>
+                                <td align="left"><code>aria-disabled</code></td>
+                                <td align="left">For the disabled <code>MenuItem</code> text</td>
+                            </tr>
+                            <tr>
+                                <td align="left"><code>aria-haspopup,aria-expanded</code></td>
+                                <td align="left">For items with children</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p>The <code>Menu</code> component uses the <code>menuitem</code>, and <code>menu</code> roles.</p>
+
+                <div className="tm-sidebar-right uk-visible@l">
+                    <div uk-sticky="offset: 160" className="uk-sticky uk-active uk-sticky-fixed">
+                        <ul uk-scrollspy-nav="closest: li; scroll: true; offset: 100" className="uk-nav uk-nav-default tm-nav uk-nav-parent-icon">
+                            <li className="uk-active"><a href="#usage">Usage</a></li>
+                            <li className=""><a href="#databindings">Data Binding</a></li>
+                            <li className=""><a href="#mode">Click Mode</a></li>
+                            <li className=""><a href="#items">Items</a></li>
+                            <li className=""><a href="#alignment">Alignment</a></li>
+                            <li className=""><a href="#url">Url</a></li>
+                            <li className=""><a href="#icon">Icon</a></li>
+                            <li className=""><a href="#disabled">Disabled</a></li>
+                            <li className=""><a href="#vertical">Vertical</a></li>
+                            <li className=""><a href="#route">Routing</a></li>
+                            <li className=""><a href="#menuitem">MenuItem Props</a></li>
+                            <li className=""><a href="#accessibility">Accesibility</a></li>
+                        </ul>
+                    </div>
+                    <div className="uk-sticky-placeholder" style={{ height: '249px', margin: '0px' }}></div>
+                </div>
+
+
+
+            </div>
+
+        )
+    }
+
+}
+
+const layoutMenuDoc = MenuDoc
+export { layoutMenuDoc as MenuDoc }

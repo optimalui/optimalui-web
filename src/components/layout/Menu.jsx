@@ -1,42 +1,44 @@
 /* eslint-disable */
-import React, { Component,cloneElement,crea } from 'react';
-import ReactDOM from 'react-dom'
+import React, { Component, cloneElement, createElement } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { MenuItem } from '.'
+import { MenuItem, SubMenu as ContainerMenu } from './'
 import { menuStyle } from '../../assets/jss'
 import injectSheet from 'react-jss'
-import {noop} from '../../util'
-import {connect} from 'mini-store'
+import { noop } from '../../util'
+import { connect } from 'mini-store'
 import uuidv4 from 'uuid'
 import _ from 'lodash'
 
 
 class RegularMenu extends Component {
     static propTypes = {
-        alignItems:PropTypes.string,
+        alignItems: PropTypes.string,
         items: PropTypes.array,
-        mode:PropTypes.string,
-        onMouseLeave:PropTypes.func,
-        vertical:PropTypes.bool,
-        onSelect:PropTypes.func,
-    }
-    
-    static defaultProps = {
-        alignItems:'left',
-        items: [],
-        mode:"hover",
-        onMouseLeave:noop,
-        vertical:false,
-        onSelect:noop
+        mode: PropTypes.string,
+        onMouseLeave: PropTypes.func,
+        vertical: PropTypes.bool,
+        onSelect: PropTypes.func,
+        menuId: PropTypes.string
     }
 
-    constructor(props){
+    static defaultProps = {
+        alignItems: 'left',
+        items: [],
+        mode: "hover",
+        onMouseLeave: noop,
+        vertical: false,
+        onSelect: noop,
+        menuId: `menu-${uuidv4()}`
+    }
+
+    constructor(props) {
         super(props)
         this.state = {
             activeMenuItemId: null,
             menuItems: [],
-            closeMenuItems:false,
+            closeMenuItems: false,
+            updateComponent: true
         }
 
         this.subMenu = [];
@@ -44,24 +46,30 @@ class RegularMenu extends Component {
         this.menuRef = React.createRef()
     }
 
+
     onSelect = (item,event) => {
-        const { onSelect} = this.props;
-        console.log(item)
+        event.stopPropagation()
+        const { onSelect } = this.props;
         const info = {
-            item: item.props
-        };
+            event,
+            item: {
+                itemId: item.props ? 
+                (item.props.itemId ? item.props.itemId : 'undefined-item-id') : 
+                (item.itemId ? item.itemId : 'undefined-item-id'),
+                text: item.props ? item.props.text : item.text
+            }
+        }
 
         if (typeof onSelect === 'function') {
             if (onSelect(info) === false) return;
-        } 
-
-        if (typeof event === 'function') {
-            debugger;
-            //click event
-            if (event(info) === false) return; 
         }
-    };
 
+        this.setState({ updateComponent: false });
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextState.updateComponent 
+    }
 
 
     render() {
@@ -74,15 +82,14 @@ class RegularMenu extends Component {
             classes,
             mode,
             vertical,
+            selectedMenuItem,
+            menuId,
             ...other
         } = this.props;
-        
 
-       const {activeMenuItemId,closeMenuItems} = this.state 
-
-       const navClass = cx("uk-navbar-container",customClassName,{
-        [classes.verticalNavStyle]:vertical
-       })
+        const navClass = cx("uk-navbar-container", customClassName, {
+            [classes.verticalNavStyle]: vertical
+        })
 
 
         const containerClassName = cx({
@@ -91,61 +98,58 @@ class RegularMenu extends Component {
             "uk-navbar-center": alignItems === 'center',
         })
 
-
-        const { onSelect } = this
-
-        const events = {
-            // onClick:onSelect
-        }
-
-        const menuId = `menu-id-${uuidv4()}`
-
-
-        const SubMenu = ({ menuItems, mode}) => {
-            return _.map(menuItems, (item) => {
-                if (item.hasOwnProperty('items')) {
-                    return <MenuItem 
-                                {...item}
-                                vertical={vertical}
-                                parent={item.hasOwnProperty('items')} 
-                                key={uuidv4()} 
-                                mode={mode} 
-                                menuId={menuId}
-                                itemId={`menu-item-${uuidv4()}`}
-                                 >
-                        {
-                            item.hasOwnProperty('items') && <SubMenu menuItems={item['items']} mode={mode} vertical={vertical}/>
-                        }
-                    </MenuItem>
-                } else {
-                    return <MenuItem key={uuidv4()} {...item} vertical={vertical}/>
-                }
+        const SubMenu = ({ menuItems, mode, itemIndex }) => {
+            return _.map(menuItems, (item, index) => {
+                const itemId = typeof itemIndex!=='undefined' ? `${menuId}-menu-item-${itemIndex}-${index}` : `${menuId}-menu-item-${index}`
+                return createElement(
+                    MenuItem,
+                    {
+                        ...item,
+                        vertical,
+                        parent: item.hasOwnProperty('items'),
+                        key: itemId,
+                        mode: mode,
+                        menuId: menuId,
+                        itemId,
+                        onClick: this.onSelect.bind(this, item, itemId)
+                    },
+                    item.hasOwnProperty('items') && <SubMenu menuItems={item['items']} mode={mode} vertical={vertical} itemIndex={index} />
+                )
             })
         }
 
-        const navBarClass = cx({
-            "uk-navbar-nav":!vertical,
-            "uk-nav uk-nav-default":vertical,
-        }) 
-        
+        const mapRecursive = (children, callback) => (
+            React.Children.map(
+                children,
+                child => (
+                    child.props.children
+                        ? mapRecursive(child.props.children)
+                        : callback(child)
+                ),
+            )
+        );
+
+        const CloneItems = ({ children }) => {
+            return React.Children.map(children, (child, index) => {
+                return cloneElement(child, {
+                    key: `menu-item-${index}`,
+                    vertical: vertical,
+                    onSelect: this.onSelect.bind(this, child),
+                    mode,
+                    menuId
+                },
+                    child.props.parent && <CloneItems children={child.props.children} />
+                )
+            })
+
+        }
+
         return (
-            <nav className={navClass} uk-navbar={`mode:${mode};vertical:${vertical};`} {...other}  {...events} ref={this.menuRef}>
+            <nav className={navClass} uk-navbar={`mode:${mode};vertical:${vertical};`} {...other}  ref={this.menuRef}>
                 <div className={containerClassName}>
                     <ul className="uk-navbar-nav" role="menu" aria-orientation={vertical ? 'vertical' : ''}>
                         {
-                            items.length ? <SubMenu menuItems={items} mode={mode} /> :
-                                React.Children.map(children, (child, index) => {
-                                    if (child.type === MenuItem) {
-                                        return cloneElement(child, {
-                                            key: `menu-item-${index}`,
-                                            vertical: vertical, 
-                                            // onClick:this.onSelect.bind(this,child,child.props.onClick) , 
-                                            mode,
-                                            menuId
-                                        })
-
-                                    }
-                                })
+                            items.length ? <SubMenu menuItems={items} mode={mode} /> : <CloneItems children={children} />
                         }
                     </ul>
                 </div>
@@ -153,8 +157,8 @@ class RegularMenu extends Component {
         )
     }
 }
-
-const connectedMenu = connect()(RegularMenu)
+const mapProps = (state) => ({ selectedMenuItem: state.selectedMenuItem })
+const connectedMenu = connect(mapProps)(RegularMenu)
 
 const styledMenu = injectSheet(menuStyle)(connectedMenu)
 

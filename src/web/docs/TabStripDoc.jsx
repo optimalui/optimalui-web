@@ -731,9 +731,10 @@ export const TabStripDoc = () => {
                 </Tab>
                 <Tab title="Markup">
                     <SyntaxHighlighter language='javascript' style={docco}>{tabStripUsage}</SyntaxHighlighter>
+                    <MarkupButtons codeText={tabStripUsage} />
                 </Tab>
             </TabStrip>
-            <MarkupButtons codeText={tabStripUsage} />
+            
         </div>
          {/** ALIGNMENT */}
          <h2 id="alignment" className="uk-h3 tm-heading-fragment"><a href="#alignment">Alignment</a></h2>
@@ -955,16 +956,17 @@ export const TabStripDoc = () => {
                     </Tab>
                     <Tab title="Markup">
                         <SyntaxHighlighter language='javascript' style={docco}>{tabStripAlignment}</SyntaxHighlighter>
+                        <MarkupButtons codeText={tabStripAlignment} />
                     </Tab>
                 </TabStrip>
-                <MarkupButtons codeText={tabStripAlignment} />
+                
          </div>
          {/** DropDown Tab */}
          <h2 id="dropdown" className="uk-h3 tm-heading-fragment"><a href="#dropdown">Dropdown Tab</a></h2>
          <p>Set the <code>dropdown</code> property of the tab component to <code>true</code>.
          Add <code>TabItem</code> component as children of<code>Tab</code> component.
          To disable <code>TabItem</code> ,set <code>disabled</code> prop as <code>true</code>.</p>
-            <div>
+            <div className="uk-position-relative uk-margin-medium">
             <TabStrip>
                 <Tab title="Preview">
                     <TabStrip>
@@ -1015,16 +1017,17 @@ export const TabStripDoc = () => {
                 </Tab>
                 <Tab title="Markup">
                     <SyntaxHighlighter language='javascript' style={docco}>{tabStripDropDown}</SyntaxHighlighter>
+                    <MarkupButtons codeText={tabStripDropDown} />
                 </Tab>
             </TabStrip>
-            <MarkupButtons codeText={tabStripDropDown} />
+            
             </div>
         {/** Animation */}
         <h2 id="animation" className="uk-h3 tm-heading-fragment"><a href="#animation">Animation</a></h2>
         <p>TabStrip component uses <code><a href="https://www.npmjs.com/package/react-animations" target="_blank">react-animations</a></code> react module. 
         To implement an animation, set <code>animation</code> prop and set <code>duration</code> prop to change animation duration time.</p>
         <p>All animation collection should be inspect at this <code><a href="http://react-animations.herokuapp.com/" target="_blank">link</a></code></p>
-        <div>
+        <div className="uk-position-relative uk-margin-medium">
             <TabStrip>
                 <Tab title="Preview">
                     <TabStrip selected={selected} onSelect={handleSelect} animation='fadeInRight'>
@@ -1075,15 +1078,16 @@ export const TabStripDoc = () => {
                 </Tab>
                 <Tab title="Markup">
                     <SyntaxHighlighter language='javascript' style={docco}>{tabStripAnimation}</SyntaxHighlighter>
+                    <MarkupButtons codeText={tabStripAnimation} />
                 </Tab>
             </TabStrip>
-            <MarkupButtons codeText={tabStripAnimation} />
+            
         </div>
 
         {/** Configuration */}
         <h2 id="configuration" className="uk-h3 tm-heading-fragment"><a href="#configuration">Configuration</a></h2>
         <p>The following example shows how to map a collection to <code>Tab</code> components.</p>
-            <div>
+            <div className="uk-position-relative uk-margin-medium">
             <TabStrip>
                 <Tab title="Preview">
                     <TabStrip>
@@ -1101,9 +1105,9 @@ export const TabStripDoc = () => {
                 </Tab>
                 <Tab title="Markup">
                     <SyntaxHighlighter language='javascript' style={docco}>{configurationSource}</SyntaxHighlighter>
+                    <MarkupButtons codeText={configurationSource} />
                 </Tab>
             </TabStrip>
-            <MarkupButtons codeText={configurationSource} />
             </div>
         {/** Keyboard Navigation */}
         <h2 id="keyboard" className="uk-h3 tm-heading-fragment"><a href="#keyboard">Keyboard Navigation</a></h2>
@@ -1140,7 +1144,7 @@ export const TabStripDoc = () => {
                 </tbody>
             </table>
         </div>
-        <div>              
+        <div className="uk-position-relative uk-margin-medium">              
         <TabStrip>
                 <Tab title="Preview">
                     <TabStrip>
@@ -1168,9 +1172,9 @@ export const TabStripDoc = () => {
                 </Tab>
                 <Tab title="Markup">
                     <SyntaxHighlighter language='javascript' style={docco}>{keyboardSource}</SyntaxHighlighter>
+                    <MarkupButtons codeText={keyboardSource} />
                 </Tab>
             </TabStrip>
-        <MarkupButtons codeText={keyboardSource} />
         </div>  
          {/** ACCESSIBILITY */}
         <h2 id="accessibility" className="uk-h3 tm-heading-fragment"><a href="#accessibility">Accessibility</a></h2>

@@ -7,6 +7,7 @@ import {DropDownButton,DropDownButtonItem} from '../../components/buttons';
 import { Icon } from '../../components';
 import sample_img_icon from '../../assets/web/img/sample_settings_icon.png'
 import DropDownButtonEvents from './events/DropDownButtonEvent';
+import { TabStrip, Tab,TabItem } from '../../components/layout';
 
 const dropDownUsage = `
 import React from 'react'; 
@@ -284,44 +285,34 @@ export const DropDownButtonDoc = () => (
         <p>DropDownButton component can be enabled by hovering and clicking the toggle. Just add the <code>mode="click"</code> prop to enable click mode. </p>
         <p>By default, the DropDownButton component is enabled. To disable , add <code>disabled:true</code> to <code>buttonProps</code> prop.</p>
         <div className="uk-position-relative uk-margin-medium">
-            <ul uk-tab="swiping: false" className="uk-tab">
-                <li className="uk-active"><a href="#" aria-expanded="true">Preview</a></li>
-                <li className=""><a href="#" aria-expanded="false">Markup</a></li>
-            </ul>
-            <ul className="uk-switcher uk-margin">
-                <li>
+            <TabStrip>
+                <Tab title="Preview"> 
                     <DropDownButton mode="hover" text="Hover" items={items} />
                     <DropDownButton mode="click" text="Click" items={items} style={{ marginLeft: '3px' }}  />
                     <DropDownButton text="Disabled" items={items} style={{ marginLeft: '3px' }} buttonProps={{ disabled: true }} />
-                </li>
-                <li>
+                </Tab>
+                <Tab title="Markup">
                     <SyntaxHighlighter language='javascript' style={docco}>{dropDownUsage}</SyntaxHighlighter>
-                </li>
-            </ul>
-            <MarkupButtons codeText={dropDownUsage}/>
+                    <MarkupButtons codeText={dropDownUsage}/>
+                </Tab>
+            </TabStrip>
         </div>
 
         {/** BUTTON STYLE */}
         <h2 id="button-props" className="uk-h3 tm-heading-fragment"><a href="#button-props">Button Style Props</a></h2>
         <p>To use different DropDownButton style ,set Button component props with <code>buttonProps</code> prop.</p>
-        <div className="uk-position-relative uk-margin-medium" style={{height:'100%'}}>
-            <ul uk-tab="swiping: false" className="uk-tab">
-                <li className="uk-active"><a href="#" aria-expanded="true">Preview</a></li>
-                <li className=""><a href="#" aria-expanded="false">Markup</a></li>
-            </ul>
-            <ul className="uk-switcher uk-margin">
-                <li>
-                    <DropDownButton text="Settings" items={items} buttonProps={{primary:true}}/>
-                    <DropDownButton text="Settings" items={items} buttonProps={{secondary:true}} style={{marginLeft:'3px'}}  />
-                    <DropDownButton text="Settings" items={items} buttonProps={{danger:true}} style={{marginLeft:'3px'}}  />
-                    <DropDownButton text="Settings" items={items} buttonProps={{text:true}} style={{marginLeft:'3px'}}  />
-                    
-                </li>
-                <li>
+        <div className="uk-position-relative uk-margin-medium" style={{ height: '100%' }}>
+            <TabStrip>
+                <Tab title="Preview">
+                    <DropDownButton text="Settings" items={items} buttonProps={{ primary: true }} />
+                    <DropDownButton text="Settings" items={items} buttonProps={{ secondary: true }} style={{ marginLeft: '3px' }} />
+                    <DropDownButton text="Settings" items={items} buttonProps={{ danger: true }} style={{ marginLeft: '3px' }} />
+                    <DropDownButton text="Settings" items={items} buttonProps={{ text: true }} style={{ marginLeft: '3px' }} />                </Tab>
+                <Tab title="Markup">
                     <SyntaxHighlighter language='javascript' style={docco}>{dropDownStyle}</SyntaxHighlighter>
-                </li>
-            </ul>
-            <MarkupButtons codeText={dropDownStyle}/>
+                    <MarkupButtons codeText={dropDownStyle} />
+                </Tab>
+            </TabStrip>
         </div>
 
         {/** ANIMATION */}
@@ -329,25 +320,22 @@ export const DropDownButtonDoc = () => (
         <p>DropButtonComponent uses <code><a href="https://www.npmjs.com/package/react-animations" target="_blank">react-animations</a></code> react module. To implement an animation, set <code>animation</code> prop and set <code>duration</code> prop to change animation duration time.</p>
         <p>All animation collection should be inspect at this <code><a href="http://react-animations.herokuapp.com/" target="_blank">link</a></code></p>
         <div className="uk-position-relative uk-margin-medium" style={{height:'100%'}}>
-            <ul uk-tab="swiping: false" className="uk-tab">
-                <li className="uk-active"><a href="#" aria-expanded="true">Preview</a></li>
-                <li className=""><a href="#" aria-expanded="false">Markup</a></li>
-            </ul>
-            <ul className="uk-switcher uk-margin">
-                <li>
-                    <DropDownButton text="slide-In-Down" items={items} buttonProps={{primary:true}} animation="slideInDown"/>
-                    <DropDownButton text="slide-In-Up" items={items} buttonProps={{secondary:true}} animation="slideInUp" style={{marginLeft:'3px'}}  />
-                    <DropDownButton text="bounce" items={items} buttonProps={{danger:true}} animation="bounce" style={{marginLeft:'3px'}}  />
-                    <DropDownButton text="fade-In-Down" items={items} buttonProps={{text:true}} animation="fadeInDown" style={{marginLeft:'3px'}}  />
-                </li>
-                <li>
+            <TabStrip>
+                <Tab title="Preview">
+                    <DropDownButton text="slide-In-Down" items={items} buttonProps={{ primary: true }} animation="slideInDown" />
+                    <DropDownButton text="slide-In-Up" items={items} buttonProps={{ secondary: true }} animation="slideInUp" style={{ marginLeft: '3px' }} />
+                    <DropDownButton text="bounce" items={items} buttonProps={{ danger: true }} animation="bounce" style={{ marginLeft: '3px' }} />
+                    <DropDownButton text="fade-In-Down" items={items} buttonProps={{ text: true }} animation="fadeInDown" style={{ marginLeft: '3px' }} />
+
+                </Tab>
+                <Tab title="Markup">
                     <SyntaxHighlighter language='javascript' style={docco}>{animationSource}</SyntaxHighlighter>
-                </li>
-            </ul>
-            <MarkupButtons codeText={animationSource}/>
+                    <MarkupButtons codeText={animationSource} />
+                </Tab>
+            </TabStrip>
         </div>
 
-        {/** ANIMATION */}
+        {/** ICON PROPS */}
         <h2 id="icon" className="uk-h3 tm-heading-fragment"><a href="#icon">Icon Props</a></h2>
         <p>Add <code>buttonProps</code> prop   the DropDownButton component and give Button component icon props as object.</p>
         <p>Button icon properties:</p>
@@ -357,21 +345,17 @@ export const DropDownButtonDoc = () => (
                 <li>Adding FontAwesome and other font icons.  They are implemented by setting the required third-party CSS classes through the <code>iconClass</code> prop.</li>
             </ul>
         <div className="uk-position-relative uk-margin-medium" style={{height:'100%'}}>
-            <ul uk-tab="swiping: false" className="uk-tab">
-                <li className="uk-active"><a href="#" aria-expanded="true">Preview</a></li>
-                <li className=""><a href="#" aria-expanded="false">Markup</a></li>
-            </ul>
-            <ul className="uk-switcher uk-margin">
-                <li>
-                        <DropDownButton text="OptimalUI" items={items} buttonProps={{ icon: "cog" }} mode="click" />
-                        <DropDownButton text="Image" items={items} buttonProps={{ imageUrl: sample_img_icon, imageWidth: 24, imageHeight: 24 }} style={{ marginLeft: '3px' }} mode="click" />
-                        <DropDownButton text="FontAwesome" items={items} buttonProps={{ iconClass: "fa fa-cog", iconStyle: { fontSize: '20px' } }} style={{ marginLeft: '3px' }} mode="click" />
-                </li>
-                <li>
+            <TabStrip>
+                <Tab title="Preview">
+                    <DropDownButton text="OptimalUI" items={items} buttonProps={{ icon: "cog" }} mode="click" />
+                    <DropDownButton text="Image" items={items} buttonProps={{ imageUrl: sample_img_icon, imageWidth: 24, imageHeight: 24 }} style={{ marginLeft: '3px' }} mode="click" />
+                    <DropDownButton text="FontAwesome" items={items} buttonProps={{ iconClass: "fa fa-cog", iconStyle: { fontSize: '20px' } }} style={{ marginLeft: '3px' }} mode="click" />
+                </Tab>
+                <Tab title="Markup">
                     <SyntaxHighlighter language='javascript' style={docco}>{iconWithButton}</SyntaxHighlighter>
-                </li>
-            </ul>
-            <MarkupButtons codeText={iconWithButton}/>
+                    <MarkupButtons codeText={iconWithButton} />
+                </Tab>
+            </TabStrip>        
         </div>
 
         {/** PROPS  */}
@@ -467,42 +451,35 @@ export const DropDownButtonDoc = () => (
          <p>If the text field in the data objects is named <code>text</code>, the component gets its value automatically. 
              If the name of the property in the data source is different,it is necessary to the <code>textField</code> property.</p>
         <div className="uk-position-relative uk-margin-medium">
-            <ul uk-tab="swiping: false" className="uk-tab">
-                <li className="uk-active"><a href="#" aria-expanded="true">Preview</a></li>
-                <li className=""><a href="#" aria-expanded="false">Markup</a></li>
-            </ul>
-            <ul className="uk-switcher uk-margin">
-                <li>
+            <TabStrip>
+                <Tab title="Preview">
                     <DropDownButton mode="hover" text="Settings" items={items} />
                     <DropDownButton textField="actionName" items={objectItems} text="Edit" style={{ marginLeft: '3px' }} mode="click" />
-                </li>
-                <li>
+                </Tab>
+                <Tab title="Markup">
                     <SyntaxHighlighter language='javascript' style={docco}>{dataBinding}</SyntaxHighlighter>
-                </li>
-            </ul>
-            <MarkupButtons codeText={dataBinding}/>
+                    <MarkupButtons codeText={dataBinding} />
+                </Tab>
+            </TabStrip>         
         </div>
+        {/** CHILD COMPONENTS */}
         <p className="uk-text-lead">Child Components</p>
         <p>Set <code>DropDownButtonItem</code> component as child to create custom list. </p>
         <p>The following example shows how to use the <code>DropDownButtonItem</code> child components to populate the dropdown list.</p>
         <div className="uk-position-relative uk-margin-medium">
-            <ul uk-tab="swiping: false" className="uk-tab">
-                <li className="uk-active"><a href="#" aria-expanded="true">Example</a></li>
-                <li className=""><a href="#" aria-expanded="false">ViewSource</a></li>
-            </ul>
-            <ul className="uk-switcher uk-margin">
-                <li>
+            <TabStrip>
+                <Tab title="Preview">
                     <DropDownButton text="File Settings">
                         <DropDownButtonItem text="Edit" icon="file-edit" />
                         <DropDownButtonItem text="Upload" icon="cloud-upload" />
                         <DropDownButtonItem text="Save As PDF" icon="file-pdf" />
                     </DropDownButton>
-                </li>
-                <li>
+                </Tab>
+                <Tab title="Markup">
                     <SyntaxHighlighter language='javascript' style={docco}>{itemSource}</SyntaxHighlighter>
-                </li>
-            </ul>
-            <MarkupButtons codeText={itemSource}/>
+                    <MarkupButtons codeText={itemSource} />
+                </Tab>
+            </TabStrip>           
         </div>
         <p className="uk-text-lead">DropDownButtonItem Props</p>
         <div className="uk-overflow-auto">
@@ -603,18 +580,17 @@ export const DropDownButtonDoc = () => (
         <h2 id="events" className="uk-h3 tm-heading-fragment"><a href="#events">Events</a></h2>
         <p>The following example demonstrates basic DropDownButton events.</p>
         <div className="uk-position-relative uk-margin-medium">
-            <ul uk-tab="swiping: false" className="uk-tab">
-                <li className="uk-active"><a href="#" aria-expanded="true">Example</a></li>
-                <li className=""><a href="#" aria-expanded="false">View Source</a></li>
-            </ul>
-            <ul className="uk-switcher uk-margin">
-                <li key="src-1"> <DropDownButtonEvents/></li>
-                <li key="src-2">
+            <TabStrip>
+                <Tab title="Preview">
+                    <DropDownButtonEvents />
+                </Tab>
+                <Tab title="Markup">
                     <SyntaxHighlighter language='javascript' style={docco}>{eventLogs}</SyntaxHighlighter>
-                </li>
-            </ul>
-            <MarkupButtons codeText={eventLogs}/>
+                    <MarkupButtons codeText={eventLogs} />
+                </Tab>
+            </TabStrip>  
         </div>
+        {/**TODO:Change onItemClick */}
         <p><code>onItemClick</code> function prop is getting with default object variables which is <code>item</code> and <code>domEvent</code>.You can inspect this when create a custom item click function.</p>
         <div className="uk-position-relative uk-margin-medium">
             <ul uk-tab="swiping: false" className="uk-tab">

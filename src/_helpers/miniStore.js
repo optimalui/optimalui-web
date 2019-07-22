@@ -4,11 +4,11 @@ const tabStripStore = {
     selectedTabIndex: null,
     selectedTabItem: null,
     selectedTabItemIndex: null,
-    selectedContent: null
+    selectedContent: null,
 }
 
 const menuStore = {
-    currentItemId:null,
+    selectedMenuItem:null
 }
 
 export const miniStore = create({
