@@ -16,20 +16,22 @@ class RegularMenu extends Component {
         alignItems: PropTypes.string,
         items: PropTypes.array,
         mode: PropTypes.string,
-        onMouseLeave: PropTypes.func,
         vertical: PropTypes.bool,
         onSelect: PropTypes.func,
-        menuId: PropTypes.string
+        menuId: PropTypes.string,
+        toolbar:PropTypes.bool,
+        transparent: PropTypes.bool,
     }
 
     static defaultProps = {
         alignItems: 'left',
         items: [],
         mode: "hover",
-        onMouseLeave: noop,
         vertical: false,
         onSelect: noop,
-        menuId: `menu-${uuidv4()}`
+        menuId: `menu-${uuidv4()}`,
+        toolbar:false,
+        transparent: false
     }
 
     constructor(props) {
@@ -82,12 +84,15 @@ class RegularMenu extends Component {
             classes,
             mode,
             vertical,
-            selectedMenuItem,
             menuId,
+            toolbar,
+            transparent,
             ...other
         } = this.props;
 
-        const navClass = cx("uk-navbar-container", customClassName, {
+        const navClass = cx("uk-navbar-container",{
+            "uk-navbar-transparent":transparent 
+        }, customClassName, {
             [classes.verticalNavStyle]: vertical
         })
 
@@ -110,8 +115,9 @@ class RegularMenu extends Component {
                         key: itemId,
                         mode: mode,
                         menuId: menuId,
+                        toolbar,
                         itemId,
-                        onClick: this.onSelect.bind(this, item, itemId)
+                        onClick: this.onSelect.bind(this, item)
                     },
                     item.hasOwnProperty('items') && <SubMenu menuItems={item['items']} mode={mode} vertical={vertical} itemIndex={index} />
                 )
@@ -136,6 +142,7 @@ class RegularMenu extends Component {
                     vertical: vertical,
                     onSelect: this.onSelect.bind(this, child),
                     mode,
+                    toolbar,
                     menuId
                 },
                     child.props.parent && <CloneItems children={child.props.children} />
@@ -157,9 +164,6 @@ class RegularMenu extends Component {
         )
     }
 }
-const mapProps = (state) => ({ selectedMenuItem: state.selectedMenuItem })
-const connectedMenu = connect(mapProps)(RegularMenu)
-
-const styledMenu = injectSheet(menuStyle)(connectedMenu)
+const styledMenu = injectSheet(menuStyle)(RegularMenu)
 
 export { styledMenu as Menu }

@@ -1016,9 +1016,71 @@ class MenuEvents extends React.Component {
         ); 
     }
 }
- 
-export default MenuEvents;
 
+const MenuProps = ()=>(
+    <React.Fragment>
+        <h2 id="props" className="uk-h3 tm-heading-fragment"><a href="#props">Menu Props</a></h2>
+        <p>The <code>Menu</code> component has the following props:</p>
+        <div className="uk-overflow-auto">
+            <table className="uk-table uk-table-divider">
+                <thead>
+                    <tr>
+                        <th align="left">Prop</th>
+                        <th align="left">PropType</th>
+                        <th align="left">Required</th>
+                        <th align="left">Default</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td align="left"><code>mode</code></td>
+                        <td align="left"><code>string</code></td>
+                        <td align="left"><code>no</code></td>
+                        <td align="left"><code>{`'hover'`}</code></td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>items</code></td>
+                        <td align="left"><code>array</code></td>
+                        <td align="left"><code>no</code></td>
+                        <td align="left"><code>{`[]`}</code></td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>className</code></td>
+                        <td align="left"><code>string</code></td>
+                        <td align="left"><code>no</code></td>
+                        <td align="left"><code>{`''`}</code></td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>menuId</code></td>
+                        <td align="left"><code>string</code></td>
+                        <td align="left"><code>no</code></td>
+                        <td align="left">random string id</td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>alignItems</code></td>
+                        <td align="left"><code>string</code></td>
+                        <td align="left"><code>no</code></td>
+                        <td align="left"><code>{`left`}</code></td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>onSelect</code></td>
+                        <td align="left"><code>func</code></td>
+                        <td align="left"><code>no</code></td>
+                        <td align="left"><code>null</code></td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>vertical</code></td>
+                        <td align="left"><code>bool</code></td>
+                        <td align="left"><code>no</code></td>
+                        <td align="left"><code>false</code></td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+    </React.Fragment>
+)
 
 class MenuDoc extends React.Component {
     render() {
@@ -1055,6 +1117,9 @@ class MenuDoc extends React.Component {
 
                 {/** ROUTER */}
                 <MenuRouter/>
+
+                {/** PROPS */}
+                <MenuProps/>
 
                 {/** MENUITEM */}
                 <MenuItemDoc/>
@@ -1124,6 +1189,7 @@ class MenuDoc extends React.Component {
                             <li className=""><a href="#disabled">Disabled</a></li>
                             <li className=""><a href="#vertical">Vertical</a></li>
                             <li className=""><a href="#route">Routing</a></li>
+                            <li className=""><a href="#props">Menu Props</a></li>
                             <li className=""><a href="#menuitem">MenuItem Props</a></li>
                             <li className=""><a href="#accessibility">Accesibility</a></li>
                         </ul>

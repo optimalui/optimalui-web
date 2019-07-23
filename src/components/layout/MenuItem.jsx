@@ -37,7 +37,8 @@ class RegularMenuItem extends Component {
         iconClassName:PropTypes.string,
         vertical:PropTypes.bool,
         route:PropTypes.string,
-        itemId:PropTypes.string
+        itemId:PropTypes.string,
+        toolbar:PropTypes.bool
     };
 
     static defaultProps = {
@@ -53,7 +54,8 @@ class RegularMenuItem extends Component {
         icon:'',
         iconClassName:'',
         vertical:false,
-        route:''
+        route:'',
+        toolbar:false
     };
 
     constructor(props) {
@@ -147,6 +149,7 @@ class RegularMenuItem extends Component {
             route,
             staticContext,
             store,
+            toolbar,
             ...other
         } = this.props;
 
@@ -173,7 +176,10 @@ class RegularMenuItem extends Component {
             [classes.subMenuWrapper]: parent
         })
 
-
+        const itemTextClass = cx({
+            [classes.menuItemText]:!toolbar,
+            [classes.activeMenuItem]:active
+        })
 
 
         return (
@@ -191,15 +197,15 @@ class RegularMenuItem extends Component {
 
                 {
                         route ? 
-                        <Link replace={route === this.props.history.location.pathname} to={route} className={cx(classes.menuItemText)}>
-                            {icon && <Icon name={icon} className={iconClass} />}
+                        <Link replace={route === this.props.history.location.pathname} to={route} className={itemTextClass}>
+                            {icon &&  <Icon name={icon} className={iconClass} />}
                             {text}
-                            {parent && <Icon name="triangle-right" className={classes.iconStyle} />}
+                            {parent && !toolbar && <Icon name="triangle-right" className={classes.iconStyle} />}
                         </Link> :
-                        <a href={`//${url}`} target={urlTarget} className={cx(classes.menuItemText)} onClick={this.handleLinkClick}>
+                        <a href={`//${url}`} target={urlTarget}  className={itemTextClass} onClick={this.handleLinkClick}>
                             {icon && <Icon name={icon} className={iconClass} />}
                             {text}
-                            {parent && <Icon name="triangle-right" className={classes.iconStyle} />}
+                            {parent && !toolbar && <Icon name="triangle-right" className={classes.iconStyle} />}
                         </a>
 
                 } 
