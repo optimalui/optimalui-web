@@ -2,10 +2,12 @@
 import React from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
-import { Toolbar,ToolbarItem, TabStrip, Tab,Menu,MenuItem } from '../../components/layout'; 
+import { Toolbar,ToolbarItem, ToolbarContent,TabStrip, Tab,Menu,MenuItem } from '../../components/layout'; 
 import { Button} from '../../components/buttons'; 
+import { Logo} from '../../components'; 
 import MarkupButtons from './MarkupButtons';
-import backgroundImg from '../../assets/web/img/light.jpg'
+import backgroundImg from '../../assets/web/img/light.jpeg'
+
 
 const ToolBarUsage = () => {
     const src =  `
@@ -152,14 +154,14 @@ const TransparentToolbar = () => {
     import React from 'react';
     import ReactDOM from 'react-dom';
     import { ToolBar,ToolbarItem,Menu,MenuItem } from '@optimalui/components/layout'
-    import backgroundImg from '../images/light.jpg'
+    import backgroundImg from '../img/light.jpeg'
     
     class App extends React.Component {
         render() { 
             return ( 
-                <div class="uk-position-relative">
+                <div className="uk-position-relative">
                     <img src={backgroundImg} alt="" />
-                    <div class="uk-position-top">
+                    <div className="uk-position-top">
                         <Toolbar transparent>
                             <ToolbarItem>
                                 <Menu>
@@ -184,15 +186,13 @@ const TransparentToolbar = () => {
     `;
     return <React.Fragment>
         <h2 id="usage" className="uk-h3 tm-heading-fragment"><a href="#usage">Transparent Prop</a></h2>
-        <p>When using an image or colored background for the hero section of your website, you might want to turn the <code>Toolbar</code> transparent. 
-        You can set <code>transparent</code> prop of <code>Toolbar</code> as <code>true</code> to make transparent the <code>Toolbar</code>.</p>
-        
+        <p>You can set <code>transparent</code> prop of <code>Toolbar</code> as <code>true</code> to make transparent the <code>Toolbar</code>.</p>
         <div className="uk-position-relative uk-margin-medium">
             <TabStrip>
                 <Tab title="Preview">
-                    <div class="uk-position-relative">
+                    <div className="uk-position-relative">
                         <img src={backgroundImg} alt="" />
-                        <div class="uk-position-top">
+                        <div className="uk-position-top">
                             <Toolbar transparent>
                                 <ToolbarItem>
                                     <Menu>
@@ -216,32 +216,41 @@ const TransparentToolbar = () => {
     </React.Fragment>
 }
 
-const ToolbarContent = () => {
+const ToolbarItemContent = () => {
     const src =  `
     import React from 'react';
     import ReactDOM from 'react-dom';
-    import { ToolBar,ToolbarItem,Menu,MenuItem } from '@optimalui/components/layout'
-    import backgroundImg from '../images/light.jpg'
+    import { ToolBar,ToolbarItem,Menu,MenuItem,ToolbarContent } from '@optimalui/components/layout'
     
     class App extends React.Component {
         render() { 
             return ( 
-                <div class="uk-position-relative">
-                    <img src={backgroundImg} alt="" />
-                    <div class="uk-position-top">
-                        <Toolbar transparent>
-                            <ToolbarItem>
-                                <Menu>
-                                    <MenuItem text="Active" active />
-                                    <MenuItem text="Item" />
-                                    <MenuItem text="Parent" parent>
-                                        <MenuItem text="Active" active />
-                                    </MenuItem>
-                                </Menu>
-                            </ToolbarItem>
-                        </Toolbar>
-                    </div>
-                </div>
+                <Toolbar>
+                    <ToolbarItem>
+                        
+                        <ToolbarContent>
+                            <a className="uk-logo" href="#">Logo</a>
+                        </ToolbarContent>
+
+                        <ToolbarContent>
+                            <Menu>
+                                <MenuItem text="Features" icon="star" />
+                            </Menu>
+                        </ToolbarContent>
+
+                        <ToolbarContent>
+                            <div>Some <a href="#">Link</a></div>
+                        </ToolbarContent>
+
+                        <ToolbarContent>
+                            <form>
+                                <input className="uk-input uk-form-width-small" type="text" placeholder="Input" />
+                                <Button className="uk-margin-small-left">Button</Button>
+                            </form>
+                        </ToolbarContent>
+
+                    </ToolbarItem>
+                </Toolbar>
             )
         }
     }
@@ -252,23 +261,117 @@ const ToolbarContent = () => {
     ) 
     `;
     return <React.Fragment>
-        <h2 id="usage" className="uk-h3 tm-heading-fragment"><a href="#usage">Transparent Prop</a></h2>
-        <p>When using an image or colored background for the hero section of your website, you might want to turn the <code>Toolbar</code> transparent. 
-        You can set <code>transparent</code> prop of <code>Toolbar</code> as <code>true</code> to make transparent the <code>Toolbar</code>.</p>
-        
+        <h2 id="content" className="uk-h3 tm-heading-fragment"><a href="#content">Toolbar Content</a></h2> 
+        <p>You can also add custom content to the <code>Toolbar</code>, like text, icons, buttons or forms with using a <code>ToolbarContent</code> component.</p>
         <div className="uk-position-relative uk-margin-medium">
             <TabStrip>
                 <Tab title="Preview">
-                            <Toolbar>
-                                <ToolbarItem>
-                                <div className="uk-navbar-item">
-                                    <form action="javascript:void(0)">
-                                        <input className="uk-input uk-form-width-small" type="text" placeholder="Input"/>{/**TODO:Input component */}
-                                        <Button>Button</Button>
-                                     </form>
-                                     </div>
-                                </ToolbarItem>
-                            </Toolbar>
+                    <Toolbar>
+                        <ToolbarItem>
+
+                            <ToolbarContent>
+                                <Logo>Logo</Logo>
+                            </ToolbarContent>
+
+                            <ToolbarContent>
+                                <Menu>
+                                    <MenuItem text="Features" icon="star" />
+                                </Menu>
+                            </ToolbarContent>
+
+                            <ToolbarContent>
+                                <div>Some <a href="#">Link</a></div>
+                            </ToolbarContent>
+
+                            <ToolbarContent>
+                                <form>
+                                    <input className="uk-input uk-form-width-small" type="text" placeholder="Input" />{/**TODO:Input component */}
+                                    <Button className="uk-margin-small-left">Button</Button>
+                                </form>
+                            </ToolbarContent>
+
+                        </ToolbarItem>
+                    </Toolbar>
+                </Tab>
+                <Tab title="Markup">
+                    <SyntaxHighlighter language='javascript' style={docco}>{src}</SyntaxHighlighter>
+                    <MarkupButtons codeText={src} />
+                </Tab>
+            </TabStrip>
+        </div>
+    </React.Fragment> 
+}
+
+const CenteredLogo = () => {
+    const src =  `
+    import React from 'react';
+    import ReactDOM from 'react-dom';
+    import { ToolBar,ToolbarItem,Menu,MenuItem,ToolbarContent } from '@optimalui/components/layout'
+    import { Logo} from '@optimalui/components'; 
+    
+    class App extends React.Component {
+        render() { 
+            return ( 
+                <Toolbar>
+                    <ToolbarItem align="center">
+                        <ToolbarContent align="left">
+                            <Menu>
+                                <MenuItem text="Active" active />
+                                <MenuItem text="Parent" parent>
+                                    <MenuItem text="Active" active />
+                                    <MenuItem text="Item" />
+                                    <MenuItem text="Item" />
+                                </MenuItem>
+                            </Menu>
+                        </ToolbarContent>
+                        <ToolbarContent>
+                            <Logo>Logo</Logo>
+                        </ToolbarContent>
+                        <ToolbarContent align="right">
+                            <Menu>
+                                <MenuItem text="Item" />
+                            </Menu>
+                        </ToolbarContent>
+                    </ToolbarItem>
+                </Toolbar>
+            )
+        }
+    }
+    
+    ReactDOM.render(
+        <App />,
+        document.querySelector('my-app')
+    ) 
+    `;
+    return <React.Fragment>
+        <h2 id="content" className="uk-h3 tm-heading-fragment"><a href="#content">Centered Logo</a></h2> 
+        <p>You can set center a <code>Logo</code> component with using <code>ToolbarItem</code>'s and <code>ToolbarContent</code>'s <code>align</code> prop.</p>
+        <p>The <code>align</code> prop align items which inside of parent component as <code>left</code>,<code>right</code> and <code>center</code>.</p>
+        <div className="uk-position-relative uk-margin-medium">
+            <TabStrip>
+                <Tab title="Preview">
+                    <Toolbar>
+                        <ToolbarItem align="center">
+                            <ToolbarContent align="left">
+                                <Menu>
+                                    <MenuItem text="Active" active />
+                                    <MenuItem text="Parent" parent>
+                                        <MenuItem text="Active" active />
+                                        <MenuItem text="Item" />
+                                        <MenuItem text="Item" />
+                                    </MenuItem>
+                                </Menu>
+                            </ToolbarContent>
+                            <ToolbarContent>
+                                <Logo>Logo</Logo>
+                            </ToolbarContent>
+                            <ToolbarContent align="right">
+                                <Menu>
+                                    <MenuItem text="Item" />
+                                </Menu>
+                            </ToolbarContent>
+                        </ToolbarItem>
+                    </Toolbar>
                 </Tab>
                 <Tab title="Markup">
                     <SyntaxHighlighter language='javascript' style={docco}>{src}</SyntaxHighlighter>
@@ -294,7 +397,10 @@ export const ToolbarDoc = () => (
         <TransparentToolbar/>
 
         {/**CONTENT ITEM */}
-        <ToolbarContent/>
+        <ToolbarItemContent/>
+
+        {/**CENTERED LOGO */}
+        <CenteredLogo/>
 
 
     </div>

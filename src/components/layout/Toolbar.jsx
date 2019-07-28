@@ -45,7 +45,7 @@ class Toolbar extends Component {
         },classes.root,customClassName)
 
         return (
-            <nav className={toolbarClass} {...other}> 
+            <nav className={toolbarClass} {...other} uk-navbar=""> 
                     {
                         React.Children.map(children, (child) => {
                             if (child.type === ToolbarItem) {

@@ -21,19 +21,22 @@ const RegularIcon = ({ ...props }) => {
         smallRightMargin,
         ...other
     } = props;
-    const className = cx(
-        css(iconStyle.root,smallRightMargin ? iconStyle.iconSmallRight:'',
-            formIcon ? iconStyle.formIcon:''), customClassName) 
+    const className = cx("uk-icon",{
+       "uk-margin-small-right": smallRightMargin
+    },css(formIcon ? iconStyle.formIcon:''), customClassName) 
     const iconProp = `icon:${props.name};ratio:${props.size};`;
     const width = props.size * 20;
     const height = props.size * 20;
 
-    const linkClassName = cx(customLinkClassName,css(link ? iconStyle.iconLink :'',isButton ? iconStyle.iconButton :''))
-    const icon = props.link || props.isButton ?
-            <a href={`//${props.link}`} target={props.target} className={linkClassName}>
-                <span dangerouslySetInnerHTML={{ __html: iconList(width, height, props.name) }}  {...other} className={className}></span>
-            </a> :<span dangerouslySetInnerHTML={{ __html: iconList(width, height, props.name) }}  {...other} className={className}></span>
-    return (icon)
+    const linkClassName = cx(customLinkClassName,"uk-margin-small-right",{
+        "uk-icon-button":isButton,
+        "uk-icon-link":link
+    })
+    return props.link || props.isButton ?
+        <a href={`//${props.link}`} target={props.target} className={linkClassName}>
+            <span dangerouslySetInnerHTML={{ __html: iconList(width, height, props.name) }}  {...other} className={className}></span>
+        </a> : <span dangerouslySetInnerHTML={{ __html: iconList(width, height, props.name) }}  {...other} className={className}></span>
+
 }
 
 RegularIcon.propTypes = {

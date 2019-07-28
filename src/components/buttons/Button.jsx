@@ -94,16 +94,16 @@ class RegularButton extends Component {
       'uk-width-1-1': fullWidth
     })
 
-    const iconClassName = classNames('uk-margin-small-right',customIconClass);
-    const iconClass = classNames('uk-margin-small-right',customIconClassName);
+    const iconCls = classNames('uk-margin-small-right', customIconClass);
+    const fontCls = classNames('uk-margin-small-right', customIconClassName); 
   
     
     return (
       <button {...other} className={className} disabled={disabled}>
-        {icon ? <Icon name={icon} className={iconClassName} style={iconStyle}/> : ''}
-        {imageUrl ? <img src={imageUrl} alt="" className={iconClassName} style={iconStyle} width={imageWidth} height={imageHeight}/>:''}
-        {iconClass ? <i className={iconClass} style={iconStyle}></i>:''}
-        {children}
+        {icon && <Icon name={icon} className={iconCls} style={iconStyle}/>}
+        {imageUrl && <img src={imageUrl} alt="" className={iconCls} style={iconStyle} width={imageWidth} height={imageHeight}/>}
+        {customIconClass && <i className={fontCls} style={iconStyle}></i>}
+        {children} 
       </button>
     )
   }

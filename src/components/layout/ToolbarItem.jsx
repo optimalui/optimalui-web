@@ -50,7 +50,7 @@ class ToolbarItem extends Component {
                     {
                         React.Children.map(children, (child, index) => {
                             if (child.type === Menu) {
-                                return cloneElement(child, { toolbar: true,transparent:true,key:index })
+                                return cloneElement(child, { toolbar: true,key:index })
                             }
                             return cloneElement(child, { ...child.props,key:index })
                         })
