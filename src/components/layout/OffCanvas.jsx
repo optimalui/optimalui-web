@@ -1,69 +1,51 @@
 /* eslint-disable */
-import React, { Component, cloneElement} from 'react';
+import React, { Component, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { offCanvasStyle } from '../../assets/jss'
-import {Icon} from '../../components'
+import { OffCanvasBody, OffCanvasCloseButton } from '../layout'
 import injectSheet from 'react-jss'
 import _ from 'lodash'
 
 
 class OffCanvas extends Component {
     static propTypes = {
-        open: PropTypes.bool
+        open: PropTypes.bool,
+        mode: PropTypes.string,
     }
 
     static defaultProps = {
-        open: false
+        open: false,
+        mode: 'slide',
     }
 
     constructor(props) {
         super(props)
         this.state = {
-            openCanvas:false
+            openCanvas: false
         }
-        this.canvasRef = React.createRef()
         this.handleClickOutSide = this.handleClickOutSide.bind(this)
         this.handleCloseCanvas = this.handleCloseCanvas.bind(this)
     }
 
     componentDidMount() {
-        document.addEventListener("click", this.handleClickOutSide)
-    }
-
-    componentWillUpdate(nextProps, nextState){
-        let root = document.getElementsByTagName( 'html' )[0]
-        // if(nextProps.open){
-        //     document.body.classList.add("uk-offcanvas-container")
-        //     root.classList.add("uk-offcanvas-page")
-        // }else{
-        //     document.body.classList.remove("uk-offcanvas-container")
-        //     root.classList.remove("uk-offcanvas-page")
-        // }
-
 
     }
 
-    componentWillReceiveProps(nextProps){
-            this.setState({ openCanvas: nextProps.open });
-    }
-
-    componentWillUnmount(){
-        document.removeEventListener("click", this.handleClickOutSide)
+    componentWillReceiveProps(nextProps) {
+        this.setState({ openCanvas: nextProps.open });
     }
 
     handleClickOutSide(e) {
-        // console.log(this.state.outSideClick)
-        // if (this.canvasRef && this.props.open) {
-        //     if (!this.canvasRef.current.contains(e.target)) {
-        //         // this.setState({ outSideClick: true })
-        //     }
-        // }
+        if (this.state.openCanvas) {
+            this.setState({ openCanvas: false })
+        }
     }
-    handleCloseCanvas(){
+
+    handleCloseCanvas() {
         this.setState({ openCanvas: false })
     }
-    
+
 
     render() {
 
@@ -72,45 +54,30 @@ class OffCanvas extends Component {
             classes,
             className: customClassName,
             open,
+            mode,
+            overlay,
             ...other
         } = this.props;
 
         const offCanvasClass = cx(classes.root, {
-            [classes.openCanvas]:this.state.openCanvas
+            [classes.openCanvas]: this.state.openCanvas,
+            [classes.slideMode]: mode === 'slide',
         }, customClassName)
 
         const offCanvasBarClass = cx({
-            [classes.openCanvas]:this.state.openCanvas,
-        },classes.canvasBar)
-        
+            [classes.openCanvas]: this.state.openCanvas,
+        }, classes.canvasBar)
 
         return (
-            <React.Fragment>
-                <div className={offCanvasClass} {...other} ref={this.canvasRef}>
-                    <div className={offCanvasBarClass}>
-
-                        <button className={classes.closeBtn} type="button" onClick={this.handleCloseCanvas} uk-close=""></button>
-
-                        <h3>Title</h3>
-
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-
-                    </div>
+            <div className={offCanvasClass} {...other}>
+                <div className={offCanvasBarClass}>
+                    {React.Children.map(children, (child) => {
+                        if (child.type === OffCanvasBody || child.type === OffCanvasCloseButton) {
+                            return cloneElement(child, { ...child.props })
+                        }
+                    })}
                 </div>
-                {/* <button className="uk-button uk-button-default uk-margin-small-right" type="button" uk-toggle="target: #offcanvas-usage">Open</button>
-
-                <div id="offcanvas-usage" uk-offcanvas="">
-                    <div className="uk-offcanvas-bar">
-
-                        <button className="uk-offcanvas-close" type="button" uk-close=""></button>
-
-                        <h3>Title</h3>
-
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-
-                    </div>
-                </div> */}
-            </React.Fragment>
+            </div>
         )
     }
 }

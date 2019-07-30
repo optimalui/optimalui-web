@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import MarkupButtons from './MarkupButtons';
-import { TabStrip, Tab,OffCanvas } from '../../components/layout'; 
+import { TabStrip, Tab,OffCanvas,OffCanvasBody,OffCanvasCloseButton,OffCanvasOverlay } from '../../components/layout'; 
 import { Button } from '../../components/buttons'; 
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import logoSrc from '../../assets/web/img/react-logo.png'
@@ -15,6 +15,11 @@ const OffCanvasUsage = () => {
     const toggleCanvas = () => {
         setOpen(!open)
     }
+
+    const closeCanvas = () => {
+        setOpen(false)
+    }
+    
     
 
     const src =  `
@@ -42,7 +47,15 @@ const OffCanvasUsage = () => {
             <TabStrip>
                 <Tab title="Preview">
                     <Button onClick={toggleCanvas}>Open</Button>
-                    <OffCanvas open={open}/>
+                    <OffCanvasOverlay onClick={closeCanvas}>
+                        <OffCanvas open={open}>
+                            <OffCanvasCloseButton onClick={closeCanvas} />
+                            <OffCanvasBody>
+                                <h3>Title</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                            </OffCanvasBody>
+                        </OffCanvas>
+                    </OffCanvasOverlay>
                 </Tab>
                 <Tab title="Markup">
                     <SyntaxHighlighter language='javascript' style={docco}>{src}</SyntaxHighlighter>

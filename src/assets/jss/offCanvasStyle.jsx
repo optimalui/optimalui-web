@@ -1,16 +1,14 @@
 import {slideOutLeft} from 'react-animations'
 
-console.log(slideOutLeft)
 
 export const offCanvasStyle = {
     root:{
-        display: 'none',
         position: 'fixed',
         top: 0,
         bottom: 0,
         left: 0,
         zIndex: 1000,
-        color:'#666'
+        color:'#666',
     },
     canvasBar: {
         position: 'absolute',
@@ -22,6 +20,7 @@ export const offCanvasStyle = {
         padding: '20px 20px',
         background: '#fff',
         overflowY: 'auto',
+        transition: 'left 0.3s ease-out',
         '-webkit-overflow-scrolling': 'touch',
         '@media (min-width: 960px)': {
             left: '-350px',
@@ -32,7 +31,6 @@ export const offCanvasStyle = {
     openCanvas:{
         display:'block',
         left:0,
-        // width:'270px'
     },
     closeBtn:{
         color:'#999 !important',
@@ -42,8 +40,17 @@ export const offCanvasStyle = {
         right: '20px',
         padding: '5px'
     },
-    animation: {
-        ...slideOutLeft, 
-        animationDuration: "3s"
+    overlay:{
+        position: 'fixed',
+        width: '100%', /* Full width (cover the whole page) */
+        height: '100%', /* Full height (cover the whole page) */
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        zIndex: 1300, /* Specify a stack order in case you're using a different order for other elements */
+    },
+    overlayBackground:{
+        backgroundColor: 'rgba(0,0,0,0.1)', /* Black background with opacity */
     }
 }

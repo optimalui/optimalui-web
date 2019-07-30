@@ -8,4 +8,7 @@ export * from './TabStrip'
 export * from './Tab'
 export * from './TabItem'
 export * from './OffCanvas'
+export * from './OffCanvasBody'
+export * from './OffCanvasCloseButton'
+export * from './OffCanvasOverlay'
 
