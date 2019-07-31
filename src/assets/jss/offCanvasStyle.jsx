@@ -1,12 +1,20 @@
-import {slideOutLeft} from 'react-animations'
-
 
 export const offCanvasStyle = {
-    root:{
+    leftCanvasRoot:{
+        // visibility: 'hidden',
         position: 'fixed',
         top: 0,
         bottom: 0,
-        left: 0,
+        left:0,
+        zIndex: 1000,
+        color:'#666',
+    },
+    rightCanvasRoot:{
+        // visibility: 'hidden',
+        position: 'fixed',
+        top: 0,
+        bottom: 0,
+        right:0,
         zIndex: 1000,
         color:'#666',
     },
@@ -28,9 +36,33 @@ export const offCanvasStyle = {
             padding: '40px 40px',
         }
     },
+    canvasBarRight: {
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        right: '-270px',
+        width: '270px', 
+        boxSizing: 'border-box',
+        padding: '20px 20px',
+        background: '#fff',
+        overflowY: 'auto',
+        transition: 'right 0.3s ease-out',
+        '-webkit-overflow-scrolling': 'touch',
+        '@media (min-width: 960px)': {
+            right: '-350px',
+            width: '350px',
+            padding: '40px 40px',
+        }
+    },
     openCanvas:{
+        // visibility: 'visible',
         display:'block',
         left:0,
+    },
+    openCanvasRight:{
+        display:'block',
+        left:'auto',
+        right:0
     },
     closeBtn:{
         color:'#999 !important',

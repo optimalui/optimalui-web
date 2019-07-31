@@ -3,7 +3,7 @@ import React, { Component, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { offCanvasStyle } from '../../assets/jss'
-import { OffCanvasBody, OffCanvasCloseButton } from '../layout'
+import { OffCanvasBody, OffCanvasCloseButton} from '../layout'
 import injectSheet from 'react-jss'
 import _ from 'lodash'
 
@@ -12,11 +12,13 @@ class OffCanvas extends Component {
     static propTypes = {
         open: PropTypes.bool,
         mode: PropTypes.string,
+        position:PropTypes.string,
     }
 
     static defaultProps = {
         open: false,
         mode: 'slide',
+        position:'left'
     }
 
     constructor(props) {
@@ -24,7 +26,6 @@ class OffCanvas extends Component {
         this.state = {
             openCanvas: false
         }
-        this.handleClickOutSide = this.handleClickOutSide.bind(this)
         this.handleCloseCanvas = this.handleCloseCanvas.bind(this)
     }
 
@@ -34,12 +35,6 @@ class OffCanvas extends Component {
 
     componentWillReceiveProps(nextProps) {
         this.setState({ openCanvas: nextProps.open });
-    }
-
-    handleClickOutSide(e) {
-        if (this.state.openCanvas) {
-            this.setState({ openCanvas: false })
-        }
     }
 
     handleCloseCanvas() {
@@ -56,23 +51,29 @@ class OffCanvas extends Component {
             open,
             mode,
             overlay,
+            position,
             ...other
         } = this.props;
 
-        const offCanvasClass = cx(classes.root, {
-            [classes.openCanvas]: this.state.openCanvas,
-            [classes.slideMode]: mode === 'slide',
+        const offCanvasClass = cx({
+            [classes.leftCanvasRoot]: position === 'left',
+            [classes.rightCanvasRoot]: position === 'right',
+            [classes.openCanvas]: this.state.openCanvas && position === 'left',
+            [classes.openCanvasRight]: this.state.openCanvas && position === 'right',
         }, customClassName)
 
         const offCanvasBarClass = cx({
-            [classes.openCanvas]: this.state.openCanvas,
-        }, classes.canvasBar)
+            [classes.canvasBar]: position === 'left',
+            [classes.openCanvas]: this.state.openCanvas && position === 'left',
+            [classes.canvasBarRight]: position === 'right',
+            [classes.openCanvasRight]: this.state.openCanvas && position==='right',
+        })
 
         return (
             <div className={offCanvasClass} {...other}>
                 <div className={offCanvasBarClass}>
                     {React.Children.map(children, (child) => {
-                        if (child.type === OffCanvasBody || child.type === OffCanvasCloseButton) {
+                        if ((child.type === OffCanvasBody || child.type === OffCanvasCloseButton)) {
                             return cloneElement(child, { ...child.props })
                         }
                     })}
