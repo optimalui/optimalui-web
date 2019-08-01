@@ -282,6 +282,7 @@ const OffCanvasPosition = ()=>{
             <TabStrip>
                 <Tab title="Preview">
                         <Button onClick={toggleOffCanvas}>Open</Button>
+                        <OffCanvasOverlay overlay={open} overlayBackground onClick={closeOffCanvas}>
                         <OffCanvas open={open} position="right">
                             <OffCanvasCloseButton onClick={closeOffCanvas} />
                             <OffCanvasBody>
@@ -290,6 +291,7 @@ const OffCanvasPosition = ()=>{
                                     Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                             </OffCanvasBody>
                         </OffCanvas>
+                        </OffCanvasOverlay>
                 </Tab>
                 <Tab title="Markup">
                     <SyntaxHighlighter language='javascript' style={docco}>{src}</SyntaxHighlighter>
@@ -299,6 +301,70 @@ const OffCanvasPosition = ()=>{
         </div>
         </React.Fragment>
     )
+}
+
+const OffCanvasMode = () => {
+    const [open,setOpen] = useState(false);
+
+    const toggleOffCanvas = () => {
+        setOpen(!open)
+    }
+
+    const closeOffCanvas = () => {
+        setOpen(false)
+    }
+    const src=``
+    return <React.Fragment>
+        <h2 id="mode" className="uk-h3 tm-heading-fragment"><a href="#mode">Animation Mode</a></h2>
+        <p>
+            You can change the <code>OffCanvas</code> animation mode with the <code>mode</code> prop. By default, the <code>mode</code> prop is <code>slide</code>. 
+        </p> 
+        <p>The <code>mode</code> prop should be set with one of the following values.</p>
+        <div className="uk-overflow-auto">
+        <table className="uk-table uk-table-divider"><thead><tr>
+            <th align="left">Value</th>
+            <th align="left">Description</th>
+        </tr>
+        </thead><tbody><tr>
+            <td align="left"><code>slide</code></td>
+            <td align="left">The <code>OffCanvas</code> slides out and overlays the content. This is the default mode.</td>
+        </tr>
+                <tr>
+                    <td align="left"><code>push</code></td>
+                    <td align="left">The <code>OffCanvas</code> slides out and pushes the site.</td>
+                </tr>
+                <tr>
+                    <td align="left"><code>reveal</code></td>
+                    <td align="left">The <code>OffCanvas</code> slides out and reveals its content while pushing the site.</td>
+                </tr>
+                <tr>
+                    <td align="left"><code>none</code></td>
+                    <td align="left">The <code>OffCanvas</code> appears and overlays the content without an animation.</td>
+                </tr>
+            </tbody></table>
+        </div>
+        <div className="uk-position-relative uk-margin-medium">
+            <TabStrip>
+                <Tab title="Preview">
+                    <Button onClick={toggleOffCanvas}>Slide</Button>
+                    <OffCanvasOverlay overlay={open} overlayBackground onClick={closeOffCanvas}>
+                        <OffCanvas open={open}>
+                            <OffCanvasCloseButton onClick={closeOffCanvas} />
+                            <OffCanvasBody>
+                                <h3>Title</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                            </OffCanvasBody>
+                        </OffCanvas>
+                    </OffCanvasOverlay>
+                </Tab>
+                <Tab title="Markup">
+                    <SyntaxHighlighter language='javascript' style={docco}>{src}</SyntaxHighlighter>
+                    <MarkupButtons codeText={src} />
+                </Tab>
+            </TabStrip>
+        </div>
+    </React.Fragment>
 }
 
 export const OffCanvasDoc = () => (
@@ -316,12 +382,16 @@ export const OffCanvasDoc = () => (
         {/**POSITION */}
         <OffCanvasPosition />
 
+        {/**MODE */}
+        <OffCanvasMode />
+
         <div className="tm-sidebar-right uk-visible@l">
             <div uk-sticky="offset: 160" className="uk-sticky uk-active uk-sticky-fixed">
                 <ul uk-scrollspy-nav="closest: li; scroll: true; offset: 100" className="uk-nav uk-nav-default tm-nav uk-nav-parent-icon">
                     <li className="uk-active"><a href="#usage">Usage</a></li>
                     <li className="uk-active"><a href="#overlay">Overlay</a></li>
                     <li className="uk-active"><a href="#position">Position</a></li>
+                    <li className="uk-active"><a href="#mode">Animation Mode</a></li>
                 </ul>
             </div>
             <div className="uk-sticky-placeholder" style={{ height: '249px', margin: '0px' }}></div>
