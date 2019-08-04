@@ -10,11 +10,12 @@ const OffCanvasOverlay = ({ children,offCanvasPosition="left", overlay = false, 
         [classes.overlayBackground]: overlayBackground
     }, className)
     return <div className={overlayClass} {...other}>
-        {React.Children.map(children, (child) => {
+        {/* {React.Children.map(children, (child) => {
             if (child.type === OffCanvas) {
                 return cloneElement(child, { position:offCanvasPosition,...child.props })
             }
-        })}
+        })} */}
+        {children}
     </div>
 }
 

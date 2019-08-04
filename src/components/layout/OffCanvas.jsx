@@ -1,11 +1,12 @@
 /* eslint-disable */
-import React, { Component, cloneElement } from 'react';
+import React, { Component, cloneElement,useEffect } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { offCanvasStyle } from '../../assets/jss'
-import { OffCanvasBody, OffCanvasCloseButton} from '../layout'
+import { OffCanvasBody, OffCanvasCloseButton,OffCanvasOverlay} from '../layout'
 import injectSheet from 'react-jss'
 import _ from 'lodash'
+
 
 
 class OffCanvas extends Component {
@@ -35,6 +36,50 @@ class OffCanvas extends Component {
 
     componentWillReceiveProps(nextProps) {
         this.setState({ openCanvas: nextProps.open });
+    }
+
+    componentWillUpdate(nextProps,nextState){
+        const {
+            mode,
+            classes,
+            position,
+        } = this.props;
+        if (mode === "reveal") {
+            if (nextState.openCanvas) {
+                document.body.style.left = window.screen.width >= 960 ? '350px' : '270px'
+                document.body.style.overflowY = 'scroll'
+                document.body.style.touchAction = 'pan-y pinch-zoom'
+                document.documentElement.style.overflow = 'hidden'
+            } else {
+                document.body.style.left = 0;
+                document.body.style.overflowY = null
+                document.body.style.touchAction = null
+                document.documentElement.style.overflow = null
+                document.documentElement.style.overflow = null
+            }
+        }
+    }
+
+    componentWillMount() {
+        const {
+            mode,
+            position,
+        } = this.props;
+        if (mode === 'reveal' && position === 'left') {
+            document.body.style.position = 'relative';
+            document.body.style.left = 0;
+            document.body.style.transition = 'left .3s ease-out';
+            document.body.style.boxSizing = 'border-box';
+            document.body.style.width = '100%';
+        }
+    }
+
+    componentWillUnmount(){
+        document.body.style.position = null;
+        document.body.style.left = 0;
+        document.body.style.transition = null;
+        document.body.style.boxSizing = null;
+        document.body.style.width = null;
     }
 
     handleCloseCanvas() {
@@ -79,48 +124,43 @@ class OffCanvas extends Component {
             [classes.slideOpen]: mode === 'slide' && position === 'left' && this.state.openCanvas,
             [classes.slideRight]: mode === 'slide' && position === 'right',
             [classes.slideRightOpen]: mode === 'slide' && position === 'right' && this.state.openCanvas,
+
+            [classes.reveal]: mode === 'reveal' && position === 'left',
+            [classes.revealOpen]: mode === 'reveal' && position === 'left' && this.state.openCanvas,
         })
 
-        return (
-            // <div className={offCanvasClass} {...other}>
-            //     <div className={offCanvasBarClass}>
-            //         {React.Children.map(children, (child) => {
-            //             if ((child.type === OffCanvasBody || child.type === OffCanvasCloseButton)) {
-            //                 return cloneElement(child, { ...child.props })
-            //             }
-            //         })}
-            //     </div>
-            // </div>
+        const pusherClass = cx(classes.pusher,{
+            [classes.revealPusher]: mode === 'reveal' && position === 'left',
+        })
 
-                // <div className={menuStyle} {...other}>
-                //     <div className="canvas-bar">
-                //         {React.Children.map(children, (child) => {
-                //             if ((child.type === OffCanvasBody || child.type === OffCanvasCloseButton)) {
-                //                 return cloneElement(child, { ...child.props })
-                //             }
-                //         })}
-                //     </div>
-                // </div>
-                // <div className={cx(canvasClass,modeClass)} {...other}>
-                //     <div className={classes.canvasContent}>
-                //         {React.Children.map(children, (child) => {
-                //             if ((child.type === OffCanvasBody || child.type === OffCanvasCloseButton)) {
-                //                 return cloneElement(child, { ...child.props })
-                //             }
-                //         })}
-                //     </div>
-                // </div>
-                <div className="st-container st-effect-2 st-menu-open">
-                <div className="st-menu st-effect-2" id="menu-2">
-                     <div className={classes.canvasContent}>
-                         {React.Children.map(children, (child) => {
+
+
+        return (
+            <React.Fragment>
+                <div className={cx(canvasClass, modeClass)} {...other} ref={(node) => { this.offCanvasRef = node }}>
+                    <div className={classes.canvasContent}>
+                        {React.Children.map(children, (child) => {
                             if ((child.type === OffCanvasBody || child.type === OffCanvasCloseButton)) {
                                 return cloneElement(child, { ...child.props })
                             }
                         })}
                     </div>
                 </div>
-                </div>
+                <OffCanvasOverlay overlay={this.state.openCanvas} overlayBackground={this.state.openCanvas}></OffCanvasOverlay>
+
+                {/* <button className="uk-button uk-button-default uk-margin-small-right" type="button" uk-toggle="target: #offcanvas-reveal">Reveal</button>
+                <div id="offcanvas-reveal" uk-offcanvas="mode: reveal; overlay: true">
+                    <div className="uk-offcanvas-bar">
+
+                        <button className="uk-offcanvas-close" type="button" uk-close=""></button>
+
+                        <h3>Title</h3>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+                    </div>
+                </div> */}
+            </React.Fragment>   
 
         )
     }

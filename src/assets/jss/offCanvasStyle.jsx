@@ -129,7 +129,8 @@ export const offCanvasStyle = {
         '-webkit-overflow-scrolling': 'touch',
         '@media (min-width: 960px)': {
             padding: '80px 40px !important',
-        }
+        },
+        boxSizing:'border-box',
     },
 
     /** slide */
@@ -146,6 +147,18 @@ export const offCanvasStyle = {
     },
 
     /**reveal */
+    reveal:{
+        zIndex:-1,
+    },
+    revealOpen:{
+        visibility: 'visible',
+        overflow: 'hidden',
+        background:'#fff',
+        width: '270px',
+        '@media (min-width: 960px)': { 
+            width: '350px'
+        }
+    },
 
     overlay: {
         position: 'fixed',
@@ -155,7 +168,7 @@ export const offCanvasStyle = {
         left: 0,
         right: 0,
         bottom: 0,
-        zIndex: 1300, /* Specify a stack order in case you're using a different order for other elements */
+        zIndex: 1000, /* Specify a stack order in case you're using a different order for other elements */
     },
     overlayBackground: {
         backgroundColor: 'rgba(0,0,0,0.1)', /* Black background with opacity */

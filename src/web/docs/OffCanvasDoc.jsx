@@ -305,7 +305,9 @@ const OffCanvasPosition = ()=>{
 
 const OffCanvasMode = () => {
     const [open,setOpen] = useState(false);
+    const [openReveal,setOpenReveal] = useState(false);
 
+    /**Slide */
     const toggleOffCanvas = () => {
         setOpen(!open)
     }
@@ -313,6 +315,16 @@ const OffCanvasMode = () => {
     const closeOffCanvas = () => {
         setOpen(false)
     }
+
+    /***Reveal */
+    const toggleOffCanvasReveal = () => {
+        setOpenReveal(!openReveal)
+    }
+
+    const closeOffCanvasReveal = () => {
+        setOpenReveal(false)
+    }
+
     const src=``
     return <React.Fragment>
         <h2 id="mode" className="uk-h3 tm-heading-fragment"><a href="#mode">Animation Mode</a></h2>
@@ -346,7 +358,8 @@ const OffCanvasMode = () => {
         <div className="uk-position-relative uk-margin-medium">
             <TabStrip>
                 <Tab title="Preview">
-                    <Button onClick={toggleOffCanvas}>Slide</Button>
+                    <Button onClick={toggleOffCanvas} className="uk-margin-small-right">Slide</Button>
+                    <Button onClick={toggleOffCanvasReveal}>Reveal</Button>
                     <OffCanvasOverlay overlay={open} overlayBackground onClick={closeOffCanvas}>
                         <OffCanvas open={open}>
                             <OffCanvasCloseButton onClick={closeOffCanvas} />
@@ -356,7 +369,17 @@ const OffCanvasMode = () => {
                                 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                             </OffCanvasBody>
                         </OffCanvas>
-                    </OffCanvasOverlay>
+                    </OffCanvasOverlay> 
+                    {/* <OffCanvasOverlay overlay={openReveal} overlayBackground onClick={closeOffCanvasReveal}> */}
+                        <OffCanvas open={openReveal} mode="reveal">
+                            <OffCanvasCloseButton onClick={closeOffCanvasReveal} />
+                            <OffCanvasBody>
+                                <h3>Title</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                            </OffCanvasBody>
+                        </OffCanvas>
+                    {/* </OffCanvasOverlay> */}
                 </Tab>
                 <Tab title="Markup">
                     <SyntaxHighlighter language='javascript' style={docco}>{src}</SyntaxHighlighter>
