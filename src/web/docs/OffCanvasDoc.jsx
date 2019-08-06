@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import MarkupButtons from './MarkupButtons';
-import { TabStrip, Tab,OffCanvas,OffCanvasBody,OffCanvasCloseButton,OffCanvasOverlay } from '../../components/layout'; 
+import { TabStrip, Tab,OffCanvas,OffCanvasBody,OffCanvasCloseButton } from '../../components/layout'; 
 import { Button } from '../../components/buttons'; 
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
@@ -101,7 +101,7 @@ const OffCanvasOverlayDoc = () => {
     const src =  `
     import React from 'react';
     import ReactDOM from 'react-dom';
-    import { OffCanvas,OffCanvasBody,OffCanvasCloseButton,OffCanvasOverlay } from '@optimalui/components/layout'
+    import { OffCanvas,OffCanvasBody,OffCanvasCloseButton } from '@optimalui/components/layout'
     import { Button } from '@optimalui/components/buttons'; 
 
     const OffCanvasApp = () => {
@@ -125,27 +125,23 @@ const OffCanvasOverlayDoc = () => {
                 <Button onClick={toggleOffCanvas} className="uk-margin-small-right">Open</Button>
                 <Button onClick={toggleOffCanvasOverlay}>Overlay</Button>
 
-                <OffCanvasOverlay overlay={open} onClick={closeOffCanvas}>
-                    <OffCanvas open={open}>
-                        <OffCanvasCloseButton onClick={closeOffCanvas} />
-                        <OffCanvasBody>
-                            <h3>Title</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        </OffCanvasBody>
-                    </OffCanvas>
-                </OffCanvasOverlay>
+                <OffCanvas open={open} overlay={open} overlayClick={closeOffCanvas}>
+                    <OffCanvasCloseButton onClick={closeOffCanvas} />
+                    <OffCanvasBody>
+                        <h3>Title</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    </OffCanvasBody>
+                </OffCanvas>
 
-                <OffCanvasOverlay overlay={openOverlay} overlayBackground onClick={closeOffCanvasOverlay}>
-                    <OffCanvas open={openOverlay}>
-                        <OffCanvasCloseButton onClick={closeOffCanvasOverlay} />
-                        <OffCanvasBody>
-                            <h3>Title</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        </OffCanvasBody>
-                    </OffCanvas>
-                </OffCanvasOverlay>
+                <OffCanvas open={openOverlay} overlay={openOverlay} overlayBackground overlayClick={closeOffCanvasOverlay}>
+                    <OffCanvasCloseButton onClick={closeOffCanvasOverlay} />
+                    <OffCanvasBody>
+                        <h3>Title</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    </OffCanvasBody>
+                </OffCanvas>
             </React.Fragment>
         )
     }
@@ -158,9 +154,8 @@ const OffCanvasOverlayDoc = () => {
 
     return <React.Fragment>
         <h2 id="overlay" className="uk-h3 tm-heading-fragment"><a href="#overlay">Overlay</a></h2>
-        <p>To create an overlay for the <code>OffCanvas</code> component, the <code>OffCanvasOverlay</code> component should be created as the parent component.</p>
-        <p>To use the overlay property in the <code>OffCanvasOverlay</code> component, the <code>overlay</code> prop should be set to true. 
-        The <code>OffCanvasOverlay</code>'s <code>overlayBackground</code> prop provides overlay background color by setting as true.</p>
+        <p>To create an overlay for the <code>OffCanvas</code> component, the <code>overlay</code> prop should be set as <code>true</code>. The <code>OffCanvas</code>'s <code>overlayBackground</code> prop provides overlay background color by setting as true.</p>
+        <p>You can manage open or close state by using <code>overlayClick</code> functional prop.</p>
         <div className="uk-position-relative uk-margin-medium">
             <TabStrip>
                 <Tab title="Preview">
@@ -168,8 +163,7 @@ const OffCanvasOverlayDoc = () => {
                     <Button onClick={toggleOffCanvas} className="uk-margin-small-right">Open</Button>
                     <Button onClick={toggleOffCanvasOverlay}>Overlay</Button>
 
-                    <OffCanvasOverlay overlay={open} onClick={closeOffCanvas}>
-                        <OffCanvas open={open}>
+                        <OffCanvas open={open} overlay={open} overlayClick={closeOffCanvas}>
                             <OffCanvasCloseButton onClick={closeOffCanvas} />
                             <OffCanvasBody>
                                 <h3>Title</h3>
@@ -177,10 +171,8 @@ const OffCanvasOverlayDoc = () => {
                                     Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                             </OffCanvasBody>
                         </OffCanvas>
-                    </OffCanvasOverlay>
 
-                    <OffCanvasOverlay overlay={openOverlay} overlayBackground onClick={closeOffCanvasOverlay}>
-                        <OffCanvas open={openOverlay}>
+                        <OffCanvas open={openOverlay} overlay={openOverlay} overlayBackground overlayClick={closeOffCanvasOverlay}>
                             <OffCanvasCloseButton onClick={closeOffCanvasOverlay} />
                             <OffCanvasBody>
                                 <h3>Title</h3>
@@ -188,7 +180,6 @@ const OffCanvasOverlayDoc = () => {
                                     Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                             </OffCanvasBody>
                         </OffCanvas>
-                    </OffCanvasOverlay>
                 </Tab>
                 <Tab title="Markup">
                     <SyntaxHighlighter language='javascript' style={docco}>{src}</SyntaxHighlighter>
@@ -196,7 +187,7 @@ const OffCanvasOverlayDoc = () => {
                 </Tab>
             </TabStrip>
         </div>
-        <p className="uk-text-lead">OffCanvasOverlay Props</p>
+        <p className="uk-text-lead">Overlay Props</p>
         <div className="uk-overflow-auto">
             <table className="uk-table uk-table-divider">
                 <thead>
@@ -219,6 +210,12 @@ const OffCanvasOverlayDoc = () => {
                         <td align="left"><code>bool</code></td>
                         <td align="left">no</td>
                         <td align="left"><code>false</code></td>
+                    </tr>
+                    <tr>
+                        <td align="left"><code>overlayClick</code></td>
+                        <td align="left"><code>func</code></td>
+                        <td align="left">no</td>
+                        <td align="left"><code>null</code></td>
                     </tr>
                 </tbody>
             </table>
@@ -256,14 +253,14 @@ const OffCanvasPosition = ()=>{
         return(
             <React.Fragment>
                 <Button onClick={toggleOffCanvas}>Open</Button>
-                <OffCanvas open={open} position="right">
+                <OffCanvas open={open} overlay={open} overlayBackground overlayClick={closeOffCanvas} position="right">
                     <OffCanvasCloseButton onClick={closeOffCanvas} />
                     <OffCanvasBody>
                         <h3>Title</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                     </OffCanvasBody>
-                </OffCanvas>
+               </OffCanvas>
             </React.Fragment>
         )
     }
@@ -282,8 +279,7 @@ const OffCanvasPosition = ()=>{
             <TabStrip>
                 <Tab title="Preview">
                         <Button onClick={toggleOffCanvas}>Open</Button>
-                        <OffCanvasOverlay overlay={open} overlayBackground onClick={closeOffCanvas}>
-                        <OffCanvas open={open} position="right">
+                        <OffCanvas open={open} overlay={open} overlayBackground overlayClick={closeOffCanvas} position="right">
                             <OffCanvasCloseButton onClick={closeOffCanvas} />
                             <OffCanvasBody>
                                 <h3>Title</h3>
@@ -291,7 +287,6 @@ const OffCanvasPosition = ()=>{
                                     Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                             </OffCanvasBody>
                         </OffCanvas>
-                        </OffCanvasOverlay>
                 </Tab>
                 <Tab title="Markup">
                     <SyntaxHighlighter language='javascript' style={docco}>{src}</SyntaxHighlighter>
@@ -305,7 +300,7 @@ const OffCanvasPosition = ()=>{
 
 const OffCanvasMode = () => {
     const [open,setOpen] = useState(false);
-    const [openReveal,setOpenReveal] = useState(false);
+    const [mode,setMode] = useState('slide');
 
     /**Slide */
     const toggleOffCanvas = () => {
@@ -318,14 +313,71 @@ const OffCanvasMode = () => {
 
     /***Reveal */
     const toggleOffCanvasReveal = () => {
-        setOpenReveal(!openReveal)
+        setOpen(!open)
+        setMode('reveal')
     }
 
-    const closeOffCanvasReveal = () => {
-        setOpenReveal(false)
+    /***Push */
+    const toggleOffCanvasPush = () => {
+        setOpen(!open)
+        setMode('push')
     }
 
-    const src=``
+    const src=`
+    import React from 'react';
+    import ReactDOM from 'react-dom';
+    import { OffCanvas,OffCanvasBody,OffCanvasCloseButton } from '@optimalui/components/layout'
+    import { Button } from '@optimalui/components/buttons'; 
+
+    const OffCanvasApp = () => {
+        const [open,setOpen] = useState(false);
+        const [openReveal,setOpenReveal] = useState(false);
+    
+        /**Slide */
+        const toggleOffCanvas = () => {
+            setOpen(!open)
+        }
+    
+        const closeOffCanvas = () => {
+            setOpen(false)
+        }
+    
+        /***Reveal */
+        const toggleOffCanvasReveal = () => {
+            setOpenReveal(!openReveal)
+        }
+    
+        const closeOffCanvasReveal = () => {
+            setOpenReveal(false)
+        }
+        return(
+            <React.Fragment>
+            <Button onClick={toggleOffCanvas} className="uk-margin-small-right">Slide</Button>
+            <Button onClick={toggleOffCanvasReveal}>Reveal</Button>
+            <OffCanvas open={open} overlay={open} overlayBackground={open} overlayClick={closeOffCanvas}>
+                <OffCanvasCloseButton onClick={closeOffCanvas} />
+                <OffCanvasBody>
+                    <h3>Title</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </OffCanvasBody>
+            </OffCanvas>
+            <OffCanvas open={openReveal} mode="reveal" overlay={openReveal} overlayBackground={openReveal} overlayClick={closeOffCanvasReveal}>
+                <OffCanvasCloseButton onClick={closeOffCanvasReveal} />
+                <OffCanvasBody>
+                    <h3>Title</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </OffCanvasBody>
+            </OffCanvas>
+            </React.Fragment>
+        )
+    }
+
+    ReactDOM.render(
+        <OffCanvasApp />,
+        document.querySelector('my-app')
+    )`
     return <React.Fragment>
         <h2 id="mode" className="uk-h3 tm-heading-fragment"><a href="#mode">Animation Mode</a></h2>
         <p>
@@ -359,27 +411,18 @@ const OffCanvasMode = () => {
             <TabStrip>
                 <Tab title="Preview">
                     <Button onClick={toggleOffCanvas} className="uk-margin-small-right">Slide</Button>
-                    <Button onClick={toggleOffCanvasReveal}>Reveal</Button>
-                    <OffCanvasOverlay overlay={open} overlayBackground onClick={closeOffCanvas}>
-                        <OffCanvas open={open}>
-                            <OffCanvasCloseButton onClick={closeOffCanvas} />
-                            <OffCanvasBody>
-                                <h3>Title</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    <Button onClick={toggleOffCanvasPush} className="uk-margin-small-right">Push</Button>
+                    <Button onClick={toggleOffCanvasReveal} className="uk-margin-small-right">Reveal</Button>
+
+
+                    <OffCanvas open={open} mode={mode} overlay={open} overlayBackground={open} overlayClick={closeOffCanvas}>
+                        <OffCanvasCloseButton onClick={closeOffCanvas} />
+                        <OffCanvasBody>
+                            <h3>Title</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                                 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                            </OffCanvasBody>
-                        </OffCanvas>
-                    </OffCanvasOverlay> 
-                    {/* <OffCanvasOverlay overlay={openReveal} overlayBackground onClick={closeOffCanvasReveal}> */}
-                        <OffCanvas open={openReveal} mode="reveal">
-                            <OffCanvasCloseButton onClick={closeOffCanvasReveal} />
-                            <OffCanvasBody>
-                                <h3>Title</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                            </OffCanvasBody>
-                        </OffCanvas>
-                    {/* </OffCanvasOverlay> */}
+                        </OffCanvasBody>
+                    </OffCanvas>
                 </Tab>
                 <Tab title="Markup">
                     <SyntaxHighlighter language='javascript' style={docco}>{src}</SyntaxHighlighter>

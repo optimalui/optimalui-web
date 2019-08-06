@@ -101,27 +101,29 @@ export const offCanvasStyle = {
         width: '270px', 
         boxSizing: 'border-box', 
         overflowY: 'auto', 
-        '-webkit-transition': 'all 0.5s', 
-        transition: 'all 0.5s', 
+        // '-webkit-transition': 'all 0.5s', 
+        // transition: 'all 0.5s', 
         '&::after':{
-            position: 'fixed',  
-            visibility: 'hidden', 
-            top: 0, 
-            bottom: 0, 
-            left:0, 
-            width: '100%',
-            height: '100%',
-            content: '',
-            opacity: 1,
-            '-webkit-transition': 'opacity 0.5s',
-            transition: 'opacity 0.5s'
+            // position: 'fixed',  
+            // visibility: 'hidden', 
+            // top: 0, 
+            // bottom: 0, 
+            // left:0, 
+            // width: '100%',
+            // height: '100%',
+            // content: '',
+            // opacity: 1,
+            // '-webkit-transition': 'opacity 0.5s',
+            // transition: 'opacity 0.5s'
         },
         '@media (min-width: 960px)': {
             width: '350px'
         }
     },
     canvasContent:{
+        visibility:'visible',
         position: 'absolute',
+        width:'270px',
         top: 0,
         bottom: 0,
         left:0,
@@ -130,7 +132,8 @@ export const offCanvasStyle = {
         '@media (min-width: 960px)': {
             padding: '80px 40px !important',
         },
-        boxSizing:'border-box',
+        // boxSizing:'border-box',
+        transition:'none',
     },
 
     /** slide */
@@ -138,6 +141,8 @@ export const offCanvasStyle = {
         background: '#fff',
         '-webkit-transform': 'translate3d(-100%, 0, 0)',
         transform: 'translate3d(-100%, 0, 0)',
+        '-webkit-transition': 'all 0.5s',
+        transition: 'all 0.5s', 
     },
     slideOpen:{
         visibility: 'visible',
@@ -147,12 +152,33 @@ export const offCanvasStyle = {
     },
 
     /**reveal */
+    beforePushBodyStyle:{
+        position :'relative',
+        left :0,
+        transition :'left .3s ease-out',
+        boxSizing :'border-box',
+        width :'100%',
+    },
+    pushBodyStyle:{
+        left: '270px !important',
+        '@media (min-width: 960px)': { 
+            left: '350px !important'
+        },
+        overflowY: 'scroll',
+        touchAction: 'pan-y pinch-zoom'
+    },
     reveal:{
-        zIndex:-1,
+        top: 0,
+        bottom: 0,
+        left: 0,
+        width: 0,
+        overflow: 'hidden',
+        '-webkit-transition': 'width .3s ease-out',
+        transition: 'width .3s ease-out',
+        zIndex:-1
     },
     revealOpen:{
         visibility: 'visible',
-        overflow: 'hidden',
         background:'#fff',
         width: '270px',
         '@media (min-width: 960px)': { 
@@ -160,11 +186,32 @@ export const offCanvasStyle = {
         }
     },
 
+    /**push */
+    push:{
+        visibility: 'hidden',
+        top: 0,
+        bottom: 0,
+        width:'270px',
+        left: '-270px',
+        '@media (min-width: 960px)': { 
+            left: '-350px',
+            width:'350px',
+        },
+        overflow: 'hidden',
+        '-webkit-transition': 'left .3s ease-out',
+        transition: 'left .3s ease-out',
+    },
+    pushOpen:{
+        visibility: 'visible',
+        background:'#fff',
+        left: 0
+    },
+
     overlay: {
         position: 'fixed',
         width: '100%', /* Full width (cover the whole page) */
         height: '100%', /* Full height (cover the whole page) */
-        top: 0,
+        top: 0, 
         left: 0,
         right: 0,
         bottom: 0,
