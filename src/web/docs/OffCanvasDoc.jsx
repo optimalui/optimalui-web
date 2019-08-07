@@ -62,7 +62,7 @@ const OffCanvasUsage = () => {
             <TabStrip>
                 <Tab title="Preview">
                     <Button onClick={toggleOffCanvas}>Open</Button>
-                    <OffCanvas open={open}>
+                    <OffCanvas open={open} mode="slide">
                         <OffCanvasCloseButton onClick={closeOffCanvas} />
                         <OffCanvasBody>
                             <h3>Title</h3>
@@ -163,7 +163,7 @@ const OffCanvasOverlayDoc = () => {
                     <Button onClick={toggleOffCanvas} className="uk-margin-small-right">Open</Button>
                     <Button onClick={toggleOffCanvasOverlay}>Overlay</Button>
 
-                        <OffCanvas open={open} overlay={open} overlayClick={closeOffCanvas}>
+                        <OffCanvas mode="slide" open={open} overlay={open} overlayClick={closeOffCanvas}>
                             <OffCanvasCloseButton onClick={closeOffCanvas} />
                             <OffCanvasBody>
                                 <h3>Title</h3>
@@ -172,7 +172,7 @@ const OffCanvasOverlayDoc = () => {
                             </OffCanvasBody>
                         </OffCanvas>
 
-                        <OffCanvas open={openOverlay} overlay={openOverlay} overlayBackground overlayClick={closeOffCanvasOverlay}>
+                        <OffCanvas mode="slide" open={openOverlay} overlay={openOverlay} overlayBackground overlayClick={closeOffCanvasOverlay}>
                             <OffCanvasCloseButton onClick={closeOffCanvasOverlay} />
                             <OffCanvasBody>
                                 <h3>Title</h3>
@@ -279,7 +279,7 @@ const OffCanvasPosition = ()=>{
             <TabStrip>
                 <Tab title="Preview">
                         <Button onClick={toggleOffCanvas}>Open</Button>
-                        <OffCanvas open={open} overlay={open} overlayBackground overlayClick={closeOffCanvas} position="right">
+                        <OffCanvas mode="slide" open={open} overlay={open} overlayBackground overlayClick={closeOffCanvas} position="right">
                             <OffCanvasCloseButton onClick={closeOffCanvas} />
                             <OffCanvasBody>
                                 <h3>Title</h3>
@@ -298,139 +298,142 @@ const OffCanvasPosition = ()=>{
     )
 }
 
-const OffCanvasMode = () => {
-    const [open,setOpen] = useState(false);
-    const [mode,setMode] = useState('slide');
 
-    /**Slide */
-    const toggleOffCanvas = () => {
-        setOpen(!open)
+
+class OffCanvasMode extends React.Component{
+    constructor(props) {
+        super(props)
+        this.state = {
+            open: false,
+            mode: 'slide',
+        }
+        
     }
 
-    const closeOffCanvas = () => {
-        setOpen(false)
+    toggleOffCanvas = (mode) => {
+        const { open } = this.state
+        this.setState({open: !open,mode });
     }
 
-    /***Reveal */
-    const toggleOffCanvasReveal = () => {
-        setOpen(!open)
-        setMode('reveal')
+    closeOffCanvas = () => {
+        this.setState({ open: false});
     }
 
-    /***Push */
-    const toggleOffCanvasPush = () => {
-        setOpen(!open)
-        setMode('push')
-    }
+    render() {
+        const src=`
+        import React from 'react';
+        import ReactDOM from 'react-dom';
+        import { OffCanvas,OffCanvasBody,OffCanvasCloseButton } from '@optimalui/components/layout'
+        import { Button } from '@optimalui/components/buttons'; 
+    
+        const OffCanvasApp = () => {
+            const [open,setOpen] = useState(false);
+            const [openReveal,setOpenReveal] = useState(false);
+        
+            /**Slide */
+            const toggleOffCanvas = () => {
+                setOpen(!open)
+            }
+        
+            const closeOffCanvas = () => {
+                setOpen(false)
+            }
+        
+            /***Reveal */
+            const toggleOffCanvasReveal = () => {
+                setOpenReveal(!openReveal)
+            }
+        
+            const closeOffCanvasReveal = () => {
+                setOpenReveal(false)
+            }
+            return(
+                <React.Fragment>
+                <Button onClick={toggleOffCanvas} className="uk-margin-small-right">Slide</Button>
+                <Button onClick={toggleOffCanvasReveal}>Reveal</Button>
+                <OffCanvas open={open} overlay={open} overlayBackground={open} overlayClick={closeOffCanvas}>
+                    <OffCanvasCloseButton onClick={closeOffCanvas} />
+                    <OffCanvasBody>
+                        <h3>Title</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    </OffCanvasBody>
+                </OffCanvas>
+                <OffCanvas open={openReveal} mode="reveal" overlay={openReveal} overlayBackground={openReveal} overlayClick={closeOffCanvasReveal}>
+                    <OffCanvasCloseButton onClick={closeOffCanvasReveal} />
+                    <OffCanvasBody>
+                        <h3>Title</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    </OffCanvasBody>
+                </OffCanvas>
+                </React.Fragment>
+            )
+        }
+    
+        ReactDOM.render(
+            <OffCanvasApp />,
+            document.querySelector('my-app')
+        )`
 
-    const src=`
-    import React from 'react';
-    import ReactDOM from 'react-dom';
-    import { OffCanvas,OffCanvasBody,OffCanvasCloseButton } from '@optimalui/components/layout'
-    import { Button } from '@optimalui/components/buttons'; 
+        const {open,mode} = this.state
 
-    const OffCanvasApp = () => {
-        const [open,setOpen] = useState(false);
-        const [openReveal,setOpenReveal] = useState(false);
-    
-        /**Slide */
-        const toggleOffCanvas = () => {
-            setOpen(!open)
-        }
-    
-        const closeOffCanvas = () => {
-            setOpen(false)
-        }
-    
-        /***Reveal */
-        const toggleOffCanvasReveal = () => {
-            setOpenReveal(!openReveal)
-        }
-    
-        const closeOffCanvasReveal = () => {
-            setOpenReveal(false)
-        }
-        return(
+        return (
             <React.Fragment>
-            <Button onClick={toggleOffCanvas} className="uk-margin-small-right">Slide</Button>
-            <Button onClick={toggleOffCanvasReveal}>Reveal</Button>
-            <OffCanvas open={open} overlay={open} overlayBackground={open} overlayClick={closeOffCanvas}>
-                <OffCanvasCloseButton onClick={closeOffCanvas} />
-                <OffCanvasBody>
-                    <h3>Title</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                </OffCanvasBody>
-            </OffCanvas>
-            <OffCanvas open={openReveal} mode="reveal" overlay={openReveal} overlayBackground={openReveal} overlayClick={closeOffCanvasReveal}>
-                <OffCanvasCloseButton onClick={closeOffCanvasReveal} />
-                <OffCanvasBody>
-                    <h3>Title</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                </OffCanvasBody>
-            </OffCanvas>
+                <h2 id="mode" className="uk-h3 tm-heading-fragment"><a href="#mode">Animation Mode</a></h2>
+                <p>
+                    You can change the <code>OffCanvas</code> animation mode with the <code>mode</code> prop. By default, the <code>mode</code> prop is <code>slide</code>.
+        </p>
+                <p>The <code>mode</code> prop should be set with one of the following values.</p>
+                <div className="uk-overflow-auto">
+                    <table className="uk-table uk-table-divider"><thead><tr>
+                        <th align="left">Value</th>
+                        <th align="left">Description</th>
+                    </tr>
+                    </thead><tbody><tr>
+                        <td align="left"><code>slide</code></td>
+                        <td align="left">The <code>OffCanvas</code> slides out and overlays the content. This is the default mode.</td>
+                    </tr>
+                            <tr>
+                                <td align="left"><code>push</code></td>
+                                <td align="left">The <code>OffCanvas</code> slides out and pushes the site.</td>
+                            </tr>
+                            <tr>
+                                <td align="left"><code>reveal</code></td>
+                                <td align="left">The <code>OffCanvas</code> slides out and reveals its content while pushing the site.</td>
+                            </tr>
+                            <tr>
+                                <td align="left"><code>none</code></td>
+                                <td align="left">The <code>OffCanvas</code> appears and overlays the content without an animation.</td>
+                            </tr>
+                        </tbody></table>
+                </div>
+                <div className="uk-position-relative uk-margin-medium">
+                    <TabStrip>
+                        <Tab title="Preview">
+                            <Button onClick={() => this.toggleOffCanvas('slide')} className="uk-margin-small-right">Slide</Button>
+                            <Button onClick={() => this.toggleOffCanvas('push')} className="uk-margin-small-right">Push</Button>
+                            <Button onClick={() => this.toggleOffCanvas('reveal')} className="uk-margin-small-right">Reveal</Button>
+                            <OffCanvas mode={mode} open={open} overlay={open} overlayBackground={open} overlayClick={this.closeOffCanvas}>
+                                <OffCanvasCloseButton onClick={this.closeOffCanvas} />
+                                <OffCanvasBody>
+                                    <h3>Title</h3>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                         Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                </OffCanvasBody>
+                            </OffCanvas>
+
+
+                        </Tab>
+                        <Tab title="Markup">
+                            <SyntaxHighlighter language='javascript' style={docco}>{src}</SyntaxHighlighter>
+                            <MarkupButtons codeText={src} />
+                        </Tab>
+                    </TabStrip>
+                </div>
             </React.Fragment>
         )
     }
-
-    ReactDOM.render(
-        <OffCanvasApp />,
-        document.querySelector('my-app')
-    )`
-    return <React.Fragment>
-        <h2 id="mode" className="uk-h3 tm-heading-fragment"><a href="#mode">Animation Mode</a></h2>
-        <p>
-            You can change the <code>OffCanvas</code> animation mode with the <code>mode</code> prop. By default, the <code>mode</code> prop is <code>slide</code>. 
-        </p> 
-        <p>The <code>mode</code> prop should be set with one of the following values.</p>
-        <div className="uk-overflow-auto">
-        <table className="uk-table uk-table-divider"><thead><tr>
-            <th align="left">Value</th>
-            <th align="left">Description</th>
-        </tr>
-        </thead><tbody><tr>
-            <td align="left"><code>slide</code></td>
-            <td align="left">The <code>OffCanvas</code> slides out and overlays the content. This is the default mode.</td>
-        </tr>
-                <tr>
-                    <td align="left"><code>push</code></td>
-                    <td align="left">The <code>OffCanvas</code> slides out and pushes the site.</td>
-                </tr>
-                <tr>
-                    <td align="left"><code>reveal</code></td>
-                    <td align="left">The <code>OffCanvas</code> slides out and reveals its content while pushing the site.</td>
-                </tr>
-                <tr>
-                    <td align="left"><code>none</code></td>
-                    <td align="left">The <code>OffCanvas</code> appears and overlays the content without an animation.</td>
-                </tr>
-            </tbody></table>
-        </div>
-        <div className="uk-position-relative uk-margin-medium">
-            <TabStrip>
-                <Tab title="Preview">
-                    <Button onClick={toggleOffCanvas} className="uk-margin-small-right">Slide</Button>
-                    <Button onClick={toggleOffCanvasPush} className="uk-margin-small-right">Push</Button>
-                    <Button onClick={toggleOffCanvasReveal} className="uk-margin-small-right">Reveal</Button>
-
-
-                    <OffCanvas open={open} mode={mode} overlay={open} overlayBackground={open} overlayClick={closeOffCanvas}>
-                        <OffCanvasCloseButton onClick={closeOffCanvas} />
-                        <OffCanvasBody>
-                            <h3>Title</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        </OffCanvasBody>
-                    </OffCanvas>
-                </Tab>
-                <Tab title="Markup">
-                    <SyntaxHighlighter language='javascript' style={docco}>{src}</SyntaxHighlighter>
-                    <MarkupButtons codeText={src} />
-                </Tab>
-            </TabStrip>
-        </div>
-    </React.Fragment>
 }
 
 export const OffCanvasDoc = () => (
