@@ -307,16 +307,22 @@ class OffCanvasMode extends React.Component{
             open: false,
             mode: 'slide',
         }
+        this.setMode = this.setMode.bind(this)
         
     }
 
-    toggleOffCanvas = (mode) => {
+    toggleOffCanvas = () => {
         const { open } = this.state
-        this.setState({open: !open,mode });
+        this.setState({open: !open});
     }
 
     closeOffCanvas = () => {
         this.setState({ open: false});
+    }
+
+    setMode(e){
+        this.setState({mode:e.target.name});
+
     }
 
     render() {
@@ -411,9 +417,17 @@ class OffCanvasMode extends React.Component{
                 <div className="uk-position-relative uk-margin-medium">
                     <TabStrip>
                         <Tab title="Preview">
-                            <Button onClick={() => this.toggleOffCanvas('slide')} className="uk-margin-small-right">Slide</Button>
-                            <Button onClick={() => this.toggleOffCanvas('push')} className="uk-margin-small-right">Push</Button>
-                            <Button onClick={() => this.toggleOffCanvas('reveal')} className="uk-margin-small-right">Reveal</Button>
+                            <form>
+                                <div className="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+                                    <label><input className="uk-radio" type="radio" name="slide" onChange={this.setMode} checked={mode === 'slide'} /> Slide</label>
+                                    <label><input className="uk-radio" type="radio" name="push" onChange={this.setMode} checked={mode === 'push'} /> Push</label>
+                                    <label><input className="uk-radio" type="radio" name="reveal" onChange={this.setMode} checked={mode === 'reveal'} /> Reveal</label>
+                                    <label><input className="uk-radio" type="radio" name="none" onChange={this.setMode} checked={mode === 'none'} /> None</label>
+                                </div>
+                                <label><Button onClick={this.toggleOffCanvas} className="uk-margin-small-right">Open</Button></label>
+                            </form>
+
+
                             <OffCanvas mode={mode} open={open} overlay={open} overlayBackground={open} overlayClick={this.closeOffCanvas}>
                                 <OffCanvasCloseButton onClick={this.closeOffCanvas} />
                                 <OffCanvasBody>

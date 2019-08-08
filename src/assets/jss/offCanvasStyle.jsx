@@ -129,9 +129,17 @@ export const offCanvasStyle = {
         boxSizing:'border-box',
     },
 
+    showCanvas:{
+        visibility:'visible',
+        transition: 'all .3s ease-out',
+        '-webkit-transition': 'all .3s ease-out',
+    },
+    hideCanvas:{
+        visibility:'hidden',
+    },
+
     /** slide */
     slide: {
-        visibility:'visible',
         background: '#fff',
         left:  '-270px',
         '@media (min-width: 960px)': {
@@ -173,7 +181,6 @@ export const offCanvasStyle = {
         transition: 'width 0.3s', 
     },
     revealOpen:{
-        
         width: '270px',
         '@media (min-width: 960px)': { 
             width: '350px'

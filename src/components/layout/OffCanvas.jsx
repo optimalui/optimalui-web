@@ -70,26 +70,12 @@ class OffCanvas extends Component {
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
- 
-        // if (nextProps.mode !== prevState.animationMode) {
-        //     return {
-        //         animationMode: nextProps.mode,
-        //     }
-        // }
-
-        // if (nextProps.open !== prevState.openCanvas) {
-        //     return {
-        //         openCanvas:nextProps.open,
-        //     }
-        // }
-
         return {
-            pushBody: nextProps.open && (nextProps.mode === 'push' || nextProps.mode === 'reveal')
+            openCanvas: nextProps.open,
+            pushBody: nextProps.open && (nextProps.mode === 'push' || nextProps.mode === 'reveal'),
+            animationMode: nextProps.mode
         }
-
-        return null
     }
-
 
     render() {
 
@@ -109,21 +95,22 @@ class OffCanvas extends Component {
 
         const {openCanvas,animationMode,pushBody,animationModeClass} = this.state
 
-        console.log(openCanvas)
+        console.log(this.state)
 
         const canvasClass = cx({
             [classes.canvas]: position === 'left',
             [classes.canvasRight]: position === 'right',
 
-            [classes.slide]: position === 'left' && mode==='slide' ,
-            [classes.slideRight]: position === 'right' && mode==='slide' ,
-            [classes.push]: position === 'left' &&  mode==='push' ,
-            [classes.reveal]: position === 'left' && mode==='reveal' ,
+            [classes.slide]: position === 'left' && animationMode==='slide' ,
+            [classes.slideRight]: position === 'right' && animationMode==='slide' ,
+            [classes.push]: position === 'left' &&  animationMode==='push' ,
+            [classes.reveal]: position === 'left' && animationMode==='reveal' ,
 
-            [classes.slideOpen]: position === 'left' && open && mode==='slide' ,
-            [classes.slideRightOpen]: position === 'right' && open && mode==='slide' ,
-            [classes.pushOpen]: position === 'left' && open && mode==='push' ,
-            [classes.revealOpen]: position === 'left' && open && mode==='reveal' ,
+            [classes.slideOpen]: position === 'left' && openCanvas && animationMode==='slide' ,
+            [classes.slideRightOpen]: position === 'right' && openCanvas && animationMode==='slide' ,
+            [classes.pushOpen]: position === 'left' && openCanvas && animationMode==='push' && pushBody ,
+            [classes.revealOpen]: position === 'left' && openCanvas && animationMode==='reveal' && pushBody  ,
+
         },customClassName)
 
 
@@ -146,7 +133,7 @@ class OffCanvas extends Component {
 
         return (
             <React.Fragment>
-                {/* <div className={overlayClass} {...overlayEvents}>
+                <div className={overlayClass} {...overlayEvents}>
                     <div className={canvasClass} {...other} ref={(node) => { this.offCanvasRef = node }}>
                         <div className={classes.canvasContent}>
                             {React.Children.map(children, (child) => {
@@ -156,7 +143,7 @@ class OffCanvas extends Component {
                             })}
                         </div>
                     </div>
-                </div> */}
+                </div>
             </React.Fragment>   
         )
     }
