@@ -306,8 +306,10 @@ class OffCanvasMode extends React.Component{
         this.state = {
             open: false,
             mode: 'slide',
+            overlay:true,
         }
         this.setMode = this.setMode.bind(this)
+        this.setOverlay = this.setOverlay.bind(this)
         
     }
 
@@ -322,7 +324,9 @@ class OffCanvasMode extends React.Component{
 
     setMode(e){
         this.setState({mode:e.target.name});
-
+    }
+    setOverlay(e){
+        this.setState({overlay:e.target.checked});
     }
 
     render() {
@@ -382,7 +386,7 @@ class OffCanvasMode extends React.Component{
             document.querySelector('my-app')
         )`
 
-        const {open,mode} = this.state
+        const {open,mode,overlay} = this.state
 
         return (
             <React.Fragment>
@@ -417,18 +421,35 @@ class OffCanvasMode extends React.Component{
                 <div className="uk-position-relative uk-margin-medium">
                     <TabStrip>
                         <Tab title="Preview">
-                            <form>
-                                <div className="uk-margin uk-grid-small uk-child-width-auto uk-grid">
-                                    <label><input className="uk-radio" type="radio" name="slide" onChange={this.setMode} checked={mode === 'slide'} /> Slide</label>
-                                    <label><input className="uk-radio" type="radio" name="push" onChange={this.setMode} checked={mode === 'push'} /> Push</label>
-                                    <label><input className="uk-radio" type="radio" name="reveal" onChange={this.setMode} checked={mode === 'reveal'} /> Reveal</label>
-                                    <label><input className="uk-radio" type="radio" name="none" onChange={this.setMode} checked={mode === 'none'} /> None</label>
+                            <form className="uk-form-stacked">
+                                <div className="uk-margin">
+                                    <label className="uk-form-label" for="form-stacked-text">Animation Mode</label>
+                                    <div className="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+                                        <label><input className="uk-radio" type="radio" name="slide" onChange={this.setMode} checked={mode === 'slide'} /> Slide</label>
+                                        <label><input className="uk-radio" type="radio" name="push" onChange={this.setMode} checked={mode === 'push'} /> Push</label>
+                                        <label><input className="uk-radio" type="radio" name="reveal" onChange={this.setMode} checked={mode === 'reveal'} /> Reveal</label>
+                                        <label><input className="uk-radio" type="radio" name="none" onChange={this.setMode} checked={mode === 'none'} /> None</label>
+                                    </div>
                                 </div>
-                                <label><Button onClick={this.toggleOffCanvas} className="uk-margin-small-right">Open</Button></label>
+                                <div className="uk-margin">
+                                    <label className="uk-form-label" for="form-stacked-text">Position</label>
+                                    <div className="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+                                        <label><input className="uk-radio" type="radio" name="slide" onChange={this.setMode} checked={mode === 'slide'} /> Left</label>
+                                        <label><input className="uk-radio" type="radio" name="push" onChange={this.setMode} checked={mode === 'push'} /> Right</label>
+                                        <label><input className="uk-radio" type="radio" name="reveal" onChange={this.setMode} checked={mode === 'reveal'} /> Top</label>
+                                        <label><input className="uk-radio" type="radio" name="none" onChange={this.setMode} checked={mode === 'none'} /> Bottom</label>
+                                    </div>
+                                </div>
+                                <div className="uk-margin">
+                                    <label><input className="uk-checkbox" type="checkbox" name="none" onChange={this.setOverlay} checked={overlay === true} /> Overlay</label>
+                                </div>
+                                <div className="uk-margin" style={{pull:'right'}}>
+                                    <label><Button onClick={this.toggleOffCanvas} className="uk-margin-small-right">Open</Button></label>
+                                </div>
                             </form>
 
 
-                            <OffCanvas mode={mode} open={open} overlay={open} overlayBackground={open} overlayClick={this.closeOffCanvas}>
+                            <OffCanvas mode={mode} open={open} overlay={open} overlayBackground={overlay} overlayClick={this.closeOffCanvas}>
                                 <OffCanvasCloseButton onClick={this.closeOffCanvas} />
                                 <OffCanvasBody>
                                     <h3>Title</h3>

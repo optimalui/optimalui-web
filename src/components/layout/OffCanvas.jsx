@@ -1,13 +1,12 @@
 /* eslint-disable */
 import React, { Component, cloneElement,useEffect } from 'react';
-import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { offCanvasStyle } from '../../assets/jss'
-import { OffCanvasBody, OffCanvasCloseButton,OffCanvasOverlay} from '../layout'
-import injectSheet from 'react-jss'
+import { OffCanvasBody, OffCanvasCloseButton} from '../layout'
 import _ from 'lodash'
 import {noop} from '../../util'
+import injectSheet from 'react-jss'
 
 
 
@@ -49,8 +48,9 @@ class OffCanvas extends Component {
     componentDidMount(){
         const {
             mode,
-            classes,
+            open,
             position,
+            classes,
         } = this.props;
         if (position === 'left') {
             document.body.classList.add(classes.beforePushBodyStyle)
@@ -70,19 +70,28 @@ class OffCanvas extends Component {
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
-        return {
-            openCanvas: nextProps.open,
-            pushBody: nextProps.open && (nextProps.mode === 'push' || nextProps.mode === 'reveal'),
-            animationMode: nextProps.mode
+        if (prevState.openCanvas !== nextProps.open) {
+            return {
+                openCanvas: nextProps.open,
+                pushBody: nextProps.open && (nextProps.mode === 'push' || nextProps.mode === 'reveal'),
+            }
         }
+
+        if (prevState.animationMode !== nextProps.mode) {
+            return {
+                animationMode: nextProps.mode
+            }
+        }
+
+        return null
     }
 
     render() {
 
         const {
             children,
-            classes,
             className: customClassName,
+            classes,
             open,
             mode,
             overlay,
@@ -95,38 +104,42 @@ class OffCanvas extends Component {
 
         const {openCanvas,animationMode,pushBody,animationModeClass} = this.state
 
-        console.log(this.state)
-
         const canvasClass = cx({
-            [classes.canvas]: position === 'left',
-            [classes.canvasRight]: position === 'right',
+                [classes.canvas]: position === 'left',
+                [classes.canvasRight]: position === 'right',
+    
+                [classes.slide]: position === 'left' && animationMode==='slide' ,
+                [classes.slideRight]: position === 'right' && animationMode==='slide' ,
+                [classes.push]: position === 'left' &&  animationMode==='push' ,
+                [classes.reveal]: position === 'left' && animationMode==='reveal' ,
+    
+                [classes.slideOpen]: position === 'left' && openCanvas && animationMode==='slide' ,
+                [classes.slideRightOpen]: position === 'right' && openCanvas && animationMode==='slide' ,
 
-            [classes.slide]: position === 'left' && animationMode==='slide' ,
-            [classes.slideRight]: position === 'right' && animationMode==='slide' ,
-            [classes.push]: position === 'left' &&  animationMode==='push' ,
-            [classes.reveal]: position === 'left' && animationMode==='reveal' ,
+                [classes.pushOpen]: position === 'left' && openCanvas && animationMode==='push' && pushBody ,
+                [classes.revealOpen]: position === 'left' && openCanvas && animationMode==='reveal' && pushBody  ,
 
-            [classes.slideOpen]: position === 'left' && openCanvas && animationMode==='slide' ,
-            [classes.slideRightOpen]: position === 'right' && openCanvas && animationMode==='slide' ,
-            [classes.pushOpen]: position === 'left' && openCanvas && animationMode==='push' && pushBody ,
-            [classes.revealOpen]: position === 'left' && openCanvas && animationMode==='reveal' && pushBody  ,
-
-        },customClassName)
-
-
+                [classes.none]: position === 'left' && animationMode==='none',
+                [classes.noneOpen]: position === 'left' && openCanvas && animationMode==='none',
+    
+            })
 
         const overlayClass = cx({
             [classes.overlay]: overlay,
             [classes.overlayBackground]: overlayBackground && overlay,
         }, overlayClassName)
 
+        const contentClass = cx(classes.canvasContent,{
+            [classes.showCanvas]:openCanvas
+        })
+
         const overlayEvents = {
             onClick:overlayClick
         }
 
-        if(pushBody){
+        if (pushBody) {
             this.addPushBodyStyle()
-        }else{
+        } else {
             this.removePushBodyStyle()
         }
 
@@ -135,7 +148,7 @@ class OffCanvas extends Component {
             <React.Fragment>
                 <div className={overlayClass} {...overlayEvents}>
                     <div className={canvasClass} {...other} ref={(node) => { this.offCanvasRef = node }}>
-                        <div className={classes.canvasContent}>
+                        <div className={contentClass}>
                             {React.Children.map(children, (child) => {
                                 if ((child.type === OffCanvasBody || child.type === OffCanvasCloseButton)) {
                                     return cloneElement(child, { ...child.props })

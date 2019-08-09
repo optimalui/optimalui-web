@@ -1,4 +1,4 @@
-
+import { StyleSheet } from 'aphrodite/no-important';
 
 // export const offCanvasStyle = {
 //     leftCanvasRoot:{
@@ -93,7 +93,7 @@
 export const offCanvasStyle = {
     canvas:{
         position: 'fixed',  
-        visibility: 'hidden', 
+        visibility:'hidden',
         top: 0, 
         bottom: 0, 
         left:0, 
@@ -102,19 +102,20 @@ export const offCanvasStyle = {
         width: '270px',
         boxSizing: 'border-box', 
         overflowY: 'auto', 
-        // '&::after':{
-        //     position: 'fixed',  
-        //     top: 0, 
-        //     bottom: 0, 
-        //     left:0, 
-        //     width: '100%',
-        //     height: '100%',
-        // },
+        '&::after':{
+            position: 'fixed',  
+            top: 0, 
+            bottom: 0, 
+            left:0, 
+            width: '100%',
+            height: '100%',
+        },
         '@media (min-width: 960px)': {
             width: '350px',
         }
     },
     canvasContent:{
+        visibility: 'hidden',
         position: 'absolute',
         width: '270px',
         top: 0,
@@ -127,15 +128,14 @@ export const offCanvasStyle = {
             width: '350px',
         },
         boxSizing:'border-box',
+        transition:'visibility 0.3s'
     },
 
     showCanvas:{
-        visibility:'visible',
-        transition: 'all .3s ease-out',
-        '-webkit-transition': 'all .3s ease-out',
+        visibility:'visible'
     },
     hideCanvas:{
-        visibility:'hidden',
+        display:'none'
     },
 
     /** slide */
@@ -149,6 +149,7 @@ export const offCanvasStyle = {
         '-webkit-transition': 'left .3s ease-out',
     },
     slideOpen:{
+        visibility:'visible',
         left:0
     },
 
@@ -169,7 +170,6 @@ export const offCanvasStyle = {
         touchAction: 'pan-y pinch-zoom'
     },
     reveal:{
-        visibility:'visible',
         background:'#fff',
         top: 0,
         bottom: 0,
@@ -181,6 +181,7 @@ export const offCanvasStyle = {
         transition: 'width 0.3s', 
     },
     revealOpen:{
+        visibility:'visible',
         width: '270px',
         '@media (min-width: 960px)': { 
             width: '350px'
@@ -189,10 +190,10 @@ export const offCanvasStyle = {
 
     /**push */
     push:{
-        visibility:'visible',
         background:'#fff',
         top: 0,
         bottom: 0,
+        width:0,
         width:'270px',
         left: '-270px',
         '@media (min-width: 960px)': { 
@@ -204,9 +205,9 @@ export const offCanvasStyle = {
         transition: 'left .3s',
     },
     pushOpen:{
+        visibility:'visible',
         left: 0
     },
-
     overlay: {
         position: 'fixed',
         width: '100%', /* Full width (cover the whole page) */
@@ -219,6 +220,19 @@ export const offCanvasStyle = {
     },
     overlayBackground: {
         backgroundColor: 'rgba(0,0,0,0.1)', /* Black background with opacity */
+    },
+
+    /**none mode */
+    none: {
+        background: '#fff',
+        left: '-270px',
+        '@media (min-width: 960px)': {
+            left: '-350px',
+        },
+    },
+    noneOpen: {
+        visibility: 'visible',
+        left: 0
     },
 
     /*** Right Canvas */
@@ -257,14 +271,16 @@ export const offCanvasStyle = {
 
     /** slide right */
     slideRight:{
+        visibility:'visible',
         background: '#fff',
-        '-webkit-transform': 'translate3d(100%, 0, 0)',
-        transform: 'translate3d(100%, 0, 0)',
+        right:  '-270px',
+        '@media (min-width: 960px)': {
+            right:  '-350px',
+        },
+        transition: 'right .3s ease-out',
+        '-webkit-transition': 'right .3s ease-out',
     },
     slideRightOpen:{
-        visibility: 'visible',
-        background: '#fff',
-        '-webkit-transform': 'translate3d(0, 0, 0)',
-        transform: 'translate3d(0, 0, 0)',
+        right:0
     },
 }
