@@ -8,10 +8,17 @@ import * as serviceWorker from './serviceWorker';
 import { Provider} from 'mini-store';
 import { miniStore as store } from './_helpers'
 import  './App.css'
+import { ThemeProvider } from "react-jss";
+
+const theme = {
+    
+}
 
 ReactDOM.render(
     <Provider store={store}>
-        <App />
+        <ThemeProvider theme={theme}>
+            <App />
+        </ThemeProvider>
     </Provider>,
     document.getElementById('root')
 );

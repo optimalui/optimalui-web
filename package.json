@@ -15,7 +15,7 @@
     "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.8.4",
     "react-html-parser": "^2.0.2",
-    "react-jss": "^8.6.1",
+    "react-jss": "^10.0.0-alpha.23",
     "react-notifications": "^1.4.3",
     "react-redux": "^6.0.1",
     "react-router-dom": "^5.0.0",

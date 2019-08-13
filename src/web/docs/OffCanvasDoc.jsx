@@ -307,9 +307,11 @@ class OffCanvasMode extends React.Component{
             open: false,
             mode: 'slide',
             overlay:true,
+            position:'left'
         }
         this.setMode = this.setMode.bind(this)
         this.setOverlay = this.setOverlay.bind(this)
+        this.setPosition = this.setPosition.bind(this)
         
     }
 
@@ -328,6 +330,11 @@ class OffCanvasMode extends React.Component{
     setOverlay(e){
         this.setState({overlay:e.target.checked});
     }
+
+    setPosition(e){
+        this.setState({position:e.target.name});
+    }
+    
 
     render() {
         const src=`
@@ -386,7 +393,7 @@ class OffCanvasMode extends React.Component{
             document.querySelector('my-app')
         )`
 
-        const {open,mode,overlay} = this.state
+        const {open,mode,overlay,position} = this.state
 
         return (
             <React.Fragment>
@@ -423,7 +430,7 @@ class OffCanvasMode extends React.Component{
                         <Tab title="Preview">
                             <form className="uk-form-stacked">
                                 <div className="uk-margin">
-                                    <label className="uk-form-label" for="form-stacked-text">Animation Mode</label>
+                                    <label className="uk-form-label">Animation Mode</label>
                                     <div className="uk-margin uk-grid-small uk-child-width-auto uk-grid">
                                         <label><input className="uk-radio" type="radio" name="slide" onChange={this.setMode} checked={mode === 'slide'} /> Slide</label>
                                         <label><input className="uk-radio" type="radio" name="push" onChange={this.setMode} checked={mode === 'push'} /> Push</label>
@@ -432,12 +439,10 @@ class OffCanvasMode extends React.Component{
                                     </div>
                                 </div>
                                 <div className="uk-margin">
-                                    <label className="uk-form-label" for="form-stacked-text">Position</label>
+                                    <label className="uk-form-label">Position</label>
                                     <div className="uk-margin uk-grid-small uk-child-width-auto uk-grid">
-                                        <label><input className="uk-radio" type="radio" name="slide" onChange={this.setMode} checked={mode === 'slide'} /> Left</label>
-                                        <label><input className="uk-radio" type="radio" name="push" onChange={this.setMode} checked={mode === 'push'} /> Right</label>
-                                        <label><input className="uk-radio" type="radio" name="reveal" onChange={this.setMode} checked={mode === 'reveal'} /> Top</label>
-                                        <label><input className="uk-radio" type="radio" name="none" onChange={this.setMode} checked={mode === 'none'} /> Bottom</label>
+                                        <label><input className="uk-radio" type="radio" name="left" onChange={this.setPosition} checked={position === 'left'} /> Left</label>
+                                        <label><input className="uk-radio" type="radio" name="right" onChange={this.setPosition} checked={position === 'right'} /> Right</label>
                                     </div>
                                 </div>
                                 <div className="uk-margin">
@@ -449,7 +454,7 @@ class OffCanvasMode extends React.Component{
                             </form>
 
 
-                            <OffCanvas mode={mode} open={open} overlay={open} overlayBackground={overlay} overlayClick={this.closeOffCanvas}>
+                            <OffCanvas mode={mode} open={open} overlay={overlay && open} overlayBackground={overlay && open} overlayClick={this.closeOffCanvas} position={position}>
                                 <OffCanvasCloseButton onClick={this.closeOffCanvas} />
                                 <OffCanvasBody>
                                     <h3>Title</h3>

@@ -9,7 +9,6 @@ import {noop} from '../../util'
 import injectSheet from 'react-jss'
 
 
-
 class OffCanvas extends Component {
     static propTypes = {
         open: PropTypes.bool,
@@ -21,6 +20,7 @@ class OffCanvas extends Component {
         overlayClassName:PropTypes.string,
         className:PropTypes.string,
         width:PropTypes.number,
+        style:PropTypes.object
     }
 
     static defaultProps = {
@@ -32,7 +32,8 @@ class OffCanvas extends Component {
         overlayClick:noop,
         className:'',
         overlayClassName:'',
-        width:270
+        width:270,
+        style:{}
     }
 
     constructor(props) {
@@ -41,7 +42,8 @@ class OffCanvas extends Component {
             openCanvas:false,
             animationModeClass:null,
             pushBody:false,
-            animationMode:'slide'
+            animationMode:'slide',
+            canvasPosition:'left'
         }
     }
 
@@ -52,20 +54,26 @@ class OffCanvas extends Component {
             position,
             classes,
         } = this.props;
-        if (position === 'left') {
-            document.body.classList.add(classes.beforePushBodyStyle)
-        }
 
+            
     }
 
     addPushBodyStyle() {
-        const { classes } = this.props
-        document.body.classList.add(classes.pushBodyStyle)
+        const {
+            position,
+            classes,
+        } = this.props;
+        const bodyStyle = position === 'left' ? classes.pushBodyStyle :classes.pushBodyStyleRight
+        document.body.classList.add(bodyStyle)
         document.documentElement.style.overflow = 'hidden'
     }
     removePushBodyStyle(){
-        const {classes} = this.props
-        document.body.classList.remove(classes.pushBodyStyle)
+        const {
+            position,
+            classes,
+        } = this.props;
+        const bodyStyle = position === 'left' ? classes.pushBodyStyle : classes.pushBodyStyleRight
+        document.body.classList.remove(bodyStyle)
         document.documentElement.style.overflow = null
     }
 
@@ -79,7 +87,13 @@ class OffCanvas extends Component {
 
         if (prevState.animationMode !== nextProps.mode) {
             return {
-                animationMode: nextProps.mode
+                animationMode: nextProps.mode,
+            }
+        }
+
+        if(prevState.canvasPosition!==nextProps.position){
+            return {
+                canvasPosition:nextProps.position
             }
         }
 
@@ -91,7 +105,6 @@ class OffCanvas extends Component {
         const {
             children,
             className: customClassName,
-            classes,
             open,
             mode,
             overlay,
@@ -99,28 +112,34 @@ class OffCanvas extends Component {
             position,
             overlayClick,
             overlayClassName,
+            style:customStyle,
+            classes,
             ...other
         } = this.props;
 
-        const {openCanvas,animationMode,pushBody,animationModeClass} = this.state
-
+        const {openCanvas,animationMode,pushBody,canvasPosition} = this.state
+    
         const canvasClass = cx({
-                [classes.canvas]: position === 'left',
-                [classes.canvasRight]: position === 'right',
+                [classes.canvas]: canvasPosition === 'left',
+                [classes.canvasRight]: canvasPosition === 'right',
     
-                [classes.slide]: position === 'left' && animationMode==='slide' ,
-                [classes.slideRight]: position === 'right' && animationMode==='slide' ,
-                [classes.push]: position === 'left' &&  animationMode==='push' ,
-                [classes.reveal]: position === 'left' && animationMode==='reveal' ,
+                // [classes.slide]: canvasPosition === 'left' && animationMode==='slide' ,
+                // [classes.slideRight]: canvasPosition === 'right' && animationMode==='slide' ,
+                // [classes.slideOpen]: canvasPosition === 'left' && openCanvas && animationMode==='slide' ,
+                // [classes.slideRightOpen]: canvasPosition === 'right' && openCanvas && animationMode==='slide' ,
+
+                // [classes.push]: canvasPosition === 'left' &&  animationMode==='push' ,
+                // [classes.pushOpen]: canvasPosition === 'left' && openCanvas && animationMode==='push',
+                // [classes.pushRight]: canvasPosition === 'right' &&  animationMode==='push' ,
+                // [classes.pushRightOpen]: canvasPosition === 'right' && openCanvas && animationMode==='push' ,
+
+                // [classes.reveal]: canvasPosition === 'left' && animationMode==='reveal' ,
+                // [classes.revealRight]: canvasPosition === 'right' && animationMode==='reveal' ,
+                // [classes.revealOpen]: canvasPosition === 'left' && openCanvas && animationMode==='reveal' ,
+                // [classes.revealRightOpen]: canvasPosition === 'right' && openCanvas && animationMode==='reveal',
     
-                [classes.slideOpen]: position === 'left' && openCanvas && animationMode==='slide' ,
-                [classes.slideRightOpen]: position === 'right' && openCanvas && animationMode==='slide' ,
-
-                [classes.pushOpen]: position === 'left' && openCanvas && animationMode==='push' && pushBody ,
-                [classes.revealOpen]: position === 'left' && openCanvas && animationMode==='reveal' && pushBody  ,
-
-                [classes.none]: position === 'left' && animationMode==='none',
-                [classes.noneOpen]: position === 'left' && openCanvas && animationMode==='none',
+                // [classes.none]: canvasPosition === 'left' && animationMode==='none',
+                // [classes.noneOpen]: canvasPosition === 'left' && openCanvas && animationMode==='none',
     
             })
 
@@ -129,13 +148,37 @@ class OffCanvas extends Component {
             [classes.overlayBackground]: overlayBackground && overlay,
         }, overlayClassName)
 
-        const contentClass = cx(classes.canvasContent,{
-            [classes.showCanvas]:openCanvas
+        const canvasBarClass = cx({
+            [classes.canvasContent]: canvasPosition === 'left',
+            [classes.canvasContentRight]: canvasPosition === 'right',
+
+            [classes.slide]: canvasPosition === 'left' && animationMode==='slide' ,
+            [classes.slideRight]: canvasPosition === 'right' && animationMode==='slide' ,
+            [classes.slideOpen]: canvasPosition === 'left' && openCanvas && animationMode==='slide' ,
+            [classes.slideRightOpen]: canvasPosition === 'right' && openCanvas && animationMode==='slide' ,
+
+            [classes.push]: canvasPosition === 'left' && animationMode === 'push',
+            [classes.pushOpen]: canvasPosition === 'left' && openCanvas && animationMode === 'push',
+            [classes.pushRight]: canvasPosition === 'right' && animationMode === 'push',
+            [classes.pushRightOpen]: canvasPosition === 'right' && openCanvas && animationMode === 'push',
+
+            [classes.reveal]: canvasPosition === 'left' && animationMode==='reveal' ,
+            [classes.revealRight]: canvasPosition === 'right' && animationMode==='reveal' ,
+            [classes.revealOpen]: canvasPosition === 'left' && openCanvas && animationMode==='reveal' ,
+            [classes.revealRightOpen]: canvasPosition === 'right' && openCanvas && animationMode==='reveal',
+
+            [classes.none]: canvasPosition === 'left' && animationMode === 'none',
+            [classes.noneOpen]: canvasPosition === 'left' && openCanvas && animationMode === 'none',
+
+
         })
 
-        const overlayEvents = {
-            onClick:overlayClick
+        if (position === 'left') {
+            document.body.classList.add(classes.beforePushBodyStyle)
+        } else if (position === 'right') {
+            document.body.classList.add(classes.beforePushBodyStyleRight)
         }
+
 
         if (pushBody) {
             this.addPushBodyStyle()
@@ -143,17 +186,34 @@ class OffCanvas extends Component {
             this.removePushBodyStyle()
         }
 
+        let canvasStyle = customStyle
+
+        if (openCanvas && animationMode !== 'slide') {
+            canvasStyle = Object.assign({ visibility: 'visible', transition: 'visibility .3s' }, canvasStyle)
+        } else if (animationMode !== 'slide') {
+            canvasStyle = Object.assign({ visibility: 'hidden', zIndex: -1 }, canvasStyle)
+        }
+
+        const overlayEvents = {
+            onClick:overlayClick
+        }
+
 
         return (
             <React.Fragment>
-                <div className={overlayClass} {...overlayEvents}>
-                    <div className={canvasClass} {...other} ref={(node) => { this.offCanvasRef = node }}>
-                        <div className={contentClass}>
-                            {React.Children.map(children, (child) => {
-                                if ((child.type === OffCanvasBody || child.type === OffCanvasCloseButton)) {
-                                    return cloneElement(child, { ...child.props })
-                                }
-                            })}
+                <div className={overlayClass} {...overlayEvents} >
+                    <div className={canvasClass} {...other} ref={(node) => { this.offCanvasRef = node }} style={canvasStyle}>
+                        <div className={canvasBarClass}>
+                            <div className={cx({
+                                [classes.canvasContent]: canvasPosition === 'left',
+                                [classes.canvasContentRight]: canvasPosition === 'right',
+                            })}>
+                                {React.Children.map(children, (child) => {
+                                    if ((child.type === OffCanvasBody || child.type === OffCanvasCloseButton)) {
+                                        return cloneElement(child, { ...child.props })
+                                    }
+                                })}
+                            </div>
                         </div>
                     </div>
                 </div>
