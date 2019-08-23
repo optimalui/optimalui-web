@@ -2,13 +2,18 @@ import React from 'react'
 import { offCanvasStyle } from '../../assets/jss'
 import injectSheet from 'react-jss'
 import cx from 'classnames'
+import {Icon} from '../Icon'
 
-const OffCanvasCloseButton = ({children,className,classes,...other})=>(
-    <button className={cx("uk-offcanvas-close",classes.closeButton,className)} type="button" uk-close="" {...other}>
-        {children}
-    </button>
-)
+const OffCanvasCloseButton = ({ children, className, ...other }) => {
+    const classes = offCanvasStyle(other)
+    return (
+        // <button className={cx(classes.closeButton, className)} type="button" {...other}>
+        //     {children}
+        // </button>
+        <Icon className={cx(classes.closeButton, className)} {...other}/>
+    )
+}
 
-const styledComponent = injectSheet(offCanvasStyle)(OffCanvasCloseButton)
+const styledComponent = OffCanvasCloseButton
 
 export {styledComponent as OffCanvasCloseButton}

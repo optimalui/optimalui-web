@@ -4,7 +4,17 @@ import MarkupButtons from './MarkupButtons';
 import { TabStrip, Tab,OffCanvas,OffCanvasBody,OffCanvasCloseButton } from '../../components/layout'; 
 import { Button } from '../../components/buttons'; 
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import {Icon} from '../../components'
 
+const closeButtonStyle={
+    position: 'absolute',
+    zIndex: 1000,
+    top: '20px',
+    right: '20px',
+    padding: '5px',
+    cursor:'pointer',
+    color: '#999',
+}
 
 const OffCanvasUsage = () => {
 
@@ -24,6 +34,18 @@ const OffCanvasUsage = () => {
     import ReactDOM from 'react-dom';
     import { OffCanvas,OffCanvasBody,OffCanvasCloseButton } from '@optimalui/components/layout'
     import { Button } from '@optimalui/components/buttons'; 
+    import {Icon} from '@optimalui/components'
+
+    const closeButtonStyle={
+        position: 'absolute',
+        zIndex: 1000,
+        top: '20px',
+        right: '20px',
+        padding: '5px',
+        cursor:'pointer',
+        color: '#999',
+    }
+
 
     const OffCanvasApp = () => {
         const [open,setOpen] = useState(false);
@@ -37,8 +59,8 @@ const OffCanvasUsage = () => {
             <React.Fragment>
                 <Button onClick={toggleOffCanvas}>Open</Button>
                 <OffCanvas open={open}>
-                    <OffCanvasCloseButton onClick={closeOffCanvas} />
                     <OffCanvasBody>
+                        <Icon name="close" style={closeButtonStyle} onClick={closeOffCanvas} />
                         <h3>Title</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                         Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
@@ -63,8 +85,8 @@ const OffCanvasUsage = () => {
                 <Tab title="Preview">
                     <Button onClick={toggleOffCanvas}>Open</Button>
                     <OffCanvas open={open} mode="slide">
-                        <OffCanvasCloseButton onClick={closeOffCanvas} />
                         <OffCanvasBody>
+                            <Icon name="close" style={closeButtonStyle} onClick={closeOffCanvas} />
                             <h3>Title</h3>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
@@ -103,6 +125,17 @@ const OffCanvasOverlayDoc = () => {
     import ReactDOM from 'react-dom';
     import { OffCanvas,OffCanvasBody,OffCanvasCloseButton } from '@optimalui/components/layout'
     import { Button } from '@optimalui/components/buttons'; 
+    import {Icon} from '@optimalui/components'
+
+    const closeButtonStyle={
+        position: 'absolute',
+        zIndex: 1000,
+        top: '20px',
+        right: '20px',
+        padding: '5px',
+        cursor:'pointer',
+        color: '#999',
+    }
 
     const OffCanvasApp = () => {
         const [open,setOpen] = useState(false);
@@ -126,8 +159,8 @@ const OffCanvasOverlayDoc = () => {
                 <Button onClick={toggleOffCanvasOverlay}>Overlay</Button>
 
                 <OffCanvas open={open} overlay={open} overlayClick={closeOffCanvas}>
-                    <OffCanvasCloseButton onClick={closeOffCanvas} />
                     <OffCanvasBody>
+                        <Icon name="close" style={closeButtonStyle} onClick={closeOffCanvas} />
                         <h3>Title</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
                             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
@@ -135,8 +168,8 @@ const OffCanvasOverlayDoc = () => {
                 </OffCanvas>
 
                 <OffCanvas open={openOverlay} overlay={openOverlay} overlayBackground overlayClick={closeOffCanvasOverlay}>
-                    <OffCanvasCloseButton onClick={closeOffCanvasOverlay} />
                     <OffCanvasBody>
+                        <Icon name="close" style={closeButtonStyle} onClick={closeOffCanvas} />
                         <h3>Title</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
                             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
@@ -164,8 +197,8 @@ const OffCanvasOverlayDoc = () => {
                     <Button onClick={toggleOffCanvasOverlay}>Overlay</Button>
 
                         <OffCanvas mode="slide" open={open} overlay={open} overlayClick={closeOffCanvas}>
-                            <OffCanvasCloseButton onClick={closeOffCanvas} />
                             <OffCanvasBody>
+                                <Icon name="close" style={closeButtonStyle} onClick={closeOffCanvas} />
                                 <h3>Title</h3>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
                                     Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
@@ -173,8 +206,8 @@ const OffCanvasOverlayDoc = () => {
                         </OffCanvas>
 
                         <OffCanvas mode="slide" open={openOverlay} overlay={openOverlay} overlayBackground overlayClick={closeOffCanvasOverlay}>
-                            <OffCanvasCloseButton onClick={closeOffCanvasOverlay} />
                             <OffCanvasBody>
+                                <Icon name="close" style={closeButtonStyle} onClick={closeOffCanvas} />
                                 <h3>Title</h3>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
                                     Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
@@ -240,7 +273,18 @@ const OffCanvasPosition = ()=>{
     import React from 'react';
     import ReactDOM from 'react-dom';
     import { OffCanvas,OffCanvasBody,OffCanvasCloseButton } from '@optimalui/components/layout'
-    import { Button } from '@optimalui/components/buttons'; 
+    import { Button } from '@optimalui/components/buttons';
+    import {Icon} from '@optimalui/components'
+    
+    const closeButtonStyle={
+        position: 'absolute',
+        zIndex: 1000,
+        top: '20px',
+        right: '20px',
+        padding: '5px',
+        cursor:'pointer',
+        color: '#999',
+    }
 
     const OffCanvasApp = () => {
         const [open,setOpen] = useState(false);
@@ -254,8 +298,8 @@ const OffCanvasPosition = ()=>{
             <React.Fragment>
                 <Button onClick={toggleOffCanvas}>Open</Button>
                 <OffCanvas open={open} overlay={open} overlayBackground overlayClick={closeOffCanvas} position="right">
-                    <OffCanvasCloseButton onClick={closeOffCanvas} />
                     <OffCanvasBody>
+                        <Icon name="close" style={closeButtonStyle} onClick={this.closeOffCanvas} />
                         <h3>Title</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
@@ -280,8 +324,8 @@ const OffCanvasPosition = ()=>{
                 <Tab title="Preview">
                         <Button onClick={toggleOffCanvas}>Open</Button>
                         <OffCanvas mode="slide" open={open} overlay={open} overlayBackground overlayClick={closeOffCanvas} position="right">
-                            <OffCanvasCloseButton onClick={closeOffCanvas} />
                             <OffCanvasBody>
+                                <Icon name="close" style={closeButtonStyle} onClick={closeOffCanvas} />
                                 <h3>Title</h3>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                                     Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
@@ -341,44 +385,89 @@ class OffCanvasMode extends React.Component{
         import React from 'react';
         import ReactDOM from 'react-dom';
         import { OffCanvas,OffCanvasBody,OffCanvasCloseButton } from '@optimalui/components/layout'
-        import { Button } from '@optimalui/components/buttons'; 
+        import { Button } from '@optimalui/components/buttons';
+        import {Icon} from '@optimalui/components' 
+
+        const closeButtonStyle={
+            position: 'absolute',
+            zIndex: 1000,
+            top: '20px',
+            right: '20px',
+            padding: '5px',
+            cursor:'pointer',
+            color: '#999',
+        }
     
-        const OffCanvasApp = () => {
-            const [open,setOpen] = useState(false);
-            const [openReveal,setOpenReveal] = useState(false);
-        
-            /**Slide */
-            const toggleOffCanvas = () => {
-                setOpen(!open)
+        class OffCanvasApp extends React.Component {
+            constructor(props) {
+                super(props)
+                this.state = {
+                    open: false,
+                    mode: 'slide',
+                    overlay:true,
+                    position:'left'
+                }
+                this.setMode = this.setMode.bind(this)
+                this.setOverlay = this.setOverlay.bind(this)
+                this.setPosition = this.setPosition.bind(this)
+                
             }
         
-            const closeOffCanvas = () => {
-                setOpen(false)
+            toggleOffCanvas = () => {
+                const { open } = this.state
+                this.setState({open: !open});
             }
         
-            /***Reveal */
-            const toggleOffCanvasReveal = () => {
-                setOpenReveal(!openReveal)
+            closeOffCanvas = () => {
+                this.setState({ open: false});
             }
         
-            const closeOffCanvasReveal = () => {
-                setOpenReveal(false)
+            setMode(e){
+                this.setState({mode:e.target.name});
             }
+            setOverlay(e){
+                this.setState({overlay:e.target.checked});
+            }
+        
+            setPosition(e){
+                this.setState({position:e.target.name});
+            }
+
+            render(){
+
+            const {open,mode,overlay,position} = this.state
+
             return(
                 <React.Fragment>
-                <Button onClick={toggleOffCanvas} className="uk-margin-small-right">Slide</Button>
-                <Button onClick={toggleOffCanvasReveal}>Reveal</Button>
-                <OffCanvas open={open} overlay={open} overlayBackground={open} overlayClick={closeOffCanvas}>
-                    <OffCanvasCloseButton onClick={closeOffCanvas} />
+                    <form className="uk-form-stacked">
+                        <div className="uk-margin">
+                            <label className="uk-form-label">Animation Mode</label>
+                            <div className="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+                                <label><input className="uk-radio" type="radio" name="slide" onChange={this.setMode} checked={mode === 'slide'} /> Slide</label>
+                                <label><input className="uk-radio" type="radio" name="push" onChange={this.setMode} checked={mode === 'push'} /> Push</label>
+                                <label><input className="uk-radio" type="radio" name="reveal" onChange={this.setMode} checked={mode === 'reveal'} /> Reveal</label>
+                                <label><input className="uk-radio" type="radio" name="none" onChange={this.setMode} checked={mode === 'none'} /> None</label>
+                            </div>
+                        </div>
+                        <div className="uk-margin">
+                            <label className="uk-form-label">Position</label>
+                            <div className="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+                                <label><input className="uk-radio" type="radio" name="left" onChange={this.setPosition} checked={position === 'left'} /> Left</label>
+                                <label><input className="uk-radio" type="radio" name="right" onChange={this.setPosition} checked={position === 'right'} /> Right</label>
+                            </div>
+                        </div>
+                        <div className="uk-margin">
+                            <label><input className="uk-checkbox" type="checkbox" name="none" onChange={this.setOverlay} checked={overlay === true} /> Overlay</label>
+                        </div>
+                        <div className="uk-margin" style={{pull:'right'}}>
+                            <label><Button onClick={this.toggleOffCanvas} className="uk-margin-small-right">Open</Button></label>
+                        </div>
+                </form>
+
+
+                <OffCanvas mode={mode} open={open} overlay={overlay && open} overlayBackground={overlay && open} overlayClick={this.closeOffCanvas} position={position}>
                     <OffCanvasBody>
-                        <h3>Title</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                    </OffCanvasBody>
-                </OffCanvas>
-                <OffCanvas open={openReveal} mode="reveal" overlay={openReveal} overlayBackground={openReveal} overlayClick={closeOffCanvasReveal}>
-                    <OffCanvasCloseButton onClick={closeOffCanvasReveal} />
-                    <OffCanvasBody>
+                        <Icon name="close" style={closeButtonStyle} onClick={this.closeOffCanvas} />
                         <h3>Title</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
@@ -386,6 +475,7 @@ class OffCanvasMode extends React.Component{
                 </OffCanvas>
                 </React.Fragment>
             )
+            }
         }
     
         ReactDOM.render(
@@ -454,13 +544,44 @@ class OffCanvasMode extends React.Component{
                             </form>
 
 
-                            <OffCanvas mode={mode} open={open} overlay={overlay && open} overlayBackground={overlay && open} overlayClick={this.closeOffCanvas} position={position}>
-                                <OffCanvasCloseButton onClick={this.closeOffCanvas} />
+                            <OffCanvas 
+                                mode={mode} open={open} 
+                                overlay={overlay && open} 
+                                overlayBackground={overlay && open} 
+                                overlayClick={this.closeOffCanvas} 
+                                position={position}
+                                width={500}>  
                                 <OffCanvasBody>
-                                    <h3>Title</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                         Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                </OffCanvasBody>
+                                    <Icon name="close" style={closeButtonStyle} onClick={this.closeOffCanvas} />
+                                    <form>
+                                        <fieldset class="uk-fieldset">
+                                            <legend class="uk-legend">Legend</legend>
+                                            <div class="uk-margin">
+                                                <input class="uk-input" type="text" placeholder="Input" />
+                                            </div>
+                                            <div class="uk-margin">
+                                                <select class="uk-select">
+                                                    <option>Option 01</option>
+                                                    <option>Option 02</option>
+                                                </select>
+                                            </div>
+                                            <div class="uk-margin">
+                                                <textarea class="uk-textarea" rows="5" placeholder="Textarea"></textarea>
+                                            </div>
+                                            <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+                                                <label><input class="uk-radio" type="radio" name="radio2" checked /> A</label>
+                                                <label><input class="uk-radio" type="radio" name="radio2" /> B</label>
+                                            </div>
+                                            <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+                                                <label><input class="uk-checkbox" type="checkbox" checked /> A</label>
+                                                <label><input class="uk-checkbox" type="checkbox" /> B</label>
+                                            </div>
+                                            <div class="uk-margin">
+                                                <input class="uk-range" type="range" value="2" min="0" max="10" step="0.1" />
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                               </OffCanvasBody>
                             </OffCanvas>
 
 
