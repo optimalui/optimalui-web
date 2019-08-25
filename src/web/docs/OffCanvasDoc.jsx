@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import MarkupButtons from './MarkupButtons';
-import { TabStrip, Tab,OffCanvas,OffCanvasBody,OffCanvasCloseButton } from '../../components/layout'; 
+import { TabStrip, Tab,OffCanvas,OffCanvasBody,Menu, MenuItem } from '../../components/layout'; 
 import { Button } from '../../components/buttons'; 
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import {Icon} from '../../components'
+
+/**for menu offcanvas */
 
 const closeButtonStyle={
     position: 'absolute',
@@ -351,7 +353,7 @@ class OffCanvasMode extends React.Component{
             open: false,
             mode: 'slide',
             overlay:true,
-            position:'left'
+            position:'left',
         }
         this.setMode = this.setMode.bind(this)
         this.setOverlay = this.setOverlay.bind(this)
@@ -378,7 +380,6 @@ class OffCanvasMode extends React.Component{
     setPosition(e){
         this.setState({position:e.target.name});
     }
-    
 
     render() {
         const src=`
@@ -545,39 +546,33 @@ class OffCanvasMode extends React.Component{
 
 
                             <OffCanvas 
-                                mode={mode} open={open} 
+                                mode={mode} 
+                                open={open} 
                                 overlay={overlay && open} 
                                 overlayBackground={overlay && open} 
                                 overlayClick={this.closeOffCanvas} 
                                 position={position}
-                                width={500}>  
+                                width={400}>  
                                 <OffCanvasBody>
                                     <Icon name="close" style={closeButtonStyle} onClick={this.closeOffCanvas} />
                                     <form>
-                                        <fieldset class="uk-fieldset">
-                                            <legend class="uk-legend">Legend</legend>
-                                            <div class="uk-margin">
-                                                <input class="uk-input" type="text" placeholder="Input" />
+                                        <fieldset className="uk-fieldset">
+                                            <legend className="uk-legend">Legend</legend>
+                                            <div className="uk-margin">
+                                                <input className="uk-input" type="text" placeholder="Input" />
                                             </div>
-                                            <div class="uk-margin">
-                                                <select class="uk-select">
+                                            <div className="uk-margin">
+                                                <select className="uk-select">
                                                     <option>Option 01</option>
                                                     <option>Option 02</option>
                                                 </select>
                                             </div>
-                                            <div class="uk-margin">
-                                                <textarea class="uk-textarea" rows="5" placeholder="Textarea"></textarea>
+                                            <div className="uk-margin">
+                                                <textarea className="uk-textarea" rows="5" placeholder="Textarea"></textarea>
                                             </div>
-                                            <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
-                                                <label><input class="uk-radio" type="radio" name="radio2" checked /> A</label>
-                                                <label><input class="uk-radio" type="radio" name="radio2" /> B</label>
-                                            </div>
-                                            <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
-                                                <label><input class="uk-checkbox" type="checkbox" checked /> A</label>
-                                                <label><input class="uk-checkbox" type="checkbox" /> B</label>
-                                            </div>
-                                            <div class="uk-margin">
-                                                <input class="uk-range" type="range" value="2" min="0" max="10" step="0.1" />
+                                            <div uk-margin="">
+                                                 <Button danger className="uk-margin-small-right" onClick={this.closeOffCanvas}>Cancel</Button>
+                                                 <Button onClick={this.closeOffCanvas}>Submit</Button>
                                             </div>
                                         </fieldset>
                                     </form>
@@ -595,6 +590,61 @@ class OffCanvasMode extends React.Component{
             </React.Fragment>
         )
     }
+}
+
+const OffcanvasMenu = ()=>{
+    const [open,setOpen] = useState(false);
+
+    const toggleOffCanvas = () => {
+        setOpen(!open)
+    }
+
+    const closeOffCanvas = () => {
+        setOpen(false)
+    }
+
+    const src = ``
+
+    return (
+        <React.Fragment>
+        <h2 id="menu" className="uk-h3 tm-heading-fragment"><a href="#menu">Menu in OffCanvas</a></h2>
+        <p>By default, the position of the <code>OffCanvas</code> component opens on the left edge of the screen. You can change the position of the component by setting the <code>position</code> prop as <code>left</code> or <code>right</code>.
+        </p>
+        <div className="uk-position-relative uk-margin-medium">
+            <TabStrip>
+                <Tab title="Preview">
+                        <Button onClick={toggleOffCanvas}>Open</Button>
+                        <OffCanvas mode="slide" open={open} overlay={open} overlayBackground overlayClick={closeOffCanvas} width={250}>
+                            <OffCanvasBody>
+                                <Icon name="close" style={closeButtonStyle} onClick={closeOffCanvas} />
+                                <Menu collapsible>
+                                    <MenuItem header text="Header"/>
+                                    <MenuItem parent text="Item1" icon="thumbnails">
+                                        <MenuItem text="Item1.1"/>
+                                        <MenuItem text="Item1.2"/>
+                                        <MenuItem text="Item1.3"/>
+                                    </MenuItem>
+                                    <MenuItem parent text="Item2" icon="cog">
+                                        <MenuItem text="Item2.1"/>
+                                        <MenuItem text="Item2.2"/>
+                                        <MenuItem text="Item2.3"/>
+                                    </MenuItem>
+                                    <MenuItem text="Item3" icon="settings"/>
+                                    <MenuItem text="Item4" icon="mail"/>
+                                    <MenuItem divider/>
+                                    <MenuItem text="Item5" icon="trash"/>
+                                </Menu>
+                            </OffCanvasBody>
+                        </OffCanvas>
+                </Tab>
+                <Tab title="Markup">
+                    <SyntaxHighlighter language='javascript' style={docco}>{src}</SyntaxHighlighter>
+                    <MarkupButtons codeText={src} />
+                </Tab>
+            </TabStrip>
+        </div>
+        </React.Fragment>
+    )
 }
 
 export const OffCanvasDoc = () => (
@@ -615,6 +665,9 @@ export const OffCanvasDoc = () => (
         {/**MODE */}
         <OffCanvasMode />
 
+        {/**MENU OFFCANVAS */}
+        <OffcanvasMenu/>
+
         <div className="tm-sidebar-right uk-visible@l">
             <div uk-sticky="offset: 160" className="uk-sticky uk-active uk-sticky-fixed">
                 <ul uk-scrollspy-nav="closest: li; scroll: true; offset: 100" className="uk-nav uk-nav-default tm-nav uk-nav-parent-icon">
@@ -622,6 +675,7 @@ export const OffCanvasDoc = () => (
                     <li className="uk-active"><a href="#overlay">Overlay</a></li>
                     <li className="uk-active"><a href="#position">Position</a></li>
                     <li className="uk-active"><a href="#mode">Animation Mode</a></li>
+                    <li className="uk-active"><a href="#menu">Menu in OffCanvas</a></li>
                 </ul>
             </div>
             <div className="uk-sticky-placeholder" style={{ height: '249px', margin: '0px' }}></div>

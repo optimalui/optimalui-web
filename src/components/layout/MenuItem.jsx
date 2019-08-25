@@ -38,7 +38,10 @@ class RegularMenuItem extends Component {
         vertical:PropTypes.bool,
         route:PropTypes.string,
         itemId:PropTypes.string,
-        toolbar:PropTypes.bool
+        toolbar:PropTypes.bool,
+        collapsible:PropTypes.bool,
+        header:PropTypes.bool,
+        divider:PropTypes.bool,
     };
 
     static defaultProps = {
@@ -55,7 +58,10 @@ class RegularMenuItem extends Component {
         iconClassName:'',
         vertical:false,
         route:'',
-        toolbar:false
+        toolbar:false,
+        collapsible:false,
+        header:false,//for collapsible
+        divider:false,// for collapsible
     };
 
     constructor(props) {
@@ -63,6 +69,7 @@ class RegularMenuItem extends Component {
         this.state = {
             isOpen: false,
             active: false,
+            itemMode:"hover",
         }
         this.handleClick = this.handleClick.bind(this)
         this.handleLinkClick = this.handleLinkClick.bind(this)
@@ -73,10 +80,10 @@ class RegularMenuItem extends Component {
 
     handleClick = (e) => {
         e.stopPropagation();
-        const { onSelect,onClick, mode } = this.props;
-        const { isOpen, } = this.state
+        const { onSelect,onClick} = this.props;
+        const { isOpen,itemMode } = this.state
 
-        if (mode === "click") {
+        if (itemMode === "click") {
             this.setState({ isOpen: !isOpen })
         }
 
@@ -85,16 +92,19 @@ class RegularMenuItem extends Component {
 
 
     handleLinkClick(e){
-        const {url,disabled} = this.props
-        if(!url || disabled){
+        const {url,disabled,collapsible} = this.props
+        const {isOpen} = this.state
+        if((!url || disabled) && !collapsible){
             e.preventDefault()
+        }else if(collapsible){
+            this.setState({ isOpen: !isOpen })
         }
     }
 
     handleMouseEnter = (e) => {
-        const {mode,onMouseEnter} = this.props;
+        const {onMouseEnter,collapsible} = this.props;
 
-        if (mode === "hover") {
+        if (this.state.itemMode === "hover") {
             this.setState({ isOpen: true}) 
         }
 
@@ -125,6 +135,17 @@ class RegularMenuItem extends Component {
         }
     };
 
+    static getDerivedStateFromProps(props, state) {
+        if (props.mode != state.itemMode && !props.collapsible) {
+            return { itemMode: props.mode };
+        }
+
+        if (props.collapsible) {
+            return { itemMode: "click" };
+        }
+        return null;
+      }
+
 
     render() {
         
@@ -150,14 +171,19 @@ class RegularMenuItem extends Component {
             staticContext,
             store,
             toolbar,
+            collapsible,
+            header,
+            divider,
             ...other
         } = this.props;
 
-        const { isOpen } = this.state
+        const { isOpen,itemMode } = this.state
 
         const customClass = cx(customClassName, {
             [classes.disabledItem]: disabled,
-            'parent': parent
+            'parent uk-parent': parent,
+            'uk-nav-header':header,
+            'uk-nav-divider':divider,
         })
 
 
@@ -181,7 +207,23 @@ class RegularMenuItem extends Component {
             [classes.activeMenuItem]:active
         })
 
+        const renderCollapsibleSubMenu = (parent && !disabled) &&
+            <ul className="uk-nav-sub">
+                {
+                    children
+                }
+            </ul>
 
+        const renderSubMenu = (parent && !disabled) &&
+            <div className={parentClassName} ref={(item) => { this.subMenuRef = item; }} uk-drop={vertical ? `boundary:!li; boundary-align: true; mode:${itemMode};pos: right-justify;` : `mode:${itemMode}`}>
+                <ul className={cx("uk-nav uk-navbar-dropdown-nav", classes.subMenu)}>
+                    {
+                        children
+                    }
+                </ul>
+            </div>
+        
+        
         return (
             <li
                 {...mouseEvents}
@@ -195,33 +237,23 @@ class RegularMenuItem extends Component {
                 aria-expanded = {isOpen}
                 >
 
-                {
-                        route ? 
+                {!(header || divider) ? (
+                    route ?
                         <Link replace={route === this.props.history.location.pathname} to={route} className={itemTextClass}>
-                            {icon &&  <Icon name={icon} className={iconClass} />}
-                            {text}
-                            {parent && !toolbar && <Icon name="triangle-right" className={classes.iconStyle} />}
-                        </Link> :
-                        <a href={`//${url}`} target={urlTarget}  className={itemTextClass} onClick={this.handleLinkClick}>
                             {icon && <Icon name={icon} className={iconClass} />}
                             {text}
-                            {parent && !toolbar && <Icon name="triangle-right" className={classes.iconStyle} />}
-                        </a>
+                            {parent && !toolbar && !collapsible && <Icon name="triangle-right" className={classes.iconStyle} />}
+                        </Link> :
+                        <a href={`//${url}`} target={urlTarget} className={itemTextClass} onClick={this.handleLinkClick}>
+                            {icon && <Icon name={icon} className={iconClass} />}
+                            {text}
+                            {parent && !toolbar && !collapsible && <Icon name="triangle-right" className={classes.iconStyle} />}
+                        </a>) : ''
 
                 } 
-
-                    
-                {(parent && !disabled) &&
-                    <div className={parentClassName} ref={(item) => { this.subMenuRef = item; }} uk-drop={vertical ? `boundary:!li; boundary-align: true; mode:${mode};pos: right-justify;`:`mode:${mode}`}>
-                        <ul className={cx("uk-nav uk-navbar-dropdown-nav", classes.subMenu)}>
-                            {
-                                children
-                            }
-                        </ul>
-                    </div>
-                }
-                    
-                    
+                {!(header || divider) ?
+                        (collapsible ? renderCollapsibleSubMenu : renderSubMenu) : ''} 
+                {header ? text : ''}
             </li >
         )
     }

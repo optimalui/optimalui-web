@@ -21,6 +21,7 @@ class RegularMenu extends Component {
         menuId: PropTypes.string,
         toolbar:PropTypes.bool,
         transparent: PropTypes.bool,
+        collapsible:PropTypes.bool,
     }
 
     static defaultProps = {
@@ -31,7 +32,8 @@ class RegularMenu extends Component {
         onSelect: noop,
         menuId: `menu-${uuidv4()}`,
         toolbar:false,
-        transparent: false
+        transparent: false,
+        collapsible:false
     }
 
     constructor(props) {
@@ -87,6 +89,7 @@ class RegularMenu extends Component {
             menuId,
             toolbar,
             transparent,
+            collapsible,
             ...other
         } = this.props;
 
@@ -103,7 +106,7 @@ class RegularMenu extends Component {
             "uk-navbar-center": alignItems === 'center',
         })
 
-        const SubMenu = ({ menuItems, mode, itemIndex }) => {
+        const SubMenu = ({ menuItems, mode,collapsible, itemIndex }) => {
             return _.map(menuItems, (item, index) => {
                 const itemId = typeof itemIndex!=='undefined' ? `${menuId}-menu-item-${itemIndex}-${index}` : `${menuId}-menu-item-${index}`
                 return createElement(
@@ -115,11 +118,12 @@ class RegularMenu extends Component {
                         key: itemId,
                         mode: mode,
                         menuId: menuId,
+                        collapsible,
                         toolbar,
                         itemId,
                         onClick: this.onSelect.bind(this, item)
                     },
-                    item.hasOwnProperty('items') && <SubMenu menuItems={item['items']} mode={mode} vertical={vertical} itemIndex={index} />
+                    item.hasOwnProperty('items') && <SubMenu menuItems={item['items']} mode={mode} vertical={vertical} collapsible={collapsible} itemIndex={index} />
                 )
             })
         }
@@ -141,6 +145,7 @@ class RegularMenu extends Component {
                     key: `menu-item-${index}`,
                     vertical: vertical,
                     onSelect: this.onSelect.bind(this, child),
+                    collapsible,
                     mode,
                     toolbar,
                     menuId
@@ -151,16 +156,29 @@ class RegularMenu extends Component {
 
         }
 
+
         return (
-            <nav className={navClass} uk-navbar={`mode:${mode};vertical:${vertical};`} {...other}  ref={this.menuRef}>
-                <div className={containerClassName}>
-                    <ul className="uk-navbar-nav" role="menu" aria-orientation={vertical ? 'vertical' : ''}>
+            <React.Fragment>
+                {collapsible && <div className="uk-nav uk-nav-default tm-nav">
+                    <ul className="uk-nav-default uk-nav-parent-icon" uk-nav="">
                         {
-                            items.length ? <SubMenu menuItems={items} mode={mode} /> : <CloneItems children={children} />
+                            items.length ? <SubMenu menuItems={items} mode={mode} collapsible={collapsible} /> : <CloneItems children={children} />
                         }
                     </ul>
                 </div>
-            </nav>
+                }
+
+                {!collapsible && <nav className={navClass} uk-navbar={`mode:${mode};vertical:${vertical};`} {...other} ref={this.menuRef}>
+                    <div className={containerClassName}>
+                        <ul className="uk-navbar-nav" role="menu" aria-orientation={vertical ? 'vertical' : ''}>
+                            {
+                                items.length ? <SubMenu menuItems={items} mode={mode} collapsible={collapsible} /> : <CloneItems children={children} />
+                            }
+                        </ul>
+                    </div>
+                </nav>
+                }
+            </React.Fragment>
         )
     }
 }
