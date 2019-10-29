@@ -882,6 +882,25 @@ const MenuVertical = () => (
     </React.Fragment>
 )
 
+const MenuCollapsible = ()=>(
+    <React.Fragment>
+    <h2 id="collapsible" className="uk-h3 tm-heading-fragment"><a href="#collapsible">Collapsible</a></h2>
+    <p>Set the <code>collapsible</code> prop as <code>true</code> to create a collapsible <code>Menu</code> component.</p>
+    <div className="uk-position-relative uk-margin-medium">
+        <TabStrip>
+            <Tab title="Preview">
+                <Menu items={bookCategories} mode="click" collapsible />
+            </Tab>
+            <Tab title="Markup">
+                <SyntaxHighlighter language='javascript' style={docco}>{verticalMenu}</SyntaxHighlighter>
+                <MarkupButtons codeText={verticalMenu} />
+            </Tab>
+        </TabStrip>
+        
+    </div>
+</React.Fragment>
+)
+
 const MenuRouter = () => (
     <React.Fragment>
         <h2 id="route" className="uk-h3 tm-heading-fragment"><a href="#route">Routing</a></h2>
@@ -1074,6 +1093,12 @@ const MenuProps = ()=>(
                         <td align="left"><code>no</code></td>
                         <td align="left"><code>false</code></td>
                     </tr>
+                    <tr>
+                        <td align="left"><code>collapsible</code></td>
+                        <td align="left"><code>bool</code></td>
+                        <td align="left"><code>no</code></td>
+                        <td align="left"><code>false</code></td>
+                    </tr>
 
                 </tbody>
             </table>
@@ -1114,6 +1139,9 @@ class MenuDoc extends React.Component {
 
                 {/** VERTICAL */}
                 <MenuVertical/>
+
+                {/** Collapsible */}
+                <MenuCollapsible/>
 
                 {/** ROUTER */}
                 <MenuRouter/>
@@ -1188,6 +1216,7 @@ class MenuDoc extends React.Component {
                             <li className=""><a href="#icon">Icon</a></li>
                             <li className=""><a href="#disabled">Disabled</a></li>
                             <li className=""><a href="#vertical">Vertical</a></li>
+                            <li className=""><a href="#collapsible">Collapsible</a></li>
                             <li className=""><a href="#route">Routing</a></li>
                             <li className=""><a href="#props">Menu Props</a></li>
                             <li className=""><a href="#menuitem">MenuItem Props</a></li>

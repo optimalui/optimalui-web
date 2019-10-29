@@ -9,7 +9,7 @@ import { noop } from '../../util'
 import { connect } from 'mini-store'
 import uuidv4 from 'uuid'
 import _ from 'lodash'
-
+import { withTheme } from 'theming'; 
 
 class RegularMenu extends Component {
     static propTypes = {
@@ -22,6 +22,8 @@ class RegularMenu extends Component {
         toolbar:PropTypes.bool,
         transparent: PropTypes.bool,
         collapsible:PropTypes.bool,
+        style:PropTypes.object,
+        menuTheme:PropTypes.string,
     }
 
     static defaultProps = {
@@ -33,7 +35,9 @@ class RegularMenu extends Component {
         menuId: `menu-${uuidv4()}`,
         toolbar:false,
         transparent: false,
-        collapsible:false
+        collapsible:false,
+        style:{},
+        menuTheme:'default'
     }
 
     constructor(props) {
@@ -82,14 +86,17 @@ class RegularMenu extends Component {
             children,
             alignItems,
             className: customClassName,
-            items,
             classes,
+            items,
             mode,
             vertical,
             menuId,
             toolbar,
             transparent,
             collapsible,
+            menuTheme,
+            theme,
+            style:customMenuStyle,
             ...other
         } = this.props;
 
@@ -156,6 +163,10 @@ class RegularMenu extends Component {
 
         }
 
+        let setMenuStyle =customMenuStyle
+        if(menuTheme==='dark'){
+            setMenuStyle = Object.assign(setMenuStyle,theme.darkTheme)
+        }
 
         return (
             <React.Fragment>
@@ -168,8 +179,8 @@ class RegularMenu extends Component {
                 </div>
                 }
 
-                {!collapsible && <nav className={navClass} uk-navbar={`mode:${mode};vertical:${vertical};`} {...other} ref={this.menuRef}>
-                    <div className={containerClassName}>
+                {!collapsible && <nav className={navClass} uk-navbar={`mode:${mode};vertical:${vertical};`} {...other} ref={this.menuRef}  style={setMenuStyle}>
+                    <div className={containerClassName} >
                         <ul className="uk-navbar-nav" role="menu" aria-orientation={vertical ? 'vertical' : ''}>
                             {
                                 items.length ? <SubMenu menuItems={items} mode={mode} collapsible={collapsible} /> : <CloneItems children={children} />
@@ -182,6 +193,7 @@ class RegularMenu extends Component {
         )
     }
 }
-const styledMenu = injectSheet(menuStyle)(RegularMenu)
+const themedMenu = withTheme(RegularMenu)
+const styledMenu = injectSheet(menuStyle)(themedMenu)
 
 export { styledMenu as Menu }

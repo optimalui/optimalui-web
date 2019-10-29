@@ -5,6 +5,7 @@ import { TabStrip, Tab,OffCanvas,OffCanvasBody,Menu, MenuItem } from '../../comp
 import { Button } from '../../components/buttons'; 
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import {Icon} from '../../components'
+import { Link, Route, Switch, BrowserRouter as Router, HashRouter } from "react-router-dom";
 
 /**for menu offcanvas */
 
@@ -17,6 +18,91 @@ const closeButtonStyle={
     cursor:'pointer',
     color: '#999',
 }
+
+const Home = () => (
+    <React.Fragment>
+        <p className="uk-text-lead">Home</p>
+        <p>
+            Nunc nulla. Praesent turpis.
+
+            Praesent nonummy mi in odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+
+            Donec vitae orci sed dolor rutrum auctor. Suspendisse feugiat.
+        </p>
+    </React.Fragment>
+)
+
+const Products = () => (
+    <React.Fragment>
+        <p className="uk-text-lead">Products</p>
+        <p>
+            Aliquam lobortis. Nam at tortor in tellus interdum sagittis. Fusce ac felis sit amet ligula pharetra condimentum. Aliquam lobortis.
+        </p>
+    </React.Fragment>
+)
+
+
+const Team = () => (
+    <React.Fragment>
+        <p className="uk-text-lead">Our Team</p>
+        <p>
+            Donec posuere vulputate arcu. Fusce a quam.
+        </p>
+    </React.Fragment>
+)
+
+const ContactUs = () => (
+    <React.Fragment>
+        <p className="uk-text-lead">Contact Us</p>
+        <p>
+        Quisque libero metus, condimentum nec, tempor a, commodo mollis, magna. Etiam vitae tortor. Cras non dolor. 
+            Duis leo. Proin faucibus arcu quis ante. In ut quam vitae odio lacinia tincidunt.
+        </p>
+    </React.Fragment>
+)
+
+const Services = () => (
+    <React.Fragment>
+        <p className="uk-text-lead">Services</p>
+        <p>
+        Quisque libero metus, condimentum nec, tempor a, commodo mollis, magna. Etiam vitae tortor. Cras non dolor. 
+            Duis leo. Proin faucibus arcu quis ante. In ut quam vitae odio lacinia tincidunt.
+        </p>
+    </React.Fragment>
+)
+
+const Support = () => (
+    <React.Fragment>
+        <p className="uk-text-lead">Support</p>
+        <p>
+        Quisque libero metus, condimentum nec, tempor a, commodo mollis, magna. Etiam vitae tortor. Cras non dolor. 
+            Duis leo. Proin faucibus arcu quis ante. In ut quam vitae odio lacinia tincidunt.
+        </p>
+    </React.Fragment>
+)
+
+const Portfolio = () => (
+    <React.Fragment>
+        <p className="uk-text-lead">Our Portfolio</p>
+        <p>
+        Quisque libero metus, condimentum nec, tempor a, commodo mollis, magna. Etiam vitae tortor. Cras non dolor. 
+            Duis leo. Proin faucibus arcu quis ante. In ut quam vitae odio lacinia tincidunt.
+        </p>
+    </React.Fragment>
+)
+
+const MenuRoute = () => (
+    <Switch>
+        <Route exact={true} path="/home" component={Home} />
+        <Route path="/products" component={Products} />
+        <Route path="/about/team" component={Team} />
+        <Route path="/about/services" component={Services} />
+        <Route path="/about/portfolio" component={Portfolio} />
+        <Route path="/support" component={Support} />
+        <Route path="/contact-us" component={ContactUs} />
+        
+    </Switch>
+)
 
 const OffCanvasUsage = () => {
 
@@ -608,34 +694,33 @@ const OffcanvasMenu = ()=>{
     return (
         <React.Fragment>
         <h2 id="menu" className="uk-h3 tm-heading-fragment"><a href="#menu">Menu in OffCanvas</a></h2>
-        <p>By default, the position of the <code>OffCanvas</code> component opens on the left edge of the screen. You can change the position of the component by setting the <code>position</code> prop as <code>left</code> or <code>right</code>.
-        </p>
+        <p>You can use <code>Menu</code> component inside a <code>OffCanvas</code> component with setting <code>Menu</code>'s <code>collapsible</code> prop as <code>true</code>.</p>
         <div className="uk-position-relative uk-margin-medium">
             <TabStrip>
                 <Tab title="Preview">
                         <Button onClick={toggleOffCanvas}>Open</Button>
-                        <OffCanvas mode="slide" open={open} overlay={open} overlayBackground overlayClick={closeOffCanvas} width={250}>
-                            <OffCanvasBody>
-                                <Icon name="close" style={closeButtonStyle} onClick={closeOffCanvas} />
-                                <Menu collapsible>
-                                    <MenuItem header text="Header"/>
-                                    <MenuItem parent text="Item1" icon="thumbnails">
-                                        <MenuItem text="Item1.1"/>
-                                        <MenuItem text="Item1.2"/>
-                                        <MenuItem text="Item1.3"/>
-                                    </MenuItem>
-                                    <MenuItem parent text="Item2" icon="cog">
-                                        <MenuItem text="Item2.1"/>
-                                        <MenuItem text="Item2.2"/>
-                                        <MenuItem text="Item2.3"/>
-                                    </MenuItem>
-                                    <MenuItem text="Item3" icon="settings"/>
-                                    <MenuItem text="Item4" icon="mail"/>
-                                    <MenuItem divider/>
-                                    <MenuItem text="Item5" icon="trash"/>
-                                </Menu>
-                            </OffCanvasBody>
-                        </OffCanvas>
+                        <HashRouter>
+                            <OffCanvas mode="slide" open={open} overlay={open} overlayBackground overlayClick={closeOffCanvas} width={250}>
+                                <OffCanvasBody>
+                                    <Icon name="close" style={closeButtonStyle} onClick={closeOffCanvas} />
+                                    <Menu collapsible>
+                                        <MenuItem header text="Header" />
+                                        <MenuItem text="Home" route='/home' icon='home' />
+                                        <MenuItem text="Products" route='/products' icon='thumbnails' />
+                                        <MenuItem text="About" parent icon='info'>
+                                            <MenuItem text="Our Team" route='/about/team' icon='users' />
+                                            <MenuItem text="Our Portfolio" route='/about/portfolio' icon='grid' />
+                                            <MenuItem text="Services" route='/about/services' icon='list' />
+                                        </MenuItem>
+                                        <MenuItem text="Support" route='/support' icon='lifesaver'/>
+                                        <MenuItem divider/>
+                                        <MenuItem text="Contact Us" route='/contact-us' icon='mail'/>
+                                    </Menu>
+                                </OffCanvasBody>
+                            </OffCanvas>
+                            <MenuRoute />
+                        </HashRouter>
+                        
                 </Tab>
                 <Tab title="Markup">
                     <SyntaxHighlighter language='javascript' style={docco}>{src}</SyntaxHighlighter>
