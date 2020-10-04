@@ -24,16 +24,20 @@ export const WebSidebar = () => (
                 <li className="uk-parent">
                     <Link to="/docs/layout">Layout</Link>
                     <ul className="uk-nav-sub">
+                        <li><Link to="/docs/layout/grid">Grid</Link></li>
                         <li><Link to="/docs/layout/menu">Menu</Link></li>
                         <li><Link to="/docs/layout/toolbar">Toolbar</Link></li>
                         <li><Link to="/docs/layout/offcanvas">OffCanvas</Link></li>
                         <li><Link to="/docs/layout/tabstrip">TabStrip</Link></li>
-                        <li><Link to="/docs/layout/margin">Margin</Link></li>
+                    </ul>
+                </li>
+                <li className="uk-parent">
+                    <Link to="/docs/inputs">Inputs</Link>
+                    <ul className="uk-nav-sub">
+                        <li><Link to="/docs/inputs/input">Input</Link></li>
                     </ul>
                 </li>
                 <li><Link to="/docs/icon">Icon</Link></li>
-                <li><Link to="/docs/cover">Cover</Link></li>
-                <li><Link to="/docs/logo">Logo</Link></li>
             </ul>
         </div>
     </div>

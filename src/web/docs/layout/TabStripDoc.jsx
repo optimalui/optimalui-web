@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
-import { TabStrip, Tab,TabItem } from '../../components/layout';
-import MarkupButtons from './MarkupButtons';
+import { TabStrip, Tab,TabItem } from '../../../components/layout';
+import MarkupButtons from '../MarkupButtons';
 
 const tabStripUsage = `
 import React from 'react';

@@ -1,7 +1,6 @@
-import React, { cloneElement } from 'react'
+import React  from 'react'
 import { offCanvasStyle } from '../../assets/jss'
 import injectSheet from 'react-jss'
-import { OffCanvas } from '../layout'
 import cx from 'classnames'
 
 const OffCanvasOverlay = ({ children,offCanvasPosition="left", overlay = false, overlayBackground = false, className, classes, ...other }) => {
@@ -10,11 +9,6 @@ const OffCanvasOverlay = ({ children,offCanvasPosition="left", overlay = false, 
         [classes.overlayBackground]: overlayBackground
     }, className)
     return <div className={overlayClass} {...other}>
-        {/* {React.Children.map(children, (child) => {
-            if (child.type === OffCanvas) {
-                return cloneElement(child, { position:offCanvasPosition,...child.props })
-            }
-        })} */}
         {children}
     </div>
 }

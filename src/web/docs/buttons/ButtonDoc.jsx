@@ -1,13 +1,13 @@
 /* eslint-disable */
 import React from 'react';
-import { Button } from '../../components/buttons'
+import { Button } from '../../../components/buttons'
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
-import MarkupButtons from './MarkupButtons';
-import ButtonEvents from './events/ButtonEvents';
-import { Icon } from '../../components';
-import sample_img_icon from '../../assets/web/img/sample_img_icon.png'
-import '../../assets/web/css/font-awesome-v4.7.0.css'
+import MarkupButtons from '../MarkupButtons';
+import ButtonEvents from '../events/ButtonEvents';
+import { Icon } from '../../../components';
+import sample_img_icon from '../../../assets/web/img/sample_img_icon.png'
+import '../../../assets/web/css/font-awesome-v4.7.0.css'
 
 
 const buttonUsage = `

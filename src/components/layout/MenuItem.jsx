@@ -62,6 +62,7 @@ class RegularMenuItem extends Component {
         collapsible:false,
         header:false,//for collapsible
         divider:false,// for collapsible
+        text:''
     };
 
     constructor(props) {

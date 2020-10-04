@@ -2,11 +2,10 @@
 import React from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
-import { Toolbar,ToolbarItem, ToolbarContent,TabStrip, Tab,Menu,MenuItem } from '../../components/layout'; 
-import { Button} from '../../components/buttons'; 
-import { Logo} from '../../components'; 
-import MarkupButtons from './MarkupButtons';
-import backgroundImg from '../../assets/web/img/light.jpeg'
+import { Toolbar,ToolbarItem, ToolbarContent,TabStrip, Tab,Menu,MenuItem } from '../../../components/layout'; 
+import { Button} from '../../../components/buttons'; 
+import MarkupButtons from '../MarkupButtons';
+import backgroundImg from '../../../assets/web/img/light.jpeg'
 
 
 const ToolBarUsage = () => {
@@ -270,7 +269,7 @@ const ToolbarItemContent = () => {
                         <ToolbarItem>
 
                             <ToolbarContent>
-                                <Logo>Logo</Logo>
+                                <span>Logo</span>
                             </ToolbarContent>
 
                             <ToolbarContent>
@@ -307,8 +306,7 @@ const CenteredLogo = () => {
     import React from 'react';
     import ReactDOM from 'react-dom';
     import { ToolBar,ToolbarItem,Menu,MenuItem,ToolbarContent } from '@optimalui/components/layout'
-    import { Logo} from '@optimalui/components'; 
-    
+
     class App extends React.Component {
         render() { 
             return ( 
@@ -325,7 +323,7 @@ const CenteredLogo = () => {
                             </Menu>
                         </ToolbarContent>
                         <ToolbarContent>
-                            <Logo>Logo</Logo>
+                            Logo
                         </ToolbarContent>
                         <ToolbarContent align="right">
                             <Menu>
@@ -363,7 +361,7 @@ const CenteredLogo = () => {
                                 </Menu>
                             </ToolbarContent>
                             <ToolbarContent>
-                                <Logo>Logo</Logo>
+                                <span>Logo</span>
                             </ToolbarContent>
                             <ToolbarContent align="right">
                                 <Menu>

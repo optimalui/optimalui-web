@@ -2,13 +2,13 @@
 import React, { useState } from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
-import { Menu, TabStrip, Tab, SubMenu,MenuItem } from '../../components/layout';
-import MarkupButtons from './MarkupButtons';
-import menuItems from './menuItems.json'
+import { Menu, TabStrip, Tab, SubMenu,MenuItem } from '../../../components/layout';
+import MarkupButtons from '../MarkupButtons';
+import menuItems from '../menuItems.json'
 import { Link, Route, Switch, BrowserRouter as Router, HashRouter } from "react-router-dom";
-import MenuRouting from './MenuRouting'
+import MenuRouting from '../MenuRouting'
 import _ from 'lodash'
-import EventLog from './EventLog';
+import EventLog from '../EventLog';
 
 
 const menuUsage = `

@@ -1,10 +1,10 @@
 /* eslint-disable */
 import React from 'react';
-import { ButtonGroup, Button } from '../../components/buttons'
-import { Margin } from '../../components/layout'
+import { ButtonGroup, Button } from '../../../components/buttons'
+import { Margin } from '../../../components/layout'
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
-import MarkupButtons from './MarkupButtons';
+import MarkupButtons from '../MarkupButtons';
 
 const buttonGroupUsage = `
 import React from 'react';
