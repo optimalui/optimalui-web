@@ -29,12 +29,15 @@ export const WebSidebar = () => (
                         <li><Link to="/docs/layout/toolbar">Toolbar</Link></li>
                         <li><Link to="/docs/layout/offcanvas">OffCanvas</Link></li>
                         <li><Link to="/docs/layout/tabstrip">TabStrip</Link></li>
+                        <li><Link to="/docs/layout/margin">Margin</Link></li>
                     </ul>
                 </li>
                 <li className="uk-parent">
                     <Link to="/docs/inputs">Inputs</Link>
                     <ul className="uk-nav-sub">
                         <li><Link to="/docs/inputs/input">Input</Link></li>
+                        <li><Link to="/docs/inputs/checkbox">Checkbox</Link></li>
+                        <li><Link to="/docs/inputs/radio">Radio</Link></li>
                     </ul>
                 </li>
                 <li><Link to="/docs/icon">Icon</Link></li>

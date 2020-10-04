@@ -106,7 +106,7 @@ const InputUsage = () => (
   </React.Fragment>
 );
 
-const InputSize = ()=>(
+const InputSize = () => (
   <React.Fragment>
     <h2 id="usage" className="uk-h3 tm-heading-fragment">
       <a href="#size">Size</a>
@@ -133,7 +133,7 @@ const InputSize = ()=>(
     </div>
   </React.Fragment>
 );
-const InputWidth = ()=>(
+const InputWidth = () => (
   <React.Fragment>
     <h2 id="usage" className="uk-h3 tm-heading-fragment">
       <a href="#width">Width</a>
@@ -162,19 +162,98 @@ const InputWidth = ()=>(
   </React.Fragment>
 );
 
+export const InputProps = () => (
+  <React.Fragment>
+    <h2 id="props" className="uk-h3 tm-heading-fragment"><a href="#props">Input Props</a></h2>
+    <p>The Input component has the following props.</p>
+    <div className="uk-overflow-auto">
+      <table className="uk-table uk-table-divider">
+        <thead>
+          <tr>
+            <th align="left">prop</th>
+            <th align="left">propType</th>
+            <th align="left">reqiured</th>
+            <th align="left">default</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td align="left"><code>value</code></td>
+            <td align="left"><code>string</code></td>
+            <td align="left">no</td>
+            <td align="left"><code>''</code></td>
+          </tr>
+          <tr>
+            <td align="left"><code>type</code></td>
+            <td align="left"><code>string</code></td>
+            <td align="left">no</td>
+            <td align="left"><code>'text'</code></td>
+          </tr>
+          <tr>
+            <td align="left"><code>className</code></td>
+            <td align="left"><code>string</code></td>
+            <td align="left">no</td>
+            <td align="left"><code>''</code></td>
+          </tr>
+          <tr>
+            <td align="left"><code>placeHolder</code></td>
+            <td align="left"><code>string</code></td>
+            <td align="left">no</td>
+            <td align="left"><code>''</code></td>
+          </tr>
+          <tr>
+            <td align="left"><code>disabled</code></td>
+            <td align="left"><code>bool</code></td>
+            <td align="left">no</td>
+            <td align="left"><code>false</code></td>
+          </tr>
+          <tr>
+            <td align="left"><code>size</code></td>
+            <td align="left"><code>string</code></td>
+            <td align="left">no</td>
+            <td align="left"><code>''</code></td>
+          </tr>
+          <tr>
+            <td align="left"><code>width</code></td>
+            <td align="left"><code>string</code></td>
+            <td align="left">no</td>
+            <td align="left"><code>''</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </React.Fragment>
+)
+
 export const InputDoc = () => (
   <div className="uk-container uk-container-small uk-position-relative">
     <h1>Input</h1>
     <p className="uk-text-lead">You can enter a text with input component</p>
-    
+
     {/** USAGE */}
     <InputUsage />
-    
+
     {/** SIZE */}
     <InputSize />
 
     {/** WIDTH */}
     <InputWidth />
+
+    {/** PROPS */}
+    <InputProps />
+
+
+    <div className="tm-sidebar-right uk-visible@l">
+      <div uk-sticky="offset: 160" className="uk-sticky uk-active uk-sticky-fixed">
+        <ul uk-scrollspy-nav="closest: li; scroll: true; offset: 100" className="uk-nav uk-nav-default tm-nav uk-nav-parent-icon">
+          <li className="uk-active"><a href="#usage">Usage</a></li>
+          <li className=""><a href="#size">size</a></li>
+          <li className=""><a href="#link">width</a></li>
+          <li className=""><a href="#props">props</a></li>
+        </ul>
+      </div>
+      <div className="uk-sticky-placeholder" style={{ height: '249px', margin: '0px' }}></div>
+    </div>
 
   </div>
 );

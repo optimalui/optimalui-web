@@ -5,7 +5,9 @@ import { Intro } from './Intro';
 import { ButtonDoc, ButtonGroupDoc, DropDownButtonDoc } from './buttons';
 import { TabStripDoc, MenuDoc, ToolbarDoc, OffCanvasDoc, GridDoc } from './layout';
 import { IconDoc } from './IconDoc';
-import { InputDoc } from './inputs';
+import { CheckboxDoc, InputDoc } from './inputs';
+import { MarginDoc } from './MarginDoc';
+import { RadioDoc } from './inputs/RadioDoc';
 
 
 class DocContent extends Component {
@@ -25,7 +27,10 @@ class DocContent extends Component {
                     <Route path="/docs/layout/toolbar" component={ToolbarDoc} />
                     <Route path="/docs/layout/offcanvas" component={OffCanvasDoc} />
                     <Route path="/docs/layout/grid" component={GridDoc} />
+                    <Route path="/docs/layout/margin" component={MarginDoc} />
                     <Route path="/docs/inputs/input" component={InputDoc} />
+                    <Route path="/docs/inputs/checkbox" component={CheckboxDoc} />
+                    <Route path="/docs/inputs/radio" component={RadioDoc} />
                     <Route path="/docs/icon" component={IconDoc} />
                 </div>
             </div>
