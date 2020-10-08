@@ -2,7 +2,6 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import RadioGroupContext from './RadioGroupContext';
 import useControlled from '../../utils/useControlled';
-import useForkRef from '../../utils/useForkRef';
 import useId from '../../utils/useId';
 
 const RadioGroup = React.forwardRef(function RadioGroup(props, ref) {
@@ -14,6 +13,7 @@ const RadioGroup = React.forwardRef(function RadioGroup(props, ref) {
     onChange,
     ...other
   } = props;
+
   const rootRef = React.useRef(null);
 
   const [value, setValueState] = useControlled({
@@ -40,8 +40,6 @@ const RadioGroup = React.forwardRef(function RadioGroup(props, ref) {
     [],
   );
 
-  const handleRef = useForkRef(ref, rootRef);
-
   const handleChange = (event) => {
     setValueState(event.target.value);
 
@@ -54,7 +52,9 @@ const RadioGroup = React.forwardRef(function RadioGroup(props, ref) {
 
   return (
     <RadioGroupContext.Provider value={{ name, onChange: handleChange, value }}>
+      <div className="uk-margin uk-grid-small uk-child-width-auto uk-grid">
         {children}
+      </div>
     </RadioGroupContext.Provider>
   );
 });

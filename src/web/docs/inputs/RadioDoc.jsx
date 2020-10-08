@@ -10,40 +10,43 @@ import Radio from "../../../components/inputs/Radio";
 
 const src = `
 import React from "react";
-import { Checkbox } from "optimalui/components/inputs";
+import { Radio,RadioGroup} from "optimalui/components/inputs";
 import { Grid,GridItem } from "optimalui/components/layout";
     
-class App extends React.Component {
-        render() { 
-          return (
+export const App = () => {
+
+    const [value, setValue] = React.useState('female');
+
+    const handleChange = (event) => {
+        setValue(event.target.value);
+    };
+
+
+    return (
             <React.Fragment>
-                <Grid>
-                    <GridItem>
-                        <Checkbox value="Checked" checked />
-                    </GridItem>
-                    <GridItem>
-                        <Checkbox value="Unchecked" />
-                    </GridItem>
-                    <GridItem>
-                        <Checkbox value="Disabled" disabled />
-                    </GridItem>
-                </Grid>
+                    <Grid>
+                        <GridItem>
+                            <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
+                                <label><Radio value="male" /> Male</label>
+                                <label><Radio value="female" /> Female</label>
+                            </RadioGroup>
+                        /GridItem>
+                    </Grid>
             </React.Fragment>
-            )
-        }
-    }
+        )
+}
     
-    ReactDOM.render(
+ReactDOM.render(
         <App />,
         document.querySelector('my-app')
     ) 
 `;
 
 
-export const CheckboxProps = () => (
+export const RadioProps = () => (
     <React.Fragment>
-        <h2 id="props" className="uk-h3 tm-heading-fragment"><a href="#props">Checkbox Props</a></h2>
-        <p>The Checkbox component has the following props.</p>
+        <h2 id="props" className="uk-h3 tm-heading-fragment"><a href="#props">Radio Props</a></h2>
+        <p>The Radio component has the following props.</p>
         <div className="uk-overflow-auto">
             <table className="uk-table uk-table-divider">
                 <thead>
@@ -58,22 +61,82 @@ export const CheckboxProps = () => (
                     <tr>
                         <td align="left"><code>value</code></td>
                         <td align="left"><code>string</code></td>
-                        <td align="left">no</td>
+                        <td align="left">yes</td>
                         <td align="left"><code>''</code></td>
                     </tr>
 
                     <tr>
-                        <td align="left"><code>className</code></td>
+                        <td align="left"><code>required</code></td>
+                        <td align="left"><code>bool</code></td>
+                        <td align="left">no</td>
+                        <td align="left"><code>false</code></td>
+                    </tr>
+
+                    <tr>
+                        <td align="left"><code>onChange</code></td>
+                        <td align="left"><code>func</code></td>
+                        <td align="left">no</td>
+                        <td align="left"><code>null</code></td>
+                    </tr>
+
+                    <tr>
+                        <td align="left"><code>name</code></td>
                         <td align="left"><code>string</code></td>
                         <td align="left">no</td>
                         <td align="left"><code>''</code></td>
                     </tr>
 
                     <tr>
-                        <td align="left"><code>disabled</code></td>
+                        <td align="left"><code>checked</code></td>
                         <td align="left"><code>bool</code></td>
                         <td align="left">no</td>
                         <td align="left"><code>false</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+
+        <h2 id="r_group_props" className="uk-h3 tm-heading-fragment"><a href="#r_group_props">RadioGroup Props</a></h2>
+        <p>The RadioGroup component has the following props.</p>
+        <div className="uk-overflow-auto">
+            <table className="uk-table uk-table-divider">
+                <thead>
+                    <tr>
+                        <th align="left">prop</th>
+                        <th align="left">propType</th>
+                        <th align="left">reqiured</th>
+                        <th align="left">default</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td align="left"><code>defaultValue</code></td>
+                        <td align="left"><code>string | number</code></td>
+                        <td align="left">no</td>
+                        <td align="left"><code>null</code></td>
+                    </tr>
+
+                    <tr>
+                        <td align="left"><code>name</code></td>
+                        <td align="left"><code>string</code></td>
+                        <td align="left">no</td>
+                        <td align="left"><code>''</code></td>
+                    </tr>
+
+                    <tr>
+                        <td align="left"><code>onChange</code></td>
+                        <td align="left"><code>func</code></td>
+                        <td align="left">no</td>
+                        <td align="left"><code>null</code></td>
+                    </tr>
+
+                    <tr>
+                        <td align="left"><code>value</code></td>
+                        <td align="left"><code>any</code></td>
+                        <td align="left">no</td>
+                        <td align="left"><code>''</code></td>
                     </tr>
 
                     <tr>
@@ -102,8 +165,8 @@ const Usage = () => {
                 <a href="#usage">Usage</a>
             </h2>
             <p>
-                Import <code>@optimalui/components/inputs</code> module to use Checkbox
-      component.
+                Import <code>@optimalui/components/inputs</code> module to use Radio and RadioGroup
+      components.
     </p>
             <div className="uk-position-relative uk-margin-medium">
                 <TabStrip>
@@ -111,8 +174,8 @@ const Usage = () => {
                         <Grid>
                             <GridItem>
                                 <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
-                                    <label><Radio value="test" /></label>
-                                    <label><Radio value="test" /></label>
+                                    <label><Radio value="male" /> Male</label>
+                                    <label><Radio value="female" /> Female</label>
                                 </RadioGroup>
                             </GridItem>
                         </Grid>
@@ -131,24 +194,27 @@ const Usage = () => {
 
 export const RadioDoc = () => {
 
-
-
     return (
         <div className="uk-container uk-container-small uk-position-relative">
             <h1>Radio</h1>
             <p className="uk-text-lead">
-                The CheckBox component is type of input that provides boolean selection field.
+                The Radio component allows a selection from a set of options.
             </p>
 
             {/** USAGE */}
             <Usage />
 
 
+            {/** PROPS */}
+            <RadioProps />
+
+
             <div className="tm-sidebar-right uk-visible@l">
                 <div uk-sticky="offset: 160" className="uk-sticky uk-active uk-sticky-fixed">
                     <ul uk-scrollspy-nav="closest: li; scroll: true; offset: 100" className="uk-nav uk-nav-default tm-nav uk-nav-parent-icon">
                         <li className="uk-active"><a href="#usage">Usage</a></li>
-                        <li className="uk-active"><a href="#props">Props</a></li>
+                        <li className="uk-active"><a href="#props">Radio Props</a></li>
+                        <li className="uk-active"><a href="#r_group_props">RadioGroup Props</a></li>
                     </ul>
                 </div>
                 <div className="uk-sticky-placeholder" style={{ height: '249px', margin: '0px' }}></div>

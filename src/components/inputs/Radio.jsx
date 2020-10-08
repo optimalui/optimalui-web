@@ -34,16 +34,13 @@ const Radio = React.forwardRef(function Radio(props, ref) {
       checked={checked}
       onChange={onChange}
       ref={ref}
+      className={cx(props.className,"uk-radio")}
       {...other}
     />
   );
 });
 
 Radio.propTypes = {
-  // ----------------------------- Warning --------------------------------
-  // | These PropTypes are generated from the TypeScript type definitions |
-  // |     To update them edit the d.ts file and run "yarn proptypes"     |
-  // ----------------------------------------------------------------------
   /**
    * If `true`, the component is checked.
    */
