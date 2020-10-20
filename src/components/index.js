@@ -1,2 +1,6 @@
 export * from './Icon'
-export * from './Card'
+export {default as Card} from './Card'
+export {default as CardHeader} from './CardHeader'
+export {CardBody} from './CardBody'
+export {CardFooter} from './CardFooter'
+export {Avatar} from './Avatar'

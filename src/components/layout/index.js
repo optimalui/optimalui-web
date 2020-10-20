@@ -11,6 +11,6 @@ export * from './OffCanvas'
 export * from './OffCanvasBody'
 export * from './OffCanvasCloseButton'
 export * from './OffCanvasOverlay'
-export * from './Grid';
-export * from './GridItem';
+export {default as Grid} from './Grid';
+export {default as GridItem} from './GridItem';
 
