@@ -6,9 +6,15 @@ const Card = React.forwardRef(function Card(props, ref) {
   const { className, children, color, size, title, ...other } = props;
 
   let headerComponentExist = false;
+  let mediaClass = "";
   React.Children.map(children, (child, index) => {
-    if (child.type.displayName === "CardHeader") {
+    if (child.type.displayName === "CardHeader" || child.type.displayName === "CardBody") {
       headerComponentExist = true;
+    }
+    if(child.type.displayName==="CardMedia"){
+      if(child.props.align==="left" || child.props.align==="right"){
+        mediaClass = "uk-grid-collapse uk-child-width-1-2@s uk-margin uk-grid";
+      }
     }
   });
 
@@ -23,6 +29,7 @@ const Card = React.forwardRef(function Card(props, ref) {
           "uk-card-small": size === "small",
           "uk-card-large": size === "large",
         },
+        mediaClass,
         className
       )}
       {...other}

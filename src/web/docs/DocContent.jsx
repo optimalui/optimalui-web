@@ -9,6 +9,7 @@ import { CheckboxDoc, InputDoc } from './inputs';
 import { MarginDoc } from './MarginDoc';
 import { RadioDoc } from './inputs/RadioDoc';
 import { CardDoc } from './CardDoc';
+import { AvatarDoc } from './AvatarDoc';
 
 
 class DocContent extends Component {
@@ -34,6 +35,7 @@ class DocContent extends Component {
                     <Route path="/docs/inputs/radio" component={RadioDoc} />
                     <Route path="/docs/icon" component={IconDoc} />
                     <Route path="/docs/card" component={CardDoc} />
+                    <Route path="/docs/avatar" component={AvatarDoc} />
                 </div>
             </div>
         );
