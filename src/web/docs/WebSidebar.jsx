@@ -38,6 +38,7 @@ export const WebSidebar = () => (
                         <li><Link to="/docs/inputs/input">Input</Link></li>
                         <li><Link to="/docs/inputs/checkbox">Checkbox</Link></li>
                         <li><Link to="/docs/inputs/radio">Radio</Link></li>
+                        <li><Link to="/docs/inputs/select">Select</Link></li>
                     </ul>
                 </li>
                 <li><Link to="/docs/icon">Icon</Link></li>

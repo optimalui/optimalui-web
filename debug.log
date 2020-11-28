@@ -912,3 +912,6 @@
 [0918/101033.969:ERROR:crash_report_database_win.cc(469)] failed to stat report
 [0918/101033.969:ERROR:crash_report_database_win.cc(469)] failed to stat report
 [0918/101033.969:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[1026/132025.837:ERROR:directory_reader_win.cc(43)] FindFirstFile: Sistem belirtilen yolu bulamýyor. (0x3)
+[1113/140306.620:ERROR:directory_reader_win.cc(43)] FindFirstFile: Sistem belirtilen yolu bulamýyor. (0x3)
+[1119/210509.190:ERROR:directory_reader_win.cc(43)] FindFirstFile: Sistem belirtilen yolu bulamýyor. (0x3)
