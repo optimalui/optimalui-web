@@ -1,12 +1,10 @@
 /* eslint-disable */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './assets/web/css/font-awesome-v4.7.0.css'
+import './assets/css/font-awesome-v4.7.0.css'
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { ThemeProvider } from 'theming';
-import { Provider} from 'mini-store';
-import { miniStore as store } from './_helpers'
 import  './App.css'
 
 const theme = {
@@ -17,11 +15,9 @@ const theme = {
 };
 
 ReactDOM.render(
-    <Provider store={store}>
         <ThemeProvider theme={theme}>
             <App />
-        </ThemeProvider>
-    </Provider>,
+        </ThemeProvider>,
     document.getElementById('root')
 );
 

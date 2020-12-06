@@ -3,7 +3,6 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import { Icon } from "../Icon";
 import { SelectOption } from "./SelectOption";
-import cx from "classnames";
 
 const HelperText = styled.div`
   display: block;
@@ -81,17 +80,6 @@ const FilterInput = styled.input`
   outline: none;
 `;
 
-const Seperator = styled.div`
-  &:after {
-    content: "";
-    width: 100%;
-    border-bottom: solid 1px #fff;
-    position: absolute;
-    left: 0;
-    top: 50%;
-    z-index: 1;
-  }
-`;
 
 const Option = ({ children, className, group, ...props }) => (
   <li className={className} {...props}>
@@ -212,7 +200,7 @@ class Select extends Component {
    */
   renderOptions(options = []) {
     const { multiple } = this.props;
-    const { values, filteredOptions } = this.state;
+    const { values} = this.state;
     return (
       <Options>
         {options.map((option, index) => {
@@ -279,7 +267,7 @@ class Select extends Component {
     var selectedOptions = [];
     options.forEach((option) => {
       if (option.hasOwnProperty("group")) {
-        option.group.map((opt) => {
+        option.group.forEach((opt) => {
           if (values.includes(opt.value)) {
             selectedOptions.push(opt);
           }
@@ -322,7 +310,7 @@ class Select extends Component {
 
   renderPlaceHolder() {
     const { values, showOptions, showFilter } = this.state;
-    const { placeholder, disabled, filterable } = this.props;
+    const { placeholder,filterable } = this.props;
     return (
       <Placeholder>
         {values.length === 0 ? placeholder : ""}

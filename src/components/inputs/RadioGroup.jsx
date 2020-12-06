@@ -52,7 +52,7 @@ const RadioGroup = React.forwardRef(function RadioGroup(props, ref) {
 
   return (
     <RadioGroupContext.Provider value={{ name, onChange: handleChange, value }}>
-      <div className="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+      <div className="uk-margin uk-grid-small uk-child-width-auto uk-grid" {...other}>
         {children}
       </div>
     </RadioGroupContext.Provider>

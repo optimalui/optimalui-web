@@ -1,8 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import cx from "classnames";
-import Grid from "./Grid";
-import { Margin } from "./Margin";
 
 const GridItem = (props) => {
   const {

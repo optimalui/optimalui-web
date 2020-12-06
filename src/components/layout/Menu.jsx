@@ -6,7 +6,6 @@ import { MenuItem, SubMenu as ContainerMenu } from './'
 import { menuStyle } from '../../assets/jss'
 import injectSheet from 'react-jss'
 import { noop } from '../../util'
-import { connect } from 'mini-store'
 import uuidv4 from 'uuid'
 import _ from 'lodash'
 import { withTheme } from 'theming'; 

@@ -6,9 +6,6 @@ import { Margin } from "../layout";
 
 
 export default class Checkbox extends Component {
-    constructor(props) {
-        super(props);
-    }
     state = {
         checked: this.props.checked
     }

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom'
 import {Icon} from '../Icon'
 
-class RegularButton extends Component {
+export default class RegularButton extends Component {
   static propTypes = {
     active: PropTypes.bool,
     className: PropTypes.string,
@@ -108,13 +108,3 @@ class RegularButton extends Component {
     )
   }
 }
-
-// const mapStateToProps = (state) => {
-//   return { disableids: state.buttonReducer.disableIds }
-// }
-
-// const connectedButton = connect(mapStateToProps)(RegularButton)
-
-const btn = RegularButton
-
-export {btn as Button }

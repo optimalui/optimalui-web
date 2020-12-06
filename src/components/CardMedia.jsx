@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import cx from "classnames";
 
 export const CardMedia = React.forwardRef(function CardMedia(props, ref) {
-  const { className, align, children, width, height, src, ...other } = props;
+  const { className, align, children, width, height, src,alt, ...other } = props;
 
   return (
     <div
@@ -18,6 +18,7 @@ export const CardMedia = React.forwardRef(function CardMedia(props, ref) {
       {...other}
     >
       <img
+        alt={alt}
         src={src}
         style={{ height: "100%", width: "100%" }}
         className={align === "right" || align === "left" ? "uk-cover" : ""}

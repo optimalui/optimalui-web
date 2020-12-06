@@ -5,7 +5,6 @@ import cx from 'classnames';
 import injectSheet from 'react-jss'
 import { menuStyle } from '../../assets/jss'
 import { Icon } from '../Icon'
-import { connect } from 'mini-store';
 import {  Link, withRouter } from 'react-router-dom'
 import uuidv4 from 'uuid'
 
@@ -260,9 +259,8 @@ class RegularMenuItem extends Component {
     }
 }
 
-const connectedMenuItem = connect()(RegularMenuItem)
 
-const styledMenuItem = injectSheet(menuStyle)(connectedMenuItem)
+const styledMenuItem = injectSheet(menuStyle)(RegularMenuItem)
 
 const routeMenuItem = withRouter(styledMenuItem)
 
