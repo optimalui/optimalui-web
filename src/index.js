@@ -1,11 +1,7 @@
 /* eslint-disable */
 import React from 'react';
 import ReactDOM from 'react-dom';
-<<<<<<< HEAD
-import './assets/web/css/font-awesome-v4.7.0.css'
-=======
 import './assets/css/font-awesome-v4.7.0.css'
->>>>>>> 4b2aafe8c6f914da9e8b239a92b338bb1c4d408b
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { ThemeProvider } from 'theming';
