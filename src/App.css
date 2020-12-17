@@ -8,9 +8,6 @@
   display: inline-block;
   position: relative;
 }
-/* .menu li.dropdown:hover > .submenu {
-  display: block;
-} */
 .menu li a {
   display: block;
   padding: 12px 8px;
@@ -19,10 +16,6 @@
   transition: .1s ease-in-out;
   transition-property: color,background-color;
 }
-
-/* .menu li a:hover {
-  background: grey;
-} */
 
 .menu .submenu {
   position: absolute;
@@ -62,6 +55,7 @@
   left: 200px;
   top: 0px;
 }
+<<<<<<< HEAD
 
 /*** OFFCANVAS   **/
 /* .st-pusher {
@@ -173,3 +167,5 @@
 }
 } */
 
+=======
+>>>>>>> 4b2aafe8c6f914da9e8b239a92b338bb1c4d408b
