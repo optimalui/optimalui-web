@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import MarkupButtons from '../MarkupButtons';
-import { TabStrip, Tab,OffCanvas,OffCanvasBody,Menu, MenuItem } from '../../../components/layout'; 
-import { Button } from '../../../components/buttons'; 
+import { TabStrip, Tab,OffCanvas,OffCanvasBody,Menu, MenuItem,Button,Icon } from 'optimalui-react'; 
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
-import {Icon} from '../../../components'
 import {  Route, Switch, HashRouter } from "react-router-dom";
 
 /**for menu offcanvas */
@@ -120,7 +118,7 @@ const OffCanvasUsage = () => {
     const src =  `
     import React from 'react';
     import ReactDOM from 'react-dom';
-    import { OffCanvas,OffCanvasBody,OffCanvasCloseButton } from '@optimalui/components/layout'
+    import { OffCanvas,OffCanvasBody,OffCanvasCloseButton } from 'optimalui-react'
     import { Button } from '@optimalui/components/buttons'; 
     import {Icon} from '@optimalui/components'
 
@@ -165,7 +163,7 @@ const OffCanvasUsage = () => {
     `;
     return <React.Fragment>
         <h2 id="usage" className="uk-h3 tm-heading-fragment"><a href="#usage">Usage</a></h2>
-        <p>Import <code>@optimalui/components/layout</code> module to use <code>OffCanvas</code> component. You can control the open and close event of the <code>OffCanvas</code> component with setting <code>open</code> prop as <code>true</code> or <code>false</code>.</p>
+        <p>Import <code>optimalui-react</code> module to use <code>OffCanvas</code> component. You can control the open and close event of the <code>OffCanvas</code> component with setting <code>open</code> prop as <code>true</code> or <code>false</code>.</p>
         <p>You can create a button with a close button style by creating the <code>OffCanvasCloseButton</code> component as a child component of the <code>OffCanvas</code> component.</p>
         <p>The <code>OffCanvasBody</code> component is used to create the contents of the <code>OffCanvas</code> component.</p>
         <div className="uk-position-relative uk-margin-medium">
@@ -211,7 +209,7 @@ const OffCanvasOverlayDoc = () => {
     const src =  `
     import React from 'react';
     import ReactDOM from 'react-dom';
-    import { OffCanvas,OffCanvasBody,OffCanvasCloseButton } from '@optimalui/components/layout'
+    import { OffCanvas,OffCanvasBody,OffCanvasCloseButton } from 'optimalui-react'
     import { Button } from '@optimalui/components/buttons'; 
     import {Icon} from '@optimalui/components'
 
@@ -360,7 +358,7 @@ const OffCanvasPosition = ()=>{
     const src=`
     import React from 'react';
     import ReactDOM from 'react-dom';
-    import { OffCanvas,OffCanvasBody,OffCanvasCloseButton } from '@optimalui/components/layout'
+    import { OffCanvas,OffCanvasBody,OffCanvasCloseButton } from 'optimalui-react'
     import { Button } from '@optimalui/components/buttons';
     import {Icon} from '@optimalui/components'
     

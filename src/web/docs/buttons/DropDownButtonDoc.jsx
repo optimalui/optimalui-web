@@ -3,11 +3,9 @@ import React from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import MarkupButtons from '../MarkupButtons';
-import {DropDownButton,DropDownButtonItem} from '../../../components/buttons';
-import { Icon } from '../../../components';
+import {DropDownButton,DropDownButtonItem,Icon,Tab,TabStrip,TabItem} from 'optimalui-react';
 import sample_img_icon from '../../../assets/web/img/sample_settings_icon.png'
 import DropDownButtonEvents from '../events/DropDownButtonEvent';
-import { TabStrip, Tab,TabItem } from '../../../components/layout';
 
 const dropDownUsage = `
 import React from 'react'; 

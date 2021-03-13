@@ -1,12 +1,9 @@
 
 import React from "react";
-import { TabStrip, Tab} from "../../../components/layout";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import MarkupButtons from "../MarkupButtons";
 import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
-import Checkbox from "../../../components/inputs/Checkbox";
-import GridItem from "../../../components/layout/GridItem";
-import Grid from "../../../components/layout/Grid";
+import {Grid,GridItem,Checkbox,TabStrip,Tab} from "optimalui-react";
 
 const src = `
 import React from "react";
@@ -94,10 +91,7 @@ const Usage = () => (
         <h2 id="usage" className="uk-h3 tm-heading-fragment">
             <a href="#usage">Usage</a>
         </h2>
-        <p>
-            Import <code>@optimalui/components/inputs</code> module to use Checkbox
-      component.
-    </p>
+        
         <div className="uk-position-relative uk-margin-medium">
             <TabStrip>
                 <Tab title="Preview">

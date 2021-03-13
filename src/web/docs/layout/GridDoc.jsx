@@ -1,15 +1,12 @@
 import React from "react";
-import { TabStrip, Tab } from "../../../components/layout";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import MarkupButtons from "../MarkupButtons";
 import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
-import Grid from "../../../components/layout/Grid";
-import GridItem from "../../../components/layout/GridItem";
-import { Card } from "../../../components";
+import { Grid, GridItem, Card,TabStrip,Tab } from "optimalui-react";
 
 const src = `
 import React from "react";
-import {  Grid, GridItem } from "@optimalui/components/layout";
+import {  Grid, GridItem } from "optimalui-react";
 import {Card} from "@optimalui/components";
     
 export const Sample = ()=>(
@@ -35,7 +32,7 @@ export const Sample = ()=>(
 
 const srcWidth = `
 import React from "react";
-import {  Grid, GridItem } from "@optimalui/components/layout";
+import {  Grid, GridItem } from "optimalui-react";
 import {Card} from "@optimalui/components";
     
 export const Sample = ()=>(
@@ -101,10 +98,18 @@ const Width = () => (
       you can set a width to <code>GridItem</code> component by giving one of
       following boolean props:
       <ul className="uk-list">
-        <li><code>w_1_2, w_1_3, w_2_3</code></li>
-        <li><code>w_1_4, w_3_4</code></li>
-        <li><code>w_1_5, w_2_5, w_3_5, w_4_5</code></li>
-        <li><code>w_1_6, w_5_6</code></li>
+        <li>
+          <code>w_1_2, w_1_3, w_2_3</code>
+        </li>
+        <li>
+          <code>w_1_4, w_3_4</code>
+        </li>
+        <li>
+          <code>w_1_5, w_2_5, w_3_5, w_4_5</code>
+        </li>
+        <li>
+          <code>w_1_6, w_5_6</code>
+        </li>
       </ul>
     </p>
 
@@ -131,8 +136,7 @@ const Width = () => (
           <MarkupButtons codeText={srcWidth} />
         </Tab>
       </TabStrip>
-      </div>
-    
+    </div>
   </React.Fragment>
 );
 export const GridDoc = () => (
@@ -144,6 +148,6 @@ export const GridDoc = () => (
 
     {/** USAGE */}
     <GridUsage />
-    <Width/>
+    <Width />
   </div>
 );

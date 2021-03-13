@@ -4,11 +4,11 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 export const WebSidebar = () => (
     <div className="tm-sidebar-left uk-visible@m">
-        <h3>Documentation</h3>
+       {/*<h3>Documentation</h3>
         <ul className="uk-nav uk-nav-default tm-nav">
             <li className="uk-nav-header">Getting started</li>
-            <li className=""><Link to="/docs/introduction">Introduction</Link></li>
-        </ul>
+            <li className=""><Link to="/docs/introduction">Installation</Link></li>
+       </ul>*/}
         <h3>Components</h3>
         <hr />
         <div className="uk-nav uk-nav-default tm-nav">

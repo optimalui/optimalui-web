@@ -2,13 +2,13 @@
 import React from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
-import { Margin } from '../../components/layout';
+import { Margin } from 'optimalui-react';
 import MarkupButtons from './MarkupButtons';
 
 const marginUsage = `
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Margin } from '@optimalui/components/layout'
+import { Margin } from 'optimalui-react'
 
 class App extends React.Component {
     render() { 
@@ -34,7 +34,7 @@ ReactDOM.render(
 const smallMarginUsage = `
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Margin } from '@optimalui/components/layout'
+import { Margin } from 'optimalui-react'
 
 class App extends React.Component {
     render() { 
@@ -60,7 +60,7 @@ ReactDOM.render(
 const mediumMarginUsage = `
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Margin } from '@optimalui/components/layout'
+import { Margin } from 'optimalui-react'
 
 class App extends React.Component {
     render() { 
@@ -86,7 +86,7 @@ ReactDOM.render(
 const largeMarginSource = `
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Margin } from '@optimalui/components/layout'
+import { Margin } from 'optimalui-react'
 
 class App extends React.Component {
     render() { 
@@ -112,7 +112,7 @@ ReactDOM.render(
 const xlargeMarginSource = `
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Margin } from '@optimalui/components/layout'
+import { Margin } from 'optimalui-react'
 
 class App extends React.Component {
     render() { 
@@ -138,7 +138,7 @@ ReactDOM.render(
 const removeMarginSource = `
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Margin } from '@optimalui/components/layout'
+import { Margin } from 'optimalui-react'
 
 class App extends React.Component {
     render() { 
@@ -164,7 +164,7 @@ ReactDOM.render(
 const autoMarginSource = `
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Margin } from '@optimalui/components/layout'
+import { Margin } from 'optimalui-react'
 
 class App extends React.Component {
     render() { 
@@ -190,7 +190,7 @@ export const MarginDoc = () => (
         <p className="uk-text-lead">Margin component provides to give space between components.</p>
         {/** USAGE */}
         <h2 id="usage" className="uk-h3 tm-heading-fragment"><a href="#usage">Usage</a></h2>
-        <p>Import <code>@optimalui/components/layout</code> module to use Margin component. Set <code>Margin</code> component as a parent to give  margin to any component.</p>
+        <p> Set <code>Margin</code> component as a parent to give  margin to any component.</p>
         <div className="uk-position-relative uk-margin-medium">
             <ul uk-tab="" className="uk-tab">
                 <li className="uk-active"><a href="#" aria-expanded="true">Preview</a></li>

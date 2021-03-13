@@ -2,14 +2,14 @@
 import React, { useState } from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
-import { TabStrip, Tab, TabItem } from "../../../components/layout";
+import { TabStrip, Tab, TabItem } from "optimalui-react";
 import { DocTable, DocTableRow, TableRowItem } from "../DocTable";
 import MarkupButtons from "../MarkupButtons";
 
 const tabStripUsage = `
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { TabStrip,Tab } from '@optimalui/components/layout'
+import { TabStrip,Tab } from 'optimalui-react'
 
 class App extends React.Component {
     constructor(props){
@@ -73,7 +73,7 @@ ReactDOM.render(
 const tabStripAlignment = `
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { TabStrip,Tab } from '@optimalui/components/layout'
+import { TabStrip,Tab } from 'optimalui-react'
 
 class App extends React.Component {
     render() { 
@@ -296,7 +296,7 @@ ReactDOM.render(
 const tabStripDropDown = `
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { TabStrip,Tab,TabItem } from '@optimalui/components/layout'
+import { TabStrip,Tab,TabItem } from 'optimalui-react'
 
 class App extends React.Component {
     render() { 
@@ -368,7 +368,7 @@ document.querySelector('my-app')
 const tabStripAnimation = `
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { TabStrip,Tab,TabItem } from '@optimalui/components/layout'
+import { TabStrip,Tab,TabItem } from 'optimalui-react'
 
 class App extends React.Component {
     render() { 
@@ -472,7 +472,7 @@ const items = [
 const configurationSource = `
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { TabStrip,Tab } from '@optimalui/components/layout'
+import { TabStrip,Tab } from 'optimalui-react'
 
 class App extends React.Component {
     render() { 
@@ -592,7 +592,7 @@ const keyBoardItems = [
 const keyboardSource = `
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { TabStrip,Tab } from '@optimalui/components/layout'
+import { TabStrip,Tab } from 'optimalui-react'
 
 class App extends React.Component {
     render() { 
@@ -863,10 +863,7 @@ export const TabStripDoc = () => {
       <h2 id="usage" className="uk-h3 tm-heading-fragment">
         <a href="#usage">Usage</a>
       </h2>
-      <p>
-        Import <code>@optimalui/components/layout</code> module to use TabStrip
-        component.
-      </p>
+      
       <p>
         Use <code>Tab</code> component to set TabStript content. To disable a
         Tab set <code>disabled</code> prop to <code>true</code>.

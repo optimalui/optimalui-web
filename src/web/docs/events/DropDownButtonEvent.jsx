@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React,{Component} from 'react';
 import EventLog from '../EventLog';
-import { DropDownButton } from '../../../components/buttons';
+import { DropDownButton } from 'optimalui-react';
 
 
 class DropDownButtonEvents extends Component {

@@ -1,7 +1,6 @@
 /* eslint-disable */
 import React from "react";
-import { Button } from "../../../components/buttons";
-import { TabStrip, Tab } from "../../../components/layout";
+import { Button,TabStrip,Tab } from "optimalui-react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import MarkupButtons from "../MarkupButtons";

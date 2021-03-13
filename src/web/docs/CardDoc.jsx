@@ -16,7 +16,7 @@ import avatarImg from "../../assets/web/img/avatar_.jpg";
 
 const src = `
 import React from "react";
-import {  Grid, GridItem } from "@optimalui/components/layout";
+import {  Grid, GridItem } from "optimalui-react";
 import {Card} from "@optimalui/components";
     
 export const CardSample = ()=>(
@@ -42,7 +42,7 @@ export const CardSample = ()=>(
 
 const srcSize = `
 import React from "react";
-import {  Grid, GridItem } from "@optimalui/components/layout";
+import {  Grid, GridItem } from "optimalui-react";
 import {Card} from "@optimalui/components";
     
 export const CardSize = ()=>(
@@ -63,7 +63,7 @@ export const CardSize = ()=>(
 
 const srcHeader = `
 import React from "react";
-import {  Grid, GridItem } from "@optimalui/components/layout";
+import {  Grid, GridItem } from "optimalui-react";
 import {Card,CardHeader,CardBody,CardFooter} from "@optimalui/components";
 import { Button } from "@optimalui/components/buttons";
     
@@ -104,7 +104,7 @@ export const Sample = ()=>(
 
 const srcMedia = `
 import React from "react";
-import {  Grid, GridItem } from "@optimalui/components/layout";
+import {  Grid, GridItem } from "optimalui-react";
 import {Card,CardHeader,CardBody,CardFooter} from "@optimalui/components";
 import { Button } from "@optimalui/components/buttons";
 

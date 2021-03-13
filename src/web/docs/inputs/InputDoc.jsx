@@ -1,15 +1,12 @@
 import React from "react";
-import { TabStrip, Tab } from "../../../components/layout";
-import Input from "../../../components/inputs/Input";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import MarkupButtons from "../MarkupButtons";
 import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
-import Grid from "../../../components/layout/Grid";
-import GridItem from "../../../components/layout/GridItem";
+import {Grid,GridItem,Input,TabStrip,Tab} from "optimalui-react";
 
 const src = `
 import React from "react";
-import {Input} from "@optimalui/components/inputs";
+import {Input} from "optimalui-react";
     
 class App extends React.Component {
         render() { 
@@ -30,7 +27,7 @@ class App extends React.Component {
 
 const sizeSrc = `
 import React from "react";
-import {Input} from "@optimalui/components/inputs";
+import {Input} from "optimalui-react";
     
 class App extends React.Component {
         render() { 
@@ -52,7 +49,7 @@ class App extends React.Component {
 
 const widthSrc = `
 import React from "react";
-import {Input} from "@optimalui/components/inputs";
+import {Input} from "optimalui-react";
     
 class App extends React.Component {
         render() { 
@@ -75,7 +72,7 @@ class App extends React.Component {
 
 const multilineSrc = `
 import React from "react";
-import {Input} from "@optimalui/components/inputs";
+import {Input} from "optimalui-react";
     
 class App extends React.Component {
         render() { 
@@ -98,10 +95,7 @@ const InputUsage = () => (
     <h2 id="usage" className="uk-h3 tm-heading-fragment">
       <a href="#usage">Usage</a>
     </h2>
-    <p>
-      Import <code>@optimalui/components/inputs</code> module to use input
-      component.
-    </p>
+    
     <div className="uk-position-relative uk-margin-medium">
       <TabStrip>
         <Tab title="Preview">

@@ -1,12 +1,8 @@
 import React from "react";
-import { TabStrip, Tab} from "../../../components/layout";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import MarkupButtons from "../MarkupButtons";
 import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
-import Grid from "../../../components/layout/Grid";
-import GridItem from "../../../components/layout/GridItem";
-import RadioGroup from "../../../components/inputs/RadioGroup";
-import Radio from "../../../components/inputs/Radio";
+import {Radio,RadioGroup,Grid,GridItem,TabStrip,Tab} from "optimalui-react";
 
 const src = `
 import React from "react";
@@ -165,7 +161,7 @@ const Usage = () => {
                 <a href="#usage">Usage</a>
             </h2>
             <p>
-                Import <code>@optimalui/components/inputs</code> module to use Radio and RadioGroup
+                Import <code>optimalui-react</code> module to use Radio and RadioGroup
       components.
     </p>
             <div className="uk-position-relative uk-margin-medium">

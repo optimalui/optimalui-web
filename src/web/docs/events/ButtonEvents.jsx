@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React,{Component} from 'react';
 import EventLog from '../EventLog';
-import { Button } from '../../../components/buttons';
+import { Button } from 'optimalui-react';
 
 
 class ButtonEvents extends Component {

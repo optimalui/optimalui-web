@@ -7,7 +7,7 @@ import { Avatar } from "../../components";
 
 const src = `
 import React from "react";
-import {  Grid, GridItem } from "@optimalui/components/layout";
+import {  Grid, GridItem } from "optimalui-react";
 import {Avatar} from "@optimalui/components";
     
 export const Sample = ()=>(

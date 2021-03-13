@@ -2,11 +2,10 @@
 import React, { useState } from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
-import { Menu, TabStrip, Tab, SubMenu,MenuItem } from '../../../components/layout';
+import { Menu, TabStrip, Tab,MenuItem } from 'optimalui-react';
+import { Link,HashRouter, BrowserRouter, Router,Switch, Route } from "react-router-dom";
 import MarkupButtons from '../MarkupButtons';
 import menuItems from '../menuItems.json'
-import { Link, Route, Switch, BrowserRouter as Router, HashRouter } from "react-router-dom";
-import MenuRouting from '../MenuRouting'
 import _ from 'lodash'
 import EventLog from '../EventLog';
 
@@ -14,7 +13,7 @@ import EventLog from '../EventLog';
 const menuUsage = `
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Menu,MenuItem } from '@optimalui/components/layout'
+import { Menu,MenuItem } from 'optimalui-react'
 import menuItems from './menuItems.json'
 
 class App extends React.Component {
@@ -59,7 +58,7 @@ const menuItemsSource = `
 const dataBindingSource = `
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Menu } from '@optimalui/components/layout'
+import { Menu } from 'optimalui-react'
 
 class App extends React.Component {
     render() { 
@@ -103,7 +102,7 @@ ReactDOM.render(
 const clickModeSource = `
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Menu } from '@optimalui/components/layout'
+import { Menu } from 'optimalui-react'
 
 class App extends React.Component {
     render() { 
@@ -174,7 +173,7 @@ const items = [
 const menuItemsUsage = `
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Menu,MenuItem } from '@optimalui/components/layout'
+import { Menu,MenuItem } from 'optimalui-react'
 
 class App extends React.Component {
     render() { 
@@ -200,7 +199,7 @@ ReactDOM.render(
 const alignmentSource = `
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Menu } from '@optimalui/components/layout'
+import { Menu } from 'optimalui-react'
 
 class App extends React.Component {
     render() { 
@@ -254,7 +253,7 @@ ReactDOM.render(
 const itemUrl = `
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Menu,MenuItem } from '@optimalui/components/layout'
+import { Menu,MenuItem } from 'optimalui-react'
 
 class App extends React.Component {
     render() { 
@@ -279,7 +278,7 @@ ReactDOM.render(
 const iconsUsage = `
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Menu } from '@optimalui/components/layout'
+import { Menu } from 'optimalui-react'
 
 class App extends React.Component {
     render() { 
@@ -337,7 +336,7 @@ const disabledItems = [
 const disabledUsage = `
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Menu } from '@optimalui/components/layout'
+import { Menu } from 'optimalui-react'
 
 class App extends React.Component {
     render() { 
@@ -410,7 +409,7 @@ const bookCategories = [
 const verticalMenu = `
     import React from 'react';
     import ReactDOM from 'react-dom';
-    import { Menu } from '@optimalui/components/layout'
+    import { Menu } from 'optimalui-react'
 
     class App extends React.Component {
         render() { 
@@ -485,7 +484,7 @@ const verticalMenu = `
 const routeMenu = `
     import React from 'react';
     import ReactDOM from 'react-dom';
-    import { Menu,MenuItem } from '@optimalui/components/layout'
+    import { Menu,MenuItem } from 'optimalui-react'
     import {Route, Switch, HashRouter } from "react-router-dom";
 
 
@@ -565,7 +564,7 @@ const routeMenu = `
 const menuEventsSource = `
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Menu,MenuItem } from '@optimalui/components/layout'
+import { Menu,MenuItem } from 'optimalui-react'
 
 class App extends React.Component {
     constructor(props) {
@@ -655,7 +654,7 @@ const Team = () => (
 
 const MenuRoute = () => (
     <Switch>
-        <Route exact={true} path="/home" component={Home} />
+        <Route exact={true} path="/home" component={Home} /> 
         <Route exact={true} path="/products" component={Products} />
         <Route exact={true} path="/about" component={About} />
         <Route exact={true} path="/about/team" component={Team} />
@@ -665,7 +664,6 @@ const MenuRoute = () => (
 const MenuUsage = () => (
     <React.Fragment>
         <h2 id="usage" className="uk-h3 tm-heading-fragment"><a href="#usage">Usage</a></h2>
-        <p>Import <code>@optimalui/components/layout</code> module to use <code>Menu</code> component.</p>
         <p>You can describe the <code>Menu</code> items with <code>items</code> prop or <code>MenuItem</code> component.</p>
         <div className="uk-position-relative uk-margin-medium">
             <TabStrip>
@@ -916,8 +914,8 @@ const MenuRouter = () => (
                                 <MenuItem text="Team" route='/about/team' />
                             </MenuItem>
                         </Menu>
-                        <MenuRoute />
-                    </HashRouter>
+                        <MenuRoute /> 
+                     </HashRouter>
                 </Tab>
                 <Tab title="Markup">
                     <SyntaxHighlighter language='javascript' style={docco}>{routeMenu}</SyntaxHighlighter>
@@ -986,7 +984,7 @@ const MenuItemDoc = ()=>(
                         <td align="left"><code>no</code></td>
                         <td align="left"><code>{`''`}</code></td>
                     </tr>
-                    <tr>
+                     <tr>
                         <td align="left"><code>route</code></td>
                         <td align="left"><code>string</code></td>
                         <td align="left"><code>no</code></td>
@@ -1143,11 +1141,10 @@ class MenuDoc extends React.Component {
                 {/** Collapsible */}
                 <MenuCollapsible/>
 
-                {/** ROUTER */}
-                <MenuRouter/>
-
                 {/** PROPS */}
                 <MenuProps/>
+
+                <MenuRouter/>
 
                 {/** MENUITEM */}
                 <MenuItemDoc/>

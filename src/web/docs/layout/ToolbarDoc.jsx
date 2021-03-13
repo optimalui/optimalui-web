@@ -2,8 +2,7 @@
 import React from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
-import { Toolbar,ToolbarItem, ToolbarContent,TabStrip, Tab,Menu,MenuItem } from '../../../components/layout'; 
-import { Button} from '../../../components/buttons'; 
+import { Toolbar,ToolbarItem, ToolbarContent,TabStrip, Tab,Menu,MenuItem,Button } from 'optimalui-react'; 
 import MarkupButtons from '../MarkupButtons';
 import backgroundImg from '../../../assets/web/img/light.jpeg'
 
@@ -12,7 +11,7 @@ const ToolBarUsage = () => {
     const src =  `
     import React from 'react';
     import ReactDOM from 'react-dom';
-    import { ToolBar,ToolbarItem,Menu,MenuItem } from '@optimalui/components/layout'
+    import { ToolBar,ToolbarItem,Menu,MenuItem } from 'optimalui-react'
     
     class App extends React.Component {
         render() { 
@@ -39,7 +38,6 @@ const ToolBarUsage = () => {
     `;
     return <React.Fragment>
         <h2 id="usage" className="uk-h3 tm-heading-fragment"><a href="#usage">Usage</a></h2>
-        <p>Import <code>@optimalui/components/layout</code> module to use <code>Toolbar</code> component.</p>
         <p>
             <code>Toolbar</code> component accepts only <code>ToolbarItem</code> child component. 
             You can create <code>Toolbar</code> contents  with <code>ToolbarItem</code> component.
@@ -72,7 +70,7 @@ const MultipleNavigation = () => {
     const src =  `
     import React from 'react';
     import ReactDOM from 'react-dom';
-    import { ToolBar,ToolbarItem,Menu,MenuItem } from '@optimalui/components/layout'
+    import { ToolBar,ToolbarItem,Menu,MenuItem } from 'optimalui-react'
     
     class App extends React.Component {
         render() { 
@@ -152,7 +150,7 @@ const TransparentToolbar = () => {
     const src =  `
     import React from 'react';
     import ReactDOM from 'react-dom';
-    import { ToolBar,ToolbarItem,Menu,MenuItem } from '@optimalui/components/layout'
+    import { ToolBar,ToolbarItem,Menu,MenuItem } from 'optimalui-react'
     import backgroundImg from '../img/light.jpeg'
     
     class App extends React.Component {
@@ -219,7 +217,7 @@ const ToolbarItemContent = () => {
     const src =  `
     import React from 'react';
     import ReactDOM from 'react-dom';
-    import { ToolBar,ToolbarItem,Menu,MenuItem,ToolbarContent } from '@optimalui/components/layout'
+    import { ToolBar,ToolbarItem,Menu,MenuItem,ToolbarContent } from 'optimalui-react'
     
     class App extends React.Component {
         render() { 
@@ -305,7 +303,7 @@ const CenteredLogo = () => {
     const src =  `
     import React from 'react';
     import ReactDOM from 'react-dom';
-    import { ToolBar,ToolbarItem,Menu,MenuItem,ToolbarContent } from '@optimalui/components/layout'
+    import { ToolBar,ToolbarItem,Menu,MenuItem,ToolbarContent } from 'optimalui-react'
 
     class App extends React.Component {
         render() { 

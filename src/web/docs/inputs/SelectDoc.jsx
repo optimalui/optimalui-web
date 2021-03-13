@@ -9,7 +9,7 @@ import { Select } from "../../../components/inputs/Select";
 const src = `
 import React,{useState} from "react";
 import {Select} from "@optimalui/components";
-import {Grid} from "@optimalui/components/layout";
+import {Grid} from "optimalui-react";
     
 export const SelectSample = ()=>{
           const [value, setValue] = useState("");
@@ -80,7 +80,7 @@ export const SelectSample = ()=>{
 const groupSrc = `
 import React,{useState} from "react";
 import {Select} from "@optimalui/components";
-import {Grid} from "@optimalui/components/layout";
+import {Grid} from "optimalui-react";
     
 export const SelectSample = ()=>{
           const [value, setValue] = useState("");
@@ -127,7 +127,7 @@ export const SelectSample = ()=>{
 const multipleSrc= `
 import React,{useState} from "react";
 import {Select} from "@optimalui/components";
-import {Grid} from "@optimalui/components/layout";
+import {Grid} from "optimalui-react";
     
 export const SelectSample = ()=>{
           const [values, setValues] = useState([]);
@@ -165,7 +165,7 @@ export const SelectSample = ()=>{
 const filterSrc= `
 import React,{useState} from "react";
 import {Select} from "@optimalui/components";
-import {Grid} from "@optimalui/components/layout";
+import {Grid} from "optimalui-react";
     
 export const SelectSample = ()=>{
           const [values, setValues] = useState([]);
