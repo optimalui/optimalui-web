@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import Grid from "../../../components/layout/Grid";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import MarkupButtons from "../MarkupButtons";
 import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
-import { TabStrip, Tab } from "../../../components/layout";
-import { Select } from "../../../components/inputs/Select";
+import { Select, Tab, TabStrip, Grid, Margin, GridItem } from "optimalui-react";
 
 const src = `
 import React,{useState} from "react";
@@ -124,7 +122,7 @@ export const SelectSample = ()=>{
       }
 `;
 
-const multipleSrc= `
+const multipleSrc = `
 import React,{useState} from "react";
 import {Select} from "@optimalui/components";
 import {Grid} from "optimalui-react";
@@ -161,8 +159,7 @@ export const SelectSample = ()=>{
       }
 `;
 
-
-const filterSrc= `
+const filterSrc = `
 import React,{useState} from "react";
 import {Select} from "@optimalui/components";
 import {Grid} from "optimalui-react";
@@ -274,28 +271,30 @@ const SelectUsage = () => {
       <div className="uk-position-relative uk-margin-medium">
         <TabStrip>
           <Tab title="Preview">
-            <Grid>
-              <Select
-                onChange={handleChange}
-                placeholder="Select Items"
-                options={[
-                  { text: "Item-1", value: "item-1" },
-                  { text: "Item-2", value: "item-2" },
-                  { text: "Item-3", value: "item-3" },
-                ]}
-              />
-            </Grid>
-            <Grid>
-              <Select
-                onChange={handleChange}
-                disabled
-                placeholder="Select Items"
-                options={[
-                  { text: "Item-1", value: "item-1" },
-                  { text: "Item-2", value: "item-2" },
-                  { text: "Item-3", value: "item-3" },
-                ]}
-              />
+            <Grid className="uk-child-width-expand@s uk-text-center">
+              <GridItem w_1_2>
+                <Select
+                  onChange={handleChange}
+                  placeholder="Select Items"
+                  options={[
+                    { text: "Item-1", value: "item-1" },
+                    { text: "Item-2", value: "item-2" },
+                    { text: "Item-3", value: "item-3" },
+                  ]}
+                />
+              </GridItem>
+              <GridItem w_1_2>
+                <Select
+                  onChange={handleChange}
+                  disabled
+                  placeholder="Select Items"
+                  options={[
+                    { text: "Item-1", value: "item-1" },
+                    { text: "Item-2", value: "item-2" },
+                    { text: "Item-3", value: "item-3" },
+                  ]}
+                />
+              </GridItem>
             </Grid>
             <Grid>
               <Select
@@ -323,9 +322,9 @@ const SelectUsage = () => {
               />
             </Grid>
             <Grid>
-                <p style={{marginLeft:"10px"}}>
-                  <code>selected item : {JSON.stringify(value)}</code>
-                </p>
+              <p style={{ marginLeft: "10px" }}>
+                <code>selected item : {JSON.stringify(value)}</code>
+              </p>
             </Grid>
           </Tab>
           <Tab title="Markup">
@@ -371,9 +370,9 @@ const SelectUsage = () => {
               />
             </Grid>
             <Grid>
-                <p style={{marginLeft:"10px"}}>
-                  <code>selected item : {JSON.stringify(value)}</code>
-                </p>
+              <p style={{ marginLeft: "10px" }}>
+                <code>selected item : {JSON.stringify(value)}</code>
+              </p>
             </Grid>
           </Tab>
           <Tab title="Markup">
@@ -399,21 +398,21 @@ const SelectUsage = () => {
         <TabStrip>
           <Tab title="Preview">
             <Grid>
-            <Select
-              multiple
-              onChange={handleMultipleChange}
-              placeholder="Select Items"
-              options={[
-                { text: "Item-1", value: "item-1" },
-                { text: "Item-2", value: "item-2" },
-                { text: "Item-3", value: "item-3" },
-              ]}
-            />
+              <Select
+                multiple
+                onChange={handleMultipleChange}
+                placeholder="Select Items"
+                options={[
+                  { text: "Item-1", value: "item-1" },
+                  { text: "Item-2", value: "item-2" },
+                  { text: "Item-3", value: "item-3" },
+                ]}
+              />
             </Grid>
             <Grid>
-                <p style={{marginLeft:"10px"}}>
-                  <code>selected items : {JSON.stringify(values)}</code>
-                </p>
+              <p style={{ marginLeft: "10px" }}>
+                <code>selected items : {JSON.stringify(values)}</code>
+              </p>
             </Grid>
           </Tab>
           <Tab title="Markup">
@@ -485,12 +484,12 @@ const SelectUsage = () => {
               />
             </Grid>
             <Grid>
-                <p style={{marginLeft:"10px"}}>
-                  <code>selected items : {JSON.stringify(values)}</code>
-                </p>
-                <p style={{marginLeft:"10px"}}>
-                  <code>selected item : {JSON.stringify(value)}</code>
-                </p>
+              <p style={{ marginLeft: "10px" }}>
+                <code>selected items : {JSON.stringify(values)}</code>
+              </p>
+              <p style={{ marginLeft: "10px" }}>
+                <code>selected item : {JSON.stringify(value)}</code>
+              </p>
             </Grid>
           </Tab>
           <Tab title="Markup">
@@ -558,7 +557,7 @@ export const SelectProps = () => (
               <code>false</code>
             </td>
           </tr>
-          
+
           <tr>
             <td align="left">
               <code>disabled</code>
@@ -571,7 +570,7 @@ export const SelectProps = () => (
               <code>false</code>
             </td>
           </tr>
-          
+
           <tr>
             <td align="left">
               <code>multiple</code>

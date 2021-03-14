@@ -2,7 +2,7 @@ import React from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import MarkupButtons from "../MarkupButtons";
 import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
-import {Radio,RadioGroup,Grid,GridItem,TabStrip,Tab} from "optimalui-react";
+import {Radio,Grid,GridItem,TabStrip,Tab} from "optimalui-react";
 
 const src = `
 import React from "react";
@@ -22,10 +22,8 @@ export const App = () => {
             <React.Fragment>
                     <Grid>
                         <GridItem>
-                            <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
-                                <label><Radio value="male" /> Male</label>
-                                <label><Radio value="female" /> Female</label>
-                            </RadioGroup>
+                                    <Radio name="gender" value="male" onChange={handleChange}/> Male
+                                    <Radio name="gender" value="female" onChange={handleChange} /> Female
                         /GridItem>
                     </Grid>
             </React.Fragment>
@@ -83,7 +81,7 @@ export const RadioProps = () => (
                     </tr>
 
                     <tr>
-                        <td align="left"><code>checked</code></td>
+                        <td align="left"><code>selected</code></td>
                         <td align="left"><code>bool</code></td>
                         <td align="left">no</td>
                         <td align="left"><code>false</code></td>
@@ -92,58 +90,7 @@ export const RadioProps = () => (
             </table>
         </div>
 
-
-
-        <h2 id="r_group_props" className="uk-h3 tm-heading-fragment"><a href="#r_group_props">RadioGroup Props</a></h2>
-        <p>The RadioGroup component has the following props.</p>
-        <div className="uk-overflow-auto">
-            <table className="uk-table uk-table-divider">
-                <thead>
-                    <tr>
-                        <th align="left">prop</th>
-                        <th align="left">propType</th>
-                        <th align="left">reqiured</th>
-                        <th align="left">default</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td align="left"><code>defaultValue</code></td>
-                        <td align="left"><code>string | number</code></td>
-                        <td align="left">no</td>
-                        <td align="left"><code>null</code></td>
-                    </tr>
-
-                    <tr>
-                        <td align="left"><code>name</code></td>
-                        <td align="left"><code>string</code></td>
-                        <td align="left">no</td>
-                        <td align="left"><code>''</code></td>
-                    </tr>
-
-                    <tr>
-                        <td align="left"><code>onChange</code></td>
-                        <td align="left"><code>func</code></td>
-                        <td align="left">no</td>
-                        <td align="left"><code>null</code></td>
-                    </tr>
-
-                    <tr>
-                        <td align="left"><code>value</code></td>
-                        <td align="left"><code>any</code></td>
-                        <td align="left">no</td>
-                        <td align="left"><code>''</code></td>
-                    </tr>
-
-                    <tr>
-                        <td align="left"><code>checked</code></td>
-                        <td align="left"><code>bool</code></td>
-                        <td align="left">no</td>
-                        <td align="left"><code>false</code></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        
     </React.Fragment>
 )
 
@@ -169,10 +116,8 @@ const Usage = () => {
                     <Tab title="Preview">
                         <Grid>
                             <GridItem>
-                                <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
-                                    <label><Radio value="male" /> Male</label>
-                                    <label><Radio value="female" /> Female</label>
-                                </RadioGroup>
+                                    <Radio name="gender" value="male" onChange={handleChange}/> Male
+                                    <Radio name="gender" value="female" onChange={handleChange} /> Female
                             </GridItem>
                         </Grid>
                     </Tab>
