@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { Intro } from './Intro';
+import { Intro, IntroDoc } from './Intro';
 import { ButtonDoc, ButtonGroupDoc, DropDownButtonDoc } from './buttons';
 import { TabStripDoc, MenuDoc, ToolbarDoc, OffCanvasDoc, GridDoc } from './layout';
 import { IconDoc } from './IconDoc';
@@ -19,8 +19,8 @@ class DocContent extends Component {
     render() {
         return (
             <div className="tm-main uk-section uk-section-default"> 
-                <div>
-                    <Route exact path="/docs/introduction" component={Intro} />
+                <div> 
+                    <Route path="/" exact component={Intro} />
                     <Route path="/docs/buttons/button" component={ButtonDoc} />
                     <Route path="/docs/buttons/button-group" component={ButtonGroupDoc} />
                     <Route path="/docs/buttons/dropdown-button" component={DropDownButtonDoc} />

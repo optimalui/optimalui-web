@@ -6,8 +6,7 @@ import { Select, Tab, TabStrip, Grid, Margin, GridItem } from "optimalui-react";
 
 const src = `
 import React,{useState} from "react";
-import {Select} from "@optimalui/components";
-import {Grid} from "optimalui-react";
+import {Select,Grid,GridItem} from "optimalui-react";
     
 export const SelectSample = ()=>{
           const [value, setValue] = useState("");
@@ -17,57 +16,61 @@ export const SelectSample = ()=>{
           return (
             <React.Fragment>
               <Grid>
-                <Select
-                  onChange={handleChange}
-                  placeholder="Select Items"
-                  options={[
-                    { text: "Item-1", value: "item-1" },
-                    { text: "Item-2", value: "item-2" },
-                    { text: "Item-3", value: "item-3" },
-                  ]}
-                />
+                <GridItem w_1_2>
+                  <Select
+                    onChange={handleChange}
+                    placeholder="Select Items"
+                    options={[
+                      { text: "Item-1", value: "item-1" },
+                      { text: "Item-2", value: "item-2" },
+                      { text: "Item-3", value: "item-3" },
+                    ]}
+                  />
+                </GridItem>
+                <GridItem w_1_2>
+                  <Select
+                    onChange={handleChange}
+                    disabled
+                    placeholder="Select Items"
+                    options={[
+                      { text: "Item-1", value: "item-1" },
+                      { text: "Item-2", value: "item-2" },
+                      { text: "Item-3", value: "item-3" },
+                    ]}
+                  />
+                </GridItem>
               </Grid>
               <Grid>
-                <Select
-                  onChange={handleChange}
-                  disabled
-                  placeholder="Select Items"
-                  options={[
-                    { text: "Item-1", value: "item-1" },
-                    { text: "Item-2", value: "item-2" },
-                    { text: "Item-3", value: "item-3" },
-                  ]}
-                />
+                <GridItem w_1_2>
+                  <Select
+                    helperText="Some important text!"
+                    onChange={handleChange}
+                    placeholder="Select Items"
+                    options={[
+                      { text: "Item-1", value: "item-1" },
+                      { text: "Item-2", value: "item-2" },
+                      { text: "Item-3", value: "item-3" },
+                    ]}
+                  />
+                </GridItem>
+                <GridItem w_1_2>
+                  <Select
+                    error
+                    helperText="Some important error!"
+                    onChange={handleChange}
+                    placeholder="Select Items"
+                    options={[
+                      { text: "Item-1", value: "item-1" },
+                      { text: "Item-2", value: "item-2" },
+                      { text: "Item-3", value: "item-3" },
+                    ]}
+                  />
+                </GridItem>
               </Grid>
               <Grid>
-                <Select
-                  helperText="Some important text!"
-                  onChange={handleChange}
-                  placeholder="Select Items"
-                  options={[
-                    { text: "Item-1", value: "item-1" },
-                    { text: "Item-2", value: "item-2" },
-                    { text: "Item-3", value: "item-3" },
-                  ]}
-                />
-              </Grid>
-              <Grid>
-                <Select
-                  error
-                  helperText="Some important error!"
-                  onChange={handleChange}
-                  placeholder="Select Items"
-                  options={[
-                    { text: "Item-1", value: "item-1" },
-                    { text: "Item-2", value: "item-2" },
-                    { text: "Item-3", value: "item-3" },
-                  ]}
-                />
-              </Grid>
-              <Grid>
-                  <p style={{marginLeft:"10px"}}>
-                    <code>selected item : {JSON.stringify(value)}</code>
-                  </p>
+                    <p style={{marginLeft:"10px"}}>
+                      <code>selected item : {JSON.stringify(value)}</code>
+                    </p>
               </Grid>
             </React.Fragment>
            )
@@ -77,8 +80,7 @@ export const SelectSample = ()=>{
 
 const groupSrc = `
 import React,{useState} from "react";
-import {Select} from "@optimalui/components";
-import {Grid} from "optimalui-react";
+import {Select,Grid,GridItem} from "optimalui-react";
     
 export const SelectSample = ()=>{
           const [value, setValue] = useState("");
@@ -88,9 +90,130 @@ export const SelectSample = ()=>{
           return (
             <React.Fragment>
               <Grid>
+                <GridItem w_1_2>
+                  <Select
+                    onChange={handleChange}
+                    placeholder="Select Items"
+                    options={[
+                      {
+                        text: "Group-items-1",
+                        group: [
+                          { text: "Item-1.1", value: "item-1.1" },
+                          { text: "Item-1.2", value: "item-1.2" },
+                          { text: "Item-1.3", value: "item-1.3" },
+                        ],
+                      },
+                      {
+                        text: "Group-items-2",
+                        group: [
+                          { text: "Item-2.1", value: "item-2.1" },
+                          { text: "Item-2.2", value: "item-2.2" },
+                          { text: "Item-2.3", value: "item-2.3" },
+                        ],
+                      },
+                    ]}
+                  />
+                </GridItem>
+            </Grid>
+            <Grid>
+                <p>
+                  <code>selected item : {JSON.stringify(value)}</code>
+                </p>
+            </Grid>
+            </React.Fragment>
+           )
+        }
+      }
+`;
+
+const multipleSrc = `
+import React,{useState} from "react";
+import {Select,Grid,GridItem} from "optimalui-react";
+    
+export const SelectSample = ()=>{
+          const [values, setValues] = useState([]);
+          
+          const handleMultipleChange = (e) => {
+            setValues(e);
+          };
+
+          return (
+            <React.Fragment>
+            <Grid>
+                <GridItem w_1_2>
+              <Select
+                multiple
+                onChange={handleMultipleChange}
+                placeholder="Select Items"
+                options={[
+                  { text: "Item-1", value: "item-1" },
+                  { text: "Item-2", value: "item-2" },
+                  { text: "Item-3", value: "item-3" },
+                ]}
+              />
+              </GridItem>
+            </Grid>
+            <Grid>
+                <p>
+                  <code>selected items : {JSON.stringify(values)}</code>
+                </p>
+            </Grid>
+            </React.Fragment>
+           )
+        }
+      }
+`;
+
+const filterSrc = `
+import React,{useState} from "react";
+import {Select,Grid,GridItem} from "optimalui-react";
+    
+export const SelectSample = ()=>{
+          const [values, setValues] = useState([]);
+          const [value, setValue] = useState("");
+
+          const handleChange = (val) => {
+            if (val) setValue(val);
+          };
+          const handleMultipleChange = (e) => {
+            setValues(e);
+          };
+
+          return (
+            <React.Fragment>
+            <Grid>
+              <GridItem w_1_2>
                 <Select
+                  filterable
                   onChange={handleChange}
-                  placeholder="Select Items"
+                  placeholder="Filter Items"
+                  options={[
+                    { text: "Item-1", value: "item-1" },
+                    { text: "Item-2", value: "item-2" },
+                    { text: "Item-3", value: "item-3" },
+                  ]}
+                />
+              </GridItem>
+              <GridItem w_1_2>
+                <Select
+                  filterable
+                  multiple
+                  onChange={handleMultipleChange}
+                  placeholder="Filter Items"
+                  options={[
+                    { text: "Item-1", value: "item-1" },
+                    { text: "Item-2", value: "item-2" },
+                    { text: "Item-3", value: "item-3" },
+                  ]}
+                />
+              </GridItem>
+            </Grid>
+            <Grid>
+              <GridItem w_1_2>
+                <Select
+                  filterable
+                  onChange={handleChange}
+                  placeholder="Filter Items"
                   options={[
                     {
                       text: "Group-items-1",
@@ -110,128 +233,13 @@ export const SelectSample = ()=>{
                     },
                   ]}
                 />
+              </GridItem>
             </Grid>
             <Grid>
-                <p style={{marginLeft:"10px"}}>
-                  <code>selected item : {JSON.stringify(value)}</code>
-                </p>
-            </Grid>
-            </React.Fragment>
-           )
-        }
-      }
-`;
-
-const multipleSrc = `
-import React,{useState} from "react";
-import {Select} from "@optimalui/components";
-import {Grid} from "optimalui-react";
-    
-export const SelectSample = ()=>{
-          const [values, setValues] = useState([]);
-          
-          const handleMultipleChange = (e) => {
-            setValues(e);
-          };
-
-          return (
-            <React.Fragment>
-            <Grid>
-              <Select
-                multiple
-                onChange={handleMultipleChange}
-                placeholder="Select Items"
-                options={[
-                  { text: "Item-1", value: "item-1" },
-                  { text: "Item-2", value: "item-2" },
-                  { text: "Item-3", value: "item-3" },
-                ]}
-              />
-            </Grid>
-            <Grid>
-                <p style={{marginLeft:"10px"}}>
+                <p>
                   <code>selected items : {JSON.stringify(values)}</code>
                 </p>
-            </Grid>
-            </React.Fragment>
-           )
-        }
-      }
-`;
-
-const filterSrc = `
-import React,{useState} from "react";
-import {Select} from "@optimalui/components";
-import {Grid} from "optimalui-react";
-    
-export const SelectSample = ()=>{
-          const [values, setValues] = useState([]);
-          const [value, setValue] = useState("");
-
-          const handleChange = (val) => {
-            if (val) setValue(val);
-          };
-          const handleMultipleChange = (e) => {
-            setValues(e);
-          };
-
-          return (
-            <React.Fragment>
-            <Grid>
-              <Select
-                filterable
-                onChange={handleChange}
-                placeholder="Filter Items"
-                options={[
-                  { text: "Item-1", value: "item-1" },
-                  { text: "Item-2", value: "item-2" },
-                  { text: "Item-3", value: "item-3" },
-                ]}
-              />
-            </Grid>
-            <Grid>
-              <Select
-                filterable
-                multiple
-                onChange={handleMultipleChange}
-                placeholder="Filter Items"
-                options={[
-                  { text: "Item-1", value: "item-1" },
-                  { text: "Item-2", value: "item-2" },
-                  { text: "Item-3", value: "item-3" },
-                ]}
-              />
-            </Grid>
-            <Grid>
-              <Select
-                filterable
-                onChange={handleChange}
-                placeholder="Filter Items"
-                options={[
-                  {
-                    text: "Group-items-1",
-                    group: [
-                      { text: "Item-1.1", value: "item-1.1" },
-                      { text: "Item-1.2", value: "item-1.2" },
-                      { text: "Item-1.3", value: "item-1.3" },
-                    ],
-                  },
-                  {
-                    text: "Group-items-2",
-                    group: [
-                      { text: "Item-2.1", value: "item-2.1" },
-                      { text: "Item-2.2", value: "item-2.2" },
-                      { text: "Item-2.3", value: "item-2.3" },
-                    ],
-                  },
-                ]}
-              />
-            </Grid>
-            <Grid>
-                <p style={{marginLeft:"10px"}}>
-                  <code>selected items : {JSON.stringify(values)}</code>
-                </p>
-                <p style={{marginLeft:"10px"}}>
+                <p>
                   <code>selected item : {JSON.stringify(value)}</code>
                 </p>
             </Grid>
@@ -271,7 +279,7 @@ const SelectUsage = () => {
       <div className="uk-position-relative uk-margin-medium">
         <TabStrip>
           <Tab title="Preview">
-            <Grid className="uk-child-width-expand@s uk-text-center">
+            <Grid>
               <GridItem w_1_2>
                 <Select
                   onChange={handleChange}
@@ -297,34 +305,38 @@ const SelectUsage = () => {
               </GridItem>
             </Grid>
             <Grid>
-              <Select
-                helperText="Some important text!"
-                onChange={handleChange}
-                placeholder="Select Items"
-                options={[
-                  { text: "Item-1", value: "item-1" },
-                  { text: "Item-2", value: "item-2" },
-                  { text: "Item-3", value: "item-3" },
-                ]}
-              />
+              <GridItem w_1_2>
+                <Select
+                  helperText="Some important text!"
+                  onChange={handleChange}
+                  placeholder="Select Items"
+                  options={[
+                    { text: "Item-1", value: "item-1" },
+                    { text: "Item-2", value: "item-2" },
+                    { text: "Item-3", value: "item-3" },
+                  ]}
+                />
+              </GridItem>
+              <GridItem w_1_2>
+                <Select
+                  error
+                  helperText="Some important error!"
+                  onChange={handleChange}
+                  placeholder="Select Items"
+                  options={[
+                    { text: "Item-1", value: "item-1" },
+                    { text: "Item-2", value: "item-2" },
+                    { text: "Item-3", value: "item-3" },
+                  ]}
+                />
+              </GridItem>
             </Grid>
             <Grid>
-              <Select
-                error
-                helperText="Some important error!"
-                onChange={handleChange}
-                placeholder="Select Items"
-                options={[
-                  { text: "Item-1", value: "item-1" },
-                  { text: "Item-2", value: "item-2" },
-                  { text: "Item-3", value: "item-3" },
-                ]}
-              />
-            </Grid>
-            <Grid>
-              <p style={{ marginLeft: "10px" }}>
-                <code>selected item : {JSON.stringify(value)}</code>
-              </p>
+              <Margin type="top">
+                <p>
+                  <code>selected item : {JSON.stringify(value)}</code>
+                </p>
+              </Margin>
             </Grid>
           </Tab>
           <Tab title="Markup">
@@ -346,31 +358,33 @@ const SelectUsage = () => {
         <TabStrip>
           <Tab title="Preview">
             <Grid>
-              <Select
-                onChange={handleChange}
-                placeholder="Select Items"
-                options={[
-                  {
-                    text: "Group-items-1",
-                    group: [
-                      { text: "Item-1.1", value: "item-1.1" },
-                      { text: "Item-1.2", value: "item-1.2" },
-                      { text: "Item-1.3", value: "item-1.3" },
-                    ],
-                  },
-                  {
-                    text: "Group-items-2",
-                    group: [
-                      { text: "Item-2.1", value: "item-2.1" },
-                      { text: "Item-2.2", value: "item-2.2" },
-                      { text: "Item-2.3", value: "item-2.3" },
-                    ],
-                  },
-                ]}
-              />
+              <GridItem w_1_2>
+                <Select
+                  onChange={handleChange}
+                  placeholder="Select Items"
+                  options={[
+                    {
+                      text: "Group-items-1",
+                      group: [
+                        { text: "Item-1.1", value: "item-1.1" },
+                        { text: "Item-1.2", value: "item-1.2" },
+                        { text: "Item-1.3", value: "item-1.3" },
+                      ],
+                    },
+                    {
+                      text: "Group-items-2",
+                      group: [
+                        { text: "Item-2.1", value: "item-2.1" },
+                        { text: "Item-2.2", value: "item-2.2" },
+                        { text: "Item-2.3", value: "item-2.3" },
+                      ],
+                    },
+                  ]}
+                />
+              </GridItem>
             </Grid>
             <Grid>
-              <p style={{ marginLeft: "10px" }}>
+              <p>
                 <code>selected item : {JSON.stringify(value)}</code>
               </p>
             </Grid>
@@ -398,19 +412,21 @@ const SelectUsage = () => {
         <TabStrip>
           <Tab title="Preview">
             <Grid>
-              <Select
-                multiple
-                onChange={handleMultipleChange}
-                placeholder="Select Items"
-                options={[
-                  { text: "Item-1", value: "item-1" },
-                  { text: "Item-2", value: "item-2" },
-                  { text: "Item-3", value: "item-3" },
-                ]}
-              />
+              <GridItem w_1_2>
+                <Select
+                  multiple
+                  onChange={handleMultipleChange}
+                  placeholder="Select Items"
+                  options={[
+                    { text: "Item-1", value: "item-1" },
+                    { text: "Item-2", value: "item-2" },
+                    { text: "Item-3", value: "item-3" },
+                  ]}
+                />
+              </GridItem>
             </Grid>
             <Grid>
-              <p style={{ marginLeft: "10px" }}>
+              <p>
                 <code>selected items : {JSON.stringify(values)}</code>
               </p>
             </Grid>
@@ -434,57 +450,61 @@ const SelectUsage = () => {
         <TabStrip>
           <Tab title="Preview">
             <Grid>
-              <Select
-                filterable
-                onChange={handleChange}
-                placeholder="Filter Items"
-                options={[
-                  { text: "Item-1", value: "item-1" },
-                  { text: "Item-2", value: "item-2" },
-                  { text: "Item-3", value: "item-3" },
-                ]}
-              />
+              <GridItem w_1_2>
+                <Select
+                  filterable
+                  onChange={handleChange}
+                  placeholder="Filter Items"
+                  options={[
+                    { text: "Item-1", value: "item-1" },
+                    { text: "Item-2", value: "item-2" },
+                    { text: "Item-3", value: "item-3" },
+                  ]}
+                />
+              </GridItem>
+              <GridItem w_1_2>
+                <Select
+                  filterable
+                  multiple
+                  onChange={handleMultipleChange}
+                  placeholder="Filter Items"
+                  options={[
+                    { text: "Item-1", value: "item-1" },
+                    { text: "Item-2", value: "item-2" },
+                    { text: "Item-3", value: "item-3" },
+                  ]}
+                />
+              </GridItem>
             </Grid>
             <Grid>
-              <Select
-                filterable
-                multiple
-                onChange={handleMultipleChange}
-                placeholder="Filter Items"
-                options={[
-                  { text: "Item-1", value: "item-1" },
-                  { text: "Item-2", value: "item-2" },
-                  { text: "Item-3", value: "item-3" },
-                ]}
-              />
+              <GridItem w_1_2>
+                <Select
+                  filterable
+                  onChange={handleChange}
+                  placeholder="Filter Items"
+                  options={[
+                    {
+                      text: "Group-items-1",
+                      group: [
+                        { text: "Item-1.1", value: "item-1.1" },
+                        { text: "Item-1.2", value: "item-1.2" },
+                        { text: "Item-1.3", value: "item-1.3" },
+                      ],
+                    },
+                    {
+                      text: "Group-items-2",
+                      group: [
+                        { text: "Item-2.1", value: "item-2.1" },
+                        { text: "Item-2.2", value: "item-2.2" },
+                        { text: "Item-2.3", value: "item-2.3" },
+                      ],
+                    },
+                  ]}
+                />
+              </GridItem>
             </Grid>
             <Grid>
-              <Select
-                filterable
-                onChange={handleChange}
-                placeholder="Filter Items"
-                options={[
-                  {
-                    text: "Group-items-1",
-                    group: [
-                      { text: "Item-1.1", value: "item-1.1" },
-                      { text: "Item-1.2", value: "item-1.2" },
-                      { text: "Item-1.3", value: "item-1.3" },
-                    ],
-                  },
-                  {
-                    text: "Group-items-2",
-                    group: [
-                      { text: "Item-2.1", value: "item-2.1" },
-                      { text: "Item-2.2", value: "item-2.2" },
-                      { text: "Item-2.3", value: "item-2.3" },
-                    ],
-                  },
-                ]}
-              />
-            </Grid>
-            <Grid>
-              <p style={{ marginLeft: "10px" }}>
+              <p>
                 <code>selected items : {JSON.stringify(values)}</code>
               </p>
               <p style={{ marginLeft: "10px" }}>

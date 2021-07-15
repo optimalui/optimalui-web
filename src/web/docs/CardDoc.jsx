@@ -1,17 +1,21 @@
 import React from "react";
-import { TabStrip, Tab, Grid, GridItem} from "../../components/layout";
+import {
+  TabStrip,
+  Tab,
+  Grid,
+  GridItem,
+  Card,
+  CardHeader,
+  CardFooter,
+  CardMedia,
+  CardBody,
+  Avatar,
+  Button,
+} from "optimalui-react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import MarkupButtons from "./MarkupButtons";
 import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  CardMedia,
-  Avatar,
-} from "../../components";
-import { Button } from "../../components/buttons";
+
 import avatarImg from "../../assets/web/img/avatar_.jpg";
 
 const src = `
@@ -412,8 +416,12 @@ export const Media = () => (
 
 export const Props = () => (
   <React.Fragment>
-    <h2 id="props" className="uk-h3 tm-heading-fragment"><a href="#props">Props</a></h2>
-    <p>The <code>Card</code> component has the following props.</p>
+    <h2 id="props" className="uk-h3 tm-heading-fragment">
+      <a href="#props">Props</a>
+    </h2>
+    <p>
+      The <code>Card</code> component has the following props.
+    </p>
     <div className="uk-overflow-auto">
       <table className="uk-table uk-table-divider">
         <thead>
@@ -426,36 +434,58 @@ export const Props = () => (
         </thead>
         <tbody>
           <tr>
-            <td align="left"><code>color</code></td>
-            <td align="left"><code>string</code></td>
+            <td align="left">
+              <code>color</code>
+            </td>
+            <td align="left">
+              <code>string</code>
+            </td>
             <td align="left">no</td>
-            <td align="left"><code>default</code></td>
+            <td align="left">
+              <code>default</code>
+            </td>
           </tr>
           <tr>
-            <td align="left"><code>title</code></td>
-            <td align="left"><code>string</code></td>
+            <td align="left">
+              <code>title</code>
+            </td>
+            <td align="left">
+              <code>string</code>
+            </td>
             <td align="left">no</td>
-            <td align="left"><code>''</code></td>
+            <td align="left">
+              <code>''</code>
+            </td>
           </tr>
           <tr>
-            <td align="left"><code>className</code></td>
-            <td align="left"><code>string</code></td>
+            <td align="left">
+              <code>className</code>
+            </td>
+            <td align="left">
+              <code>string</code>
+            </td>
             <td align="left">no</td>
-            <td align="left"><code>''</code></td>
+            <td align="left">
+              <code>''</code>
+            </td>
           </tr>
           <tr>
-            <td align="left"><code>size</code></td>
-            <td align="left"><code>string</code></td>
+            <td align="left">
+              <code>size</code>
+            </td>
+            <td align="left">
+              <code>string</code>
+            </td>
             <td align="left">no</td>
-            <td align="left"><code>''</code></td>
+            <td align="left">
+              <code>''</code>
+            </td>
           </tr>
         </tbody>
-    </table>
+      </table>
     </div>
-
   </React.Fragment>
-)
-
+);
 
 export const CardDoc = () => (
   <div className="uk-container uk-container-small uk-position-relative">
@@ -467,7 +497,7 @@ export const CardDoc = () => (
     <Size />
     <Header />
     <Media />
-    <Props/>
+    <Props />
 
     <div className="tm-sidebar-right uk-visible@l">
       <div

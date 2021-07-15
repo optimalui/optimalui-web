@@ -1,8 +1,5 @@
 /* eslint-disable  */
 import React, { Component } from 'react';
-import { Button } from './components/buttons'
-import { Menu, MenuItem } from './components/layout'
-import items from '../src/components/layout/items.json'
 import { BrowserRouter as Router, Route} from "react-router-dom";
 
 import 'uikit/dist/css/uikit.css'
@@ -20,8 +17,7 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
-          <Route exact path="/" component={Home} />
-          <Route path="/docs" component={Docs} />
+          <Route path="/" component={Docs} />
         </Router>
       </div>
     );

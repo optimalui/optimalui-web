@@ -1,14 +1,12 @@
 import React from "react";
-import { TabStrip, Tab, Grid, GridItem} from "../../components/layout";
+import { TabStrip, Tab, Grid, GridItem,Avatar} from "optimalui-react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import MarkupButtons from "./MarkupButtons";
 import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
-import { Avatar } from "../../components";
 
 const src = `
 import React from "react";
-import {  Grid, GridItem } from "optimalui-react";
-import {Avatar} from "@optimalui/components";
+import {  Grid, GridItem,Avatar} from "optimalui-react";
     
 export const Sample = ()=>(
         <Grid>

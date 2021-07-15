@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Icon } from '../../components'
+import { Icon } from 'optimalui-react'
 import {iconList} from '../../assets/jss'
 
 const ICONS = Object.keys(iconList());
@@ -9,7 +9,6 @@ class IconLibrary extends Component {
         super(props);
         this.state = {
             displayedIcons:ICONS
-
         }
         this.handleFilterChange = this.handleFilterChange.bind(this)
     }
